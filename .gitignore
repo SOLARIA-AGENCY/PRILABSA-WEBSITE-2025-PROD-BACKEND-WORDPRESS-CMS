@@ -1,6 +1,3 @@
-backup/
-MODULO*
-
 # Large build files for client delivery
 prilabsa-website-build-*.zip
 *.zip
@@ -30,4 +27,6 @@ node_modules/
 .Trashes
 ehthumbs.db
 Thumbs.db
+node_modules
+node_modules
 node_modules
