@@ -1,0 +1,26 @@
+{
+  "timestamp": "2025-06-12T10:02:59.087Z",
+  "project": "PRILABSA-WEBSITE-2025",
+  "version": "0.1.0",
+  "status": "ready",
+  "metrics": {
+    "tests": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "coverage": 100
+    },
+    "lint": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "security": {
+      "vulnerabilities": 0,
+      "level": "low"
+    },
+    "build": {
+      "success": true,
+      "size": "TBD"
+    }
+  }
+}

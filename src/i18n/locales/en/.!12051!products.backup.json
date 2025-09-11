@@ -1,0 +1,17 @@
+{
+  "categories": {
+    "alimentos": "FOOD",
+    "probioticos": "PROBIOTICS",
+    "aditivos": "ADDITIVES",
+    "quimicos": "CHEMICALS",
+    "equipos": "EQUIPMENT"
+  },
+  "descriptions": {
+    "alimentosDesc": "Check our Food products catalog here",
+    "probioticosDesc": "Check our Probiotics products catalog here",
+    "aditivosDesc": "Check our Additives products catalog here",
+    "quimicosDesc": "Check our Chemicals products catalog here",
+    "equiposDesc": "Check our Equipment products catalog here"
+  },
+  "actions": {
+    "viewProducts": "VIEW PRODUCTS",

@@ -1,0 +1,67 @@
+{
+  "buttons": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Guardar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "seeMore": "Ver más",
+    "viewAll": "Ver todos",
+    "download": "Descargar",
+    "contact": "Contactar",
+    "submit": "Enviar",
+    "confirmSend": "Confirmar Envío",
+    "downloadPdf": "Descargar PDF",
+    "downloadCSS": "Descargar CSS",
+    "exportCSS": "Exportar CSS",
+    "subscribe": "SUSCRIBIRSE"
+  },
+  "forms": {
+    "fields": {
+      "fullName": "Nombre Completo",
+      "name": "nombre completo *",
+      "email": "Email *",
+      "phone": "Teléfono",
+      "company": "Empresa *",
+      "message": "Mensaje",
+      "required": "* Campos obligatorios"
+    },
+    "placeholders": {
+      "email": "Tu correo electrónico",
+      "name": "Ingresa tu nombre completo",
+      "message": "Escribe tu mensaje aquí"
+    },
+    "validation": {
+      "required": "Por favor, complete los campos obligatorios: Nombre, Email y Mensaje.",
+      "invalidEmail": "Por favor ingresa un email válido"
+    },
+    "success": "¡Gracias! Tu mensaje ha sido enviado. Nos pondremos en contacto contigo pronto.",
+    "error": "Hubo un error al enviar el mensaje. Por favor intenta de nuevo."
+  },
+  "meta": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito"
+  },
+  "messages": {
+    "simulationNote": "El envío de email es solo una simulación. Para recibir cotizaciones reales, debe integrarse un backend (SMTP, Brevo, SendGrid, etc).",
+    "logoError": "No se pudo cargar el logo para el PDF. La descarga estará deshabilitada.",
+    "redirectMessage": "Será redirigido al inicio en breve."
+  },
+  "contact": {
+    "phone": "Teléfono:",
+    "email": "Para más información escríbenos a",
+    "title": "CONTÁCTANOS"
+  },
+  "newsletter": {
+    "description": "Recibe las últimas noticias, ofertas y tendencias de la industria directamente en tu correo.",
+    "placeholder": "Tu correo electrónico",
+    "button": "SUSCRIBIRSE"
+  }
+}

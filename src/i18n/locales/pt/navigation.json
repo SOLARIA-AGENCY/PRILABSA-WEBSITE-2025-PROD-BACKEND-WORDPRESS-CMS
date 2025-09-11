@@ -1,0 +1,49 @@
+{
+  "header": {
+    "navigation": {
+      "home": "INÍCIO",
+      "about": "SOBRE NÓS",
+      "contact": "CONTATO",
+      "products": "PRODUTOS",
+      "offices": "ESCRITÓRIOS",
+      "news": "NOTÍCIAS",
+      "careers": "Trabalhe Conosco",
+      "search": "Buscar produtos..."
+    },
+    "nav": {
+      "home": "INÍCIO",
+      "about": "QUEM SOMOS",
+      "contact": "FALE CONOSCO",
+      "products": "PRODUTOS"
+    },
+    "language": {
+      "spanish": "Espanhol",
+      "english": "Inglês",
+      "portuguese": "Português",
+      "selector": "Seletor de idioma"
+    }
+  },
+  "footer": {
+    "contact": {
+      "title": "FALE CONOSCO",
+      "phone": "Telefone:",
+      "email": "Para mais informações, escreva para"
+    },
+    "location": {
+      "title": "LOCALIZAÇÃO",
+      "address": "Endereço"
+    },
+    "social": {
+      "title": "SIGA-NOS!"
+    },
+    "legal": {
+      "privacy": "Política de Privacidade",
+      "terms": "Termos e Condições",
+      "legalNotice": "Aviso Legal",
+      "cookiePolicy": "Política de Cookies"
+    },
+    "copyright": {
+      "text": "© 2025 Prilabsa. Todos os direitos reservados."
+    }
+  }
+}

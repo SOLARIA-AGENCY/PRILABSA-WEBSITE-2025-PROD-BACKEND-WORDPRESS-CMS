@@ -1,0 +1,108 @@
+{
+  "categories": {
+    "alimentos": "FOOD",
+    "probioticos": "PROBIOTICS",
+    "aditivos": "ADDITIVES",
+    "quimicos": "CHEMICALS",
+    "equipos": "EQUIPMENT"
+  },
+  "descriptions": {
+    "alimentosDesc": "Check our Food products catalog here",
+    "probioticosDesc": "Check our Probiotics products catalog here",
+    "aditivosDesc": "Check our Additives products catalog here",
+    "quimicosDesc": "Check our Chemicals products catalog here",
+    "equiposDesc": "Check our Equipment products catalog here"
+  },
+  "actions": {
+    "viewProducts": "VIEW PRODUCTS",
+    "viewAll": "View All Products →",
+    "viewCatalog": "View Complete Catalog",
+    "downloadCatalog": "Download PDF Catalog",
+    "addProduct": "Add product",
+    "removeProduct": "Remove product",
+    "downloadPdf": "Download PDF",
+    "viewProduct": "View Product",
+    "backToProducts": "Back to Products",
+    "addToQuote": "Add to Quote",
+    "addedToQuote": "Product added to quote"
+  },
+  "search": {
+    "placeholder": "Search product categories...",
+    "searchProducts": "Search products...",
+    "noResults": "No products found",
+    "noResultsDescription": "No products match the current category or search."
+  },
+  "catalog": {
+    "title": "Our Product Catalog",
+    "description": "Download our complete catalog with all our products for the aquaculture industry.",
+    "catalogTitle": "OUR PRODUCTS",
+    "catalogSubtitle": "Comprehensive solutions for the aquaculture industry with the highest quality standards"
+  },
+  "productDetail": {
+    "specifications": "Specifications",
+    "datasheet": "Technical Datasheet",
+    "viewMore": "View more",
+    "productCode": "CODE",
+    "productNotFound": "Product not found",
+    "description": "Description",
+    "benefits": "Benefits",
+    "presentation": "Presentation",
+    "relatedProducts": "Related Products",
+    "technicalSpecs": "Technical Specifications",
+    "dosage": "Dosage",
+    "application": "Application",
+    "storage": "Storage",
+    "precautions": "Precautions",
+    "downloadTechnicalSheet": "Download Technical Sheet"
+  },
+  "quotation": {
+    "title": "Quotation",
+    "pageTitle": "MY QUOTATION",
+    "myQuote": "My Quotation",
+    "subtitle": "Review selected products and adjust quantities before generating your request.",
+    "quantity": "Quantity",
+    "emptyMessage": "Your quotation cart is empty",
+    "emptyCart": "Your quotation cart is empty",
+    "exploreMessage": "Explore our catalog to find the products you need.",
+    "requestQuote": "Request Quote",
+    "generateQuote": "Generate Quote",
+    "addNote": "Add note",
+    "notes": "Additional notes"
+  },
+  "common": {
+    "products": "PRODUCTS",
+    "download": "Download",
+    "loading": "Loading...",
+    "seeMore": "See more",
+    "viewAll": "View all",
+    "home": "Home",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "open": "Open",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "update": "Update",
+    "submit": "Submit",
+    "reset": "Reset"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "products": "Products",
+    "category": {
+      "alimentos": "Food",
+      "probioticos": "Probiotics",
+      "aditivos": "Additives",
+      "quimicos": "Chemicals",
+      "equipos": "Equipment"
+    }
+  },
+  "metadata": {
+    "title": "Products - PRILABSA",
+    "description": "Complete catalog of PRILABSA products for the aquaculture industry. Food, probiotics, additives, chemicals and laboratory equipment.",
+    "keywords": "aquaculture products, laboratory equipment, chemical reagents, shrimp feed, PRILABSA Ecuador"
+  }
+}

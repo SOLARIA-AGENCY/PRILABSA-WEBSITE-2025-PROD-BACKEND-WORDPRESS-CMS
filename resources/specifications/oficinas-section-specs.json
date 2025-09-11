@@ -1,0 +1,79 @@
+{
+  "section_title": "NUESTRAS OFICINAS",
+  "subtitle": "Hemos expandido nuestras actividades en países establecidos como puntos estratégicos del continente Americano, contando con oficinas comerciales modernas y bodegas climatizadas.",
+  "background_color": "#f8f9fa",
+  "text_color": "#3759C1",
+  "layout": "centered_content",
+  "countries": [
+    {
+      "name": "ECUADOR",
+      "cities": [
+        {
+          "name": "Guayaquil",
+          "address": "Av. Carlos Julio Arosemena Km. 2 ½, C.C. Albán Borja, Planta baja, Puerta #7",
+          "email": "info@prilabsa.com.ec",
+          "primary": true
+        },
+        {
+          "name": "La Libertad",
+          "address": "Av. 11 entre las calles 15 y 16, Vía a Salinas"
+        },
+        {
+          "name": "Machala",
+          "address": "Av. Bolivar Madero Vargas y 14 oeste (esquina) junto al ECU 911"
+        },
+        {
+          "name": "Manta",
+          "address": "Calle 12, avenida 8 (esq.)"
+        },
+        {
+          "name": "San Vicente",
+          "address": "Avenida Pacífica Vélez y Malecón Leonidas Vega"
+        }
+      ]
+    },
+    {
+      "name": "USA",
+      "cities": [
+        {
+          "name": "Miami",
+          "address": "2970 West 84th St, Bay # 1, Hialeah, FL 33018",
+          "phone": "(+305) 822 8201",
+          "email": "sales@prilabsa.com"
+        }
+      ]
+    },
+    {
+      "name": "BRASIL",
+      "cities": [
+        {
+          "name": "Natal",
+          "address": "Av. Alameda das Acácias, Nº 101, Bairro Neópolis – Natal – RN",
+          "phone": "(+84) 3207773",
+          "email": "prilabsa@prilabsabr.com.br"
+        }
+      ]
+    },
+    {
+      "name": "MÉXICO",
+      "cities": [
+        {
+          "name": "Mazatlán",
+          "address": "Acua Biomar, Av. Carlos Canseco 6020 Local 2, Col. Marina Mazatlán",
+          "phone": "(+52) 669 913 25 87"
+        }
+      ]
+    }
+  ],
+  "cta_button": {
+    "text": "CONOCE MÁS",
+    "style": "outline",
+    "color": "#3759C1"
+  },
+  "typography": {
+    "title_font": "Gotham, sans-serif",
+    "content_font": "Gotham, sans-serif",
+    "title_weight": "bold",
+    "title_size": "2xl"
+  }
+} 

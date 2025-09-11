@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-01-27",
+  "total_products": 0,
+  "unique_codes": 0,
+  "duplicates": 0,
+  "categories": {},
+  "missing_images": 0,
+  "format_issues": -101,
+  "actions_required": {
+    "remove_duplicates": 0,
+    "normalize_categories": 0,
+    "fix_images": 0,
+    "unify_formats": -101
+  }
+}

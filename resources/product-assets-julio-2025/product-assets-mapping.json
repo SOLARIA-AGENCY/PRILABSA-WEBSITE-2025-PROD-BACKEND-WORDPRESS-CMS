@@ -1,0 +1,2678 @@
+{
+  "timestamp": "2025-07-29T23:05:53.190Z",
+  "summary": {
+    "totalProducts": 101,
+    "productsWithPhoto": 100,
+    "productsWithPdf": 101,
+    "unmatchedPhotos": 88,
+    "unmatchedPdfs": 48
+  },
+  "products": [
+    {
+      "id": "1",
+      "codigo": "AD001",
+      "nombre": "COMBACID XL",
+      "categoria": "aditivos",
+      "slug": "combacid-xl",
+      "assets": {
+        "photo": {
+          "originalFile": "Combacid XL.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Combacid XL.png",
+          "newFileName": "AD001_COMBACID_XL.png",
+          "score": 83.33333333333334
+        },
+        "pdf": {
+          "originalFile": "COMBACID XL.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/COMBACID XL.pdf",
+          "newFileName": "AD001_COMBACID_XL.pdf",
+          "score": 83.33333333333334
+        }
+      }
+    },
+    {
+      "id": "2",
+      "codigo": "AD002",
+      "nombre": "CAROPHYLL PINK",
+      "categoria": "aditivos",
+      "slug": "carophyll-pink",
+      "assets": {
+        "photo": {
+          "originalFile": "Carophyll pink.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Carophyll pink.png",
+          "newFileName": "AD002_CAROPHYLL_PINK.png",
+          "score": 97.77777777777779
+        },
+        "pdf": {
+          "originalFile": "CAROPHYLL PINK.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/CAROPHYLL PINK.pdf",
+          "newFileName": "AD002_CAROPHYLL_PINK.pdf",
+          "score": 97.77777777777779
+        }
+      }
+    },
+    {
+      "id": "3",
+      "codigo": "AD005",
+      "nombre": "FLORFENICOL",
+      "categoria": "aditivos",
+      "slug": "florfenicol",
+      "assets": {
+        "photo": {
+          "originalFile": "Florfenicol.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Florfenicol.png",
+          "newFileName": "AD005_FLORFENICOL.png",
+          "score": 83.33333333333334
+        },
+        "pdf": {
+          "originalFile": "FLORFENICOL.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/FLORFENICOL.pdf",
+          "newFileName": "AD005_FLORFENICOL.pdf",
+          "score": 83.33333333333334
+        }
+      }
+    },
+    {
+      "id": "4",
+      "codigo": "AD012",
+      "nombre": "VITAMINA C MONOFOSFATADA",
+      "categoria": "aditivos",
+      "slug": "vitamina-c-monofosfatada",
+      "assets": {
+        "photo": {
+          "originalFile": "Vitamina C monofosfatada.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Vitamina C monofosfatada.png",
+          "newFileName": "AD012_VITAMINA_C_MONOFOSFATADA.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "VITAMINA C MONOFOSFATADA.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/VITAMINA C MONOFOSFATADA.pdf",
+          "newFileName": "AD012_VITAMINA_C_MONOFOSFATADA.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "5",
+      "codigo": "AD009",
+      "nombre": "PROTECTOR D3 + ZINC ACTIVADO",
+      "categoria": "aditivos",
+      "slug": "protector-d3-zinc-activado",
+      "assets": {
+        "photo": {
+          "originalFile": "Protector D3.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Protector D3.png",
+          "newFileName": "AD009_PROTECTOR_D3___ZINC_ACTIVADO.png",
+          "score": 63.84615384615385
+        },
+        "pdf": {
+          "originalFile": "PROTECTOR D3 + ZINC ACTIVADO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/PROTECTOR D3 + ZINC ACTIVADO.pdf",
+          "newFileName": "AD009_PROTECTOR_D3___ZINC_ACTIVADO.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "6",
+      "codigo": "AD003",
+      "nombre": "DESINFECTANTE ARGENTYNE",
+      "categoria": "aditivos",
+      "slug": "desinfectante-argentyne",
+      "assets": {
+        "photo": {
+          "originalFile": "Argentyne.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Argentyne.png",
+          "newFileName": "AD003_DESINFECTANTE_ARGENTYNE.png",
+          "score": 36.08695652173914
+        },
+        "pdf": {
+          "originalFile": "DESINFECTANTE ARGENTYNE.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/DESINFECTANTE ARGENTYNE.pdf",
+          "newFileName": "AD003_DESINFECTANTE_ARGENTYNE.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "7",
+      "codigo": "AD004",
+      "nombre": "EMERALD",
+      "categoria": "aditivos",
+      "slug": "emerald",
+      "assets": {
+        "photo": {
+          "originalFile": "Emerald.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Emerald.png",
+          "newFileName": "AD004_EMERALD.png",
+          "score": 73.63636363636363
+        },
+        "pdf": {
+          "originalFile": "CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CHEMETRICS.pdf",
+          "newFileName": "AD004_EMERALD.pdf",
+          "score": 35.71428571428571
+        }
+      }
+    },
+    {
+      "id": "8",
+      "codigo": "AD006",
+      "nombre": "OXITETRACICLINA",
+      "categoria": "aditivos",
+      "slug": "oxitetraciclina",
+      "assets": {
+        "photo": {
+          "originalFile": "Oxitetraciclina.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Oxitetraciclina.png",
+          "newFileName": "AD006_OXITETRACICLINA.png",
+          "score": 88.94736842105263
+        },
+        "pdf": {
+          "originalFile": "OXITETRACICLINA.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/OXITETRACICLINA.pdf",
+          "newFileName": "AD006_OXITETRACICLINA.pdf",
+          "score": 88.94736842105263
+        }
+      }
+    },
+    {
+      "id": "9",
+      "codigo": "AD007",
+      "nombre": "PRIME BOOSTER",
+      "categoria": "aditivos",
+      "slug": "prime-booster",
+      "assets": {
+        "photo": {
+          "originalFile": "Prime booster.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Prime booster.png",
+          "newFileName": "AD007_PRIME_BOOSTER.png",
+          "score": 96.47058823529412
+        },
+        "pdf": {
+          "originalFile": "PRIME BOOSTER.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/PRIME BOOSTER.pdf",
+          "newFileName": "AD007_PRIME_BOOSTER.pdf",
+          "score": 96.47058823529412
+        }
+      }
+    },
+    {
+      "id": "10",
+      "codigo": "AD008",
+      "nombre": "PROTECTOR - D3",
+      "categoria": "aditivos",
+      "slug": "protector-d3",
+      "assets": {
+        "photo": {
+          "originalFile": "Protector D3.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Protector D3.png",
+          "newFileName": "AD008_PROTECTOR___D3.png",
+          "score": 85
+        },
+        "pdf": {
+          "originalFile": "PROTECTOR - D3.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/PROTECTOR - D3.pdf",
+          "newFileName": "AD008_PROTECTOR___D3.pdf",
+          "score": 85
+        }
+      }
+    },
+    {
+      "id": "11",
+      "codigo": "AD010",
+      "nombre": "SAPONINA",
+      "categoria": "aditivos",
+      "slug": "saponina",
+      "assets": {
+        "photo": {
+          "originalFile": "Saponina.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Saponina.png",
+          "newFileName": "AD010_SAPONINA.png",
+          "score": 76.66666666666667
+        },
+        "pdf": {
+          "originalFile": "SAPONINA.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/SAPONINA.pdf",
+          "newFileName": "AD010_SAPONINA.pdf",
+          "score": 76.66666666666667
+        }
+      }
+    },
+    {
+      "id": "12",
+      "codigo": "AD011",
+      "nombre": "VEVOVITALL",
+      "categoria": "aditivos",
+      "slug": "vevovitall",
+      "assets": {
+        "photo": {
+          "originalFile": "Vevovitall.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Vevovitall.png",
+          "newFileName": "AD011_VEVOVITALL.png",
+          "score": 81.42857142857143
+        },
+        "pdf": {
+          "originalFile": "VEVOVITALL.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/VEVOVITALL.pdf",
+          "newFileName": "AD011_VEVOVITALL.pdf",
+          "score": 81.42857142857143
+        }
+      }
+    },
+    {
+      "id": "13",
+      "codigo": "AD013",
+      "nombre": "VITAMINA C",
+      "categoria": "aditivos",
+      "slug": "vitamina-c",
+      "assets": {
+        "photo": {
+          "originalFile": "Vitamina C.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Vitamina C.png",
+          "newFileName": "AD013_VITAMINA_C.png",
+          "score": 81.42857142857143
+        },
+        "pdf": {
+          "originalFile": "VITAMINA C.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/VITAMINA C.pdf",
+          "newFileName": "AD013_VITAMINA_C.pdf",
+          "score": 81.42857142857143
+        }
+      }
+    },
+    {
+      "id": "14",
+      "codigo": "AL001",
+      "nombre": "LARVA Z - PLUS (Microparticulados)",
+      "categoria": "alimentos",
+      "slug": "larva-z-plus-microparticulados",
+      "assets": {
+        "photo": {
+          "originalFile": "Mps microparticulados.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Mps microparticulados.png",
+          "newFileName": "AL001_LARVA_Z___PLUS__Microparticulados_.png",
+          "score": 63.333333333333336
+        },
+        "pdf": {
+          "originalFile": "LARVA Z - PLUS (Microparticulados).pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/LARVA Z - PLUS (Microparticulados).pdf",
+          "newFileName": "AL001_LARVA_Z___PLUS__Microparticulados_.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "15",
+      "codigo": "AL002",
+      "nombre": "LARVA AP 100 (Microparticulados)",
+      "categoria": "alimentos",
+      "slug": "larva-ap-100-microparticulados",
+      "assets": {
+        "photo": {
+          "originalFile": "Mps microparticulados.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Mps microparticulados.png",
+          "newFileName": "AL002_LARVA_AP_100__Microparticulados_.png",
+          "score": 60
+        },
+        "pdf": {
+          "originalFile": "LARVA Z - PLUS (Microparticulados).pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/LARVA Z - PLUS (Microparticulados).pdf",
+          "newFileName": "AL002_LARVA_AP_100__Microparticulados_.pdf",
+          "score": 90.58823529411764
+        }
+      }
+    },
+    {
+      "id": "16",
+      "codigo": "AL003",
+      "nombre": "Z PRO (Microparticulados)",
+      "categoria": "alimentos",
+      "slug": "z-pro-microparticulados",
+      "assets": {
+        "photo": {
+          "originalFile": "Mps microparticulados.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Mps microparticulados.png",
+          "newFileName": "AL003_Z_PRO__Microparticulados_.png",
+          "score": 78
+        },
+        "pdf": {
+          "originalFile": "Z PRO (Microparticulados).pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/Z PRO (Microparticulados).pdf",
+          "newFileName": "AL003_Z_PRO__Microparticulados_.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "17",
+      "codigo": "AL004",
+      "nombre": "EZ ARTEMIA (Microencapsulados)",
+      "categoria": "alimentos",
+      "slug": "ez-artemia-microencapsulados",
+      "assets": {
+        "photo": {
+          "originalFile": "Ez artemia ultra 1.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/ZEIGLER/Ez artemia ultra 1.png",
+          "newFileName": "AL004_EZ_ARTEMIA__Microencapsulados_.png",
+          "score": 56.42857142857143
+        },
+        "pdf": {
+          "originalFile": "EZ LARVA (Microencapsulados).pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/EZ LARVA (Microencapsulados).pdf",
+          "newFileName": "AL004_EZ_ARTEMIA__Microencapsulados_.pdf",
+          "score": 80
+        }
+      }
+    },
+    {
+      "id": "18",
+      "codigo": "AL005",
+      "nombre": "EZ ARTEMIA ULTRA (Microencapsulados)",
+      "categoria": "alimentos",
+      "slug": "ez-artemia-ultra-microencapsulados",
+      "assets": {
+        "photo": {
+          "originalFile": "Ez artemia ultra 1.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/ZEIGLER/Ez artemia ultra 1.png",
+          "newFileName": "AL005_EZ_ARTEMIA_ULTRA__Microencapsulados_.png",
+          "score": 72.94117647058823
+        },
+        "pdf": {
+          "originalFile": "EZ ARTEMIA ULTRA.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/EZ ARTEMIA ULTRA.pdf",
+          "newFileName": "AL005_EZ_ARTEMIA_ULTRA__Microencapsulados_.pdf",
+          "score": 75.88235294117646
+        }
+      }
+    },
+    {
+      "id": "19",
+      "codigo": "AL007",
+      "nombre": "BRINE SHRIMP FLAKE",
+      "categoria": "alimentos",
+      "slug": "brine-shrimp-flake",
+      "assets": {
+        "photo": {
+          "originalFile": "Brine shrimp flake.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/ZEIGLER/Brine shrimp flake.png",
+          "newFileName": "AL007_BRINE_SHRIMP_FLAKE.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "BRINE SHRIMP FLAKE.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/BRINE SHRIMP FLAKE.pdf",
+          "newFileName": "AL007_BRINE_SHRIMP_FLAKE.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "20",
+      "codigo": "AL008",
+      "nombre": "SHRIMP MEAL STARTER 55-15",
+      "categoria": "alimentos",
+      "slug": "shrimp-meal-starter-55-15",
+      "assets": {
+        "photo": {
+          "originalFile": "Prime booster.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Prime booster.png",
+          "newFileName": "AL008_SHRIMP_MEAL_STARTER_55_15.png",
+          "score": 36
+        },
+        "pdf": {
+          "originalFile": "SHRIMP STARTER 55-15 VPAK.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/SHRIMP STARTER 55-15 VPAK.pdf",
+          "newFileName": "AL008_SHRIMP_MEAL_STARTER_55_15.pdf",
+          "score": 71.72413793103448
+        }
+      }
+    },
+    {
+      "id": "21",
+      "codigo": "AL009",
+      "nombre": "PRE-MIX PL RACEWAY 40-9",
+      "categoria": "alimentos",
+      "slug": "pre-mix-pl-raceway-40-9",
+      "assets": {
+        "photo": {
+          "originalFile": "Krill caja.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/CONGELADOS/Krill caja.png",
+          "newFileName": "AL009_PRE_MIX_PL_RACEWAY_40_9.png",
+          "score": 30.434782608695656
+        },
+        "pdf": {
+          "originalFile": "PREMIX PL RACEWAY 40-9.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/PREMIX PL RACEWAY 40-9.pdf",
+          "newFileName": "AL009_PRE_MIX_PL_RACEWAY_40_9.pdf",
+          "score": 90.76923076923077
+        }
+      }
+    },
+    {
+      "id": "22",
+      "codigo": "AL010",
+      "nombre": "EZ MATE",
+      "categoria": "alimentos",
+      "slug": "ez-mate",
+      "assets": {
+        "photo": {
+          "originalFile": "Ez mate.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/ZEIGLER/Ez mate.png",
+          "newFileName": "AL010_EZ_MATE.png",
+          "score": 73.63636363636363
+        },
+        "pdf": {
+          "originalFile": "EZ MATE.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/EZ MATE.pdf",
+          "newFileName": "AL010_EZ_MATE.pdf",
+          "score": 73.63636363636363
+        }
+      }
+    },
+    {
+      "id": "23",
+      "codigo": "AL011",
+      "nombre": "REDI-MATE",
+      "categoria": "alimentos",
+      "slug": "redi-mate",
+      "assets": {
+        "photo": {
+          "originalFile": "Redimate.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/ZEIGLER/Redimate.png",
+          "newFileName": "AL011_REDI_MATE.png",
+          "score": 58.33333333333333
+        },
+        "pdf": {
+          "originalFile": "REDI – MATE.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/REDI – MATE.pdf",
+          "newFileName": "AL011_REDI_MATE.pdf",
+          "score": 89.23076923076923
+        }
+      }
+    },
+    {
+      "id": "24",
+      "codigo": "AL013",
+      "nombre": "MPs (Microparticulados)",
+      "categoria": "alimentos",
+      "slug": "mps-microparticulados",
+      "assets": {
+        "photo": {
+          "originalFile": "Mps microparticulados.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Mps microparticulados.png",
+          "newFileName": "AL013_MPs__Microparticulados_.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "MP’S (MICROPARTICULADOS).pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/MACKAY MARINE/MP’S (MICROPARTICULADOS).pdf",
+          "newFileName": "AL013_MPs__Microparticulados_.pdf",
+          "score": 90.76923076923077
+        }
+      }
+    },
+    {
+      "id": "25",
+      "codigo": "AL014",
+      "nombre": "ADVANCE FEED",
+      "categoria": "alimentos",
+      "slug": "advance-feed",
+      "assets": {
+        "photo": {
+          "originalFile": "Advance feed.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Advance feed.png",
+          "newFileName": "AL014_ADVANCE_FEED.png",
+          "score": 95
+        },
+        "pdf": {
+          "originalFile": "ADVANCE FEED.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/MACKAY MARINE/ADVANCE FEED.pdf",
+          "newFileName": "AL014_ADVANCE_FEED.pdf",
+          "score": 95
+        }
+      }
+    },
+    {
+      "id": "26",
+      "codigo": "AL015",
+      "nombre": "GOLD FEED (Microparticulados)",
+      "categoria": "alimentos",
+      "slug": "gold-feed-microparticulados",
+      "assets": {
+        "photo": {
+          "originalFile": "Mps microparticulados.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Mps microparticulados.png",
+          "newFileName": "AL015_GOLD_FEED__Microparticulados_.png",
+          "score": 61.85185185185186
+        },
+        "pdf": {
+          "originalFile": "LARVA Z - PLUS (Microparticulados).pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/LARVA Z - PLUS (Microparticulados).pdf",
+          "newFileName": "AL015_GOLD_FEED__Microparticulados_.pdf",
+          "score": 65.88235294117646
+        }
+      }
+    },
+    {
+      "id": "27",
+      "codigo": "AL016",
+      "nombre": "FLAKE NEGRO DE ARTEMIA",
+      "categoria": "alimentos",
+      "slug": "flake-negro-de-artemia",
+      "assets": {
+        "photo": {
+          "originalFile": "Flake negro de artemia.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Flake negro de artemia.png",
+          "newFileName": "AL016_FLAKE_NEGRO_DE_ARTEMIA.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "FLAKE NEGRO DE ARTEMIA.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/MACKAY MARINE/FLAKE NEGRO DE ARTEMIA.pdf",
+          "newFileName": "AL016_FLAKE_NEGRO_DE_ARTEMIA.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "28",
+      "codigo": "AL018",
+      "nombre": "P. VANNAMEI Microparticulado",
+      "categoria": "alimentos",
+      "slug": "p-vannamei-microparticulado",
+      "assets": {
+        "photo": {
+          "originalFile": "P. Vannamei.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/HIGASHIMARU/P. Vannamei.png",
+          "newFileName": "AL018_P__VANNAMEI_Microparticulado.png",
+          "score": 54.44444444444444
+        },
+        "pdf": {
+          "originalFile": "P. VANNAMEI.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/HIGASHIMARU/P. VANNAMEI.pdf",
+          "newFileName": "AL018_P__VANNAMEI_Microparticulado.pdf",
+          "score": 58.14814814814815
+        }
+      }
+    },
+    {
+      "id": "29",
+      "codigo": "AL019",
+      "nombre": "ZM FEED PARA ZOEA / MYSIS",
+      "categoria": "alimentos",
+      "slug": "zm-feed-para-zoea-mysis",
+      "assets": {
+        "photo": {
+          "originalFile": "ZM feed zoea.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/HIGASHIMARU/ZM feed zoea.png",
+          "newFileName": "AL019_ZM_FEED_PARA_ZOEA___MYSIS.png",
+          "score": 76.52173913043478
+        },
+        "pdf": {
+          "originalFile": "PROTECTOR PARA AMONIO (PPA).pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/PROTECTOR PARA AMONIO (PPA).pdf",
+          "newFileName": "AL019_ZM_FEED_PARA_ZOEA___MYSIS.pdf",
+          "score": 41.03448275862068
+        }
+      }
+    },
+    {
+      "id": "30",
+      "codigo": "AL023",
+      "nombre": "KRILL CONGELADO",
+      "categoria": "alimentos",
+      "slug": "krill-congelado",
+      "assets": {
+        "photo": {
+          "originalFile": "Krill.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/CONGELADOS/Krill.png",
+          "newFileName": "AL023_KRILL_CONGELADO.png",
+          "score": 63.333333333333336
+        },
+        "pdf": {
+          "originalFile": "KRILL CONGELADO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/CONGELADOS/KRILL CONGELADO.pdf",
+          "newFileName": "AL023_KRILL_CONGELADO.pdf",
+          "score": 98.94736842105263
+        }
+      }
+    },
+    {
+      "id": "31",
+      "codigo": "AL006",
+      "nombre": "EZ LARVA (Microencapsulados)",
+      "categoria": "alimentos",
+      "slug": "ez-larva-microencapsulados",
+      "assets": {
+        "photo": {
+          "originalFile": "Ez larva.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/ZEIGLER/Ez larva.png",
+          "newFileName": "AL006_EZ_LARVA__Microencapsulados_.png",
+          "score": 48.46153846153846
+        },
+        "pdf": {
+          "originalFile": "EZ LARVA (Microencapsulados).pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/EZ LARVA (Microencapsulados).pdf",
+          "newFileName": "AL006_EZ_LARVA__Microencapsulados_.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "32",
+      "codigo": "AL012",
+      "nombre": "CISTOS DE ARTEMIA",
+      "categoria": "alimentos",
+      "slug": "cistos-de-artemia",
+      "assets": {
+        "photo": {
+          "originalFile": "Biomasa de artemia.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/CONGELADOS/Biomasa de artemia.png",
+          "newFileName": "AL012_CISTOS_DE_ARTEMIA.png",
+          "score": 69.09090909090908
+        },
+        "pdf": {
+          "originalFile": "CISTOS DE ARTEMIA.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/MACKAY MARINE/CISTOS DE ARTEMIA.pdf",
+          "newFileName": "AL012_CISTOS_DE_ARTEMIA.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "33",
+      "codigo": "AL017",
+      "nombre": "ESPIRULINA",
+      "categoria": "alimentos",
+      "slug": "espirulina",
+      "assets": {
+        "photo": {
+          "originalFile": "Espirulina regular.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Espirulina regular.png",
+          "newFileName": "AL017_ESPIRULINA.png",
+          "score": 55.45454545454546
+        },
+        "pdf": {
+          "originalFile": "ESPIRULINA REGULAR.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/MACKAY MARINE/ESPIRULINA REGULAR.pdf",
+          "newFileName": "AL017_ESPIRULINA.pdf",
+          "score": 55.45454545454546
+        }
+      }
+    },
+    {
+      "id": "34",
+      "codigo": "AL020",
+      "nombre": "ARTEMIA ADULTA CONGELADA",
+      "categoria": "alimentos",
+      "slug": "artemia-adulta-congelada",
+      "assets": {
+        "photo": {
+          "originalFile": "Artemia azul.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Artemia azul.png",
+          "newFileName": "AL020_ARTEMIA_ADULTA_CONGELADA.png",
+          "score": 68.33333333333333
+        },
+        "pdf": {
+          "originalFile": "ARTEMIA ADULTA CONGELADA.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/CONGELADOS/ARTEMIA ADULTA CONGELADA.pdf",
+          "newFileName": "AL020_ARTEMIA_ADULTA_CONGELADA.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "35",
+      "codigo": "AL021",
+      "nombre": "CALAMARES",
+      "categoria": "alimentos",
+      "slug": "calamares",
+      "assets": {
+        "photo": {
+          "originalFile": "Calamares.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/CONGELADOS/Calamares.png",
+          "newFileName": "AL021_CALAMARES.png",
+          "score": 79.23076923076923
+        },
+        "pdf": {
+          "originalFile": "CALAMARES.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/CONGELADOS/CALAMARES.pdf",
+          "newFileName": "AL021_CALAMARES.pdf",
+          "score": 79.23076923076923
+        }
+      }
+    },
+    {
+      "id": "36",
+      "codigo": "AL022",
+      "nombre": "MEJILLONES",
+      "categoria": "alimentos",
+      "slug": "mejillones",
+      "assets": {
+        "photo": {
+          "originalFile": "Mejillones.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/CONGELADOS/Mejillones.png",
+          "newFileName": "AL022_MEJILLONES.png",
+          "score": 81.42857142857143
+        },
+        "pdf": {
+          "originalFile": "MEJILLONES CONGELADOS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/CONGELADOS/MEJILLONES CONGELADOS.pdf",
+          "newFileName": "AL022_MEJILLONES.pdf",
+          "score": 50
+        }
+      }
+    },
+    {
+      "id": "37",
+      "codigo": "PB001",
+      "nombre": "TERMINATE",
+      "categoria": "probioticos",
+      "slug": "terminate",
+      "assets": {
+        "photo": {
+          "originalFile": "Terminate.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/PROBIÓTICOS/Terminate.png",
+          "newFileName": "PB001_TERMINATE.png",
+          "score": 79.23076923076923
+        },
+        "pdf": {
+          "originalFile": "TERMINATE .pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/PROBIOTICOS/FICHAS/TERMINATE .pdf",
+          "newFileName": "PB001_TERMINATE.pdf",
+          "score": 79.23076923076923
+        }
+      }
+    },
+    {
+      "id": "38",
+      "codigo": "PB002",
+      "nombre": "PONDTOSS",
+      "categoria": "probioticos",
+      "slug": "pondtoss",
+      "assets": {
+        "photo": {
+          "originalFile": "Pondtoss.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/PROBIÓTICOS/Pondtoss.png",
+          "newFileName": "PB002_PONDTOSS.png",
+          "score": 76.66666666666667
+        },
+        "pdf": {
+          "originalFile": "PONDTOSS PREMIX.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/PROBIOTICOS/FICHAS/PONDTOSS PREMIX.pdf",
+          "newFileName": "PB002_PONDTOSS.pdf",
+          "score": 52.10526315789473
+        }
+      }
+    },
+    {
+      "id": "39",
+      "codigo": "PB003",
+      "nombre": "WASTE & SLUDGE REDUCER™ (WSR)",
+      "categoria": "probioticos",
+      "slug": "waste-sludge-reducer-wsr",
+      "assets": {
+        "photo": {
+          "originalFile": "Espirulina regular.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Espirulina regular.png",
+          "newFileName": "PB003_WASTE___SLUDGE_REDUCER___WSR_.png",
+          "score": 33.333333333333336
+        },
+        "pdf": {
+          "originalFile": "WASTE & SLUDGE REDUCERTM (WSR).pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/PROBIOTICOS/FICHAS/WASTE & SLUDGE REDUCERTM (WSR).pdf",
+          "newFileName": "PB003_WASTE___SLUDGE_REDUCER___WSR_.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "40",
+      "codigo": "PB004",
+      "nombre": "HATCHERY PRIME",
+      "categoria": "probioticos",
+      "slug": "hatchery-prime",
+      "assets": {
+        "photo": {
+          "originalFile": "Hatchery prime.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/PROBIÓTICOS/Hatchery prime.png",
+          "newFileName": "PB004_HATCHERY_PRIME.png",
+          "score": 97.77777777777779
+        },
+        "pdf": {
+          "originalFile": "HATCHERY PRIME.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/PROBIOTICOS/FICHAS/HATCHERY PRIME.pdf",
+          "newFileName": "PB004_HATCHERY_PRIME.pdf",
+          "score": 97.77777777777779
+        }
+      }
+    },
+    {
+      "id": "41",
+      "codigo": "QU015",
+      "nombre": "CLORO GRANULADO",
+      "categoria": "quimicos",
+      "slug": "cloro-granulado",
+      "assets": {
+        "photo": {
+          "originalFile": "Cloro granulado.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Cloro granulado.png",
+          "newFileName": "QU015_CLORO_GRANULADO.png",
+          "score": 98.94736842105263
+        },
+        "pdf": {
+          "originalFile": "CLORO GRANULADO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/CLORO GRANULADO.pdf",
+          "newFileName": "QU015_CLORO_GRANULADO.pdf",
+          "score": 98.94736842105263
+        }
+      }
+    },
+    {
+      "id": "42",
+      "codigo": "QU004",
+      "nombre": "PERÓXIDO DE HIDRÓGENO",
+      "categoria": "quimicos",
+      "slug": "peroxido-de-hidrogeno",
+      "assets": {
+        "photo": {
+          "originalFile": "Peróxido de hidrógeno.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Peróxido de hidrógeno.png",
+          "newFileName": "QU004_PER_XIDO_DE_HIDR_GENO.png",
+          "score": 97.77777777777779
+        },
+        "pdf": {
+          "originalFile": "PERÓXIDO DE HIDRÓGENO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/PERÓXIDO DE HIDRÓGENO.pdf",
+          "newFileName": "QU004_PER_XIDO_DE_HIDR_GENO.pdf",
+          "score": 97.77777777777779
+        }
+      }
+    },
+    {
+      "id": "43",
+      "codigo": "QU006",
+      "nombre": "ÁCIDO HÚMICO",
+      "categoria": "quimicos",
+      "slug": "acido-humico",
+      "assets": {
+        "photo": {
+          "originalFile": "Ácido húmico.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Ácido húmico.png",
+          "newFileName": "QU006__CIDO_H_MICO.png",
+          "score": 81.11111111111111
+        },
+        "pdf": {
+          "originalFile": "Acido Humico.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/Acido Humico.pdf",
+          "newFileName": "QU006__CIDO_H_MICO.pdf",
+          "score": 62.5
+        }
+      }
+    },
+    {
+      "id": "44",
+      "codigo": "QU009",
+      "nombre": "ÁCIDO FÓRMICO",
+      "categoria": "quimicos",
+      "slug": "acido-formico",
+      "assets": {
+        "photo": {
+          "originalFile": "Ácido fórmico.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Ácido fórmico.png",
+          "newFileName": "QU009__CIDO_F_RMICO.png",
+          "score": 83.15789473684211
+        },
+        "pdf": {
+          "originalFile": "Acido Formico.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/Acido Formico.pdf",
+          "newFileName": "QU009__CIDO_F_RMICO.pdf",
+          "score": 64.70588235294117
+        }
+      }
+    },
+    {
+      "id": "45",
+      "codigo": "QU008",
+      "nombre": "ÁCIDO NÍTRICO",
+      "categoria": "quimicos",
+      "slug": "acido-nitrico",
+      "assets": {
+        "photo": {
+          "originalFile": "ACIDO NITRICO.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/ACIDO NITRICO.png",
+          "newFileName": "QU008__CIDO_N_TRICO.png",
+          "score": 64.70588235294117
+        },
+        "pdf": {
+          "originalFile": "ACIDO NITRICO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/ACIDO NITRICO.pdf",
+          "newFileName": "QU008__CIDO_N_TRICO.pdf",
+          "score": 64.70588235294117
+        }
+      }
+    },
+    {
+      "id": "46",
+      "codigo": "QU010",
+      "nombre": "ORTHOTOLIDINE (OTO)",
+      "categoria": "quimicos",
+      "slug": "orthotolidine-oto",
+      "assets": {
+        "photo": {
+          "originalFile": "Orthotolidine.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Orthotolidine.png",
+          "newFileName": "QU010_ORTHOTOLIDINE__OTO_.png",
+          "score": 92.35294117647058
+        },
+        "pdf": {
+          "originalFile": "ORTHOTOLIDINE.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/ORTHOTOLIDINE.pdf",
+          "newFileName": "QU010_ORTHOTOLIDINE__OTO_.pdf",
+          "score": 92.35294117647058
+        }
+      }
+    },
+    {
+      "id": "47",
+      "codigo": "QU011",
+      "nombre": "FORMALDEHÍDO (FORMOL)",
+      "categoria": "quimicos",
+      "slug": "formaldehido-formol",
+      "assets": {
+        "photo": null,
+        "pdf": {
+          "originalFile": "FORMOL.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/FORMOL.pdf",
+          "newFileName": "QU011_FORMALDEH_DO__FORMOL_.pdf",
+          "score": 46.8421052631579
+        }
+      }
+    },
+    {
+      "id": "48",
+      "codigo": "QU013",
+      "nombre": "PERCARBONATO DE SODIO",
+      "categoria": "quimicos",
+      "slug": "percarbonato-de-sodio",
+      "assets": {
+        "photo": {
+          "originalFile": "Percarbonato de sodio.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Percarbonato de sodio.png",
+          "newFileName": "QU013_PERCARBONATO_DE_SODIO.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "METASILICATO DE SODIO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/METASILICATO DE SODIO.pdf",
+          "newFileName": "QU013_PERCARBONATO_DE_SODIO.pdf",
+          "score": 62
+        }
+      }
+    },
+    {
+      "id": "49",
+      "codigo": "QU007",
+      "nombre": "TRILON B - EDTA",
+      "categoria": "quimicos",
+      "slug": "trilon-b-edta",
+      "assets": {
+        "photo": {
+          "originalFile": "Trilon B.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Trilon B.png",
+          "newFileName": "QU007_TRILON_B___EDTA.png",
+          "score": 79.23076923076923
+        },
+        "pdf": {
+          "originalFile": "TRILON (EDTA).pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/TRILON (EDTA).pdf",
+          "newFileName": "QU007_TRILON_B___EDTA.pdf",
+          "score": 80
+        }
+      }
+    },
+    {
+      "id": "50",
+      "codigo": "QU012",
+      "nombre": "EDTA (4Na)",
+      "categoria": "quimicos",
+      "slug": "edta-4na",
+      "assets": {
+        "photo": {
+          "originalFile": "EDTA-4Na02.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/EDTA-4Na02.png",
+          "newFileName": "QU012_EDTA__4Na_.png",
+          "score": 67.14285714285714
+        },
+        "pdf": {
+          "originalFile": "EDTA (4Na).pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/EDTA (4Na).pdf",
+          "newFileName": "QU012_EDTA__4Na_.pdf",
+          "score": 86.66666666666667
+        }
+      }
+    },
+    {
+      "id": "51",
+      "codigo": "QU014",
+      "nombre": "REFRIGERANTE ECOLÓGICO R507",
+      "categoria": "quimicos",
+      "slug": "refrigerante-ecologico-r507",
+      "assets": {
+        "photo": {
+          "originalFile": "Refrigerante.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Refrigerante.png",
+          "newFileName": "QU014_REFRIGERANTE_ECOL_GICO_R507.png",
+          "score": 61.85185185185186
+        },
+        "pdf": {
+          "originalFile": " REFRIGERANTE R507.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/ REFRIGERANTE R507.pdf",
+          "newFileName": "QU014_REFRIGERANTE_ECOL_GICO_R507.pdf",
+          "score": 71.85185185185186
+        }
+      }
+    },
+    {
+      "id": "52",
+      "codigo": "QU001",
+      "nombre": "CLORURO DE MAGNESIO",
+      "categoria": "quimicos",
+      "slug": "cloruro-de-magnesio",
+      "assets": {
+        "photo": {
+          "originalFile": "Cloruro de Magnesio.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Cloruro de Magnesio.png",
+          "newFileName": "QU001_CLORURO_DE_MAGNESIO.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "CLORURO DE MAGNESIO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/CLORURO DE MAGNESIO.pdf",
+          "newFileName": "QU001_CLORURO_DE_MAGNESIO.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "53",
+      "codigo": "QU002",
+      "nombre": "CLORURO DE POTASIO",
+      "categoria": "quimicos",
+      "slug": "cloruro-de-potasio",
+      "assets": {
+        "photo": {
+          "originalFile": "Cloruro de potasio.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Cloruro de potasio.png",
+          "newFileName": "QU002_CLORURO_DE_POTASIO.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "CLORURO DE POTASIO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/CLORURO DE POTASIO.pdf",
+          "newFileName": "QU002_CLORURO_DE_POTASIO.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "54",
+      "codigo": "QU003",
+      "nombre": "NITRATO DE SODIO",
+      "categoria": "quimicos",
+      "slug": "nitrato-de-sodio",
+      "assets": {
+        "photo": {
+          "originalFile": "Nitrato de sodio.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Nitrato de sodio.png",
+          "newFileName": "QU003_NITRATO_DE_SODIO.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "NITRATO DE SODIO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/NITRATO DE SODIO.pdf",
+          "newFileName": "QU003_NITRATO_DE_SODIO.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "55",
+      "codigo": "QU005",
+      "nombre": "NITRATO SÓDICO POTÁSICO",
+      "categoria": "quimicos",
+      "slug": "nitrato-sodico-potasico",
+      "assets": {
+        "photo": {
+          "originalFile": "Nitrato de sodio 2.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Nitrato de sodio 2.png",
+          "newFileName": "QU005_NITRATO_S_DICO_POT_SICO.png",
+          "score": 57.82608695652174
+        },
+        "pdf": {
+          "originalFile": "Nitrato sodico potasico.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/Nitrato sodico potasico.pdf",
+          "newFileName": "QU005_NITRATO_S_DICO_POT_SICO.pdf",
+          "score": 87.77777777777779
+        }
+      }
+    },
+    {
+      "id": "56",
+      "codigo": "QU016",
+      "nombre": "SULFATO DE ALUMINIO (SO4)3 Al2",
+      "categoria": "quimicos",
+      "slug": "sulfato-de-aluminio",
+      "assets": {
+        "photo": {
+          "originalFile": "Sulfato de aluminio.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Sulfato de aluminio.png",
+          "newFileName": "QU016_SULFATO_DE_ALUMINIO__SO4_3_Al2.png",
+          "score": 88.96551724137932
+        },
+        "pdf": {
+          "originalFile": "Sulfato de Alumino.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/Sulfato de Alumino.pdf",
+          "newFileName": "QU016_SULFATO_DE_ALUMINIO__SO4_3_Al2.pdf",
+          "score": 75.51724137931035
+        }
+      }
+    },
+    {
+      "id": "57",
+      "codigo": "QU017",
+      "nombre": "THIOSULFATO DE SODIO",
+      "categoria": "quimicos",
+      "slug": "thiosulfato-de-sodio",
+      "assets": {
+        "photo": {
+          "originalFile": "Thiosulfato de sodio.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Thiosulfato de sodio.png",
+          "newFileName": "QU017_THIOSULFATO_DE_SODIO.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "THIOSULFATO DE SODIO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/THIOSULFATO DE SODIO.pdf",
+          "newFileName": "QU017_THIOSULFATO_DE_SODIO.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "58",
+      "codigo": "QU018",
+      "nombre": "METASILICATO DE SODIO",
+      "categoria": "quimicos",
+      "slug": "metasilicato-de-sodio",
+      "assets": {
+        "photo": {
+          "originalFile": "Metasilicato de sodio.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Metasilicato de sodio.png",
+          "newFileName": "QU018_METASILICATO_DE_SODIO.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "METASILICATO DE SODIO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/METASILICATO DE SODIO.pdf",
+          "newFileName": "QU018_METASILICATO_DE_SODIO.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "59",
+      "codigo": "EQ001",
+      "nombre": "OXIGENÓMETRO - OAKTON 260",
+      "categoria": "equipos",
+      "slug": "oxigenometro-oakton-260",
+      "assets": {
+        "photo": {
+          "originalFile": "Oxigenómetro Oakton.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Oxigenómetro Oakton.png",
+          "newFileName": "EQ001_OXIGEN_METRO___OAKTON_260.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "Oxigenometro Oakton.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Oxigenometro Oakton.pdf",
+          "newFileName": "EQ001_OXIGEN_METRO___OAKTON_260.pdf",
+          "score": 92.6086956521739
+        }
+      }
+    },
+    {
+      "id": "60",
+      "codigo": "EQ002",
+      "nombre": "WATERLINK SPIN TOUCH",
+      "categoria": "equipos",
+      "slug": "waterlink-spin-touch",
+      "assets": {
+        "photo": {
+          "originalFile": "Saponina.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/Saponina.png",
+          "newFileName": "EQ002_WATERLINK_SPIN_TOUCH.png",
+          "score": 30.000000000000004
+        },
+        "pdf": {
+          "originalFile": "SPIN TOUCH.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/SPIN TOUCH.pdf",
+          "newFileName": "EQ002_WATERLINK_SPIN_TOUCH.pdf",
+          "score": 50
+        }
+      }
+    },
+    {
+      "id": "61",
+      "codigo": "EQ003",
+      "nombre": "NEON OPTOD",
+      "categoria": "equipos",
+      "slug": "neon-optod-oximetro-acuicultura",
+      "assets": {
+        "photo": {
+          "originalFile": "IRON.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/IRON.png",
+          "newFileName": "EQ003_NEON_OPTOD.png",
+          "score": 40
+        },
+        "pdf": {
+          "originalFile": "Medidor pH Oakton.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Medidor pH Oakton.pdf",
+          "newFileName": "EQ003_NEON_OPTOD.pdf",
+          "score": 33.333333333333336
+        }
+      }
+    },
+    {
+      "id": "62",
+      "codigo": "EQ004",
+      "nombre": "OXIGENÓMETRO OxyGuard Polaris C",
+      "categoria": "equipos",
+      "slug": "oxigenometro-oxyguard-polaris-c",
+      "assets": {
+        "photo": {
+          "originalFile": "Oxigenómetro Oxyguard polaris.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Oxigenómetro Oxyguard polaris.png",
+          "newFileName": "EQ004_OXIGEN_METRO_OxyGuard_Polaris_C.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "OXIGENÓMETRO OXYGUARD.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/OXIGENÓMETRO OXYGUARD.pdf",
+          "newFileName": "EQ004_OXIGEN_METRO_OxyGuard_Polaris_C.pdf",
+          "score": 90.96774193548387
+        }
+      }
+    },
+    {
+      "id": "63",
+      "codigo": "EQ005",
+      "nombre": "OXIGENÓMETRO - Disuelto DO -120",
+      "categoria": "equipos",
+      "slug": "oxigenometro-disuelto-do-120",
+      "assets": {
+        "photo": {
+          "originalFile": "Oxigenómetro Aqualabo neon.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Oxigenómetro Aqualabo neon.png",
+          "newFileName": "EQ005_OXIGEN_METRO___Disuelto_DO__120.png",
+          "score": 68.06451612903226
+        },
+        "pdf": {
+          "originalFile": "OXIGENÓMETRO OXYGUARD.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/OXIGENÓMETRO OXYGUARD.pdf",
+          "newFileName": "EQ005_OXIGEN_METRO___Disuelto_DO__120.pdf",
+          "score": 60
+        }
+      }
+    },
+    {
+      "id": "64",
+      "codigo": "EQ006",
+      "nombre": "MEDIDOR DE PH",
+      "categoria": "equipos",
+      "slug": "medidor-de-ph",
+      "assets": {
+        "photo": {
+          "originalFile": "medidor de calcio.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/medidor de calcio.png",
+          "newFileName": "EQ006_MEDIDOR_DE_PH.png",
+          "score": 67.14285714285714
+        },
+        "pdf": {
+          "originalFile": "MEDIDOR DE Ph.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MEDIDOR DE Ph.pdf",
+          "newFileName": "EQ006_MEDIDOR_DE_PH.pdf",
+          "score": 86.47058823529412
+        }
+      }
+    },
+    {
+      "id": "65",
+      "codigo": "EQ007",
+      "nombre": "MEDIDOR DE POTASIO",
+      "categoria": "equipos",
+      "slug": "medidor-de-potasio",
+      "assets": {
+        "photo": {
+          "originalFile": "medidor de potasio.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/medidor de potasio.png",
+          "newFileName": "EQ007_MEDIDOR_DE_POTASIO.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "MEDIDOR DE POTASIO .pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MEDIDOR DE POTASIO .pdf",
+          "newFileName": "EQ007_MEDIDOR_DE_POTASIO.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "66",
+      "codigo": "EQ008",
+      "nombre": "MEDIDOR DE CONDUCTIVIDAD EC-11",
+      "categoria": "equipos",
+      "slug": "medidor-de-conductividad-ec11",
+      "assets": {
+        "photo": {
+          "originalFile": "medidor de conductividad.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/medidor de conductividad.png",
+          "newFileName": "EQ008_MEDIDOR_DE_CONDUCTIVIDAD_EC_11.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "MEDIDOR DE SALINIDAD - 11.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MEDIDOR DE SALINIDAD - 11.pdf",
+          "newFileName": "EQ008_MEDIDOR_DE_CONDUCTIVIDAD_EC_11.pdf",
+          "score": 66.66666666666666
+        }
+      }
+    },
+    {
+      "id": "67",
+      "codigo": "EQ009",
+      "nombre": "MEDIDOR DE CALCIO",
+      "categoria": "equipos",
+      "slug": "medidor-de-calcio",
+      "assets": {
+        "photo": {
+          "originalFile": "medidor de calcio.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/medidor de calcio.png",
+          "newFileName": "EQ009_MEDIDOR_DE_CALCIO.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "MEDIDOR DE CALCIO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MEDIDOR DE CALCIO.pdf",
+          "newFileName": "EQ009_MEDIDOR_DE_CALCIO.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "68",
+      "codigo": "EQ014",
+      "nombre": "FRESHWATER",
+      "categoria": "equipos",
+      "slug": "freshwater-kit-analisis-agua-dulce",
+      "assets": {
+        "photo": {
+          "originalFile": "Freshwater.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Freshwater.png",
+          "newFileName": "EQ014_FRESHWATER.png",
+          "score": 81.42857142857143
+        },
+        "pdf": {
+          "originalFile": "FRESHWATER MASTER TEST KIT.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/FRESHWATER MASTER TEST KIT.pdf",
+          "newFileName": "EQ014_FRESHWATER.pdf",
+          "score": 43.333333333333336
+        }
+      }
+    },
+    {
+      "id": "69",
+      "codigo": "EQ016",
+      "nombre": "CHEMETRICS KIT DE PERÓXIDO DE HIDRÓGENO",
+      "categoria": "equipos",
+      "slug": "chemetrics-kit-peroxido-hidrogeno",
+      "assets": {
+        "photo": {
+          "originalFile": "Peróxido de hidrógeno.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Peróxido de hidrógeno.png",
+          "newFileName": "EQ016_CHEMETRICS_KIT_DE_PER_XIDO_DE_HIDR_GENO.png",
+          "score": 58.46153846153846
+        },
+        "pdf": {
+          "originalFile": "Kit de Peróxido de Hidrógeno CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Kit de Peróxido de Hidrógeno CHEMETRICS.pdf",
+          "newFileName": "EQ016_CHEMETRICS_KIT_DE_PER_XIDO_DE_HIDR_GENO.pdf",
+          "score": 77.77777777777777
+        }
+      }
+    },
+    {
+      "id": "70",
+      "codigo": "EQ017",
+      "nombre": "CHEMETRICS KIT DE NITRITO",
+      "categoria": "equipos",
+      "slug": "chemetrics-kit-nitrito",
+      "assets": {
+        "photo": {
+          "originalFile": "API KIT DE NITRITO.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/API KIT DE NITRITO.png",
+          "newFileName": "EQ017_CHEMETRICS_KIT_DE_NITRITO.png",
+          "score": 68
+        },
+        "pdf": {
+          "originalFile": "CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CHEMETRICS.pdf",
+          "newFileName": "EQ017_CHEMETRICS_KIT_DE_NITRITO.pdf",
+          "score": 58
+        }
+      }
+    },
+    {
+      "id": "71",
+      "codigo": "EQ018",
+      "nombre": "CHEMETRICS KIT DE NITRATO",
+      "categoria": "equipos",
+      "slug": "chemetrics-kit-nitrato",
+      "assets": {
+        "photo": {
+          "originalFile": "API KIT DE NITRATO.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/API KIT DE NITRATO.png",
+          "newFileName": "EQ018_CHEMETRICS_KIT_DE_NITRATO.png",
+          "score": 68
+        },
+        "pdf": {
+          "originalFile": "CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CHEMETRICS.pdf",
+          "newFileName": "EQ018_CHEMETRICS_KIT_DE_NITRATO.pdf",
+          "score": 58
+        }
+      }
+    },
+    {
+      "id": "72",
+      "codigo": "EQ019",
+      "nombre": "CHEMETRICS KIT DE HIERRO",
+      "categoria": "equipos",
+      "slug": "chemetrics-kit-hierro",
+      "assets": {
+        "photo": {
+          "originalFile": "API KIT DE PH.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/API KIT DE PH.png",
+          "newFileName": "EQ019_CHEMETRICS_KIT_DE_HIERRO.png",
+          "score": 47.5
+        },
+        "pdf": {
+          "originalFile": "CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CHEMETRICS.pdf",
+          "newFileName": "EQ019_CHEMETRICS_KIT_DE_HIERRO.pdf",
+          "score": 60
+        }
+      }
+    },
+    {
+      "id": "73",
+      "codigo": "EQ020",
+      "nombre": "CHEMETRICS KIT DE AMONIO",
+      "categoria": "equipos",
+      "slug": "chemetrics-kit-amonio",
+      "assets": {
+        "photo": {
+          "originalFile": "API KIT DE AMONIO.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/API KIT DE AMONIO.png",
+          "newFileName": "EQ020_CHEMETRICS_KIT_DE_AMONIO.png",
+          "score": 65.83333333333334
+        },
+        "pdf": {
+          "originalFile": "CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CHEMETRICS.pdf",
+          "newFileName": "EQ020_CHEMETRICS_KIT_DE_AMONIO.pdf",
+          "score": 60
+        }
+      }
+    },
+    {
+      "id": "74",
+      "codigo": "EQ021",
+      "nombre": "CHEMETRICS KIT DE FOSFATO",
+      "categoria": "equipos",
+      "slug": "chemetrics-kit-fosfato",
+      "assets": {
+        "photo": {
+          "originalFile": "API KIT DE FOSFATO.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/API KIT DE FOSFATO.png",
+          "newFileName": "EQ021_CHEMETRICS_KIT_DE_FOSFATO.png",
+          "score": 68
+        },
+        "pdf": {
+          "originalFile": "CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CHEMETRICS.pdf",
+          "newFileName": "EQ021_CHEMETRICS_KIT_DE_FOSFATO.pdf",
+          "score": 62
+        }
+      }
+    },
+    {
+      "id": "75",
+      "codigo": "EQ022",
+      "nombre": "CHEMETRICS KIT DE SULFITO",
+      "categoria": "equipos",
+      "slug": "chemetrics-kit-sulfito",
+      "assets": {
+        "photo": {
+          "originalFile": "API KIT DE PH.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/API KIT DE PH.png",
+          "newFileName": "EQ022_CHEMETRICS_KIT_DE_SULFITO.png",
+          "score": 46
+        },
+        "pdf": {
+          "originalFile": "CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CHEMETRICS.pdf",
+          "newFileName": "EQ022_CHEMETRICS_KIT_DE_SULFITO.pdf",
+          "score": 62
+        }
+      }
+    },
+    {
+      "id": "76",
+      "codigo": "EQ023",
+      "nombre": "CHEMETRICS KIT DE DUREZA",
+      "categoria": "equipos",
+      "slug": "chemetrics-kit-dureza",
+      "assets": {
+        "photo": {
+          "originalFile": "API KIT DE PH.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/API KIT DE PH.png",
+          "newFileName": "EQ023_CHEMETRICS_KIT_DE_DUREZA.png",
+          "score": 47.5
+        },
+        "pdf": {
+          "originalFile": "CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CHEMETRICS.pdf",
+          "newFileName": "EQ023_CHEMETRICS_KIT_DE_DUREZA.pdf",
+          "score": 60
+        }
+      }
+    },
+    {
+      "id": "77",
+      "codigo": "EQ024",
+      "nombre": "CHEMETRICS KIT DE ALCALINIDAD TOTAL",
+      "categoria": "equipos",
+      "slug": "chemetrics-kit-alcalinidad-total",
+      "assets": {
+        "photo": {
+          "originalFile": "Copia de alcalinidad alta.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/Copia de alcalinidad alta.png",
+          "newFileName": "EQ024_CHEMETRICS_KIT_DE_ALCALINIDAD_TOTAL.png",
+          "score": 58.57142857142858
+        },
+        "pdf": {
+          "originalFile": "Kit de Alcalinidad Total CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Kit de Alcalinidad Total CHEMETRICS.pdf",
+          "newFileName": "EQ024_CHEMETRICS_KIT_DE_ALCALINIDAD_TOTAL.pdf",
+          "score": 73.33333333333334
+        }
+      }
+    },
+    {
+      "id": "78",
+      "codigo": "EQ025",
+      "nombre": "CHEMETRICS KIT DE DIÓXIDO DE CARBONO",
+      "categoria": "equipos",
+      "slug": "chemetrics-kit-dioxido-carbono",
+      "assets": {
+        "photo": {
+          "originalFile": "API KIT DE DUREZA DE CARBONO.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/API KIT DE DUREZA DE CARBONO.png",
+          "newFileName": "EQ025_CHEMETRICS_KIT_DE_DI_XIDO_DE_CARBONO.png",
+          "score": 67.22222222222223
+        },
+        "pdf": {
+          "originalFile": "Kit de Dióxido de Carbono CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Kit de Dióxido de Carbono CHEMETRICS.pdf",
+          "newFileName": "EQ025_CHEMETRICS_KIT_DE_DI_XIDO_DE_CARBONO.pdf",
+          "score": 74.14634146341463
+        }
+      }
+    },
+    {
+      "id": "79",
+      "codigo": "EQ026",
+      "nombre": "KITS API NITRATO",
+      "categoria": "equipos",
+      "slug": "kits-api-nitrato",
+      "assets": {
+        "photo": {
+          "originalFile": "API KIT DE NITRATO.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/API KIT DE NITRATO.png",
+          "newFileName": "EQ026_KITS_API_NITRATO.png",
+          "score": 65.45454545454547
+        },
+        "pdf": {
+          "originalFile": "Kit de Nitrato CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Kit de Nitrato CHEMETRICS.pdf",
+          "newFileName": "EQ026_KITS_API_NITRATO.pdf",
+          "score": 44.48275862068966
+        }
+      }
+    },
+    {
+      "id": "80",
+      "codigo": "EQ027",
+      "nombre": "KITS API NITRITO",
+      "categoria": "equipos",
+      "slug": "kits-api-nitrito",
+      "assets": {
+        "photo": {
+          "originalFile": "API KIT DE NITRITO.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/API KIT DE NITRITO.png",
+          "newFileName": "EQ027_KITS_API_NITRITO.png",
+          "score": 65.45454545454547
+        },
+        "pdf": {
+          "originalFile": "Kit de Nitrito CHEMETRICS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Kit de Nitrito CHEMETRICS.pdf",
+          "newFileName": "EQ027_KITS_API_NITRITO.pdf",
+          "score": 44.48275862068966
+        }
+      }
+    },
+    {
+      "id": "81",
+      "codigo": "EQ028",
+      "nombre": "KITS API FOSFATO",
+      "categoria": "equipos",
+      "slug": "kits-api-fosfato",
+      "assets": {
+        "photo": {
+          "originalFile": "KITS LAMOTTE FOSFATO.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/KITS LAMOTTE FOSFATO.png",
+          "newFileName": "EQ028_KITS_API_FOSFATO.png",
+          "score": 78.33333333333333
+        },
+        "pdf": {
+          "originalFile": "TUBOS API.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/TUBOS API.pdf",
+          "newFileName": "EQ028_KITS_API_FOSFATO.pdf",
+          "score": 47.5
+        }
+      }
+    },
+    {
+      "id": "82",
+      "codigo": "EQ029",
+      "nombre": "KITS API AMONIO",
+      "categoria": "equipos",
+      "slug": "kits-api-amonio",
+      "assets": {
+        "photo": {
+          "originalFile": "API KIT DE AMONIO.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/API KIT DE AMONIO.png",
+          "newFileName": "EQ029_KITS_API_AMONIO.png",
+          "score": 62.85714285714286
+        },
+        "pdf": {
+          "originalFile": "PROTECTOR PARA AMONIO (PPA).pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/PROTECTOR PARA AMONIO (PPA).pdf",
+          "newFileName": "EQ029_KITS_API_AMONIO.pdf",
+          "score": 44.48275862068966
+        }
+      }
+    },
+    {
+      "id": "83",
+      "codigo": "EQ030",
+      "nombre": "KITS API CALCIO",
+      "categoria": "equipos",
+      "slug": "kits-api-calcio",
+      "assets": {
+        "photo": {
+          "originalFile": "API KIT DE CALCIO.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/API KIT DE CALCIO.png",
+          "newFileName": "EQ030_KITS_API_CALCIO.png",
+          "score": 62.85714285714286
+        },
+        "pdf": {
+          "originalFile": "MEDIDOR DE CALCIO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MEDIDOR DE CALCIO.pdf",
+          "newFileName": "EQ030_KITS_API_CALCIO.pdf",
+          "score": 48.095238095238095
+        }
+      }
+    },
+    {
+      "id": "84",
+      "codigo": "EQ031",
+      "nombre": "BALANZAS OHAUS",
+      "categoria": "equipos",
+      "slug": "balanzas-ohaus",
+      "assets": {
+        "photo": {
+          "originalFile": "BALANZA SCOUT PRO400.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BALANZA SCOUT PRO400.png",
+          "newFileName": "EQ031_BALANZAS_OHAUS.png",
+          "score": 41.666666666666664
+        },
+        "pdf": {
+          "originalFile": "BALANZAS OHAUS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/BALANZAS OHAUS.pdf",
+          "newFileName": "EQ031_BALANZAS_OHAUS.pdf",
+          "score": 97.77777777777779
+        }
+      }
+    },
+    {
+      "id": "85",
+      "codigo": "EQ010",
+      "nombre": "SALINÓMETRO -11",
+      "categoria": "equipos",
+      "slug": "salinometro-11",
+      "assets": {
+        "photo": {
+          "originalFile": "Salinómetro Vegge.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Salinómetro Vegge.png",
+          "newFileName": "EQ010_SALIN_METRO__11.png",
+          "score": 64.54545454545453
+        },
+        "pdf": {
+          "originalFile": "SALINÓMETRO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/SALINÓMETRO.pdf",
+          "newFileName": "EQ010_SALIN_METRO__11.pdf",
+          "score": 85
+        }
+      }
+    },
+    {
+      "id": "86",
+      "codigo": "EQ011",
+      "nombre": "SALINÓMETRO VEE GEE STX-3",
+      "categoria": "equipos",
+      "slug": "salinometro-vee-gee-stx3",
+      "assets": {
+        "photo": {
+          "originalFile": "Salinómetro Vegge.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Salinómetro Vegge.png",
+          "newFileName": "EQ011_SALIN_METRO_VEE_GEE_STX_3.png",
+          "score": 74
+        },
+        "pdf": {
+          "originalFile": "SALINÓMETRO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/SALINÓMETRO.pdf",
+          "newFileName": "EQ011_SALIN_METRO_VEE_GEE_STX_3.pdf",
+          "score": 53.99999999999999
+        }
+      }
+    },
+    {
+      "id": "87",
+      "codigo": "EQ012",
+      "nombre": "TERMÓMETRO",
+      "categoria": "equipos",
+      "slug": "termometro",
+      "assets": {
+        "photo": {
+          "originalFile": "Termómetro.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Termómetro.png",
+          "newFileName": "EQ012_TERM_METRO.png",
+          "score": 76.66666666666667
+        },
+        "pdf": {
+          "originalFile": "SALINÓMETRO.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/SALINÓMETRO.pdf",
+          "newFileName": "EQ012_TERM_METRO.pdf",
+          "score": 47.5
+        }
+      }
+    },
+    {
+      "id": "88",
+      "codigo": "EQ015",
+      "nombre": "AMMO LOCK",
+      "categoria": "equipos",
+      "slug": "ammo-lock",
+      "assets": {
+        "photo": {
+          "originalFile": "AMMO LOCK.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/AMMO LOCK.png",
+          "newFileName": "EQ015_AMMO_LOCK.png",
+          "score": 89.23076923076923
+        },
+        "pdf": {
+          "originalFile": "AMMONIA TEST KIT.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/AMMONIA TEST KIT.pdf",
+          "newFileName": "EQ015_AMMO_LOCK.pdf",
+          "score": 30.000000000000004
+        }
+      }
+    },
+    {
+      "id": "89",
+      "codigo": "EQ032",
+      "nombre": "CÁMARA NEUBAUER",
+      "categoria": "equipos",
+      "slug": "camara-neubauer",
+      "assets": {
+        "photo": {
+          "originalFile": "CAMARA NEUBAUER.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CAMARA NEUBAUER.png",
+          "newFileName": "EQ032_C_MARA_NEUBAUER.png",
+          "score": 83.6842105263158
+        },
+        "pdf": {
+          "originalFile": "CÁMARA CONTAJE DE ALGAS NEWBAUER.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CÁMARA CONTAJE DE ALGAS NEWBAUER.pdf",
+          "newFileName": "EQ032_C_MARA_NEUBAUER.pdf",
+          "score": 47.83783783783784
+        }
+      }
+    },
+    {
+      "id": "90",
+      "codigo": "EQ033",
+      "nombre": "TIRILLAS pH",
+      "categoria": "equipos",
+      "slug": "tirillas-ph",
+      "assets": {
+        "photo": {
+          "originalFile": "Tirillas PH.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Tirillas PH.png",
+          "newFileName": "EQ033_TIRILLAS_pH.png",
+          "score": 83.33333333333334
+        },
+        "pdf": {
+          "originalFile": "TIRILLAS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/TIRILLAS.pdf",
+          "newFileName": "EQ033_TIRILLAS_pH.pdf",
+          "score": 93.33333333333334
+        }
+      }
+    },
+    {
+      "id": "91",
+      "codigo": "EQ034",
+      "nombre": "CÁMARA SEDGEWICK",
+      "categoria": "equipos",
+      "slug": "camara-sedgewick",
+      "assets": {
+        "photo": {
+          "originalFile": "CAMARA SEDGEWICK.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CAMARA SEDGEWICK.png",
+          "newFileName": "EQ034_C_MARA_SEDGEWICK.png",
+          "score": 85
+        },
+        "pdf": {
+          "originalFile": "CÁMARA CONTAJE DE ALGAS NEWBAUER.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CÁMARA CONTAJE DE ALGAS NEWBAUER.pdf",
+          "newFileName": "EQ034_C_MARA_SEDGEWICK.pdf",
+          "score": 42.432432432432435
+        }
+      }
+    },
+    {
+      "id": "92",
+      "codigo": "EQ035",
+      "nombre": "BLOWERS GAST",
+      "categoria": "equipos",
+      "slug": "blowers-gast",
+      "assets": {
+        "photo": {
+          "originalFile": "BLOWERS GAST01.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BLOWERS GAST01.png",
+          "newFileName": "EQ035_BLOWERS_GAST.png",
+          "score": 76.66666666666667
+        },
+        "pdf": {
+          "originalFile": "BLOWERS GAST.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/BLOWERS GAST.pdf",
+          "newFileName": "EQ035_BLOWERS_GAST.pdf",
+          "score": 95
+        }
+      }
+    },
+    {
+      "id": "93",
+      "codigo": "EQ036",
+      "nombre": "BLOWERS ALL STAR",
+      "categoria": "equipos",
+      "slug": "blowers-all-star",
+      "assets": {
+        "photo": {
+          "originalFile": "BLOWERS GAST01.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BLOWERS GAST01.png",
+          "newFileName": "EQ036_BLOWERS_ALL_STAR.png",
+          "score": 60
+        },
+        "pdf": {
+          "originalFile": "BLOWERS ALL STAR.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/BLOWERS ALL STAR.pdf",
+          "newFileName": "EQ036_BLOWERS_ALL_STAR.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "94",
+      "codigo": "EQ037",
+      "nombre": "PIEDRAS DIFUSORAS",
+      "categoria": "equipos",
+      "slug": "piedras-difusoras",
+      "assets": {
+        "photo": {
+          "originalFile": "Piedras difusoras.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Piedras difusoras.png",
+          "newFileName": "EQ037_PIEDRAS_DIFUSORAS.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "PIEDRAS DIFUSORAS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/PIEDRAS DIFUSORAS.pdf",
+          "newFileName": "EQ037_PIEDRAS_DIFUSORAS.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "95",
+      "codigo": "EQ039",
+      "nombre": "BOLSO FILTRANTES DE POLIPROPILENO",
+      "categoria": "equipos",
+      "slug": "bolso-filtrantes-de-polipropileno",
+      "assets": {
+        "photo": {
+          "originalFile": "BOLSOS FILTRANTES DE POLIPROPILENO.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BOLSOS FILTRANTES DE POLIPROPILENO.png",
+          "newFileName": "EQ039_BOLSO_FILTRANTES_DE_POLIPROPILENO.png",
+          "score": 100
+        },
+        "pdf": {
+          "originalFile": "BOLSOS FILTRANTES.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/BOLSOS FILTRANTES.pdf",
+          "newFileName": "EQ039_BOLSO_FILTRANTES_DE_POLIPROPILENO.pdf",
+          "score": 61.515151515151516
+        }
+      }
+    },
+    {
+      "id": "96",
+      "codigo": "EQ013",
+      "nombre": "MANGUERA DE VINIL TRANSPARENTE",
+      "categoria": "equipos",
+      "slug": "manguera-de-vinil-transparente",
+      "assets": {
+        "photo": {
+          "originalFile": "Manguera vinil.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Manguera vinil.png",
+          "newFileName": "EQ013_MANGUERA_DE_VINIL_TRANSPARENTE.png",
+          "score": 76.66666666666666
+        },
+        "pdf": {
+          "originalFile": "MANGUERA DE VINIL TRANSPARENTE.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MANGUERA DE VINIL TRANSPARENTE.pdf",
+          "newFileName": "EQ013_MANGUERA_DE_VINIL_TRANSPARENTE.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "97",
+      "codigo": "EQ038",
+      "nombre": "MANGUERA DIFUSORA",
+      "categoria": "equipos",
+      "slug": "manguera-difusora",
+      "assets": {
+        "photo": {
+          "originalFile": "MANGERA DIFUSORA.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/MANGERA DIFUSORA.png",
+          "newFileName": "EQ038_MANGUERA_DIFUSORA.png",
+          "score": 85
+        },
+        "pdf": {
+          "originalFile": "MANGUERA DIFUSORA.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MANGUERA DIFUSORA.pdf",
+          "newFileName": "EQ038_MANGUERA_DIFUSORA.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "98",
+      "codigo": "EQ040",
+      "nombre": "CINTA INDUSTRIAL PRIME",
+      "categoria": "equipos",
+      "slug": "cinta-industrial-prime",
+      "assets": {
+        "photo": {
+          "originalFile": "Cinta Permalon.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Cinta Permalon.png",
+          "newFileName": "EQ040_CINTA_INDUSTRIAL_PRIME.png",
+          "score": 50.90909090909091
+        },
+        "pdf": {
+          "originalFile": "Cinta negra  industrial PRIME pdf.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Cinta negra  industrial PRIME pdf.pdf",
+          "newFileName": "EQ040_CINTA_INDUSTRIAL_PRIME.pdf",
+          "score": 91.11111111111111
+        }
+      }
+    },
+    {
+      "id": "99",
+      "codigo": "EQ041",
+      "nombre": "MALLAS PARA PISCINAS CAMARONERAS",
+      "categoria": "equipos",
+      "slug": "mallas-para-piscinas-camaroneras",
+      "assets": {
+        "photo": {
+          "originalFile": "Calamares caja.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/CONGELADOS/Calamares caja.png",
+          "newFileName": "EQ041_MALLAS_PARA_PISCINAS_CAMARONERAS.png",
+          "score": 34.375
+        },
+        "pdf": {
+          "originalFile": "MALLAS PARA PISCINAS DE CAMARONERAS.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MALLAS PARA PISCINAS DE CAMARONERAS.pdf",
+          "newFileName": "EQ041_MALLAS_PARA_PISCINAS_CAMARONERAS.pdf",
+          "score": 100
+        }
+      }
+    },
+    {
+      "id": "100",
+      "codigo": "EQ042",
+      "nombre": "MALLA MARINES ROJA",
+      "categoria": "equipos",
+      "slug": "malla-marines-roja",
+      "assets": {
+        "photo": {
+          "originalFile": "malla roja.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/malla roja.png",
+          "newFileName": "EQ042_MALLA_MARINES_ROJA.png",
+          "score": 64.44444444444444
+        },
+        "pdf": {
+          "originalFile": "MALLA ROJA.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MALLA ROJA.pdf",
+          "newFileName": "EQ042_MALLA_MARINES_ROJA.pdf",
+          "score": 64.44444444444444
+        }
+      }
+    },
+    {
+      "id": "101",
+      "codigo": "EQ043",
+      "nombre": "MALLAS NITEX",
+      "categoria": "equipos",
+      "slug": "mallas-nitex",
+      "assets": {
+        "photo": {
+          "originalFile": "MALLA NITEX.png",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/MALLA NITEX.png",
+          "newFileName": "EQ043_MALLAS_NITEX.png",
+          "score": 76.66666666666667
+        },
+        "pdf": {
+          "originalFile": "MALLAS NITEX.pdf",
+          "originalPath": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MALLAS NITEX.pdf",
+          "newFileName": "EQ043_MALLAS_NITEX.pdf",
+          "score": 95
+        }
+      }
+    }
+  ],
+  "unmatchedAssets": {
+    "photos": [
+      {
+        "name": "TAMBOR OXITETRACICLINA.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/TAMBOR OXITETRACICLINA.png"
+      },
+      {
+        "name": "VITAMINA C NUEVA.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/VITAMINA C NUEVA.png"
+      },
+      {
+        "name": "saponina 02.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ADITIVOS/saponina 02.png"
+      },
+      {
+        "name": "Mejillones caja.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/CONGELADOS/Mejillones caja.png"
+      },
+      {
+        "name": "ZM feed mysis.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/HIGASHIMARU/ZM feed mysis.png"
+      },
+      {
+        "name": "Artemia amarilla.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Artemia amarilla.png"
+      },
+      {
+        "name": "Artemias latas.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Artemias latas.png"
+      },
+      {
+        "name": "Espirulina microfina.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Espirulina microfina.png"
+      },
+      {
+        "name": "Mackay-Marine-Gold_foil-pouch-150.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Mackay-Marine-Gold_foil-pouch-150.png"
+      },
+      {
+        "name": "Mackay-Marine-Gold_foil-pouch-250.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Mackay-Marine-Gold_foil-pouch-250.png"
+      },
+      {
+        "name": "Mackay-Marine-Gold_foil-pouch-350.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Mackay-Marine-Gold_foil-pouch-350.png"
+      },
+      {
+        "name": "Mackay-Marine-Gold_foil-pouch-450.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/MACKEY MARINE/Mackay-Marine-Gold_foil-pouch-450.png"
+      },
+      {
+        "name": "40-9.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/ZEIGLER/40-9.png"
+      },
+      {
+        "name": "Ez artemia ultra2.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/ZEIGLER/Ez artemia ultra2.png"
+      },
+      {
+        "name": "Ez artemia.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/ZEIGLER/Ez artemia.png"
+      },
+      {
+        "name": "Larva AP100.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/ZEIGLER/Larva AP100.png"
+      },
+      {
+        "name": "Larva Zplus.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/ZEIGLER/Larva Zplus.png"
+      },
+      {
+        "name": "Zpro.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/ALIMENTOS/ZEIGLER/Zpro.png"
+      },
+      {
+        "name": "3587-meter.jpg",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/3587-meter.jpg"
+      },
+      {
+        "name": "BALANZA SCOUT PRO1200.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BALANZA SCOUT PRO1200.png"
+      },
+      {
+        "name": "BALANZA SCOUT PRO2000.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BALANZA SCOUT PRO2000.png"
+      },
+      {
+        "name": "BALANZA SCOUT PRO600.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BALANZA SCOUT PRO600.png"
+      },
+      {
+        "name": "BALANZA TRIPLE BRAZO.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BALANZA TRIPLE BRAZO.png"
+      },
+      {
+        "name": "BLOWERS GAST02.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BLOWERS GAST02.png"
+      },
+      {
+        "name": "BLOWERS GAST03.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BLOWERS GAST03.png"
+      },
+      {
+        "name": "BOMBAS PACER CARCAZA 2PUL.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BOMBAS PACER CARCAZA 2PUL.png"
+      },
+      {
+        "name": "BOMBAS PACER CARCAZA 3PUL.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BOMBAS PACER CARCAZA 3PUL.png"
+      },
+      {
+        "name": "BOMBAS PACER EJE DE ACERO.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BOMBAS PACER EJE DE ACERO.png"
+      },
+      {
+        "name": "BOMBAS PACER IMPULSOR 3 ALABELES.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BOMBAS PACER IMPULSOR 3 ALABELES.png"
+      },
+      {
+        "name": "BOMBAS PACER IMPULSOR 4 ALABELES.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BOMBAS PACER IMPULSOR 4 ALABELES.png"
+      },
+      {
+        "name": "BOMBAS PACER IMPULSOR 5 ALABELES.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BOMBAS PACER IMPULSOR 5 ALABELES.png"
+      },
+      {
+        "name": "BOMBAS PACER JUNTA TORICA TAPON LLENADO.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BOMBAS PACER JUNTA TORICA TAPON LLENADO.png"
+      },
+      {
+        "name": "BOMBAS PACER VOLUTA PLANA.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BOMBAS PACER VOLUTA PLANA.png"
+      },
+      {
+        "name": "BOMBAS PACER01.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BOMBAS PACER01.png"
+      },
+      {
+        "name": "BOMBAS PACER02.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BOMBAS PACER02.png"
+      },
+      {
+        "name": "BOMBAS PACER03.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/BOMBAS PACER03.png"
+      },
+      {
+        "name": "ACCES OAKTON.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/ACCES OAKTON.png"
+      },
+      {
+        "name": "AMONIA.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/AMONIA.png"
+      },
+      {
+        "name": "BUFFER ACCESORIO.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/BUFFER ACCESORIO.png"
+      },
+      {
+        "name": "FOSFATO.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/FOSFATO.png"
+      },
+      {
+        "name": "NITRATE.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/NITRATE.png"
+      },
+      {
+        "name": "NITRITE.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/NITRITE.png"
+      },
+      {
+        "name": "alcalinidad alta.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/alcalinidad alta.png"
+      },
+      {
+        "name": "dioxido de carbono.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/dioxido de carbono.png"
+      },
+      {
+        "name": "fosfato 1.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/fosfato 1.png"
+      },
+      {
+        "name": "hierro.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/hierro.png"
+      },
+      {
+        "name": "nitrato.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/nitrato.png"
+      },
+      {
+        "name": "nitrito.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/nitrito.png"
+      },
+      {
+        "name": "oakton 50p.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/oakton 50p.png"
+      },
+      {
+        "name": "oakton ph30.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/oakton ph30.png"
+      },
+      {
+        "name": "peroxido de hidrogeno.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/peroxido de hidrogeno.png"
+      },
+      {
+        "name": "sulfito.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/sulfito.png"
+      },
+      {
+        "name": "total alcalinidad baja.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/total alcalinidad baja.png"
+      },
+      {
+        "name": "total hardness.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/CHEMETRICS/total hardness.png"
+      },
+      {
+        "name": "Captura de pantalla 2024-05-21 a la(s) 17.32.23.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Captura de pantalla 2024-05-21 a la(s) 17.32.23.png"
+      },
+      {
+        "name": "INTERMAS 5201.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/INTERMAS 5201.png"
+      },
+      {
+        "name": "INTERMAS 5255.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/INTERMAS 5255.png"
+      },
+      {
+        "name": "INTERMAS 5256.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/INTERMAS 5256.png"
+      },
+      {
+        "name": "INTERMAS 5277.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/INTERMAS 5277.png"
+      },
+      {
+        "name": "Iron Lamotte.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Iron Lamotte.png"
+      },
+      {
+        "name": "KITS LAMOTTE ALCALINIDAD.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/KITS LAMOTTE ALCALINIDAD.png"
+      },
+      {
+        "name": "MICROSCOPIO SERIE CLINICAL 1320.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/MICROSCOPIO SERIE CLINICAL 1320.png"
+      },
+      {
+        "name": "Oxigenómetro Laqua.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Oxigenómetro Laqua.png"
+      },
+      {
+        "name": "Philis foco.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Philis foco.png"
+      },
+      {
+        "name": "SOLUCIONES CALCIO 150.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/SOLUCIONES CALCIO 150.png"
+      },
+      {
+        "name": "SOLUCIONES CALCIO 2000.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/SOLUCIONES CALCIO 2000.png"
+      },
+      {
+        "name": "SOLUCIONES CONDUCTIVIDAD 1.41.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/SOLUCIONES CONDUCTIVIDAD 1.41.png"
+      },
+      {
+        "name": "SOLUCIONES CONDUCTIVIDAD1 2.9.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/SOLUCIONES CONDUCTIVIDAD1 2.9.png"
+      },
+      {
+        "name": "SOLUCIONES PH4.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/SOLUCIONES PH4.png"
+      },
+      {
+        "name": "SOLUCIONES PH7.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/SOLUCIONES PH7.png"
+      },
+      {
+        "name": "SOLUCIONES POTASIO 150.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/SOLUCIONES POTASIO 150.png"
+      },
+      {
+        "name": "SOLUCIONES POTASIO 2000.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/SOLUCIONES POTASIO 2000.png"
+      },
+      {
+        "name": "SOLUCIONES SALINIDAD 0.5.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/SOLUCIONES SALINIDAD 0.5.png"
+      },
+      {
+        "name": "SOLUCIONES SALINIDAD 5.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/SOLUCIONES SALINIDAD 5.png"
+      },
+      {
+        "name": "Salinómetro Lamottte.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Salinómetro Lamottte.png"
+      },
+      {
+        "name": "Smart Spectro.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Smart Spectro.png"
+      },
+      {
+        "name": "T-Conectores.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/T-Conectores.png"
+      },
+      {
+        "name": "Válvula plática.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/Válvula plática.png"
+      },
+      {
+        "name": "medidor de salinidad.psd.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/EQUIPOS/medidor de salinidad.psd.png"
+      },
+      {
+        "name": "WSR.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/PROBIÓTICOS/WSR.png"
+      },
+      {
+        "name": "Ácido fórmico china.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Ácido fórmico china.png"
+      },
+      {
+        "name": "Cloruro de magnesio China.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Cloruro de magnesio China.png"
+      },
+      {
+        "name": "Metasilicato de sodio 2.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Metasilicato de sodio 2.png"
+      },
+      {
+        "name": "Orthotolidine 2.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Orthotolidine 2.png"
+      },
+      {
+        "name": "Peróxido de hidrógeno Brasil.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Peróxido de hidrógeno Brasil.png"
+      },
+      {
+        "name": "Thiosulfato de sodio 1kg.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Thiosulfato de sodio 1kg.png"
+      },
+      {
+        "name": "Trilon B saco.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/Trilon B saco.png"
+      },
+      {
+        "name": "foto edta b tetrasodium.png",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FOTOS SIN PARSEAR/QUÍMICOS/foto edta b tetrasodium.png"
+      }
+    ],
+    "pdfs": [
+      {
+        "name": "EMERALD NO SE ESTA TRAYENDO 2014.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ADITIVOS/FICHAS TÉCNICAS/EMERALD NO SE ESTA TRAYENDO 2014.pdf"
+      },
+      {
+        "name": "Artemia Separt.LABpdf.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/CONGELADOS/Artemia Separt.LABpdf.pdf"
+      },
+      {
+        "name": "SQUID.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/CONGELADOS/SQUID.pdf"
+      },
+      {
+        "name": " MYSIS.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/HIGASHIMARU/ MYSIS.pdf"
+      },
+      {
+        "name": "ESPIRULINA MICROFINA.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/MACKAY MARINE/ESPIRULINA MICROFINA.pdf"
+      },
+      {
+        "name": "GOLD FEED.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/MACKAY MARINE/GOLD FEED.pdf"
+      },
+      {
+        "name": "EZ ARTEMIA.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/EZ ARTEMIA.pdf"
+      },
+      {
+        "name": "LARVA AP 100.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/LARVA AP 100.pdf"
+      },
+      {
+        "name": "Zeigler Larval Shrimp Flake Black.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/ALIMENTOS/FICHAS TECNICAS/ZEIGLER/Zeigler Larval Shrimp Flake Black.pdf"
+      },
+      {
+        "name": "AQUALABO.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/AQUALABO.pdf"
+      },
+      {
+        "name": "BOMBAS PACER.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/BOMBAS PACER.pdf"
+      },
+      {
+        "name": "CALCIO TEST KIT.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CALCIO TEST KIT.pdf"
+      },
+      {
+        "name": "CÁMARA CONTAJE DE ZOOPLANCTON.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CÁMARA CONTAJE DE ZOOPLANCTON.pdf"
+      },
+      {
+        "name": "CTS Test Oakton.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/CTS Test Oakton.pdf"
+      },
+      {
+        "name": "Cinta negra  industrial PRIME pdf (1).pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Cinta negra  industrial PRIME pdf (1).pdf"
+      },
+      {
+        "name": "FOSFATO TEST KIT.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/FOSFATO TEST KIT.pdf"
+      },
+      {
+        "name": "KIT ALCALINIDAD.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/KIT ALCALINIDAD.pdf"
+      },
+      {
+        "name": "Kit de Amonio CHEMETRICS.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Kit de Amonio CHEMETRICS.pdf"
+      },
+      {
+        "name": "Kit de Dureza CHEMETRICS.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Kit de Dureza CHEMETRICS.pdf"
+      },
+      {
+        "name": "Kit de Fosfato CHEMETRICS.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Kit de Fosfato CHEMETRICS.pdf"
+      },
+      {
+        "name": "Kit de Hierro CHEMETRICS.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Kit de Hierro CHEMETRICS.pdf"
+      },
+      {
+        "name": "Kit de Sulfito CHEMETRICS.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/Kit de Sulfito CHEMETRICS.pdf"
+      },
+      {
+        "name": "MEDIDOR DE CONDUCTIVIDAD EC-11 CARACTERÍSTICAS PRINCIPALES DEL PRODUCTO.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MEDIDOR DE CONDUCTIVIDAD EC-11 CARACTERÍSTICAS PRINCIPALES DEL PRODUCTO.pdf"
+      },
+      {
+        "name": "MEDIDOR DE OXIGENOO DISUELTO.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MEDIDOR DE OXIGENOO DISUELTO.pdf"
+      },
+      {
+        "name": "MEDIDOR DE OXÍGENO DISUELTO.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MEDIDOR DE OXÍGENO DISUELTO.pdf"
+      },
+      {
+        "name": "MEDIDOR OXÍGENO DISUELTO POCKETESTER TRACER LAMOTTE 1761.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MEDIDOR OXÍGENO DISUELTO POCKETESTER TRACER LAMOTTE 1761.pdf"
+      },
+      {
+        "name": "MEDIDOR SALINIDAD LAMOTTE.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MEDIDOR SALINIDAD LAMOTTE.pdf"
+      },
+      {
+        "name": "MICROSCOPIO DE LABORATORIO VAN GUARD.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/MICROSCOPIO DE LABORATORIO VAN GUARD.pdf"
+      },
+      {
+        "name": "NITRATE TEST KIT.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/NITRATE TEST KIT.pdf"
+      },
+      {
+        "name": "NITRITE TEST KIT.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/NITRITE TEST KIT.pdf"
+      },
+      {
+        "name": "SMART SPECTRO.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/SMART SPECTRO.pdf"
+      },
+      {
+        "name": "TERMOMETRO VEEGEE.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/TERMOMETRO VEEGEE.pdf"
+      },
+      {
+        "name": "VÁLVULA PLÁSTICA.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/VÁLVULA PLÁSTICA.pdf"
+      },
+      {
+        "name": "pH DE ALTO RANGO TEST KIT.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/pH DE ALTO RANGO TEST KIT.pdf"
+      },
+      {
+        "name": "pH TEST KIT.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/FICHAS/pH TEST KIT.pdf"
+      },
+      {
+        "name": "IMPLANTADOR RALGUN.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/EQUIPOS/IMPLANTADOR RALGUN.pdf"
+      },
+      {
+        "name": "Acido Formico China.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/Acido Formico China.pdf"
+      },
+      {
+        "name": "CARNAL.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/CARNAL.pdf"
+      },
+      {
+        "name": "CLORURO DE MAGNESIO CHINA.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/CLORURO DE MAGNESIO CHINA.pdf"
+      },
+      {
+        "name": "COMBACID XL.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/COMBACID XL.pdf"
+      },
+      {
+        "name": "EDETA B TETRASODIUM.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/EDETA B TETRASODIUM.pdf"
+      },
+      {
+        "name": "METABISULFITO SÓDICO (MBS).pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/METABISULFITO SÓDICO (MBS).pdf"
+      },
+      {
+        "name": "METABISULFITO SÓDICO - HND.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/METABISULFITO SÓDICO - HND.pdf"
+      },
+      {
+        "name": "METASILICATO DE SODIOmp.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/METASILICATO DE SODIOmp.pdf"
+      },
+      {
+        "name": "NITRATO DE SODIOch.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/NITRATO DE SODIOch.pdf"
+      },
+      {
+        "name": "PERCABONATO DE SODIO CON RECUBRIMIENTO COREA.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/PERCABONATO DE SODIO CON RECUBRIMIENTO COREA.pdf"
+      },
+      {
+        "name": "PERCABONATO DE SODIO SIN  RECUBRIMIENTO CHINA.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/PERCABONATO DE SODIO SIN  RECUBRIMIENTO CHINA.pdf"
+      },
+      {
+        "name": "PERÓXIDO DE REFRIGERANTE R507.pdf",
+        "path": "/Users/nazcamedia/Desktop/MODULO PRODUCTOS PRILABSA JULIO 2025/FICHAS TÉCNICAS/QUIMICOS/FICHA/PERÓXIDO DE REFRIGERANTE R507.pdf"
+      }
+    ]
+  }
+}

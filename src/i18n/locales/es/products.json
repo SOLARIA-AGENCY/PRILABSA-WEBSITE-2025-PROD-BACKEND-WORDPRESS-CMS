@@ -1,0 +1,109 @@
+{
+  "categories": {
+    "alimentos": "ALIMENTOS",
+    "probioticos": "PROBIÓTICOS",
+    "aditivos": "ADITIVOS",
+    "quimicos": "QUÍMICOS",
+    "equipos": "EQUIPOS"
+  },
+  "descriptions": {
+    "alimentosDesc": "Revisa nuestro catálogo de productos de Alimentos aquí",
+    "probioticosDesc": "Revisa nuestro catálogo de productos de Probióticos aquí",
+    "aditivosDesc": "Revisa nuestro catálogo de productos de Aditivos aquí",
+    "quimicosDesc": "Revisa nuestro catálogo de productos de Químicos aquí",
+    "equiposDesc": "Revisa nuestro catálogo de productos de Equipos aquí"
+  },
+  "actions": {
+    "viewProducts": "VER PRODUCTOS",
+    "viewAll": "Ver Todos los Productos →",
+    "viewCatalog": "Ver Catálogo Completo",
+    "downloadCatalog": "Descargar Catálogo PDF",
+    "addProduct": "Agregar producto",
+    "removeProduct": "Eliminar producto",
+    "downloadPdf": "Descargar PDF",
+    "viewProduct": "Ver Producto",
+    "backToProducts": "Volver a Productos",
+    "addToQuote": "Agregar a Cotización",
+    "addedToQuote": "Producto agregado a la cotización"
+  },
+  "search": {
+    "label": "Buscar productos",
+    "placeholder": "Buscar categorías de productos...",
+    "searchProducts": "Buscar productos...",
+    "noResults": "No se encontraron productos",
+    "noResultsDescription": "No hay productos que coincidan con la categoría o búsqueda actual."
+  },
+  "catalog": {
+    "title": "Nuestro Catálogo de Productos",
+    "description": "Descarga nuestro catálogo completo con todos nuestros productos para la industria acuícola.",
+    "catalogTitle": "NUESTROS PRODUCTOS",
+    "catalogSubtitle": "Soluciones integrales para la industria acuícola con los más altos estándares de calidad"
+  },
+  "productDetail": {
+    "specifications": "Especificaciones",
+    "datasheet": "Ficha Técnica",
+    "viewMore": "Ver más",
+    "productCode": "CÓDIGO",
+    "productNotFound": "Producto no encontrado",
+    "description": "Descripción",
+    "benefits": "Beneficios",
+    "presentation": "Presentación",
+    "relatedProducts": "Productos Relacionados",
+    "technicalSpecs": "Especificaciones Técnicas",
+    "dosage": "Dosificación",
+    "application": "Aplicación",
+    "storage": "Almacenamiento",
+    "precautions": "Precauciones",
+    "downloadTechnicalSheet": "Descargar Ficha Técnica"
+  },
+  "quotation": {
+    "title": "Cotización",
+    "pageTitle": "MI COTIZACIÓN",
+    "myQuote": "Mi Cotización",
+    "subtitle": "Revise los productos seleccionados y ajuste las cantidades antes de generar su solicitud.",
+    "quantity": "Cantidad",
+    "emptyMessage": "Tu carrito de cotización está vacío",
+    "emptyCart": "Su carrito de cotización está vacío",
+    "exploreMessage": "Explore nuestro catálogo para encontrar los productos que necesita.",
+    "requestQuote": "Solicitar Cotización",
+    "generateQuote": "Generar Cotización",
+    "addNote": "Agregar nota",
+    "notes": "Notas adicionales"
+  },
+  "common": {
+    "products": "PRODUCTOS",
+    "download": "Descargar",
+    "loading": "Cargando...",
+    "seeMore": "Ver más",
+    "viewAll": "Ver todos",
+    "home": "Inicio",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "close": "Cerrar",
+    "open": "Abrir",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "update": "Actualizar",
+    "submit": "Enviar",
+    "reset": "Restablecer"
+  },
+  "breadcrumbs": {
+    "home": "Inicio",
+    "products": "Productos",
+    "category": {
+      "alimentos": "Alimentos",
+      "probioticos": "Probióticos",
+      "aditivos": "Aditivos",
+      "quimicos": "Químicos",
+      "equipos": "Equipos"
+    }
+  },
+  "metadata": {
+    "title": "Productos - PRILABSA",
+    "description": "Catálogo completo de productos PRILABSA para la industria acuícola. Alimentos, probióticos, aditivos, químicos y equipos de laboratorio.",
+    "keywords": "productos acuícolas, equipos laboratorio, reactivos químicos, alimentos para camarones, PRILABSA Ecuador"
+  }
+}

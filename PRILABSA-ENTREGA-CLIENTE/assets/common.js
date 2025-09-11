@@ -1,0 +1,23 @@
+const buttons = { "loading": "Loading...", "error": "Error", "success": "Success", "cancel": "Cancel", "confirm": "Confirm", "save": "Save", "edit": "Edit", "delete": "Delete", "back": "Back", "next": "Next", "previous": "Previous", "seeMore": "See more", "viewAll": "View all", "download": "Download", "contact": "Contact Us", "submit": "Submit", "confirmSend": "Confirm Send", "downloadPdf": "Download PDF", "downloadCSS": "Download CSS", "exportCSS": "Export CSS", "subscribe": "SUBSCRIBE" };
+const forms = { "fields": { "fullName": "Full Name", "name": "Full name *", "email": "Email *", "phone": "Phone", "company": "Company *", "message": "Message", "required": "* Required fields" }, "placeholders": { "email": "Your email address", "name": "Enter your full name", "message": "Write your message here" }, "validation": { "required": "Please complete the required fields: Name, Email and Message.", "invalidEmail": "Please enter a valid email" }, "success": "Thank you! Your message has been sent. We will contact you soon.", "error": "There was an error sending the message. Please try again." };
+const meta = { "loading": "Loading...", "error": "Error", "success": "Success" };
+const messages = { "simulationNote": "Email sending is just a simulation. To receive real quotations, a backend must be integrated (SMTP, Brevo, SendGrid, etc).", "logoError": "Could not load logo for PDF. Download will be disabled.", "redirectMessage": "You will be redirected to home shortly." };
+const contact = { "phone": "Phone:", "email": "For more information write to us at", "title": "CONTACT US" };
+const newsletter = { "description": "Receive the latest news, offers and industry trends directly in your email.", "placeholder": "Your email address", "button": "SUBSCRIBE" };
+const common = {
+  buttons,
+  forms,
+  meta,
+  messages,
+  contact,
+  newsletter
+};
+export {
+  buttons,
+  contact,
+  common as default,
+  forms,
+  messages,
+  meta,
+  newsletter
+};

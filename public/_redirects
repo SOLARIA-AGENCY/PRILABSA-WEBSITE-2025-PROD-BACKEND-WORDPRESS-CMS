@@ -1,0 +1,12 @@
+# Cloudflare Pages redirects configuration
+# Handle static assets first (images, CSS, JS)
+/assets/images/* /assets/images/:splat 200
+/assets/css/* /assets/css/:splat 200
+/assets/js/* /assets/js/:splat 200
+/assets/* /assets/:splat 200
+
+# Handle API routes if any
+/api/* /api/:splat 200
+
+# Handle all other routes to index.html for SPA
+/* /index.html 200

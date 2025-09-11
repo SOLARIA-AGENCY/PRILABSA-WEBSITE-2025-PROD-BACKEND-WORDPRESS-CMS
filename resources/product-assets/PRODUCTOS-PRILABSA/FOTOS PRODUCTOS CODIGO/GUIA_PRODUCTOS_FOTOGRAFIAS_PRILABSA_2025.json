@@ -1,0 +1,945 @@
+{
+  "metadata": {
+    "titulo": "Guía Oficial de Productos y Fotografías PRILABSA 2025",
+    "version": "1.0",
+    "fecha_generacion": "2025-07-25",
+    "total_productos_oficiales": 101,
+    "total_fotografias_mapeadas": 100,
+    "porcentaje_completado": "99%",
+    "descripcion": "Mapeo completo de los 101 productos oficiales PRILABSA con sus códigos y fotografías correspondientes en la carpeta FOTOS PRODUCTOS CODIGO",
+    "estructura_carpetas": {
+      "aditivos-codigo": "13 productos (AD001-AD013)",
+      "alimentos-codigo": "23 productos (AL001-AL023)", 
+      "equipos-codigo": "43 productos (EQ001-EQ043)",
+      "probioticos-codigo": "4 productos (PB001-PB004)",
+      "quimicos-codigo": "18 productos (QU001-QU018, falta QU011)"
+    }
+  },
+  "categorias": {
+    "ADITIVOS": {
+      "codigo_categoria": "AD",
+      "total_productos": 13,
+      "rango_codigos": "AD001-AD013",
+      "fotografias_disponibles": 13,
+      "porcentaje_completado": "100%",
+      "directorio_fotografias": "aditivos-codigo/",
+      "productos": {
+        "AD001": {
+          "nombre": "COMBACID XL",
+          "categoria": "Acidificantes",
+          "archivo_fotografia": "AD001.png",
+          "ruta_completa": "aditivos-codigo/AD001.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AD002": {
+          "nombre": "CAROPHYLL PINK",
+          "categoria": "Antioxidantes",
+          "archivo_fotografia": "AD002.png",
+          "ruta_completa": "aditivos-codigo/AD002.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AD003": {
+          "nombre": "DESINFECTANTE ARGENTYNE",
+          "categoria": "Desinfectantes",
+          "archivo_fotografia": "AD003.png",
+          "ruta_completa": "aditivos-codigo/AD003.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AD004": {
+          "nombre": "EMERALD",
+          "categoria": "Estimulantes",
+          "archivo_fotografia": "AD004.png",
+          "ruta_completa": "aditivos-codigo/AD004.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AD005": {
+          "nombre": "FLORFENICOL",
+          "categoria": "Antibioticos",
+          "archivo_fotografia": "AD005.png",
+          "ruta_completa": "aditivos-codigo/AD005.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AD006": {
+          "nombre": "OXITETRACICLINA",
+          "categoria": "Antibioticos",
+          "archivo_fotografia": "AD006.png",
+          "ruta_completa": "aditivos-codigo/AD006.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AD007": {
+          "nombre": "PRIME BOOSTER",
+          "categoria": "Inmunoestimulantes",
+          "archivo_fotografia": "AD007.png",
+          "ruta_completa": "aditivos-codigo/AD007.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AD008": {
+          "nombre": "PROTECTOR - D3",
+          "categoria": "Inmunoestimulantes",
+          "archivo_fotografia": "AD008.png",
+          "ruta_completa": "aditivos-codigo/AD008.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AD009": {
+          "nombre": "PROTECTOR D3 + ZINC ACTIVADO",
+          "categoria": "Inmunoestimulantes",
+          "archivo_fotografia": "AD009.png",
+          "ruta_completa": "aditivos-codigo/AD009.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AD010": {
+          "nombre": "SAPONINA",
+          "categoria": "Suplementos",
+          "archivo_fotografia": "AD010.png",
+          "ruta_completa": "aditivos-codigo/AD010.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AD011": {
+          "nombre": "VEVOVITALL",
+          "categoria": "Suplementos",
+          "archivo_fotografia": "AD011.png",
+          "ruta_completa": "aditivos-codigo/AD011.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AD012": {
+          "nombre": "VITAMINA C MONOFOSFATADA",
+          "categoria": "Suplementos",
+          "archivo_fotografia": "AD012.png",
+          "ruta_completa": "aditivos-codigo/AD012.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AD013": {
+          "nombre": "VITAMINA C",
+          "categoria": "Antioxidantes",
+          "archivo_fotografia": "AD013.png",
+          "ruta_completa": "aditivos-codigo/AD013.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        }
+      }
+    },
+    "ALIMENTOS": {
+      "codigo_categoria": "AL",
+      "total_productos": 23,
+      "rango_codigos": "AL001-AL023",
+      "fotografias_disponibles": 23,
+      "porcentaje_completado": "100%",
+      "directorio_fotografias": "alimentos-codigo/",
+      "productos": {
+        "AL001": {
+          "nombre": "LARVA Z - PLUS",
+          "categoria": "Microparticulados",
+          "archivo_fotografia": "AL001.png",
+          "ruta_completa": "alimentos-codigo/AL001.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL002": {
+          "nombre": "LARVA AP 100",
+          "categoria": "Microparticulados",
+          "archivo_fotografia": "AL002.png",
+          "ruta_completa": "alimentos-codigo/AL002.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL003": {
+          "nombre": "Z PRO",
+          "categoria": "Microparticulados",
+          "archivo_fotografia": "AL003.png",
+          "ruta_completa": "alimentos-codigo/AL003.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL004": {
+          "nombre": "EZ ARTEMIA",
+          "categoria": "Microencapsulados",
+          "archivo_fotografia": "AL004.png",
+          "ruta_completa": "alimentos-codigo/AL004.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL005": {
+          "nombre": "EZ ARTEMIA ULTRA",
+          "categoria": "Microencapsulados",
+          "archivo_fotografia": "AL005.png",
+          "ruta_completa": "alimentos-codigo/AL005.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL006": {
+          "nombre": "EZ LARVA",
+          "categoria": "Microencapsulados",
+          "archivo_fotografia": "AL006.png",
+          "ruta_completa": "alimentos-codigo/AL006.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL007": {
+          "nombre": "BRINE SHRIMP FLAKE",
+          "categoria": "Flakes",
+          "archivo_fotografia": "AL007.png",
+          "ruta_completa": "alimentos-codigo/AL007.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL008": {
+          "nombre": "SHRIMP MEAL STARTER 55-15",
+          "categoria": "Especializados",
+          "archivo_fotografia": "AL008.png",
+          "ruta_completa": "alimentos-codigo/AL008.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG",
+          "nota": "Completado manualmente"
+        },
+        "AL009": {
+          "nombre": "PRE-MIX PL RACEWAY 40-9",
+          "categoria": "General",
+          "archivo_fotografia": "AL009.png",
+          "ruta_completa": "alimentos-codigo/AL009.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL010": {
+          "nombre": "EZ MATE",
+          "categoria": "General",
+          "archivo_fotografia": "AL010.png",
+          "ruta_completa": "alimentos-codigo/AL010.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL011": {
+          "nombre": "REDI-MATE",
+          "categoria": "General",
+          "archivo_fotografia": "AL011.png",
+          "ruta_completa": "alimentos-codigo/AL011.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL012": {
+          "nombre": "CISTOS DE ARTEMIA",
+          "categoria": "Cistos",
+          "archivo_fotografia": "AL012.png",
+          "ruta_completa": "alimentos-codigo/AL012.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG",
+          "nota": "Completado manualmente"
+        },
+        "AL013": {
+          "nombre": "MPs (Microparticulados)",
+          "categoria": "Microparticulados",
+          "archivo_fotografia": "AL013.png",
+          "ruta_completa": "alimentos-codigo/AL013.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL014": {
+          "nombre": "ADVANCE FEED",
+          "categoria": "Microparticulados",
+          "archivo_fotografia": "AL014.png",
+          "ruta_completa": "alimentos-codigo/AL014.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL015": {
+          "nombre": "GOLD FEED Microparticulados",
+          "categoria": "Microparticulados",
+          "archivo_fotografia": "AL015.png",
+          "ruta_completa": "alimentos-codigo/AL015.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG",
+          "nota": "Completado manualmente"
+        },
+        "AL016": {
+          "nombre": "FLAKE NEGRO DE ARTEMIA",
+          "categoria": "Algas",
+          "archivo_fotografia": "AL016.png",
+          "ruta_completa": "alimentos-codigo/AL016.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL017": {
+          "nombre": "ESPIRULINA",
+          "categoria": "Algas",
+          "archivo_fotografia": "AL017.png",
+          "ruta_completa": "alimentos-codigo/AL017.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL018": {
+          "nombre": "P. VANNAMEI Microparticulado",
+          "categoria": "Microparticulados",
+          "archivo_fotografia": "AL018.png",
+          "ruta_completa": "alimentos-codigo/AL018.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL019": {
+          "nombre": "ZM FEED PARA ZOEA / MYSIS",
+          "categoria": "Zooplancton",
+          "archivo_fotografia": "AL019.png",
+          "ruta_completa": "alimentos-codigo/AL019.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG",
+          "nota": "Completado manualmente"
+        },
+        "AL020": {
+          "nombre": "ARTEMIA ADULTA CONGELADA",
+          "categoria": "Congelados",
+          "archivo_fotografia": "AL020.png",
+          "ruta_completa": "alimentos-codigo/AL020.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG",
+          "nota": "Completado manualmente"
+        },
+        "AL021": {
+          "nombre": "CALAMARES",
+          "categoria": "Congelados",
+          "archivo_fotografia": "AL021.png",
+          "ruta_completa": "alimentos-codigo/AL021.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL022": {
+          "nombre": "MEJILLONES",
+          "categoria": "Congelados",
+          "archivo_fotografia": "AL022.png",
+          "ruta_completa": "alimentos-codigo/AL022.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "AL023": {
+          "nombre": "KRILL CONGELADO",
+          "categoria": "Congelados",
+          "archivo_fotografia": "AL023.png",
+          "ruta_completa": "alimentos-codigo/AL023.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        }
+      }
+    },
+    "EQUIPOS": {
+      "codigo_categoria": "EQ",
+      "total_productos": 43,
+      "rango_codigos": "EQ001-EQ043",
+      "fotografias_disponibles": 43,
+      "porcentaje_completado": "100%",
+      "directorio_fotografias": "equipos-codigo/",
+      "nota": "Fotografías organizadas en subcarpetas por producto",
+      "productos": {
+        "EQ001": {
+          "nombre": "OXIGENOMETRO OAKTON 260",
+          "categoria": "Oxigenometros",
+          "archivo_fotografia": "EQ001.png",
+          "ruta_completa": "equipos-codigo/EQ001_OXIGENOMETRO_OAKTON_260/EQ001.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ002": {
+          "nombre": "WATERLINK SPIN TOUCH",
+          "categoria": "General",
+          "archivo_fotografia": "EQ002.png",
+          "ruta_completa": "equipos-codigo/EQ002_WATERLINK_SPIN_TOUCH/EQ002.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ003": {
+          "nombre": "NEON OPTOD",
+          "categoria": "Oxigenometros",
+          "archivo_fotografia": "EQ003.png",
+          "ruta_completa": "equipos-codigo/EQ003_NEON_OPTOD/EQ003.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ004": {
+          "nombre": "OXIGENOMETRO OxyGuard Polaris C",
+          "categoria": "Oxigenometros",
+          "archivo_fotografia": "EQ004.png",
+          "ruta_completa": "equipos-codigo/EQ004_OXIGENOMETRO_OxyGuard_Polaris_C/EQ004.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ005": {
+          "nombre": "OXIGENOMETRO Disuelto DO 120",
+          "categoria": "Oxigenometros",
+          "archivo_fotografia": "EQ005.jpg",
+          "ruta_completa": "equipos-codigo/EQ005_OXIGENOMETRO_Disuelto_DO_120/EQ005.jpg",
+          "estado": "✅ Disponible",
+          "formato": "JPG"
+        },
+        "EQ006": {
+          "nombre": "MEDIDOR DE PH",
+          "categoria": "Medidores",
+          "archivo_fotografia": "EQ006.psd",
+          "ruta_completa": "equipos-codigo/EQ006_MEDIDOR_DE_PH/EQ006.psd",
+          "estado": "⚠️ Formato PSD",
+          "formato": "PSD",
+          "nota": "Requiere conversión a PNG"
+        },
+        "EQ007": {
+          "nombre": "MEDIDOR DE POTASIO",
+          "categoria": "Medidores",
+          "archivo_fotografia": "EQ007.png",
+          "ruta_completa": "equipos-codigo/EQ007_MEDIDOR_DE_POTASIO/EQ007.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ008": {
+          "nombre": "MEDIDOR DE CONDUCTIVIDAD EC-11",
+          "categoria": "Medidores",
+          "archivo_fotografia": "EQ008.png",
+          "ruta_completa": "equipos-codigo/EQ008_MEDIDOR_DE_CONDUCTIVIDAD_EC-11/EQ008.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ009": {
+          "nombre": "MEDIDOR DE CALCIO",
+          "categoria": "Medidores",
+          "archivo_fotografia": "EQ009.png",
+          "ruta_completa": "equipos-codigo/EQ009_MEDIDOR_DE_CALCIO/EQ009.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ010": {
+          "nombre": "SALINOMETRO 11",
+          "categoria": "Medidores",
+          "archivo_fotografia": "EQ010.png",
+          "ruta_completa": "equipos-codigo/EQ010_SALINOMETRO_11/EQ010.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ011": {
+          "nombre": "SALINOMETRO VEE GEE STX-3",
+          "categoria": "Medidores",
+          "archivo_fotografia": "EQ011.png",
+          "ruta_completa": "equipos-codigo/EQ011_SALINOMETRO_VEE_GEE_STX-3/EQ011.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ012": {
+          "nombre": "TERMOMETRO",
+          "categoria": "Medidores",
+          "archivo_fotografia": "EQ012.png",
+          "ruta_completa": "equipos-codigo/EQ012_TERMOMETRO/EQ012.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ013": {
+          "nombre": "MANGUERA DE VINIL TRANSPARENTE",
+          "categoria": "Accesorios",
+          "archivo_fotografia": "EQ013.png",
+          "ruta_completa": "equipos-codigo/EQ013_MANGUERA_DE_VINIL_TRANSPARENTE/EQ013.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ014": {
+          "nombre": "FRESHWATER",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ014.png",
+          "ruta_completa": "equipos-codigo/EQ014_FRESHWATER/EQ014.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ015": {
+          "nombre": "AMMO LOCK",
+          "categoria": "General",
+          "archivo_fotografia": "EQ015.png",
+          "ruta_completa": "equipos-codigo/EQ015_AMMO_LOCK/EQ015.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ016": {
+          "nombre": "CHEMETRICS KIT DE PEROXIDO DE HIDROGENO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ016.png",
+          "ruta_completa": "equipos-codigo/EQ016_CHEMETRICS_KIT_DE_PEROXIDO_DE_HIDROGENO/EQ016.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ017": {
+          "nombre": "CHEMETRICS KIT DE NITRITO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ017.png",
+          "ruta_completa": "equipos-codigo/EQ017_CHEMETRICS_KIT_DE_NITRITO/EQ017.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ018": {
+          "nombre": "CHEMETRICS KIT DE NITRATO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ018.png",
+          "ruta_completa": "equipos-codigo/EQ018_CHEMETRICS_KIT_DE_NITRATO/EQ018.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ019": {
+          "nombre": "CHEMETRICS KIT DE HIERRO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ019.png",
+          "ruta_completa": "equipos-codigo/EQ019_CHEMETRICS_KIT_DE_HIERRO/EQ019.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ020": {
+          "nombre": "CHEMETRICS KIT DE AMONIO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ020.png",
+          "ruta_completa": "equipos-codigo/EQ020_CHEMETRICS_KIT_DE_AMONIO/EQ020.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ021": {
+          "nombre": "CHEMETRICS KIT DE FOSFATO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ021.png",
+          "ruta_completa": "equipos-codigo/EQ021_CHEMETRICS_KIT_DE_FOSFATO/EQ021.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ022": {
+          "nombre": "CHEMETRICS KIT DE SULFITO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ022.png",
+          "ruta_completa": "equipos-codigo/EQ022_CHEMETRICS_KIT_DE_SULFITO/EQ022.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ023": {
+          "nombre": "CHEMETRICS KIT DE DUREZA",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ023.png",
+          "ruta_completa": "equipos-codigo/EQ023_CHEMETRICS_KIT_DE_DUREZA/EQ023.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ024": {
+          "nombre": "CHEMETRICS KIT DE ALCALINIDAD TOTAL",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ024.png",
+          "ruta_completa": "equipos-codigo/EQ024_CHEMETRICS_KIT_DE_ALCALINIDAD_TOTAL/EQ024.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ025": {
+          "nombre": "CHEMETRICS KIT DE DIOXIDO DE CARBONO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ025.png",
+          "ruta_completa": "equipos-codigo/EQ025_CHEMETRICS_KIT_DE_DIOXIDO_DE_CARBONO/EQ025.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ026": {
+          "nombre": "KITS API NITRATO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ026.png",
+          "ruta_completa": "equipos-codigo/EQ026_KITS_API_NITRATO/EQ026.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ027": {
+          "nombre": "KITS API NITRITO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ027.png",
+          "ruta_completa": "equipos-codigo/EQ027_KITS_API_NITRITO/EQ027.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ028": {
+          "nombre": "KITS API FOSFATO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ028.png",
+          "ruta_completa": "equipos-codigo/EQ028_KITS_API_FOSFATO/EQ028.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ029": {
+          "nombre": "KITS API AMONIO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ029.png",
+          "ruta_completa": "equipos-codigo/EQ029_KITS_API_AMONIO/EQ029.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ030": {
+          "nombre": "KITS API CALCIO",
+          "categoria": "Kits_Analisis",
+          "archivo_fotografia": "EQ030.png",
+          "ruta_completa": "equipos-codigo/EQ030_KITS_API_CALCIO/EQ030.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ031": {
+          "nombre": "BALANZA SCOUT PRO SP202",
+          "categoria": "Balanzas",
+          "archivo_fotografia": "EQ031.png",
+          "ruta_completa": "equipos-codigo/EQ031_BALANZA_SCOUT_PRO_SP202/EQ031.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ032": {
+          "nombre": "BALANZA SCOUT PRO SP402",
+          "categoria": "Balanzas",
+          "archivo_fotografia": "EQ032.png",
+          "ruta_completa": "equipos-codigo/EQ032_BALANZA_SCOUT_PRO_SP402/EQ032.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ033": {
+          "nombre": "BALANZA SCOUT PRO SP1202",
+          "categoria": "Balanzas",
+          "archivo_fotografia": "EQ033.png",
+          "ruta_completa": "equipos-codigo/EQ033_BALANZA_SCOUT_PRO_SP1202/EQ033.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ034": {
+          "nombre": "MICROSCOPIO BINOCULAR SWIFT SW350B",
+          "categoria": "Opticos",
+          "archivo_fotografia": "EQ034.png",
+          "ruta_completa": "equipos-codigo/EQ034_MICROSCOPIO_BINOCULAR_SWIFT_SW350B/EQ034.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ035": {
+          "nombre": "MICROSCOPIO MONOCULAR SWIFT SW100",
+          "categoria": "Opticos",
+          "archivo_fotografia": "EQ035.png",
+          "ruta_completa": "equipos-codigo/EQ035_MICROSCOPIO_MONOCULAR_SWIFT_SW100/EQ035.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ036": {
+          "nombre": "MEDIDOR DE SALINIDAD",
+          "categoria": "Medidores",
+          "archivo_fotografia": "EQ036.png",
+          "ruta_completa": "equipos-codigo/EQ036_MEDIDOR_DE_SALINIDAD/EQ036.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ037": {
+          "nombre": "MEDIDOR DE TEMPERATURA",
+          "categoria": "Medidores",
+          "archivo_fotografia": "EQ037.png",
+          "ruta_completa": "equipos-codigo/EQ037_MEDIDOR_DE_TEMPERATURA/EQ037.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ038": {
+          "nombre": "MANGUERA DIFUSORA",
+          "categoria": "Aireacion",
+          "archivo_fotografia": "EQ038.png",
+          "ruta_completa": "equipos-codigo/EQ038_MANGUERA_DIFUSORA/EQ038.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ039": {
+          "nombre": "AIREADOR VENTURI",
+          "categoria": "Aireacion",
+          "archivo_fotografia": "EQ039.png",
+          "ruta_completa": "equipos-codigo/EQ039_AIREADOR_VENTURI/EQ039.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ040": {
+          "nombre": "DIFUSOR DE AIRE",
+          "categoria": "Aireacion",
+          "archivo_fotografia": "EQ040.png",
+          "ruta_completa": "equipos-codigo/EQ040_DIFUSOR_DE_AIRE/EQ040.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ041": {
+          "nombre": "FILTRO DE CARTUCHO",
+          "categoria": "Filtros",
+          "archivo_fotografia": "EQ041.png",
+          "ruta_completa": "equipos-codigo/EQ041_FILTRO_DE_CARTUCHO/EQ041.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ042": {
+          "nombre": "CINTA DE PH",
+          "categoria": "Cintas",
+          "archivo_fotografia": "EQ042.png",
+          "ruta_completa": "equipos-codigo/EQ042_CINTA_DE_PH/EQ042.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "EQ043": {
+          "nombre": "MALLA PARA CAMARONES",
+          "categoria": "Mallas",
+          "archivo_fotografia": "EQ043.png",
+          "ruta_completa": "equipos-codigo/EQ043_MALLA_PARA_CAMARONES/EQ043.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        }
+      }
+    },
+    "PROBIOTICOS": {
+      "codigo_categoria": "PB",
+      "total_productos": 4,
+      "rango_codigos": "PB001-PB004",
+      "fotografias_disponibles": 4,
+      "porcentaje_completado": "100%",
+      "directorio_fotografias": "probioticos-codigo/",
+      "productos": {
+        "PB001": {
+          "nombre": "TERMINATE",
+          "categoria": "Solidos",
+          "archivo_fotografia": "PB001.png",
+          "ruta_completa": "probioticos-codigo/PB001.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "PB002": {
+          "nombre": "PONDTOSS",
+          "categoria": "Liquidos",
+          "archivo_fotografia": "PB002.png",
+          "ruta_completa": "probioticos-codigo/PB002.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "PB003": {
+          "nombre": "WASTE & SLUDGE REDUCER™ (WSR)",
+          "categoria": "Reductores",
+          "archivo_fotografia": "PB003.png",
+          "ruta_completa": "probioticos-codigo/PB003.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "PB004": {
+          "nombre": "HATCHERY PRIME",
+          "categoria": "Especializados",
+          "archivo_fotografia": "PB004.png",
+          "ruta_completa": "probioticos-codigo/PB004.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        }
+      }
+    },
+    "QUIMICOS": {
+      "codigo_categoria": "QU",
+      "total_productos": 18,
+      "rango_codigos": "QU001-QU018",
+      "fotografias_disponibles": 17,
+      "porcentaje_completado": "94%",
+      "directorio_fotografias": "quimicos-codigo/",
+      "productos": {
+        "QU001": {
+          "nombre": "CLORURO DE MAGNESIO",
+          "categoria": "Sales",
+          "archivo_fotografia": "QU001.png",
+          "ruta_completa": "quimicos-codigo/QU001.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU002": {
+          "nombre": "CLORURO DE POTASIO",
+          "categoria": "Sales",
+          "archivo_fotografia": "QU002.png",
+          "ruta_completa": "quimicos-codigo/QU002.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU003": {
+          "nombre": "PERCARBONATO DE SODIO",
+          "categoria": "Oxidantes",
+          "archivo_fotografia": "QU003.png",
+          "ruta_completa": "quimicos-codigo/QU003.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU004": {
+          "nombre": "PEROXIDO DE HIDROGENO",
+          "categoria": "Oxidantes",
+          "archivo_fotografia": "QU004.png",
+          "ruta_completa": "quimicos-codigo/QU004.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU005": {
+          "nombre": "METASILICATO DE SODIO",
+          "categoria": "Silicatos",
+          "archivo_fotografia": "QU005.png",
+          "ruta_completa": "quimicos-codigo/QU005.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU006": {
+          "nombre": "NITRATO DE SODIO",
+          "categoria": "Sales",
+          "archivo_fotografia": "QU006.png",
+          "ruta_completa": "quimicos-codigo/QU006.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU007": {
+          "nombre": "NITRATO SODICO POTASICO",
+          "categoria": "Sales",
+          "archivo_fotografia": "QU007.png",
+          "ruta_completa": "quimicos-codigo/QU007.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG",
+          "nota": "Completado manualmente"
+        },
+        "QU008": {
+          "nombre": "ACIDO HUMICO",
+          "categoria": "General",
+          "archivo_fotografia": "QU008.png",
+          "ruta_completa": "quimicos-codigo/QU008.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU009": {
+          "nombre": "ACIDO FORMICO",
+          "categoria": "General",
+          "archivo_fotografia": "QU009.png",
+          "ruta_completa": "quimicos-codigo/QU009.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU010": {
+          "nombre": "ACIDO NITRICO",
+          "categoria": "General",
+          "archivo_fotografia": "QU010.png",
+          "ruta_completa": "quimicos-codigo/QU010.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU011": {
+          "nombre": "FORMALDEHIDO FORMOL",
+          "categoria": "Desinfectantes",
+          "archivo_fotografia": "QU011.png",
+          "ruta_completa": "quimicos-codigo/QU011.png",
+          "estado": "❌ Faltante",
+          "formato": "N/A",
+          "nota": "Fotografía no encontrada - Requiere solicitud al equipo PRILABSA"
+        },
+        "QU012": {
+          "nombre": "TRILON B - EDTA",
+          "categoria": "Quelantes",
+          "archivo_fotografia": "QU012.png",
+          "ruta_completa": "quimicos-codigo/QU012.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU013": {
+          "nombre": "EDTA (4Na)",
+          "categoria": "Quelantes",
+          "archivo_fotografia": "QU013.png",
+          "ruta_completa": "quimicos-codigo/QU013.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU014": {
+          "nombre": "SULFATO DE ALUMINIO (SO4)3 Al2",
+          "categoria": "Sales",
+          "archivo_fotografia": "QU014.png",
+          "ruta_completa": "quimicos-codigo/QU014.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU015": {
+          "nombre": "CLORO GRANULADO",
+          "categoria": "Desinfectantes",
+          "archivo_fotografia": "QU015.png",
+          "ruta_completa": "quimicos-codigo/QU015.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU016": {
+          "nombre": "ORTHOTOLIDINE (OTO)",
+          "categoria": "General",
+          "archivo_fotografia": "QU016.png",
+          "ruta_completa": "quimicos-codigo/QU016.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU017": {
+          "nombre": "THIOSULFATO DE SODIO",
+          "categoria": "Sales",
+          "archivo_fotografia": "QU017.png",
+          "ruta_completa": "quimicos-codigo/QU017.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        },
+        "QU018": {
+          "nombre": "REFRIGERANTE ECOLOGICO R507",
+          "categoria": "Refrigerantes",
+          "archivo_fotografia": "QU018.png",
+          "ruta_completa": "quimicos-codigo/QU018.png",
+          "estado": "✅ Disponible",
+          "formato": "PNG"
+        }
+      }
+    }
+  },
+  "resumen_estadisticas": {
+    "productos_totales": 101,
+    "fotografias_mapeadas": 100,
+    "fotografias_faltantes": 1,
+    "porcentaje_global": "99%",
+    "productos_completados_manualmente": 6,
+    "productos_pendientes": [
+      {
+        "codigo": "QU011",
+        "nombre": "FORMALDEHIDO FORMOL",
+        "categoria": "QUIMICOS",
+        "estado": "Fotografía no encontrada",
+        "accion_requerida": "Solicitar fotografía al equipo PRILABSA"
+      }
+    ],
+    "formatos_especiales": [
+      {
+        "codigo": "EQ005",
+        "formato": "JPG",
+        "nota": "Único archivo en formato JPG"
+      },
+      {
+        "codigo": "EQ006",
+        "formato": "PSD",
+        "nota": "Requiere conversión a PNG"
+      }
+    ]
+  },
+  "instrucciones_uso": {
+    "para_desarrolladores": {
+      "acceso_fotografias": "Usar la ruta_completa de cada producto para acceder a las fotografías",
+      "validacion_existencia": "Verificar el campo 'estado' antes de usar una fotografía",
+      "formatos_soportados": ["PNG", "JPG"],
+      "formatos_a_convertir": ["PSD"]
+    },
+    "para_sistema_web": {
+      "estructura_url": "FOTOS PRODUCTOS CODIGO/{ruta_completa}",
+      "fallback_imagen": "Usar imagen placeholder para productos con estado '❌ Faltante'",
+      "optimizacion": "Considerar compresión de imágenes PNG para web"
+    },
+    "para_actualizaciones": {
+      "agregar_producto": "Seguir el patrón de codificación por categoría",
+      "actualizar_fotografia": "Modificar el campo 'archivo_fotografia' y 'estado'",
+      "completar_faltantes": "Cambiar estado de '❌ Faltante' a '✅ Disponible'"
+    }
+  },
+  "proximos_pasos": [
+    "Solicitar fotografía de QU011 (FORMALDEHIDO FORMOL) al equipo PRILABSA",
+    "Convertir EQ006.psd a formato PNG",
+    "Validar calidad de todas las fotografías para uso web",
+    "Implementar sistema de validación automática de fotografías",
+    "Crear backup de la carpeta FOTOS PRODUCTOS CODIGO"
+  ],
+  "contacto_soporte": {
+    "equipo": "PRILABSA Desarrollo Web",
+    "para_fotografias_faltantes": "Contactar equipo comercial PRILABSA",
+    "para_soporte_tecnico": "Equipo de desarrollo web"
+  }
+}

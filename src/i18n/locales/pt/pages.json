@@ -1,0 +1,312 @@
+{
+  "home": {
+    "hero": {
+      "title": "Somos fornecedores das melhores solu��es integrais\u00A0em",
+      "subtitle": "Equipamentos, reagentes e servi�os especializados para o setor de sa�de",
+      "cta": {
+        "catalog": "SAIBA MAIS",
+        "contact": "Entre em Contato"
+      }
+    },
+    "weAre": {
+      "title": "SOMOS",
+      "subtitle": "Seu parceiro estrat�gico em solu��es para laborat�rios",
+      "description": "A Prilabsa � uma empresa multinacional fundada em 1992, dedicada � comercializa��o de alimentos, probi�ticos, aditivos, equipamentos e produtos qu�micos com altos padr�es de qualidade.",
+      "sections": {
+        "excellence": {
+          "title": "Excel�ncia em Aquicultura",
+          "description": "A Prilabsa � uma empresa multinacional fundada em 1992, dedicada � comercializa��o de alimentos, probi�ticos, aditivos, equipamentos e produtos qu�micos com altos padr�es de qualidade."
+        },
+        "coverage": {
+          "title": "Cobertura Integral",
+          "description": "Cobrimos todas as necessidades de laborat�rios de camar�o, peixes e fazendas de camar�o, gra�as ao pleno conhecimento do meio ambiente e � s�lida experi�ncia de nossa equipe treinada em diversos mercados da ind�stria aqu�cola."
+        },
+        "presence": {
+          "title": "Presen�a Continental",
+          "description": "A Prilabsa expandiu suas atividades em pontos estrat�gicos do continente americano, com escrit�rios comerciais e armaz�ns climatizados no Equador (Guayaquil, Manta, Pedernales, San Vicente, Hualtaco, Machala, Esmeraldas, Libertad), EUA (Miami), M�xico (Mazatl�n), Brasil (Natal, Aracati e Acara�), Honduras (Choluteca), Panam� (Cidade do Panam�), Nicar�gua (Chinandega), Venezuela (Maracaibo) e Peru (Tumbes)."
+        },
+        "leadership": {
+          "title": "Experi�ncia e Lideran�a",
+          "description": "Com mais de 32 anos de experi�ncia e servi�o no setor, demonstramos que a excel�ncia n�o se improvisa: se consolida atrav�s da efici�ncia de cada membro de nossa equipe. Somos a solu��o integral do setor aqu�cola nas Am�ricas."
+        }
+      },
+      "stats": {
+        "experience": "Anos de Experi�ncia",
+        "countries": "Pa�ses Atendidos",
+        "clients": "Clientes Satisfeitos",
+        "products": "Produtos Dispon�veis"
+      },
+      "watchVideo": "Assistir V�deo"
+    },
+    "catalog": {
+      "title": "NOSSOS PRODUTOS",
+      "subtitle": "Solu��es integrais para a ind�stria aqu�cola com os mais altos padr�es de qualidade",
+      "categories": {
+        "alimentos": "ALIMENTOS",
+        "probioticos": "PROBI�TICOS",
+        "aditivos": "ADITIVOS",
+        "quimicos": "QU�MICOS",
+        "equipos": "EQUIPAMENTOS"
+      },
+      "descriptions": {
+        "alimentosDesc": "Confira nosso cat�logo de produtos de Alimentos aqui",
+        "probioticosDesc": "Confira nosso cat�logo de produtos de Probi�ticos aqui",
+        "aditivosDesc": "Confira nosso cat�logo de produtos de Aditivos aqui",
+        "quimicosDesc": "Confira nosso cat�logo de produtos de Qu�micos aqui",
+        "equiposDesc": "Confira nosso cat�logo de produtos de Equipamentos aqui"
+      },
+      "viewProducts": "VER PRODUTOS",
+      "viewAll": "Ver Todos os Produtos �",
+      "viewCatalog": "Ver Cat�logo Completo"
+    },
+    "brands": {
+      "title": "Nossas Marcas",
+      "subtitle": "Distribu�mos com orgulho produtos das marcas mais reconhecidas da ind�stria."
+    },
+    "agencies": {
+      "title": "NOSSAS AG�NCIAS",
+      "description": "Expandimos nossas atividades em pa�ses estabelecidos como pontos estrat�gicos do continente americano, contando com escrit�rios comerciais modernos e armaz�ns climatizados.",
+      "cta": "SAIBA MAIS"
+    },
+    "video": {
+      "title": "Conhe�a a PRILABSA",
+      "close": "Fechar"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Desde 1992, somos uma multinacional dedicada � comercializa��o\u00A0de",
+      "animation": {
+        "productosAcuicolas": "produtos aqu�colas",
+        "solucionesIntegrales": "solu��es integrais"
+      }
+    },
+    "content": {
+      "title": "QUEM SOMOS",
+      "description": "Somos uma multinacional fundada em 1992, nos dedicamos � comercializa��o de produtos relacionados � ind�stria aqu�cola com os mais altos padr�es de qualidade e garantia no mercado. Cobrimos as necessidades de laborat�rios de larvas, fazendas de camar�o e piscicultura, gra�as ao pleno conhecimento e experi�ncia no s�lido mercado da ind�stria aqu�cola.",
+      "mission": {
+        "title": "MISS�O",
+        "description": "Ser parceiros estrat�gicos de nossos clientes ao oferecer produtos inovadores, biosseguros e de qualidade para melhorar a produ��o da ind�stria nas Am�ricas."
+      },
+      "vision": {
+        "title": "VIS�O E VALORES",
+        "description": "Ser a solu��o integral para o desenvolvimento da ind�stria aqu�cola, gra�as � competitividade e qualidade de nossos produtos. O sucesso de nosso trabalho � alcan�ado atrav�s de valores corporativos que orientam o comportamento e as a��es de nossos colaboradores: Inova��o, Compromisso, Integridade e Confian�a."
+      }
+    }
+  },
+  "offices": {
+    "hero": {
+      "title": "Conectamos e fortalecemos todas as Am�ricas. Estamos localizados em",
+      "countries": {
+        "ecuador": "EQUADOR",
+        "brasil": "BRASIL",
+        "usa": "EUA",
+        "mexico": "M�XICO",
+        "honduras": "HONDURAS",
+        "panama": "PANAM�",
+        "nicaragua": "NICAR�GUA",
+        "venezuela": "VENEZUELA",
+        "peru": "PERU"
+      }
+    },
+    "content": {
+      "title": "NOSSOS ESCRIT�RIOS",
+      "description": "Expandimos nossas atividades em pa�ses estabelecidos como pontos estrat�gicos do continente americano, contando com escrit�rios comerciais modernos e armaz�ns climatizados."
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Entre em Contato"
+    },
+    "emails": {
+      "title": "NOSSOS E-MAILS",
+      "description": "Entre em contato diretamente com o departamento que precisar.",
+      "departments": {
+        "imports": "Importa��es",
+        "sales": "Comercial e Vendas",
+        "hr": "Recursos Humanos"
+      }
+    },
+    "form": {
+      "title": "ENTRE EM CONTATO",
+      "description": "Ficaremos felizes em atend�-lo.",
+      "fields": {
+        "fullName": "Nome Completo",
+        "company": "Empresa",
+        "email": "Endere�o de E-mail",
+        "phone": "Telefone",
+        "message": "Mensagem"
+      },
+      "button": "Enviar Mensagem",
+      "errors": {
+        "required": "Por favor, preencha os campos obrigat�rios: Nome, E-mail e Mensagem."
+      },
+      "success": "Obrigado! Sua mensagem foi enviada. Entraremos em contato em breve."
+    }
+  },
+  "careers": {
+    "hero": {
+      "title": "Trabalhe Conosco"
+    },
+    "form": {
+      "title": "JUNTE-SE � NOSSA EQUIPE",
+      "description": "Buscamos talentos apaixonados pela inova��o.",
+      "fields": {
+        "fullName": "Nome Completo",
+        "email": "Endere�o de E-mail",
+        "phone": "Telefone",
+        "country": "Pa�s de Resid�ncia",
+        "area": "�rea de Interesse",
+        "cv": "Anexar Curr�culo (PDF, DOCX)"
+      },
+      "areas": {
+        "placeholder": "Selecione uma �rea",
+        "sales": "Vendas e Comercial",
+        "admin": "Administra��o e Finan�as",
+        "logistics": "Log�stica e Opera��es",
+        "rd": "Pesquisa e Desenvolvimento",
+        "marketing": "Marketing"
+      },
+      "button": "Enviar Candidatura",
+      "errors": {
+        "required": "Por favor, preencha os campos obrigat�rios: Nome, E-mail e Curr�culo."
+      },
+      "success": "Obrigado pelo seu interesse! Recebemos sua candidatura e a analisaremos em breve."
+    }
+  },
+  "products": {
+    "title": "Produtos",
+    "search": {
+      "placeholder": "Buscar categorias de produtos..."
+    }
+  },
+  "legal": {
+    "privacyPolicy": {
+      "title": "Pol�tica de Privacidade",
+      "subtitle": "Sua privacidade � importante para n�s. Saiba como gerenciamos seus dados.",
+      "breadcrumb": "Pol�tica de Privacidade",
+      "commitment": {
+        "title": "Compromisso com a Privacidade",
+        "content": "Na PRILABSA, protegemos seus dados pessoais com os mais altos padr�es de seguran�a e transpar�ncia, cumprindo com toda a regulamenta��o aplic�vel em mat�ria de prote��o de dados."
+      },
+      "sections": {
+        "section1": {
+          "number": "1",
+          "heading": "QUEM � RESPONS�VEL PELO TRATAMENTO DE SEUS DADOS?",
+          "content": "O respons�vel pelo tratamento dos dados pessoais coletados neste site � <strong>PRIME LABORATORIO PRILAB SA</strong>, com RUC <strong>0991316043001</strong> e endere�o em <strong>AV. CARLOS JULIO AROSEMENA KM 2.5 VIA DAULE C.C. ALBAN BORJA PLANTA BAJA LOCAL 055 TARQUI, GUAYAQUIL, GUAYAS - ECUADOR</strong>."
+        },
+        "section2": {
+          "number": "2",
+          "heading": "COM QUE FINALIDADE TRATAMOS SEUS DADOS PESSOAIS?",
+          "content": "Na PRILABSA tratamos as informa��es que voc� nos fornece com o objetivo de gerenciar a rela��o contratual ou comercial, gerenciar o envio das informa��es que voc� solicita, fornecer aos interessados ofertas de nossos servi�os e/ou produtos de seu interesse e/ou gerenciar sua candidatura.",
+          "subcontent": "Especificamente, seus dados ser�o tratados para:",
+          "purposes": {
+            "contact": {
+              "title": "Formul�rio de Contato",
+              "description": "Responder �s suas consultas, solicita��es ou peti��es relacionadas aos nossos produtos aqu�colas e servi�os de laborat�rio."
+            },
+            "careers": {
+              "title": "Trabalhe Conosco",
+              "description": "Gerenciar seu processo de sele��o e avaliar sua candidatura para posi��es de trabalho atuais ou futuras no setor aqu�cola."
+            },
+            "newsletter": {
+              "title": "Assinatura de Newsletter",
+              "description": "Enviar-lhe comunica��es comerciais, novidades t�cnicas ou promo��es de nossos produtos e servi�os especializados em aquicultura."
+            },
+            "quotes": {
+              "title": "Solicita��es de Cota��o",
+              "description": "Processar seus requisitos de produtos para aquicultura e gerar propostas comerciais personalizadas."
+            }
+          }
+        },
+        "section3": {
+          "number": "3",
+          "heading": "QUAL � A BASE LEGAL PARA O TRATAMENTO DE SEUS DADOS?",
+          "content": "A base legal para o tratamento de seus dados � seu <strong>consentimento expl�cito</strong>, que voc� concede ao marcar a caixa de aceita��o correspondente antes de enviar qualquer formul�rio.",
+          "warning": "<strong>Importante:</strong> Voc� pode retirar seu consentimento a qualquer momento, sem afetar a legalidade do tratamento baseado no consentimento anterior � sua retirada."
+        }
+      }
+    },
+    "legalNotice": {
+      "title": "Aviso Legal",
+      "subtitle": "Informações legais sobre o uso de nosso site e serviços",
+      "breadcrumb": "Aviso Legal",
+      "commitment": {
+        "title": "Compromisso Legal",
+        "content": "Na PRILABSA, comprometemo-nos a operar com total transparência e cumprimento da regulamentação legal vigente, garantindo a proteção de nossos usuários e clientes."
+      },
+      "sections": {
+        "section1": {
+          "number": "1",
+          "heading": "IDENTIFICAÇÃO DA EMPRESA",
+          "content": "Este site é propriedade de <strong>PRIME LABORATORIO PRILAB SA</strong>, com RUC <strong>0991316043001</strong> e endereço em <strong>AV. CARLOS JULIO AROSEMENA KM 2.5 VIA DAULE C.C. ALBAN BORJA PLANTA BAJA LOCAL 055 TARQUI, GUAYAQUIL, GUAYAS - ECUADOR</strong>."
+        },
+        "section2": {
+          "number": "2",
+          "heading": "OBJETO E ÂMBITO DE APLICAÇÃO",
+          "content": "Este aviso legal regula o uso do site <strong>www.prilabsa.com</strong> e todos os serviços oferecidos através do mesmo. O acesso e uso deste site implica a aceitação plena de todos os termos e condições aqui estabelecidos."
+        },
+        "section3": {
+          "number": "3",
+          "heading": "CONDIÇÕES DE USO",
+          "content": "O usuário compromete-se a utilizar o site de acordo com a lei, este aviso legal, os bons costumes e a ordem pública. É proibido o uso do site para fins ilícitos ou que possam prejudicar os interesses da PRILABSA ou terceiros."
+        },
+        "section4": {
+          "number": "4",
+          "heading": "PROPRIEDADE INTELECTUAL E INDUSTRIAL",
+          "content": "Todo o conteúdo deste site, incluindo mas não limitado a textos, gráficos, logotipos, ícones, imagens, clipes de áudio, downloads digitais, compilações de dados e software, é propriedade da PRILABSA ou de seus fornecedores de conteúdo e está protegido pelas leis de propriedade intelectual."
+        },
+        "section5": {
+          "number": "5",
+          "heading": "EXCLUSÃO DE GARANTIAS E RESPONSABILIDADE",
+          "content": "A PRILABSA não se responsabiliza por danos de qualquer natureza que possam ser devidos à falta de disponibilidade ou continuidade do funcionamento do site, à decepção da utilidade que os usuários possam ter atribuído ao site."
+        },
+        "section6": {
+          "number": "6",
+          "heading": "MODIFICAÇÕES",
+          "content": "A PRILABSA reserva-se o direito de efetuar sem aviso prévio as modificações que considere oportunas em seu site, podendo alterar, suprimir ou adicionar tanto os conteúdos e serviços prestados através do mesmo como a forma em que estes aparecem apresentados ou localizados."
+        },
+        "section7": {
+          "number": "7",
+          "heading": "LEGISLAÇÃO APLICÁVEL E JURISDIÇÃO",
+          "content": "Este aviso legal é regido pela lei equatoriana. Para a resolução de qualquer controvérsia que possa surgir do acesso ou uso do site, a PRILABSA e o usuário submetem-se à jurisdição dos tribunais de Guayaquil, Equador."
+        }
+      },
+      "lastUpdate": "Última atualização: Janeiro 2025"
+    }
+  },
+  "history": {
+    "title": "Nossa Hist�ria",
+    "subtitle": "Tra�ando o caminho da inova��o aqu�cola desde 1992",
+    "timeline": {
+      "1992": "A Prilabsa foi inaugurada com um escrit�rio em Guayaquil, comercializando Art�mia, come�ando com 3 pessoas.",
+      "1998": "Inaugura��o da Prilabsa Salinas e Manta, foram incorporados 4 alimentos adicionais ao portf�lio.",
+      "2000": "Inaugura��o da ag�ncia em Machala.",
+      "2001": "Torna-se multinacional buscando novos mercados, inaugurando sua primeira ag�ncia em Miami-Fl�rida.",
+      "2002": "Inicia-se uma uni�o estrat�gica com o fornecedor Mackay Marine, incluindo Art�mia do Lago Utah.",
+      "2003": "A linha de probi�ticos � incorporada, sendo pioneiros no mercado.",
+      "2005": "A ag�ncia de Honduras � aberta.",
+      "2010": "A ag�ncia da Nicar�gua � aberta.",
+      "2012": "A ag�ncia do Panam� � aberta.",
+      "2014": "A ag�ncia de Tumbes-Peru � aberta.",
+      "2017": "A ag�ncia do M�xico � aberta.",
+      "2022": "A Prilabsa completa 30 anos no mercado aqu�cola.",
+      "2025": "Lan�amento do novo site corporativo e pr�xima implementa��o de nossa plataforma de com�rcio eletr�nico."
+    }
+  },
+  "catalog": {
+    "title": "Nosso Cat�logo de Produtos",
+    "description": "Baixe nosso cat�logo completo com todos os nossos produtos para a ind�stria aqu�cola.",
+    "downloadButton": "Baixar Cat�logo PDF"
+  },
+  "newsletter": {
+    "title": "INSCREVA-SE EM NOSSA NEWSLETTER",
+    "description": "Receba as �ltimas not�cias, ofertas e tend�ncias da ind�stria diretamente em seu e-mail.",
+    "placeholder": "Seu endere�o de e-mail",
+    "button": "INSCREVER-SE",
+    "privacy": "Aceito a pol�tica de privacidade",
+    "success": "Obrigado por se inscrever!",
+    "blogTitle": "Inscreva-se em Nosso Boletim",
+    "blogDescription": "Receba as �ltimas not�cias, artigos e atualiza��es sobre a ind�stria aqu�cola diretamente em seu e-mail."
+  }
+}

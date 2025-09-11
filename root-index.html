@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prilabsa - Proveedores de soluciones integrales en alimentos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+    /* Estilos del Badge Flotante */
+    .floating-badge {
+        position: fixed;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+        text-decoration: none;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        -webkit-user-select: none;
+           -moz-user-select: none;
+                user-select: none;
+        opacity: 0.9;
+    }
+    
+    .floating-badge:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        opacity: 1;
+    }
+    
+    .floating-badge .logo { width: 20px; height: 20px; flex-shrink: 0; }
+    .floating-badge .text { display: flex; align-items: center; gap: 3px; line-height: 1; }
+    .floating-badge .powered-by { color: #6b7280; }
+    .floating-badge .brand { color: #FF8C00; font-family: 'IBM Plex Mono', monospace; font-weight: 600; }
+    
+    /* Posiciones */
+    .floating-badge.bottom-right { bottom: 20px; right: 20px; }
+    .floating-badge.bottom-left { bottom: 20px; left: 20px; }
+    .floating-badge.top-right { top: 20px; right: 20px; }
+    .floating-badge.top-left { top: 20px; left: 20px; }
+    .floating-badge.center-right { top: 50%; right: 20px; transform: translateY(-50%); }
+    .floating-badge.center-left { top: 50%; left: 20px; transform: translateY(-50%); }
+    
+    /* Tamaños */
+    .floating-badge.small { padding: 6px 10px; font-size: 11px; }
+    .floating-badge.small .logo { width: 16px; height: 16px; }
+    .floating-badge.large { padding: 10px 16px; font-size: 14px; }
+    .floating-badge.large .logo { width: 24px; height: 24px; }
+    
+    /* Temas */
+    .floating-badge.dark { background: rgba(17, 24, 39, 0.95); border-color: rgba(255, 255, 255, 0.1); color: #f9fafb; }
+    .floating-badge.dark .powered-by { color: #9ca3af; }
+    .floating-badge.minimal { background: transparent; border: none; box-shadow: none; backdrop-filter: none; }
+    .floating-badge.glass { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px); }
+    
+    /* Animaciones */
+    .floating-badge.pulse { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 0.9; } 50% { opacity: 1; } }
+    .floating-badge.bounce { animation: bounce 3s infinite; }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-5px); } 60% { transform: translateY(-3px); } }
+    
+    /* Responsivo */
+    @media (max-width: 768px) {
+        .floating-badge { font-size: 11px; padding: 6px 10px; }
+        .floating-badge .logo { width: 18px; height: 18px; }
+        .floating-badge.bottom-right, .floating-badge.bottom-left { bottom: 15px; }
+        .floating-badge.bottom-right { right: 15px; }
+        .floating-badge.bottom-left { left: 15px; }
+    }
+    </style>
+    <script type="module" crossorigin src="/assets/index-D9J0lx_0.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/leaflet-B2QFdZYX.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-CqL1h4oU.js">
+    <link rel="modulepreload" crossorigin href="/assets/react-BhPjD0Dz.js">
+    <link rel="modulepreload" crossorigin href="/assets/cotizacion-OjIOSxd8.js">
+    <link rel="modulepreload" crossorigin href="/assets/i18n-DYj1xVCX.js">
+    <link rel="stylesheet" crossorigin href="/assets/leaflet-Dgihpmma.css">
+    <link rel="stylesheet" crossorigin href="/assets/vendor-B_l4pjL9.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-ySy2sXCw.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <!-- Badge Flotante Solaria Agency -->
+    <a href="https://solaria.agency" class="floating-badge bottom-left dark" target="_blank">
+        <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="solariaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FF8C00;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#FF7F00;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <circle cx="12" cy="12" r="10" fill="url(#solariaGradient)" />
+            <circle cx="12" cy="12" r="6" fill="white" opacity="0.9" />
+            <path d="M8 12 L12 8 L16 12 L12 16 Z" fill="url(#solariaGradient)" opacity="0.8" />
+            <circle cx="12" cy="12" r="2" fill="white" />
+        </svg>
+        <div class="text"><span class="powered-by">powered</span> <span class="powered-by">by</span> <span class="brand">solaria.agency</span></div>
+    </a>
+  </body>
+</html>

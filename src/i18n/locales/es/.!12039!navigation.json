@@ -1,0 +1,15 @@
+{
+  "header": {
+    "navigation": {
+      "home": "INICIO",
+      "about": "NOSOTROS",
+      "contact": "CONTACTO",
+      "products": "PRODUCTOS",
+      "offices": "OFICINAS",
+      "news": "NOTICIAS",
+      "careers": "Trabaja con Nosotros",
+      "search": "Buscar productos..."
+    },
+    "nav": {
+      "home": "INICIO",
+      "about": "QUIENES SOMOS",

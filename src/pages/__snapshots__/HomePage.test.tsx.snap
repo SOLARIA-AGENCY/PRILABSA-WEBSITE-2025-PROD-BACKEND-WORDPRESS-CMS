@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`HomePage > matches snapshot for visual regression testing 1`] = `
+<div
+  class="min-h-screen flex items-center justify-center bg-white"
+>
+  <h1
+    class="text-6xl font-montserrat font-bold text-gray-900"
+  >
+    PRILABSA
+  </h1>
+</div>
+`;

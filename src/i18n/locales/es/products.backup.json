@@ -1,0 +1,57 @@
+{
+  "categories": {
+    "alimentos": "ALIMENTOS",
+    "probioticos": "PROBIÓTICOS",
+    "aditivos": "ADITIVOS",
+    "quimicos": "QUÍMICOS",
+    "equipos": "EQUIPOS"
+  },
+  "descriptions": {
+    "alimentosDesc": "Revisa nuestro catálogo de productos de Alimentos aquí",
+    "probioticosDesc": "Revisa nuestro catálogo de productos de Probióticos aquí",
+    "aditivosDesc": "Revisa nuestro catálogo de productos de Aditivos aquí",
+    "quimicosDesc": "Revisa nuestro catálogo de productos de Químicos aquí",
+    "equiposDesc": "Revisa nuestro catálogo de productos de Equipos aquí"
+  },
+  "actions": {
+    "viewProducts": "VER PRODUCTOS",
+    "viewAll": "Ver Todos los Productos ’",
+    "viewCatalog": "Ver Catálogo Completo",
+    "downloadCatalog": "Descargar Catálogo PDF",
+    "addProduct": "Agregar producto",
+    "removeProduct": "Eliminar producto",
+    "downloadPdf": "Descargar PDF"
+  },
+  "search": {
+    "placeholder": "Buscar categorías de productos...",
+    "searchProducts": "Buscar productos..."
+  },
+  "catalog": {
+    "title": "Nuestro Catálogo de Productos",
+    "description": "Descarga nuestro catálogo completo con todos nuestros productos para la industria acuícola.",
+    "catalogTitle": "NUESTROS PRODUCTOS",
+    "catalogSubtitle": "Soluciones integrales para la industria acuícola con los más altos estándares de calidad"
+  },
+  "productDetail": {
+    "specifications": "Especificaciones",
+    "datasheet": "Ficha Técnica",
+    "viewMore": "Ver más"
+  },
+  "quotation": {
+    "title": "Cotización",
+    "pageTitle": "MI COTIZACIÓN",
+    "myQuote": "Mi Cotización",
+    "subtitle": "Revise los productos seleccionados y ajuste las cantidades antes de generar su solicitud.",
+    "quantity": "Cantidad",
+    "emptyMessage": "Tu carrito de cotización está vacío",
+    "emptyCart": "Su carrito de cotización está vacío",
+    "exploreMessage": "Explore nuestro catálogo para encontrar los productos que necesita."
+  },
+  "common": {
+    "products": "PRODUCTOS",
+    "download": "Descargar",
+    "loading": "Cargando...",
+    "seeMore": "Ver más",
+    "viewAll": "Ver todos"
+  }
+}

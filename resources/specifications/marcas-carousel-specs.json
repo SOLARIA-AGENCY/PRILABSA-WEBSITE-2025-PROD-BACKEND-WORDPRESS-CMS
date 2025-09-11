@@ -1,0 +1,198 @@
+{
+  "section_title": "NUESTRAS MARCAS",
+  "carousel_config": {
+    "autoplay": true,
+    "infinite": true,
+    "speed": 3000,
+    "slides_to_show": 5,
+    "slides_to_scroll": 1,
+    "responsive": [
+      {
+        "breakpoint": 1024,
+        "settings": {
+          "slides_to_show": 4
+        }
+      },
+      {
+        "breakpoint": 768,
+        "settings": {
+          "slides_to_show": 3
+        }
+      },
+      {
+        "breakpoint": 480,
+        "settings": {
+          "slides_to_show": 2
+        }
+      }
+    ]
+  },
+  "brands": [
+    {
+      "name": "THOSCO",
+      "logo": "thosco",
+      "available_asset": false
+    },
+    {
+      "name": "VAN GUARD",
+      "logo": "vanguard", 
+      "available_asset": false
+    },
+    {
+      "name": "VEE GEE",
+      "logo": "vee_gee",
+      "available_asset": false
+    },
+    {
+      "name": "ZEIGLER",
+      "logo": "zeigler",
+      "available_asset": false
+    },
+    {
+      "name": "INTEC",
+      "logo": "intec",
+      "available_asset": false
+    },
+    {
+      "name": "API",
+      "logo": "api",
+      "available_asset": true,
+      "asset_path": "/assets/iniciodev/socio_api.png"
+    },
+    {
+      "name": "ARGEITIT", 
+      "logo": "argeitit",
+      "available_asset": true,
+      "asset_path": "/assets/iniciodev/socio_argeitit.png"
+    },
+    {
+      "name": "BASF",
+      "logo": "basf",
+      "available_asset": true,
+      "asset_path": "/assets/iniciodev/socio_basf.png"
+    },
+    {
+      "name": "DMS",
+      "logo": "dms",
+      "available_asset": true,
+      "asset_path": "/assets/iniciodev/socio_dms.png"
+    },
+    {
+      "name": "NOVUS",
+      "logo": "novus",
+      "available_asset": true,
+      "asset_path": "/assets/iniciodev/socio_novus.png"
+    },
+    {
+      "name": "SYNDEL",
+      "logo": "syndel",
+      "available_asset": true,
+      "asset_path": "/assets/iniciodev/socio_syndel.png"
+    },
+    {
+      "name": "NATURAL PRODUCTS",
+      "logo": "natural_products",
+      "available_asset": true,
+      "asset_path": "/assets/iniciodev/socio_natural_products.png"
+    },
+    {
+      "name": "EPICORE",
+      "logo": "epicore", 
+      "available_asset": true,
+      "asset_path": "/assets/iniciodev/socio_epicore.png"
+    },
+    {
+      "name": "BENTOLI",
+      "logo": "bentoli",
+      "available_asset": true,
+      "asset_path": "/assets/iniciodev/socio_bentoli.png"
+    },
+    {
+      "name": "SYAQUA",
+      "logo": "syaqua",
+      "available_asset": true,
+      "asset_path": "/assets/iniciodev/socio_syaqua.png"
+    },
+    {
+      "name": "AERO TUBE",
+      "logo": "aero_tube",
+      "available_asset": false
+    },
+    {
+      "name": "GAST",
+      "logo": "gast",
+      "available_asset": false
+    },
+    {
+      "name": "HIGASHIMURU", 
+      "logo": "higashimuru",
+      "available_asset": false
+    },
+    {
+      "name": "HORIBA",
+      "logo": "horiba",
+      "available_asset": false
+    },
+    {
+      "name": "INTERMAS",
+      "logo": "intermas",
+      "available_asset": false
+    },
+    {
+      "name": "KEETON",
+      "logo": "keeton",
+      "available_asset": true,
+      "asset_path": "/assets/iniciodev/brands/keeton.png"
+    },
+    {
+      "name": "LAMOTTE",
+      "logo": "lamotte",
+      "available_asset": false
+    },
+    {
+      "name": "MACKAY",
+      "logo": "mackay",
+      "available_asset": false
+    },
+    {
+      "name": "OHAUS",
+      "logo": "ohaus",
+      "available_asset": false
+    },
+    {
+      "name": "OXYGUARD",
+      "logo": "oxyguard",
+      "available_asset": false
+    },
+    {
+      "name": "PACER",
+      "logo": "pacer",
+      "available_asset": false
+    },
+    {
+      "name": "OAKTON",
+      "logo": "oakton",
+      "available_asset": false
+    },
+    {
+      "name": "WOZVIL",
+      "logo": "wozvil",
+      "available_asset": false
+    },
+    {
+      "name": "AQUALABO",
+      "logo": "aqualabo",
+      "available_asset": false
+    },
+    {
+      "name": "CHEMETRICS",
+      "logo": "chemetrics",
+      "available_asset": false
+    }
+  ],
+  "styling": {
+    "background_color": "#ffffff",
+    "title_color": "#3759C1",
+    "font_family": "Gotham, sans-serif"
+  }
+}

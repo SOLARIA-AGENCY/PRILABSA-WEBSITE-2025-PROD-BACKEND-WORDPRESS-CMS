@@ -1,0 +1,15 @@
+/* Sobrescribir rutas de assets de Slick Carousel */
+.slick-loading .slick-list {
+    background: #fff url('/assets/slick/ajax-loader.gif') center center no-repeat;
+}
+
+@font-face {
+    font-family: 'slick';
+    font-weight: normal;
+    font-style: normal;
+    src: url('/assets/slick/fonts/slick.eot');
+    src: url('/assets/slick/fonts/slick.eot?#iefix') format('embedded-opentype'),
+         url('/assets/slick/fonts/slick.woff') format('woff'),
+         url('/assets/slick/fonts/slick.ttf') format('truetype'),
+         url('/assets/slick/fonts/slick.svg#slick') format('svg');
+}

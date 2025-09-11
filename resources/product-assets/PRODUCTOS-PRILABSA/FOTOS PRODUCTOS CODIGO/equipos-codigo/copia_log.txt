@@ -1,0 +1,40 @@
+Inicio de copia: Fri Jul 25 19:40:44 CEST 2025
+✅ EQ001: Oxigenómetro Oakton.png copiado
+✅ EQ003: Oxigenómetro Aqualabo neon.png copiado
+✅ EQ006: medidor de ph.psd copiado
+✅ EQ007: medidor de potasio.png copiado
+✅ EQ008: medidor de conductividad.png copiado
+✅ EQ009: medidor de calcio.png copiado
+✅ EQ002: Smart Spectro.png copiado
+✅ EQ011: Salinómetro Vegge.png copiado
+✅ EQ012: Termómetro.png copiado
+✅ EQ015: AMMO LOCK.png copiado
+✅ EQ013: Manguera vinil.png copiado
+✅ EQ038: MANGERA DIFUSORA.png copiado
+✅ EQ014: Freshwater.png copiado
+✅ EQ016: CHEMETRICS/peroxido de hidrogeno.png copiado
+✅ EQ017: CHEMETRICS/nitrito.png copiado
+✅ EQ018: CHEMETRICS/nitrato.png copiado
+✅ EQ019: CHEMETRICS/hierro.png copiado
+✅ EQ020: CHEMETRICS/AMONIA.png copiado
+✅ EQ021: CHEMETRICS/fosfato 1.png copiado
+✅ EQ022: CHEMETRICS/sulfito.png copiado
+✅ EQ023: CHEMETRICS/total hardness.png copiado
+✅ EQ024: CHEMETRICS/total alcalinidad baja.png copiado
+✅ EQ025: CHEMETRICS/dioxido de carbono.png copiado
+✅ EQ026: API KIT DE NITRATO.png copiado
+✅ EQ027: API KIT DE NITRITO.png copiado
+✅ EQ028: API KIT DE FOSFATO.png copiado
+✅ EQ029: API KIT DE AMONIO.png copiado
+✅ EQ030: API KIT DE CALCIO.png copiado
+✅ EQ031: BALANZA SCOUT PRO2000.png copiado
+✅ EQ032: BALANZA SCOUT PRO400.png copiado
+✅ EQ034: MICROSCOPIO SERIE CLINICAL 1320.png copiado
+✅ EQ035: CAMARA NEUBAUER.png copiado
+✅ EQ037: Termómetro.png copiado
+✅ EQ039: Piedras difusoras.png copiado
+✅ EQ040: Piedras difusoras.png copiado
+✅ EQ041: BOLSOS FILTRANTES DE POLIPROPILENO.png copiado
+✅ EQ042: Tirillas PH.png copiado
+✅ EQ043: MALLA NITEX.png copiado
+Fin de copia: Fri Jul 25 19:40:53 CEST 2025

@@ -1,0 +1,312 @@
+{
+  "home": {
+    "hero": {
+      "title": "We are providers of the best comprehensive solutions\u00A0in",
+      "subtitle": "Equipment, reagents and specialized services for the health sector",
+      "cta": {
+        "catalog": "LEARN MORE",
+        "contact": "Contact Us"
+      }
+    },
+    "weAre": {
+      "title": "WE ARE",
+      "subtitle": "Your strategic partner in laboratory solutions",
+      "description": "Prilabsa is a multinational company founded in 1992, dedicated to the commercialization of food, probiotics, additives, equipment and chemicals with high quality standards.",
+      "sections": {
+        "excellence": {
+          "title": "Excellence in Aquaculture",
+          "description": "Prilabsa is a multinational company founded in 1992, dedicated to the commercialization of food, probiotics, additives, equipment and chemicals with high quality standards."
+        },
+        "coverage": {
+          "title": "Comprehensive Coverage",
+          "description": "We have covered all the needs of shrimp, fish and shrimp farm laboratories, thanks to our full knowledge of the environment and the solid experience of our staff trained in various markets of the aquaculture industry."
+        },
+        "presence": {
+          "title": "Continental Presence",
+          "description": "Prilabsa has expanded its activities in strategic points of the American continent, with commercial offices and climate-controlled warehouses in Ecuador (Guayaquil, Manta, Pedernales, San Vicente, Hualtaco, Machala, Esmeraldas, Libertad), USA (Miami), Mexico (Mazatl�n), Brazil (Natal, Aracati and Acara�), Honduras (Choluteca), Panama (Panama City), Nicaragua (Chinandega), Venezuela (Maracaibo) and Peru (Tumbes)."
+        },
+        "leadership": {
+          "title": "Experience and Leadership",
+          "description": "With more than 32 years of experience and service in the sector, we demonstrate that excellence is not improvised: it is consolidated through the efficiency of each member of our team. We are the comprehensive solution for the aquaculture sector in the Americas."
+        }
+      },
+      "stats": {
+        "experience": "Years of Experience",
+        "countries": "Countries Served",
+        "clients": "Satisfied Clients",
+        "products": "Available Products"
+      },
+      "watchVideo": "Watch Video"
+    },
+    "catalog": {
+      "title": "OUR PRODUCTS",
+      "subtitle": "Comprehensive solutions for the aquaculture industry with the highest quality standards",
+      "categories": {
+        "alimentos": "FOOD",
+        "probioticos": "PROBIOTICS",
+        "aditivos": "ADDITIVES",
+        "quimicos": "CHEMICALS",
+        "equipos": "EQUIPMENT"
+      },
+      "descriptions": {
+        "alimentosDesc": "Check our Food products catalog here",
+        "probioticosDesc": "Check our Probiotics products catalog here",
+        "aditivosDesc": "Check our Additives products catalog here",
+        "quimicosDesc": "Check our Chemicals products catalog here",
+        "equiposDesc": "Check our Equipment products catalog here"
+      },
+      "viewProducts": "VIEW PRODUCTS",
+      "viewAll": "View All Products �",
+      "viewCatalog": "View Complete Catalog"
+    },
+    "brands": {
+      "title": "Our Brands",
+      "subtitle": "We proudly distribute products from the most recognized brands in the industry."
+    },
+    "agencies": {
+      "title": "OUR AGENCIES",
+      "description": "We have expanded our activities in countries established as strategic points of the American continent, with modern commercial offices and climate-controlled warehouses.",
+      "cta": "LEARN MORE"
+    },
+    "video": {
+      "title": "Meet PRILABSA",
+      "close": "Close"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Since 1992, we are a multinational company dedicated to the commercialization\u00A0of",
+      "animation": {
+        "productosAcuicolas": "aquaculture products",
+        "solucionesIntegrales": "comprehensive solutions"
+      }
+    },
+    "content": {
+      "title": "ABOUT US",
+      "description": "We are a multinational company founded in 1992, dedicated to the commercialization of products related to the aquaculture industry with the highest standards of quality and guarantee in the market. We have covered the needs of larvae laboratories, shrimp farms and fish farming, thanks to our full knowledge and experience in the solid market of the aquaculture industry.",
+      "mission": {
+        "title": "MISSION",
+        "description": "To be strategic partners of our clients by offering innovative, biosecure and quality products to improve the production of the industry in the Americas."
+      },
+      "vision": {
+        "title": "VISION AND VALUES",
+        "description": "To be the comprehensive solution for the development of the aquaculture industry, thanks to the competitiveness and quality of our products. The success of our work is achieved through corporate values that guide the behavior and actions of our collaborators: Innovation, Commitment, Integrity and Trust."
+      }
+    }
+  },
+  "offices": {
+    "hero": {
+      "title": "We connect and strengthen all the Americas. We are located in",
+      "countries": {
+        "ecuador": "ECUADOR",
+        "brasil": "BRAZIL",
+        "usa": "USA",
+        "mexico": "MEXICO",
+        "honduras": "HONDURAS",
+        "panama": "PANAMA",
+        "nicaragua": "NICARAGUA",
+        "venezuela": "VENEZUELA",
+        "peru": "PERU"
+      }
+    },
+    "content": {
+      "title": "OUR OFFICES",
+      "description": "We have expanded our activities in countries established as strategic points of the American continent, with modern commercial offices and climate-controlled warehouses."
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Contact Us"
+    },
+    "emails": {
+      "title": "OUR EMAILS",
+      "description": "Contact directly with the department you need.",
+      "departments": {
+        "imports": "Imports",
+        "sales": "Commercial and Sales",
+        "hr": "Human Resources"
+      }
+    },
+    "form": {
+      "title": "GET IN TOUCH",
+      "description": "We will be happy to assist you.",
+      "fields": {
+        "fullName": "Full Name",
+        "company": "Company",
+        "email": "Email Address",
+        "phone": "Phone",
+        "message": "Message"
+      },
+      "button": "Send Message",
+      "errors": {
+        "required": "Please complete the required fields: Name, Email and Message."
+      },
+      "success": "Thank you! Your message has been sent. We will contact you soon."
+    }
+  },
+  "careers": {
+    "hero": {
+      "title": "Work with Us"
+    },
+    "form": {
+      "title": "JOIN OUR TEAM",
+      "description": "We are looking for talent passionate about innovation.",
+      "fields": {
+        "fullName": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone",
+        "country": "Country of Residence",
+        "area": "Area of Interest",
+        "cv": "Attach CV (PDF, DOCX)"
+      },
+      "areas": {
+        "placeholder": "Select an area",
+        "sales": "Sales and Commercial",
+        "admin": "Administration and Finance",
+        "logistics": "Logistics and Operations",
+        "rd": "Research and Development",
+        "marketing": "Marketing"
+      },
+      "button": "Send Application",
+      "errors": {
+        "required": "Please complete the required fields: Name, Email and CV."
+      },
+      "success": "Thank you for your interest! We have received your application and will review it soon."
+    }
+  },
+  "products": {
+    "title": "Products",
+    "search": {
+      "placeholder": "Search product categories..."
+    }
+  },
+  "legal": {
+    "privacyPolicy": {
+      "title": "Privacy Policy",
+      "subtitle": "Your privacy is important to us. Learn how we manage your data.",
+      "breadcrumb": "Privacy Policy",
+      "commitment": {
+        "title": "Privacy Commitment",
+        "content": "At PRILABSA, we protect your personal data with the highest standards of security and transparency, complying with all applicable data protection regulations."
+      },
+      "sections": {
+        "section1": {
+          "number": "1",
+          "heading": "WHO IS RESPONSIBLE FOR PROCESSING YOUR DATA?",
+          "content": "The data controller for personal data collected on this website is <strong>PRIME LABORATORIO PRILAB SA</strong>, with RUC <strong>0991316043001</strong> and address at <strong>AV. CARLOS JULIO AROSEMENA KM 2.5 VIA DAULE C.C. ALBAN BORJA PLANTA BAJA LOCAL 055 TARQUI, GUAYAQUIL, GUAYAS - ECUADOR</strong>."
+        },
+        "section2": {
+          "number": "2",
+          "heading": "FOR WHAT PURPOSE DO WE PROCESS YOUR PERSONAL DATA?",
+          "content": "At PRILABSA we process the information you provide to us in order to manage the contractual or commercial relationship, manage the sending of information you request, provide interested parties with offers of our services and/or products of interest and/or manage your application.",
+          "subcontent": "Specifically, your data will be processed for:",
+          "purposes": {
+            "contact": {
+              "title": "Contact Form",
+              "description": "Respond to your inquiries, requests or petitions related to our aquaculture products and laboratory services."
+            },
+            "careers": {
+              "title": "Work with Us",
+              "description": "Manage your selection process and evaluate your application for current or future job positions in the aquaculture sector."
+            },
+            "newsletter": {
+              "title": "Newsletter Subscription",
+              "description": "Send you commercial communications, technical news or promotions of our products and services specialized in aquaculture."
+            },
+            "quotes": {
+              "title": "Quote Requests",
+              "description": "Process your aquaculture product requirements and generate personalized commercial proposals."
+            }
+          }
+        },
+        "section3": {
+          "number": "3",
+          "heading": "WHAT IS THE LEGAL BASIS FOR PROCESSING YOUR DATA?",
+          "content": "The legal basis for processing your data is your <strong>explicit consent</strong>, which you grant by checking the corresponding acceptance box before submitting any form.",
+          "warning": "<strong>Important:</strong> You can withdraw your consent at any time, without affecting the lawfulness of processing based on consent prior to its withdrawal."
+        }
+      }
+    },
+    "legalNotice": {
+      "title": "Legal Notice",
+      "subtitle": "Legal information about the use of our website and services",
+      "breadcrumb": "Legal Notice",
+      "commitment": {
+        "title": "Legal Commitment",
+        "content": "At PRILABSA, we are committed to operating with complete transparency and compliance with current legal regulations, ensuring the protection of our users and clients."
+      },
+      "sections": {
+        "section1": {
+          "number": "1",
+          "heading": "COMPANY IDENTIFICATION",
+          "content": "This website is owned by <strong>PRIME LABORATORIO PRILAB SA</strong>, with RUC <strong>0991316043001</strong> and address at <strong>AV. CARLOS JULIO AROSEMENA KM 2.5 VIA DAULE C.C. ALBAN BORJA PLANTA BAJA LOCAL 055 TARQUI, GUAYAQUIL, GUAYAS - ECUADOR</strong>."
+        },
+        "section2": {
+          "number": "2",
+          "heading": "PURPOSE AND SCOPE OF APPLICATION",
+          "content": "This legal notice regulates the use of the website <strong>www.prilabsa.com</strong> and all services offered through it. Access and use of this website implies full acceptance of all the terms and conditions established herein."
+        },
+        "section3": {
+          "number": "3",
+          "heading": "CONDITIONS OF USE",
+          "content": "The user agrees to use the website in accordance with the law, this legal notice, good customs and public order. The use of the website for illegal purposes or that may damage the interests of PRILABSA or third parties is prohibited."
+        },
+        "section4": {
+          "number": "4",
+          "heading": "INTELLECTUAL AND INDUSTRIAL PROPERTY",
+          "content": "All content on this website, including but not limited to texts, graphics, logos, icons, images, audio clips, digital downloads, data compilations and software, is the property of PRILABSA or its content suppliers and is protected by intellectual property laws."
+        },
+        "section5": {
+          "number": "5",
+          "heading": "EXCLUSION OF WARRANTIES AND LIABILITY",
+          "content": "PRILABSA is not responsible for damages of any nature that may be due to the lack of availability or continuity of the operation of the website, to the disappointment of the utility that users may have attributed to the website."
+        },
+        "section6": {
+          "number": "6",
+          "heading": "MODIFICATIONS",
+          "content": "PRILABSA reserves the right to make without prior notice the modifications it deems appropriate on its website, being able to change, delete or add both the contents and services provided through it as well as the way in which they appear presented or located."
+        },
+        "section7": {
+          "number": "7",
+          "heading": "APPLICABLE LEGISLATION AND JURISDICTION",
+          "content": "This legal notice is governed by Ecuadorian law. For the resolution of any controversy that may arise from access to or use of the website, PRILABSA and the user submit to the jurisdiction of the courts of Guayaquil, Ecuador."
+        }
+      },
+      "lastUpdate": "Last update: January 2025"
+    }
+  },
+  "history": {
+    "title": "Our History",
+    "subtitle": "Tracing the path of aquaculture innovation since 1992",
+    "timeline": {
+      "1992": "Prilabsa was inaugurated with an office in Guayaquil, commercializing Artemia, starting with 3 people.",
+      "1998": "Inauguration of Prilabsa Salinas and Manta, 4 additional feeds were incorporated into the portfolio.",
+      "2000": "Inauguration of agency in Machala.",
+      "2001": "Becomes multinational seeking new markets, inaugurating its first agency in Miami-Florida.",
+      "2002": "A strategic partnership with supplier Mackay Marine begins, including Artemia from Lake Utah.",
+      "2003": "The probiotic line is incorporated, being pioneers in the market.",
+      "2005": "The Honduras agency opens.",
+      "2010": "The Nicaragua agency opens.",
+      "2012": "The Panama agency opens.",
+      "2014": "The Tumbes-Peru agency opens.",
+      "2017": "The Mexico agency opens.",
+      "2022": "Prilabsa celebrates 30 years in the aquaculture market.",
+      "2025": "Launch of the new corporate website and upcoming implementation of our e-commerce platform."
+    }
+  },
+  "catalog": {
+    "title": "Our Product Catalog",
+    "description": "Download our complete catalog with all our products for the aquaculture industry.",
+    "downloadButton": "Download PDF Catalog"
+  },
+  "newsletter": {
+    "title": "SUBSCRIBE TO OUR NEWSLETTER",
+    "description": "Receive the latest news, offers and industry trends directly in your email.",
+    "placeholder": "Your email address",
+    "button": "SUBSCRIBE",
+    "privacy": "I accept the privacy policy",
+    "success": "Thank you for subscribing!",
+    "blogTitle": "Subscribe to Our Newsletter",
+    "blogDescription": "Receive the latest news, articles and updates about the aquaculture industry directly in your email."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "totals": {
+    "productos": 105,
+    "csvFound": 105,
+    "mdFound": 105
+  },
+  "tsRestore": {
+    "totalProcessed": 105,
+    "descriptionsUpdated": 105,
+    "specsUpdated": 0,
+    "benefitsUpdated": 2
+  },
+  "translations": {
+    "esUpdated": 105
+  },
+  "sourcesDiscrepancies": 0,
+  "consistencyReport": "sources-consistency-report-1756203482100.json"
+}

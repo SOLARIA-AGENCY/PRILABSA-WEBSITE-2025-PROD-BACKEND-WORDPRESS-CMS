@@ -1,0 +1,33 @@
+backup/
+MODULO*
+
+# Large build files for client delivery
+prilabsa-website-build-*.zip
+*.zip
+
+# Build outputs
+dist/
+build/
+.vite/
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+node_modules

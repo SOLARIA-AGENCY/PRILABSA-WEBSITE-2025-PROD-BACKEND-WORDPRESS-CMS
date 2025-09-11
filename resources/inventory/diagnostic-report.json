@@ -1,0 +1,200 @@
+{
+  "timestamp": "2025-07-27T11:34:01.445Z",
+  "site_status": {
+    "https://prilabsa.solaria.agency/": {
+      "accessible": true,
+      "status": 301,
+      "responseTime": 1945,
+      "headers": {
+        "connection": "Keep-Alive",
+        "keep-alive": "timeout=5, max=100",
+        "x-powered-by": "PHP/8.2.28",
+        "x-dns-prefetch-control": "on",
+        "content-type": "text/html; charset=UTF-8",
+        "x-redirect-by": "WordPress",
+        "location": "https://solaria.agency/",
+        "x-litespeed-cache": "miss",
+        "content-length": "0",
+        "date": "Sun, 27 Jul 2025 11:34:03 GMT",
+        "server": "LiteSpeed",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests"
+      }
+    },
+    "https://prilabsa.solaria.agency/es/": {
+      "accessible": true,
+      "status": 404,
+      "responseTime": 122,
+      "headers": {
+        "connection": "Keep-Alive",
+        "keep-alive": "timeout=5, max=100",
+        "content-type": "text/html",
+        "last-modified": "Tue, 22 Apr 2025 07:41:12 GMT",
+        "etag": "\"119f-68074818-e317882c84df76d4;;;\"",
+        "accept-ranges": "bytes",
+        "content-length": "4511",
+        "date": "Sun, 27 Jul 2025 11:34:03 GMT",
+        "server": "LiteSpeed",
+        "location": "https://prilabsa.solaria.agency/index.php",
+        "content-security-policy": "upgrade-insecure-requests",
+        "platform": "hostinger",
+        "panel": "hpanel"
+      }
+    },
+    "https://prilabsa.solaria.agency/es/productos": {
+      "accessible": true,
+      "status": 404,
+      "responseTime": 101,
+      "headers": {
+        "connection": "Keep-Alive",
+        "keep-alive": "timeout=5, max=100",
+        "content-type": "text/html",
+        "last-modified": "Tue, 22 Apr 2025 07:41:12 GMT",
+        "etag": "\"119f-68074818-e317882c84df76d4;;;\"",
+        "accept-ranges": "bytes",
+        "content-length": "4511",
+        "date": "Sun, 27 Jul 2025 11:34:03 GMT",
+        "server": "LiteSpeed",
+        "location": "https://prilabsa.solaria.agency/index.php",
+        "content-security-policy": "upgrade-insecure-requests",
+        "platform": "hostinger",
+        "panel": "hpanel"
+      }
+    },
+    "https://prilabsa.solaria.agency/es/noticias": {
+      "accessible": true,
+      "status": 404,
+      "responseTime": 112,
+      "headers": {
+        "connection": "Keep-Alive",
+        "keep-alive": "timeout=5, max=100",
+        "content-type": "text/html",
+        "last-modified": "Tue, 22 Apr 2025 07:41:12 GMT",
+        "etag": "\"119f-68074818-e317882c84df76d4;;;\"",
+        "accept-ranges": "bytes",
+        "content-length": "4511",
+        "date": "Sun, 27 Jul 2025 11:34:03 GMT",
+        "server": "LiteSpeed",
+        "location": "https://prilabsa.solaria.agency/index.php",
+        "platform": "hostinger",
+        "panel": "hpanel"
+      }
+    }
+  },
+  "github_actions": {
+    "git_status": {
+      "current_branch": "main",
+      "has_changes": true,
+      "changes": [
+        "M .github/workflows/deploy-staging.yml",
+        " M package.json",
+        " M scripts/deploy-staging.js",
+        "?? .htaccess",
+        "?? CLOUDFLARE_DNS_CONFIGURATION.md",
+        "?? DEPLOYMENT_SUCCESS_REPORT.md",
+        "?? DNS_CONFIGURATION_SUMMARY.md",
+        "?? DNS_DIAGNOSTIC_REPORT.md",
+        "?? DNS_REDIRECT_FIX_REPORT.md",
+        "?? FTP_STAGING_CONNECTIVITY_FIX.md",
+        "?? INSTRUCCIONES_CORRECCION_DNS.md",
+        "?? PLAN_ACCION_INMEDIATA_DNS.md",
+        "?? RESOLUCION_CONFLICTO_CLOUDFLARE_HOSTINGER.md",
+        "?? RESUMEN_EJECUTIVO_SSL.md",
+        "?? SSL_CONFIGURATION_REPORT.md",
+        "?? SSL_WORKAROUND_SOLUTION.md",
+        "?? SYSTEM_RESTORATION_REPORT.md",
+        "?? check-ssl-status.sh",
+        "?? scripts/check-ssl-status.sh",
+        "?? scripts/cloudflare-dns-fix.js",
+        "?? scripts/cloudflare-dns-setup.cjs",
+        "?? scripts/configure-dns.js",
+        "?? scripts/diagnose-cloudflare-conflict.cjs",
+        "?? scripts/diagnose-ftp-staging.js",
+        "?? scripts/fix-cloudflare-ssl.js",
+        "?? scripts/fix-dns-redirect.js",
+        "?? scripts/monitor-dns-fix.cjs",
+        "?? scripts/monitor-dns-realtime.js",
+        "?? scripts/quick-dns-check.cjs",
+        "?? scripts/validate-deployment.js",
+        "?? scripts/verify-deployment.js",
+        "?? scripts/verify-dns-fix.js",
+        "?? scripts/verify-ftp-credentials.js",
+        "?? upload-htaccess.js",
+        "?? verify-ssl-fix.cjs"
+      ],
+      "last_commit": "74b07f2 - fix: Resolve GitHub Actions workflow issues (11 minutes ago)",
+      "remote_url": "https://github.com/PRILABSA-CORPORATE/PRILABSA-WEBSITE-2025.git"
+    }
+  },
+  "configuration": {
+    "package.json": {
+      "exists": true
+    },
+    "vite.config.ts": {
+      "exists": true
+    },
+    "netlify.toml": {
+      "exists": true
+    },
+    ".env.staging": {
+      "exists": true
+    },
+    "scripts": {
+      "build": true,
+      "deploy:staging": true,
+      "deploy:prod": false
+    }
+  },
+  "workflows": {
+    "deploy-staging.yml": {
+      "exists": true,
+      "size": 8303,
+      "hasSecrets": false,
+      "hasTriggers": true,
+      "valid": true
+    },
+    "monitor-staging.yml": {
+      "exists": true,
+      "size": 7285,
+      "hasSecrets": false,
+      "hasTriggers": true,
+      "valid": true
+    },
+    "linear-integration.yml": {
+      "exists": true,
+      "size": 13458,
+      "hasSecrets": true,
+      "hasTriggers": true,
+      "valid": true
+    },
+    "manage-deployments.yml": {
+      "exists": true,
+      "size": 9815,
+      "hasSecrets": false,
+      "hasTriggers": true,
+      "valid": true
+    },
+    "deployment-notifications.yml": {
+      "exists": true,
+      "size": 11134,
+      "hasSecrets": false,
+      "hasTriggers": true,
+      "valid": true
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "MEDIO",
+      "issue": "Cambios pendientes sin commit",
+      "action": "Hacer commit y push para triggerar workflows",
+      "command": "git add . && git commit -m \"Fix: Trigger workflows\" && git push"
+    },
+    {
+      "priority": "ALTO",
+      "issue": "LINEAR_API_KEY requerido en GitHub Secrets",
+      "action": "Configurar LINEAR_API_KEY en GitHub Repository Settings",
+      "command": "Ir a Settings → Secrets and variables → Actions"
+    }
+  ]
+}

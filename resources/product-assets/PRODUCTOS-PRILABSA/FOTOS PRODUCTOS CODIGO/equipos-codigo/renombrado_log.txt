@@ -1,0 +1,45 @@
+Inicio de renombrado: Fri Jul 25 19:41:08 CEST 2025
+✅ EQ001: Oxigenómetro Oakton.png → EQ001.png
+✅ EQ003: Oxigenómetro Aqualabo neon.png → EQ003.png
+✅ EQ004: EQ004.png → EQ004.png
+✅ EQ005: EQ005.jpg → EQ005.jpg
+✅ EQ006: medidor de ph.psd → EQ006.psd
+✅ EQ007: medidor de potasio.png → EQ007.png
+✅ EQ008: medidor de conductividad.png → EQ008.png
+✅ EQ009: medidor de calcio.png → EQ009.png
+✅ EQ002: Smart Spectro.png → EQ002.png
+✅ EQ010: EQ010.png → EQ010.png
+✅ EQ011: Salinómetro Vegge.png → EQ011.png
+✅ EQ012: Termómetro.png → EQ012.png
+✅ EQ015: AMMO LOCK.png → EQ015.png
+✅ EQ013: Manguera vinil.png → EQ013.png
+✅ EQ038: MANGERA DIFUSORA.png → EQ038.png
+✅ EQ014: Freshwater.png → EQ014.png
+✅ EQ016: peroxido de hidrogeno.png → EQ016.png
+✅ EQ017: nitrito.png → EQ017.png
+✅ EQ018: nitrato.png → EQ018.png
+✅ EQ019: hierro.png → EQ019.png
+✅ EQ020: AMONIA.png → EQ020.png
+✅ EQ021: fosfato 1.png → EQ021.png
+✅ EQ022: sulfito.png → EQ022.png
+✅ EQ023: total hardness.png → EQ023.png
+✅ EQ024: total alcalinidad baja.png → EQ024.png
+✅ EQ025: dioxido de carbono.png → EQ025.png
+✅ EQ026: API KIT DE NITRATO.png → EQ026.png
+✅ EQ027: API KIT DE NITRITO.png → EQ027.png
+✅ EQ028: API KIT DE FOSFATO.png → EQ028.png
+✅ EQ029: API KIT DE AMONIO.png → EQ029.png
+✅ EQ030: API KIT DE CALCIO.png → EQ030.png
+✅ EQ031: BALANZA SCOUT PRO2000.png → EQ031.png
+✅ EQ032: BALANZA SCOUT PRO400.png → EQ032.png
+✅ EQ033: EQ033.png → EQ033.png
+✅ EQ034: MICROSCOPIO SERIE CLINICAL 1320.png → EQ034.png
+✅ EQ035: CAMARA NEUBAUER.png → EQ035.png
+✅ EQ036: EQ036.png → EQ036.png
+✅ EQ037: Termómetro.png → EQ037.png
+✅ EQ039: Piedras difusoras.png → EQ039.png
+✅ EQ040: Piedras difusoras.png → EQ040.png
+✅ EQ041: BOLSOS FILTRANTES DE POLIPROPILENO.png → EQ041.png
+✅ EQ042: Tirillas PH.png → EQ042.png
+✅ EQ043: MALLA NITEX.png → EQ043.png
+Fin de renombrado: Fri Jul 25 19:41:13 CEST 2025

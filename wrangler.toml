@@ -1,0 +1,4 @@
+# Cloudflare Pages configuration
+name = "prilabsa-website-2025"
+compatibility_date = "2025-04-03"
+pages_build_output_dir = "dist"

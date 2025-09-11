@@ -1,0 +1,93 @@
+{
+  "productos_accordion_specs": {
+    "section_title": "NUESTROS PRODUCTOS",
+    "section_title_color": "#000000",
+    "section_background": "#ffffff",
+    "accordion_items": [
+      {
+        "id": "alimentos",
+        "title": "ALIMENTOS",
+        "title_color": "#e17e01",
+        "is_default_open": true,
+        "content": {
+          "description": "Revisa nuestro catálogo de productos de Alimentos aquí",
+          "button_text": "Ver más",
+          "button_color": "#3759C1",
+          "button_border": "2px solid #3759C1",
+          "button_hover_bg": "#3759C1",
+          "button_hover_text": "#ffffff"
+        }
+      },
+      {
+        "id": "probioticos",
+        "title": "PROBIÓTICOS",
+        "title_color": "#3759C1",
+        "is_default_open": false,
+        "content": {
+          "description": "Catálogo completo de productos probióticos para acuicultura",
+          "button_text": "Ver más",
+          "button_color": "#3759C1",
+          "button_border": "2px solid #3759C1",
+          "button_hover_bg": "#3759C1",
+          "button_hover_text": "#ffffff"
+        }
+      },
+      {
+        "id": "aditivos",
+        "title": "ADITIVOS",
+        "title_color": "#3759C1",
+        "is_default_open": false,
+        "content": {
+          "description": "Aditivos especializados para optimización de cultivos acuícolas",
+          "button_text": "Ver más",
+          "button_color": "#3759C1",
+          "button_border": "2px solid #3759C1",
+          "button_hover_bg": "#3759C1",
+          "button_hover_text": "#ffffff"
+        }
+      },
+      {
+        "id": "quimicos",
+        "title": "QUÍMICOS",
+        "title_color": "#3759C1",
+        "is_default_open": false,
+        "content": {
+          "description": "Productos químicos de alta calidad para tratamiento acuícola",
+          "button_text": "Ver más",
+          "button_color": "#3759C1",
+          "button_border": "2px solid #3759C1",
+          "button_hover_bg": "#3759C1",
+          "button_hover_text": "#ffffff"
+        }
+      },
+      {
+        "id": "equipos",
+        "title": "EQUIPOS",
+        "title_color": "#3759C1",
+        "is_default_open": false,
+        "content": {
+          "description": "Equipos especializados y tecnología avanzada para acuicultura",
+          "button_text": "Ver más",
+          "button_color": "#3759C1",
+          "button_border": "2px solid #3759C1",
+          "button_hover_bg": "#3759C1",
+          "button_hover_text": "#ffffff"
+        }
+      }
+    ],
+    "accordion_styling": {
+      "header_background": "#f8f9fa",
+      "header_border": "1px solid #e9ecef",
+      "header_padding": "18px",
+      "content_background": "#ffffff",
+      "content_padding": "20px",
+      "transition": "max-height 0.3s ease-out",
+      "font_family": "Gotham, sans-serif"
+    },
+    "implementation_based_on": [
+      "https://prilabsa.com (original site analysis)",
+      "https://prilabsa-classic.netlify.app (reference implementation)",
+      "https://www.w3schools.com/howto/howto_js_accordion.asp (accordion technique)"
+    ]
+  }
+} 

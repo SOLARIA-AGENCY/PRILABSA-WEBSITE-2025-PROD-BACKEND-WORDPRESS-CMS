@@ -1,0 +1,50 @@
+{
+  "somos_section_specs": {
+    "title": "SOMOS",
+    "title_color": "#3759C1",
+    "title_font_family": "Gotham",
+    "title_font_weight": 900,
+    "background": {
+      "image": "/assets/iniciodev/inicio_bg_trim.png",
+      "position": "right center",
+      "repeat": "no-repeat",
+      "size": "contain",
+      "color": "#ffffff"
+    },
+    "content": {
+      "text_color": "#3759C1",
+      "font_family": "Gotham",
+      "font_weight": 400,
+      "max_width": "3xl",
+      "text_align": "left",
+      "margin": "auto",
+      "spacing": "4"
+    },
+    "layout": {
+      "padding_y": "16 lg:24",
+      "container": "mx-auto px-4",
+      "text_layout": "left_aligned"
+    },
+    "button": {
+      "text": "CONOCE MÁS",
+      "background_color": "transparent",
+      "border": "2px solid #3759C1",
+      "text_color": "#3759C1",
+      "hover_background": "#3759C1",
+      "hover_text_color": "#ffffff",
+      "padding": "py-2 px-6",
+      "border_radius": "rounded-lg",
+      "font_weight": "bold",
+      "margin_top": "6"
+    },
+    "extracted_from": "https://prilabsa.com",
+    "css_classes_found": [
+      "background-color: #3759c1!important",
+      "font-family: 'Gotham'!important",
+      "font-weight: 900!important"
+    ],
+    "assets_downloaded": [
+      "inicio_bg_trim.png"
+    ]
+  }
+} 

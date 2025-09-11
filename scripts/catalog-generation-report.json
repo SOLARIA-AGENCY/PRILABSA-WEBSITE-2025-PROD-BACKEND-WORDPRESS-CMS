@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-08-22T01:40:30.909Z",
+  "totalProducts": 105,
+  "categories": {
+    "aditivos": 12,
+    "alimentos": 23,
+    "equipos": 48,
+    "probioticos": 4,
+    "quimicos": 18
+  },
+  "processingStats": {
+    "successful": 105,
+    "errors": 0,
+    "warnings": 0
+  },
+  "outputFile": "/Users/nazcamedia/Documents/GitHub/PRILABSA-WEBSITE-2025/src/data/products/julio-2025.ts"
+}
