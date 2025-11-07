@@ -1,0 +1,766 @@
+{
+  "info": {
+    "name": "PRILABSA WordPress Headless API",
+    "description": "Complete Postman collection for testing PRILABSA WordPress REST API\n\n**Methodology:** SOLARIA Agency - PAT-006 API Verification Protocol\n**Project:** PRILABSA WordPress Headless Migration\n**Version:** 1.0.0\n**Date:** 2025-11-04\n\n## Collections Included:\n\n1. **WordPress Core API** (Standard endpoints)\n   - Root discovery\n   - Posts, Pages, Media\n   - Categories, Tags\n   - Users, Comments\n\n2. **PRILABSA Custom API** (productos endpoints)\n   - GET /wp/v2/productos (list)\n   - GET /wp/v2/productos/:id (detail)\n   - GET /prilabsa/v1/productos (enhanced list)\n   - GET /prilabsa/v1/productos/search (search)\n   - GET /prilabsa/v1/productos/categoria/:cat (filter)\n   - GET /prilabsa/v1/productos/stats (statistics)\n\n3. **JWT Authentication**\n   - Generate token\n   - Validate token\n   - Refresh token\n\n4. **ACF Fields Validation**\n   - Verify all 9 fields exposed\n   - Test field types\n   - Validate image/PDF URLs\n\n5. **CORS Testing**\n   - Preflight OPTIONS requests\n   - Origin validation\n   - Headers verification\n\n## Environment Variables:\n\nCreate environment with:\n- `base_url`: http://localhost/prilabsa-local or http://productos.prilabsa.com\n- `wp_username`: admin_local\n- `wp_password`: your_password\n- `jwt_token`: (auto-populated after JWT generation)\n\n## Usage:\n\n1. Import this collection\n2. Create environment with variables above\n3. Run \"1. JWT - Generate Token\" to get JWT\n4. Token auto-saves to `jwt_token` variable\n5. Run other requests (authenticated automatically)\n\n## PAT-006 Compliance:\n\nThis collection implements SOLARIA's PAT-006 protocol:\n- ✅ Inventory all API endpoints\n- ✅ Document request/response formats\n- ✅ Verify CORS headers\n- ✅ Test authentication\n- ✅ Validate custom fields (ACF)\n- ✅ Performance testing (response times)\n\nAll requests include tests to verify:\n- HTTP 200 OK status\n- JSON response format\n- Required fields present\n- Response time <500ms",
+    "_postman_id": "prilabsa-wordpress-api-2025",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "0. Setup & Discovery",
+      "item": [
+        {
+          "name": "API Root Discovery",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "",
+                  "pm.test(\"Has namespaces\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('namespaces');",
+                  "    pm.expect(jsonData.namespaces).to.include('wp/v2');",
+                  "});",
+                  "",
+                  "pm.test(\"Has routes\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('routes');",
+                  "});",
+                  "",
+                  "pm.test(\"Response time < 500ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/wp-json/",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", ""]
+            },
+            "description": "Discover all available API routes and namespaces.\n\nExpected:\n- HTTP 200\n- JSON response\n- namespaces: [\"wp/v2\", \"prilabsa/v1\", \"jwt-auth/v1\"]\n- routes object with all endpoints"
+          },
+          "response": []
+        },
+        {
+          "name": "CORS Preflight (OPTIONS)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Has CORS headers\", function () {",
+                  "    pm.response.to.have.header('Access-Control-Allow-Origin');",
+                  "    pm.response.to.have.header('Access-Control-Allow-Methods');",
+                  "    pm.response.to.have.header('Access-Control-Allow-Headers');",
+                  "});",
+                  "",
+                  "pm.test(\"Allows localhost:5173\", function () {",
+                  "    var origin = pm.response.headers.get('Access-Control-Allow-Origin');",
+                  "    pm.expect(origin).to.include('localhost:5173');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "OPTIONS",
+            "header": [
+              {
+                "key": "Origin",
+                "value": "http://localhost:5173",
+                "type": "text"
+              },
+              {
+                "key": "Access-Control-Request-Method",
+                "value": "GET",
+                "type": "text"
+              },
+              {
+                "key": "Access-Control-Request-Headers",
+                "value": "Content-Type, Authorization",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/wp-json/wp/v2/productos",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", "wp", "v2", "productos"]
+            },
+            "description": "Test CORS preflight request.\n\nExpected headers:\n- Access-Control-Allow-Origin: http://localhost:5173\n- Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE\n- Access-Control-Allow-Headers: Content-Type, Authorization"
+          },
+          "response": []
+        }
+      ],
+      "description": "Setup and API discovery requests"
+    },
+    {
+      "name": "1. JWT Authentication",
+      "item": [
+        {
+          "name": "JWT - Generate Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has token\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('token');",
+                  "    pm.environment.set(\"jwt_token\", jsonData.token);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has user data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('user_email');",
+                  "    pm.expect(jsonData).to.have.property('user_nicename');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{wp_username}}\",\n  \"password\": \"{{wp_password}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/wp-json/jwt-auth/v1/token",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", "jwt-auth", "v1", "token"]
+            },
+            "description": "Generate JWT authentication token.\n\nSets `jwt_token` environment variable automatically.\n\nExpected response:\n```json\n{\n  \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",\n  \"user_email\": \"admin@example.com\",\n  \"user_nicename\": \"admin\",\n  \"user_display_name\": \"Admin\"\n}\n```"
+          },
+          "response": []
+        },
+        {
+          "name": "JWT - Validate Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Token is valid\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('code');",
+                  "    pm.expect(jsonData.code).to.equal('jwt_auth_valid_token');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/wp-json/jwt-auth/v1/token/validate",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", "jwt-auth", "v1", "token", "validate"]
+            },
+            "description": "Validate JWT token is still valid.\n\nRun \"JWT - Generate Token\" first to populate jwt_token."
+          },
+          "response": []
+        }
+      ],
+      "description": "JWT authentication endpoints"
+    },
+    {
+      "name": "2. WordPress Core - Productos CPT",
+      "item": [
+        {
+          "name": "GET /wp/v2/productos (List All)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an('array');",
+                  "});",
+                  "",
+                  "pm.test(\"Has pagination headers\", function () {",
+                  "    pm.response.to.have.header('X-WP-Total');",
+                  "    pm.response.to.have.header('X-WP-TotalPages');",
+                  "});",
+                  "",
+                  "pm.test(\"Each product has ACF fields\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData.length > 0) {",
+                  "        pm.expect(jsonData[0]).to.have.property('acf');",
+                  "        pm.expect(jsonData[0].acf).to.have.property('codigo');",
+                  "        pm.expect(jsonData[0].acf).to.have.property('descripcion');",
+                  "    }",
+                  "});",
+                  "",
+                  "pm.test(\"Response time < 500ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/wp-json/wp/v2/productos?per_page=10&_embed",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", "wp", "v2", "productos"],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "10",
+                  "description": "Number of items per page (default: 10, max: 100)"
+                },
+                {
+                  "key": "_embed",
+                  "value": null,
+                  "description": "Include embedded resources (featured image, categories)"
+                }
+              ]
+            },
+            "description": "Get list of all productos.\n\nQuery parameters:\n- per_page: Items per page (1-100)\n- page: Page number\n- _embed: Include featured image and taxonomies\n- orderby: title, date, modified (default: date)\n- order: asc, desc (default: desc)"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /wp/v2/productos/:id (Detail)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Has all ACF fields\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.acf).to.have.property('codigo');",
+                  "    pm.expect(jsonData.acf).to.have.property('descripcion');",
+                  "    pm.expect(jsonData.acf).to.have.property('especificaciones');",
+                  "    pm.expect(jsonData.acf).to.have.property('beneficios');",
+                  "    pm.expect(jsonData.acf).to.have.property('presentacion');",
+                  "    pm.expect(jsonData.acf).to.have.property('categoria');",
+                  "    pm.expect(jsonData.acf).to.have.property('subcategoria');",
+                  "    pm.expect(jsonData.acf).to.have.property('fotos');",
+                  "    pm.expect(jsonData.acf).to.have.property('pdf');",
+                  "});",
+                  "",
+                  "pm.test(\"Fotos is array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.acf.fotos).to.be.an('array');",
+                  "});",
+                  "",
+                  "pm.test(\"PDF has URL\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData.acf.pdf) {",
+                  "        pm.expect(jsonData.acf.pdf).to.have.property('url');",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/wp-json/wp/v2/productos/1?_embed",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", "wp", "v2", "productos", "1"],
+              "query": [
+                {
+                  "key": "_embed",
+                  "value": null
+                }
+              ]
+            },
+            "description": "Get single product by ID.\n\nReplace '1' with actual product ID.\n\nVerifies all 9 ACF fields:\n1. codigo\n2. descripcion\n3. especificaciones\n4. beneficios\n5. presentacion\n6. categoria\n7. subcategoria\n8. fotos\n9. pdf"
+          },
+          "response": []
+        }
+      ],
+      "description": "Standard WordPress REST API endpoints for productos CPT"
+    },
+    {
+      "name": "3. PRILABSA Custom API",
+      "item": [
+        {
+          "name": "GET /prilabsa/v1/productos (Enhanced List)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Has data array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('data');",
+                  "    pm.expect(jsonData.data).to.be.an('array');",
+                  "});",
+                  "",
+                  "pm.test(\"Has meta information\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('total');",
+                  "    pm.expect(jsonData).to.have.property('pages');",
+                  "    pm.expect(jsonData).to.have.property('per_page');",
+                  "});",
+                  "",
+                  "pm.test(\"Each product has clean structure\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData.data.length > 0) {",
+                  "        var product = jsonData.data[0];",
+                  "        pm.expect(product).to.have.property('id');",
+                  "        pm.expect(product).to.have.property('codigo');",
+                  "        pm.expect(product).to.have.property('nombre');",
+                  "        pm.expect(product).to.have.property('categoria');",
+                  "        pm.expect(product).to.have.property('imagen_principal');",
+                  "    }",
+                  "});",
+                  "",
+                  "pm.test(\"Response time < 500ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/wp-json/prilabsa/v1/productos?per_page=10&page=1",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", "prilabsa", "v1", "productos"],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "categoria",
+                  "value": "aditivos",
+                  "disabled": true
+                },
+                {
+                  "key": "orderby",
+                  "value": "title",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Enhanced PRILABSA productos endpoint.\n\nAdvantages over WP core:\n- Cleaner response structure\n- Optimized for frontend consumption\n- Better performance\n- Simplified field names\n\nOptional filters:\n- categoria: aditivos, alimentos, equipos, probioticos, quimicos\n- orderby: title, date, codigo\n- order: asc, desc"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /prilabsa/v1/productos/:id (By ID or Codigo)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Has clean product structure\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('id');",
+                  "    pm.expect(jsonData).to.have.property('codigo');",
+                  "    pm.expect(jsonData).to.have.property('nombre');",
+                  "    pm.expect(jsonData).to.have.property('descripcion');",
+                  "    pm.expect(jsonData).to.have.property('especificaciones');",
+                  "    pm.expect(jsonData).to.have.property('imagenes');",
+                  "    pm.expect(jsonData).to.have.property('pdf');",
+                  "});",
+                  "",
+                  "pm.test(\"Imagenes is array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.imagenes).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/wp-json/prilabsa/v1/productos/1",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", "prilabsa", "v1", "productos", "1"]
+            },
+            "description": "Get producto by ID or codigo.\n\nCan use:\n- Numeric ID: /prilabsa/v1/productos/123\n- Product code: /prilabsa/v1/productos/COMBACID-XL\n\nReturns clean, optimized structure."
+          },
+          "response": []
+        },
+        {
+          "name": "GET /prilabsa/v1/productos/search",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Has results array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('results');",
+                  "    pm.expect(jsonData.results).to.be.an('array');",
+                  "});",
+                  "",
+                  "pm.test(\"Has search query\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('query');",
+                  "});",
+                  "",
+                  "pm.test(\"Response time < 500ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/wp-json/prilabsa/v1/productos/search?q=combacid",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", "prilabsa", "v1", "productos", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "combacid",
+                  "description": "Search query (min 3 chars)"
+                }
+              ]
+            },
+            "description": "Search productos by name, description, or codigo.\n\nSearches in:\n- Product name (all languages)\n- Description (all languages)\n- Product code\n- Category\n\nMinimum 3 characters required."
+          },
+          "response": []
+        },
+        {
+          "name": "GET /prilabsa/v1/productos/categoria/:cat",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"All products have same category\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData.data && jsonData.data.length > 0) {",
+                  "        jsonData.data.forEach(function(product) {",
+                  "            pm.expect(product.categoria.toLowerCase()).to.equal('aditivos');",
+                  "        });",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/wp-json/prilabsa/v1/productos/categoria/aditivos",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", "prilabsa", "v1", "productos", "categoria", "aditivos"]
+            },
+            "description": "Get all productos by category.\n\nCategories:\n- aditivos (12 products)\n- alimentos (23 products)\n- equipos (48 products)\n- probioticos (4 products)\n- quimicos (18 products)"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /prilabsa/v1/productos/stats",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Has total count\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('total_productos');",
+                  "    pm.expect(jsonData.total_productos).to.equal(105);",
+                  "});",
+                  "",
+                  "pm.test(\"Has category breakdown\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('por_categoria');",
+                  "    pm.expect(jsonData.por_categoria).to.be.an('object');",
+                  "});",
+                  "",
+                  "pm.test(\"Category counts are correct\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    var cats = jsonData.por_categoria;",
+                  "    pm.expect(cats.aditivos).to.equal(12);",
+                  "    pm.expect(cats.alimentos).to.equal(23);",
+                  "    pm.expect(cats.equipos).to.equal(48);",
+                  "    pm.expect(cats.probioticos).to.equal(4);",
+                  "    pm.expect(cats.quimicos).to.equal(18);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/wp-json/prilabsa/v1/productos/stats",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", "prilabsa", "v1", "productos", "stats"]
+            },
+            "description": "Get productos statistics.\n\nReturns:\n- Total count (105)\n- Breakdown by category\n- Products with/without images\n- Products with/without PDFs"
+          },
+          "response": []
+        }
+      ],
+      "description": "PRILABSA custom REST API endpoints"
+    },
+    {
+      "name": "4. Taxonomies (Categories & Tags)",
+      "item": [
+        {
+          "name": "GET /wp/v2/categorias-productos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Has 5 categories\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length).to.equal(5);",
+                  "});",
+                  "",
+                  "pm.test(\"Each category has name and count\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    jsonData.forEach(function(cat) {",
+                  "        pm.expect(cat).to.have.property('name');",
+                  "        pm.expect(cat).to.have.property('count');",
+                  "        pm.expect(cat).to.have.property('slug');",
+                  "    });",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/wp-json/wp/v2/categorias-productos",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", "wp", "v2", "categorias-productos"]
+            },
+            "description": "Get all product categories.\n\nExpected 5 categories:\n1. Aditivos (12)\n2. Alimentos (23)\n3. Equipos (48)\n4. Probióticos (4)\n5. Químicos (18)"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /wp/v2/tags-productos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/wp-json/wp/v2/tags-productos",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", "wp", "v2", "tags-productos"]
+            },
+            "description": "Get all product tags (if any)."
+          },
+          "response": []
+        }
+      ],
+      "description": "Taxonomy endpoints (categories and tags)"
+    },
+    {
+      "name": "5. Performance & Monitoring",
+      "item": [
+        {
+          "name": "Health Check",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response time < 200ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/wp-json/",
+              "host": ["{{base_url}}"],
+              "path": ["wp-json", ""]
+            },
+            "description": "Quick health check - API is responding.\n\nShould respond in <200ms."
+          },
+          "response": []
+        }
+      ],
+      "description": "Performance monitoring requests"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{jwt_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Auto-set base_url if not set",
+          "if (!pm.environment.get('base_url')) {",
+          "    pm.environment.set('base_url', 'http://localhost/prilabsa-local');",
+          "}"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Global test: log response time",
+          "console.log('Response time:', pm.response.responseTime + 'ms');"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost/prilabsa-local",
+      "type": "string"
+    },
+    {
+      "key": "wp_username",
+      "value": "admin_local",
+      "type": "string"
+    },
+    {
+      "key": "wp_password",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "jwt_token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

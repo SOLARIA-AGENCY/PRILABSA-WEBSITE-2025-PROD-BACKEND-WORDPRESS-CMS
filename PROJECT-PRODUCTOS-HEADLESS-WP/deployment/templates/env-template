@@ -1,0 +1,319 @@
+################################################################################
+# PRILABSA WordPress Headless - Environment Variables Template
+################################################################################
+#
+# This file contains all environment variables needed for the WordPress
+# headless setup. Copy this file to .env and fill in your values.
+#
+# DEPLOYMENT INSTRUCTIONS:
+# 1. Copy this file: cp env-template .env
+# 2. Fill in all values (replace {{PLACEHOLDER}} text)
+# 3. Keep .env file secure (never commit to version control)
+# 4. Add .env to .gitignore if not already present
+#
+# SECURITY NOTES:
+# - Use strong, unique passwords (16+ characters)
+# - Change all default values before production deployment
+# - Never share this file or commit it to git
+# - Store backup copy in secure password manager
+#
+# @package PRILABSA_Headless_WordPress
+# @version 1.0.0
+################################################################################
+
+################################################################################
+# ENVIRONMENT TYPE
+################################################################################
+# Options: local, development, staging, production
+ENVIRONMENT=local
+
+################################################################################
+# DATABASE CONFIGURATION
+################################################################################
+
+# MySQL root password (strong password required)
+MYSQL_ROOT_PASSWORD={{GENERATE_SECURE_PASSWORD}}
+
+# WordPress database name
+MYSQL_DATABASE=prilabsa_wp_local
+
+# WordPress database user
+MYSQL_USER=wp_user
+
+# WordPress database password (strong password required)
+MYSQL_PASSWORD={{GENERATE_SECURE_PASSWORD}}
+
+# Database host and port
+WORDPRESS_DB_HOST=db:3306
+
+################################################################################
+# WORDPRESS CONFIGURATION
+################################################################################
+
+# Database settings (should match MySQL config above)
+WORDPRESS_DB_NAME=prilabsa_wp_local
+WORDPRESS_DB_USER=wp_user
+WORDPRESS_DB_PASSWORD={{SAME_AS_MYSQL_PASSWORD}}
+
+# WordPress table prefix (change for security)
+WORDPRESS_TABLE_PREFIX=prilabsa_
+
+# Debug mode (1 = enabled, 0 = disabled)
+# IMPORTANT: Set to 0 in production!
+WORDPRESS_DEBUG=1
+
+################################################################################
+# WORDPRESS SITE URLS
+################################################################################
+
+# WordPress site URL (where WordPress is installed)
+# Local: http://localhost:8080
+# Production: https://productos.prilabsa.com
+WORDPRESS_SITE_URL=http://localhost:8080
+
+# WordPress home URL (where site is accessed)
+# Local: http://localhost:8080
+# Production: https://productos.prilabsa.com
+WORDPRESS_HOME_URL=http://localhost:8080
+
+# WordPress admin email
+WORDPRESS_ADMIN_EMAIL=admin@prilabsa.local
+
+################################################################################
+# JWT AUTHENTICATION
+################################################################################
+
+# JWT secret key for API authentication
+# Generate with: openssl rand -base64 64
+# CRITICAL: Must be 64+ characters, never share
+JWT_SECRET_KEY={{GENERATE_JWT_SECRET_KEY_64_CHARS_MINIMUM}}
+
+################################################################################
+# CORS CONFIGURATION
+################################################################################
+
+# Frontend application URL (for CORS)
+# Local development: http://localhost:5173
+# Production: https://productos.prilabsa.com
+FRONTEND_URL=http://localhost:5173
+
+# Additional allowed origins (comma-separated)
+# CORS_ALLOWED_ORIGINS=http://localhost:3000,https://staging.prilabsa.com
+
+################################################################################
+# REDIS CACHE CONFIGURATION
+################################################################################
+
+# Redis password
+REDIS_PASSWORD={{GENERATE_REDIS_PASSWORD}}
+
+# Redis database number (0-15)
+REDIS_DATABASE=0
+
+################################################################################
+# PHP CONFIGURATION
+################################################################################
+
+# PHP memory limit
+PHP_MEMORY_LIMIT=512M
+
+# Maximum upload file size
+PHP_UPLOAD_MAX_FILESIZE=300M
+
+# Maximum POST data size
+PHP_POST_MAX_SIZE=320M
+
+# Maximum execution time (seconds)
+PHP_MAX_EXECUTION_TIME=300
+
+# Maximum input time (seconds)
+PHP_MAX_INPUT_TIME=300
+
+################################################################################
+# WORDPRESS ADMIN CREDENTIALS (INITIAL SETUP)
+################################################################################
+
+# WordPress admin username
+WP_ADMIN_USER=admin_local
+
+# WordPress admin password (strong password required)
+WP_ADMIN_PASSWORD={{GENERATE_ADMIN_PASSWORD}}
+
+# WordPress admin email
+WP_ADMIN_EMAIL=admin@prilabsa.local
+
+# WordPress site title
+WP_SITE_TITLE=PRILABSA Local Development
+
+################################################################################
+# SMTP CONFIGURATION (OPTIONAL)
+################################################################################
+
+# SMTP host
+# SMTP_HOST=smtp.gmail.com
+
+# SMTP port
+# SMTP_PORT=587
+
+# SMTP encryption (tls, ssl, or empty)
+# SMTP_ENCRYPTION=tls
+
+# SMTP username
+# SMTP_USER=your-email@gmail.com
+
+# SMTP password
+# SMTP_PASSWORD=your-app-password
+
+# SMTP from email
+# SMTP_FROM_EMAIL=noreply@prilabsa.com
+
+# SMTP from name
+# SMTP_FROM_NAME=PRILABSA
+
+################################################################################
+# BACKUP CONFIGURATION (OPTIONAL)
+################################################################################
+
+# Backup directory
+BACKUP_DIR=./backups
+
+# Backup retention days
+BACKUP_RETENTION_DAYS=30
+
+# S3 backup configuration (optional)
+# AWS_ACCESS_KEY_ID=your-access-key
+# AWS_SECRET_ACCESS_KEY=your-secret-key
+# AWS_S3_BUCKET=prilabsa-backups
+# AWS_S3_REGION=us-east-1
+
+################################################################################
+# SSL/TLS CONFIGURATION (PRODUCTION ONLY)
+################################################################################
+
+# Enable SSL/TLS
+# SSL_ENABLED=true
+
+# Let's Encrypt email (for SSL certificates)
+# LETSENCRYPT_EMAIL=admin@prilabsa.com
+
+# Domain name
+# DOMAIN_NAME=productos.prilabsa.com
+
+################################################################################
+# MONITORING & LOGGING (OPTIONAL)
+################################################################################
+
+# Log level (debug, info, warning, error)
+LOG_LEVEL=debug
+
+# Enable error logging
+ERROR_LOGGING=true
+
+# Sentry DSN (error tracking)
+# SENTRY_DSN=https://your-sentry-dsn
+
+# New Relic license key (APM)
+# NEW_RELIC_LICENSE_KEY=your-license-key
+
+################################################################################
+# SECURITY SETTINGS
+################################################################################
+
+# Rate limiting (requests per minute)
+RATE_LIMIT_LOGIN=5
+RATE_LIMIT_API=100
+
+# Session timeout (seconds)
+SESSION_TIMEOUT=7200
+
+# Enable two-factor authentication
+# TWO_FACTOR_AUTH=true
+
+################################################################################
+# PERFORMANCE SETTINGS
+################################################################################
+
+# Enable object caching
+OBJECT_CACHE_ENABLED=true
+
+# Enable page caching
+PAGE_CACHE_ENABLED=false
+
+# Cache TTL (seconds)
+CACHE_TTL=3600
+
+################################################################################
+# DEVELOPMENT SETTINGS (LOCAL ONLY)
+################################################################################
+
+# Enable WP_DEBUG
+WP_DEBUG=true
+
+# Enable WP_DEBUG_LOG
+WP_DEBUG_LOG=true
+
+# Enable WP_DEBUG_DISPLAY (false recommended)
+WP_DEBUG_DISPLAY=false
+
+# Enable SCRIPT_DEBUG
+SCRIPT_DEBUG=true
+
+# Enable SAVEQUERIES
+SAVEQUERIES=true
+
+################################################################################
+# CONTAINER RESOURCE LIMITS (OPTIONAL)
+################################################################################
+
+# WordPress container CPU limit
+# WORDPRESS_CPU_LIMIT=2.0
+
+# WordPress container memory limit
+# WORDPRESS_MEMORY_LIMIT=2G
+
+# Database container CPU limit
+# DB_CPU_LIMIT=1.0
+
+# Database container memory limit
+# DB_MEMORY_LIMIT=1G
+
+################################################################################
+# CUSTOM CONSTANTS (PRILABSA SPECIFIC)
+################################################################################
+
+# Enable product catalog features
+PRILABSA_CATALOG_ENABLED=true
+
+# Maximum products per API request
+PRILABSA_PRODUCTS_PER_PAGE=50
+
+# API version
+PRILABSA_API_VERSION=v1
+
+################################################################################
+# NOTES
+################################################################################
+#
+# PASSWORD GENERATION:
+# Generate secure passwords with:
+#   openssl rand -base64 32
+#
+# JWT SECRET GENERATION:
+#   openssl rand -base64 64
+#
+# VERIFY CONFIGURATION:
+# After deployment, verify variables are loaded:
+#   docker-compose exec wordpress env | grep WORDPRESS
+#
+# SECURITY CHECKLIST:
+# [ ] All passwords changed from defaults
+# [ ] JWT secret key generated (64+ chars)
+# [ ] .env file added to .gitignore
+# [ ] WP_DEBUG set to false for production
+# [ ] Strong admin password set
+# [ ] CORS origins restricted to actual domains
+# [ ] SSL/TLS enabled for production
+#
+################################################################################
+# END OF CONFIGURATION
+################################################################################
