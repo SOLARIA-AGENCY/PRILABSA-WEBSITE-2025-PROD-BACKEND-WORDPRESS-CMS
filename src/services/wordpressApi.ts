@@ -113,13 +113,19 @@ const transformedProductsCache = new Map<string, OptimizedProduct>()
  * Fetcher para SWR - maneja llamadas HTTP con error handling
  */
 const fetcher = async (url: string) => {
+  console.log('🌐 Fetcher - Llamando API:', url)
   const response = await fetch(url)
 
+  console.log('📡 Fetcher - Respuesta:', response.status, response.statusText)
+
   if (!response.ok) {
+    console.error('❌ Fetcher - Error HTTP:', response.status)
     throw new Error(`API Error: ${response.status} ${response.statusText}`)
   }
 
-  return response.json()
+  const data = await response.json()
+  console.log('📦 Fetcher - Datos recibidos:', Array.isArray(data) ? `${data.length} items` : typeof data)
+  return data
 }
 
 /**
@@ -263,18 +269,27 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
  * ```
  */
 export function useProducts() {
+  console.log('🎯 useProducts - Hook llamado')
+
   // SWR automáticamente cachea y revalida
   const { data, error, isLoading } = useSWR<WordPressProduct[]>(
     `${WP_BASE_URL}${PRODUCTOS_ENDPOINT}?per_page=${PRODUCTS_PER_PAGE}&_embed`,
     fetcher,
     {
       revalidateOnFocus: false,  // No revalidar al enfocar ventana
-      revalidateOnReconnect: true,  // Revalidar al reconectar
-      dedupingInterval: 300000,  // ⚡ 5 minutos (antes 1 min)
-      revalidateIfStale: false,  // ⚡ No revalidar automáticamente
-      revalidateOnMount: false,  // ⚡ No revalidar al montar si hay caché
+      revalidateOnReconnect: false,  // No revalidar al reconectar
+      dedupingInterval: 300000,  // ⚡ 5 minutos - evita fetches duplicados
+      // ⚠️ REMOVIDO revalidateIfStale y revalidateOnMount
+      // Permitir fetch inicial, pero usar caché si existe
     }
   )
+
+  console.log('📊 useProducts - Estado SWR:', {
+    hasData: !!data,
+    dataLength: data?.length || 0,
+    isLoading,
+    hasError: !!error
+  })
 
   // Transformar productos cuando data cambie
   const [products, setProducts] = useState<OptimizedProduct[]>([])
@@ -282,15 +297,18 @@ export function useProducts() {
 
   useEffect(() => {
     if (data) {
+      console.log('🔄 useProducts - Recibidos de API:', data.length, 'productos')
       setIsTransforming(true)
       // Transformar todos los productos en paralelo
       Promise.all(data.map(transformProduct))
         .then(transformed => {
+          console.log('✅ useProducts - Transformados:', transformed.length, 'productos')
+          console.log('📦 Primeros 3:', transformed.slice(0, 3).map(p => `${p.codigo} (${p.category})`))
           setProducts(transformed)
           setIsTransforming(false)
         })
         .catch(err => {
-          console.error('Error transforming products:', err)
+          console.error('❌ Error transforming products:', err)
           setIsTransforming(false)
         })
     }
@@ -320,9 +338,10 @@ export function useProduct(codigo: string) {
     fetcher,
     {
       revalidateOnFocus: false,  // No revalidar al enfocar ventana
-      dedupingInterval: 300000,  // ⚡ 5 minutos
-      revalidateIfStale: false,  // ⚡ No revalidar automáticamente
-      revalidateOnMount: false,  // ⚡ No revalidar al montar si hay caché
+      revalidateOnReconnect: false,  // No revalidar al reconectar
+      dedupingInterval: 300000,  // ⚡ 5 minutos - evita fetches duplicados
+      // ⚠️ REMOVIDO revalidateIfStale y revalidateOnMount
+      // Permitir fetch inicial, pero usar caché si existe
     }
   )
 

@@ -22,11 +22,23 @@ const ProductList: React.FC<ProductListProps> = ({ categorySlug, searchQuery }) 
   };
 
   const filteredProducts = useMemo(() => {
-    return allProducts
-      .filter(p => p.category === categorySlug)
+    console.log('🔍 ProductList - Filtrar por categoría:', categorySlug)
+    console.log('📦 Total productos recibidos:', allProducts.length)
+
+    const filtered = allProducts
+      .filter(p => {
+        const match = p.category === categorySlug
+        if (!match && allProducts.length > 0 && allProducts.length < 10) {
+          console.log(`  ❌ ${p.codigo}: category="${p.category}" !== categorySlug="${categorySlug}"`)
+        }
+        return match
+      })
       .filter(p =>
         searchQuery ? p.name.toLowerCase().includes(searchQuery.toLowerCase()) : true
       );
+
+    console.log('✅ Productos filtrados:', filtered.length)
+    return filtered
   }, [allProducts, categorySlug, searchQuery]);
 
   // ⭐ Estado de carga
