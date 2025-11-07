@@ -52,13 +52,6 @@ interface WordPressProduct {
       filesize: number
       mime_type: string
     } | number  // Puede ser objeto completo o ID
-    featured_image_url?: string  // ⭐ URL directa de imagen (ACF)
-    featured_image_sizes?: {
-      thumbnail?: { url: string, width: number, height: number }
-      medium?: { url: string, width: number, height: number }
-      large?: { url: string, width: number, height: number }
-      full?: { url: string, width: number, height: number }
-    }
   }
   featured_media: number  // ID de la imagen destacada
   _links: {
@@ -67,6 +60,21 @@ interface WordPressProduct {
     }>
     'wp:attachment'?: Array<{
       href: string
+    }>
+  }
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{
+      id: number
+      source_url: string
+      media_details?: {
+        width: number
+        height: number
+        sizes?: {
+          thumbnail?: { source_url: string }
+          medium?: { source_url: string }
+          large?: { source_url: string }
+        }
+      }
     }>
   }
 }
@@ -176,8 +184,8 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
     }
   }
 
-  // ⚡ Usar URL de imagen directa del ACF (evita fetch a Media API)
-  const imageURL = wpProduct.acf.featured_image_url || await getImageURL(wpProduct.featured_media)
+  // ⚡ Usar URL de imagen desde _embedded (evita fetch a Media API)
+  const imageURL = wpProduct._embedded?.['wp:featuredmedia']?.[0]?.source_url || await getImageURL(wpProduct.featured_media)
 
   // Extraer filename de URL (para compatibilidad con código existente)
   const imageFilename = imageURL ? imageURL.split('/').pop() || '' : ''
@@ -257,7 +265,7 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
 export function useProducts() {
   // SWR automáticamente cachea y revalida
   const { data, error, isLoading } = useSWR<WordPressProduct[]>(
-    `${WP_BASE_URL}${PRODUCTOS_ENDPOINT}?per_page=${PRODUCTS_PER_PAGE}`,
+    `${WP_BASE_URL}${PRODUCTOS_ENDPOINT}?per_page=${PRODUCTS_PER_PAGE}&_embed`,
     fetcher,
     {
       revalidateOnFocus: false,  // No revalidar al enfocar ventana
@@ -308,7 +316,7 @@ export function useProducts() {
  */
 export function useProduct(codigo: string) {
   const { data, error, isLoading } = useSWR<WordPressProduct[]>(
-    codigo ? `${WP_BASE_URL}${PRODUCTOS_ENDPOINT}?per_page=${PRODUCTS_PER_PAGE}` : null,
+    codigo ? `${WP_BASE_URL}${PRODUCTOS_ENDPOINT}?per_page=${PRODUCTS_PER_PAGE}&_embed` : null,
     fetcher,
     {
       revalidateOnFocus: false,  // No revalidar al enfocar ventana
