@@ -44,7 +44,14 @@ interface WordPressProduct {
       clave: string
       valor: string
     }>
-    pdf?: number  // ID del attachment PDF
+    pdf?: {
+      id: number
+      url: string
+      title: string
+      filename: string
+      filesize: number
+      mime_type: string
+    } | number  // Puede ser objeto completo o ID
   }
   featured_media: number  // ID de la imagen destacada
   _links: {
@@ -135,11 +142,20 @@ async function getPDFURL(pdfId: number): Promise<string> {
  * CRÍTICO: Mantener compatibilidad 100% con estructura actual
  */
 async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedProduct> {
-  // Obtener URLs de imagen y PDF en paralelo
-  const [imageURL, pdfURL] = await Promise.all([
-    getImageURL(wpProduct.featured_media),
-    wpProduct.acf.pdf ? getPDFURL(wpProduct.acf.pdf) : Promise.resolve(undefined)
-  ])
+  // Determinar URL del PDF: si es objeto usar directamente, si es ID hacer fetch
+  let pdfURL: string | undefined = undefined
+  if (wpProduct.acf.pdf) {
+    if (typeof wpProduct.acf.pdf === 'object' && wpProduct.acf.pdf.url) {
+      // PDF ya viene como objeto con URL
+      pdfURL = wpProduct.acf.pdf.url
+    } else if (typeof wpProduct.acf.pdf === 'number') {
+      // PDF es ID, necesita fetch
+      pdfURL = await getPDFURL(wpProduct.acf.pdf)
+    }
+  }
+
+  // Obtener URL de imagen
+  const imageURL = await getImageURL(wpProduct.featured_media)
 
   // Extraer filename de URL (para compatibilidad con código existente)
   const imageFilename = imageURL ? imageURL.split('/').pop() || '' : ''
