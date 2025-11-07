@@ -472,7 +472,7 @@ export interface ProductCategory {
  * ```
  */
 export function useCategories() {
-  const { data, error, isLoading } = useSWR<WordPressCategory[]>(
+  const { data, error, isLoading} = useSWR<WordPressCategory[]>(
     `${WP_BASE_URL}/wp/v2/categorias-productos?per_page=100`,
     fetcher,
     {
@@ -496,6 +496,385 @@ export function useCategories() {
   return {
     categories,
     isLoading,
+    error
+  }
+}
+
+// ============================================================================
+// BLOG Y NOTICIAS
+// ============================================================================
+
+import { BlogArticle } from '../types/blog'
+
+/**
+ * Estructura de respuesta de WordPress REST API para Blog
+ */
+interface WordPressBlogPost {
+  id: number
+  title: {
+    rendered: string
+  }
+  excerpt: {
+    rendered: string
+  }
+  content: {
+    rendered: string
+  }
+  date: string
+  acf: {
+    titulo_es: string
+    titulo_en: string
+    titulo_pt: string
+    resumen_es: string
+    resumen_en: string
+    resumen_pt: string
+    contenido_es: string
+    contenido_en: string
+    contenido_pt: string
+    autor_es: string
+    autor_en: string
+    autor_pt: string
+    fecha_publicacion: string  // Ymd format (ej: 20231026)
+    tags_es: string  // CSV: "Tag1,Tag2,Tag3"
+    tags_en: string
+    tags_pt: string
+  }
+  featured_media: number
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{
+      source_url: string
+    }>
+  }
+}
+
+/**
+ * Estructura de respuesta de WordPress REST API para Noticias
+ * (Misma estructura que Blog)
+ */
+type WordPressNoticia = WordPressBlogPost
+
+/**
+ * Caché en memoria de posts de blog transformados
+ */
+const blogPostsCache = new Map<string, BlogArticle>()
+
+/**
+ * Caché en memoria de noticias transformadas
+ */
+const noticiasCache = new Map<string, BlogArticle>()
+
+/**
+ * Convierte formato ACF date (Ymd: 20231026) a YYYY-MM-DD
+ */
+function formatWordPressDate(acfDate: string): string {
+  if (!acfDate || acfDate.length !== 8) return acfDate
+  const year = acfDate.substring(0, 4)
+  const month = acfDate.substring(4, 6)
+  const day = acfDate.substring(6, 8)
+  return `${year}-${month}-${day}`
+}
+
+/**
+ * Transforma post de WordPress a BlogArticle
+ */
+async function transformBlogPost(wpPost: WordPressBlogPost): Promise<BlogArticle> {
+  // ⚡ Verificar caché primero
+  const cached = blogPostsCache.get(wpPost.id.toString())
+  if (cached) return cached
+
+  // ⚡ Obtener imagen desde _embedded (evita fetch adicional)
+  const imageURL = wpPost._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''
+
+  const article: BlogArticle = {
+    id: wpPost.id.toString(),
+    title: {
+      es: cleanWordPressText(wpPost.acf.titulo_es || wpPost.title.rendered),
+      en: cleanWordPressText(wpPost.acf.titulo_en || wpPost.title.rendered),
+      pt: cleanWordPressText(wpPost.acf.titulo_pt || wpPost.title.rendered)
+    },
+    summary: {
+      es: cleanWordPressText(wpPost.acf.resumen_es || wpPost.excerpt.rendered),
+      en: cleanWordPressText(wpPost.acf.resumen_en || wpPost.excerpt.rendered),
+      pt: cleanWordPressText(wpPost.acf.resumen_pt || wpPost.excerpt.rendered)
+    },
+    content: {
+      // ⚠️ NO aplicar cleanWordPressText al contenido HTML completo
+      es: wpPost.acf.contenido_es || wpPost.content.rendered,
+      en: wpPost.acf.contenido_en || wpPost.content.rendered,
+      pt: wpPost.acf.contenido_pt || wpPost.content.rendered
+    },
+    author: {
+      es: cleanWordPressText(wpPost.acf.autor_es),
+      en: cleanWordPressText(wpPost.acf.autor_en),
+      pt: cleanWordPressText(wpPost.acf.autor_pt)
+    },
+    date: wpPost.acf.fecha_publicacion
+      ? formatWordPressDate(wpPost.acf.fecha_publicacion) // Ymd → YYYY-MM-DD
+      : wpPost.date.split('T')[0],
+    heroImage: imageURL,
+    tags: {
+      es: wpPost.acf.tags_es
+        ? wpPost.acf.tags_es.split(',').map(t => cleanWordPressText(t))
+        : [],
+      en: wpPost.acf.tags_en
+        ? wpPost.acf.tags_en.split(',').map(t => cleanWordPressText(t))
+        : [],
+      pt: wpPost.acf.tags_pt
+        ? wpPost.acf.tags_pt.split(',').map(t => cleanWordPressText(t))
+        : []
+    }
+  }
+
+  // ⚡ Guardar en caché
+  blogPostsCache.set(wpPost.id.toString(), article)
+
+  return article
+}
+
+/**
+ * Transforma noticia de WordPress a BlogArticle
+ * (Noticias usan la misma estructura que Blog)
+ */
+async function transformNoticia(wpNoticia: WordPressNoticia): Promise<BlogArticle> {
+  // ⚡ Verificar caché primero
+  const cached = noticiasCache.get(wpNoticia.id.toString())
+  if (cached) return cached
+
+  // ⚡ Obtener imagen desde _embedded (evita fetch adicional)
+  const imageURL = wpNoticia._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''
+
+  const article: BlogArticle = {
+    id: wpNoticia.id.toString(),
+    title: {
+      es: cleanWordPressText(wpNoticia.acf.titulo_es || wpNoticia.title.rendered),
+      en: cleanWordPressText(wpNoticia.acf.titulo_en || wpNoticia.title.rendered),
+      pt: cleanWordPressText(wpNoticia.acf.titulo_pt || wpNoticia.title.rendered)
+    },
+    summary: {
+      es: cleanWordPressText(wpNoticia.acf.resumen_es || wpNoticia.excerpt.rendered),
+      en: cleanWordPressText(wpNoticia.acf.resumen_en || wpNoticia.excerpt.rendered),
+      pt: cleanWordPressText(wpNoticia.acf.resumen_pt || wpNoticia.excerpt.rendered)
+    },
+    content: {
+      // ⚠️ NO aplicar cleanWordPressText al contenido HTML completo
+      es: wpNoticia.acf.contenido_es || wpNoticia.content.rendered,
+      en: wpNoticia.acf.contenido_en || wpNoticia.content.rendered,
+      pt: wpNoticia.acf.contenido_pt || wpNoticia.content.rendered
+    },
+    author: {
+      es: cleanWordPressText(wpNoticia.acf.autor_es),
+      en: cleanWordPressText(wpNoticia.acf.autor_en),
+      pt: cleanWordPressText(wpNoticia.acf.autor_pt)
+    },
+    date: wpNoticia.acf.fecha_publicacion
+      ? formatWordPressDate(wpNoticia.acf.fecha_publicacion) // Ymd → YYYY-MM-DD
+      : wpNoticia.date.split('T')[0],
+    heroImage: imageURL,
+    tags: {
+      es: wpNoticia.acf.tags_es
+        ? wpNoticia.acf.tags_es.split(',').map(t => cleanWordPressText(t))
+        : [],
+      en: wpNoticia.acf.tags_en
+        ? wpNoticia.acf.tags_en.split(',').map(t => cleanWordPressText(t))
+        : [],
+      pt: wpNoticia.acf.tags_pt
+        ? wpNoticia.acf.tags_pt.split(',').map(t => cleanWordPressText(t))
+        : []
+    }
+  }
+
+  // ⚡ Guardar en caché
+  noticiasCache.set(wpNoticia.id.toString(), article)
+
+  return article
+}
+
+/**
+ * Hook: Obtiene todos los artículos de blog
+ */
+export function useBlog() {
+  console.log('🎯 useBlog - Hook llamado')
+
+  const { data, error, isLoading } = useSWR<WordPressBlogPost[]>(
+    `${WP_BASE_URL}/wp/v2/blog?per_page=100&_embed`,
+    fetcher,
+    {
+      revalidateOnFocus: false,  // No revalidar al enfocar ventana
+      revalidateOnReconnect: false,  // No revalidar al reconectar
+      dedupingInterval: 300000,  // ⚡ 5 minutos - evita fetches duplicados
+    }
+  )
+
+  console.log('📊 useBlog - Estado SWR:', {
+    hasData: !!data,
+    dataLength: data?.length || 0,
+    isLoading,
+    hasError: !!error
+  })
+
+  const [articles, setArticles] = useState<BlogArticle[]>([])
+  const [isTransforming, setIsTransforming] = useState(false)
+
+  useEffect(() => {
+    if (data) {
+      console.log('🔄 useBlog - Recibidos de API:', data.length, 'artículos')
+      setIsTransforming(true)
+      Promise.all(data.map(transformBlogPost))
+        .then(transformed => {
+          console.log('✅ useBlog - Transformados:', transformed.length, 'artículos')
+          setArticles(transformed)
+          setIsTransforming(false)
+        })
+        .catch(err => {
+          console.error('❌ useBlog - Error:', err)
+          setIsTransforming(false)
+        })
+    }
+  }, [data])
+
+  return {
+    articles,
+    isLoading: isLoading || isTransforming,
+    error
+  }
+}
+
+/**
+ * Hook: Obtiene un artículo de blog por ID
+ */
+export function useBlogPost(id: string) {
+  const { data, error, isLoading } = useSWR<WordPressBlogPost[]>(
+    id ? `${WP_BASE_URL}/wp/v2/blog?per_page=100&_embed` : null,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      dedupingInterval: 300000,
+    }
+  )
+
+  const [article, setArticle] = useState<BlogArticle | null>(null)
+  const [isTransforming, setIsTransforming] = useState(false)
+
+  useEffect(() => {
+    if (data && id) {
+      const wpPost = data.find(p => p.id.toString() === id)
+      if (wpPost) {
+        setIsTransforming(true)
+        transformBlogPost(wpPost)
+          .then(transformed => {
+            setArticle(transformed)
+            setIsTransforming(false)
+          })
+          .catch(err => {
+            console.error('Error transforming blog post:', err)
+            setIsTransforming(false)
+          })
+      } else {
+        setArticle(null)
+        setIsTransforming(false)
+      }
+    }
+  }, [data, id])
+
+  return {
+    article,
+    isLoading: isLoading || isTransforming,
+    error
+  }
+}
+
+/**
+ * Hook: Obtiene todas las noticias
+ */
+export function useNoticias() {
+  console.log('🎯 useNoticias - Hook llamado')
+
+  const { data, error, isLoading } = useSWR<WordPressNoticia[]>(
+    `${WP_BASE_URL}/wp/v2/noticias?per_page=100&_embed`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      dedupingInterval: 300000,
+    }
+  )
+
+  console.log('📊 useNoticias - Estado SWR:', {
+    hasData: !!data,
+    dataLength: data?.length || 0,
+    isLoading,
+    hasError: !!error
+  })
+
+  const [articles, setArticles] = useState<BlogArticle[]>([])
+  const [isTransforming, setIsTransforming] = useState(false)
+
+  useEffect(() => {
+    if (data) {
+      console.log('🔄 useNoticias - Recibidos de API:', data.length, 'noticias')
+      setIsTransforming(true)
+      Promise.all(data.map(transformNoticia))
+        .then(transformed => {
+          console.log('✅ useNoticias - Transformados:', transformed.length, 'noticias')
+          setArticles(transformed)
+          setIsTransforming(false)
+        })
+        .catch(err => {
+          console.error('❌ useNoticias - Error:', err)
+          setIsTransforming(false)
+        })
+    }
+  }, [data])
+
+  return {
+    articles,
+    isLoading: isLoading || isTransforming,
+    error
+  }
+}
+
+/**
+ * Hook: Obtiene una noticia por ID
+ */
+export function useNoticia(id: string) {
+  const { data, error, isLoading } = useSWR<WordPressNoticia[]>(
+    id ? `${WP_BASE_URL}/wp/v2/noticias?per_page=100&_embed` : null,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      dedupingInterval: 300000,
+    }
+  )
+
+  const [article, setArticle] = useState<BlogArticle | null>(null)
+  const [isTransforming, setIsTransforming] = useState(false)
+
+  useEffect(() => {
+    if (data && id) {
+      const wpNoticia = data.find(p => p.id.toString() === id)
+      if (wpNoticia) {
+        setIsTransforming(true)
+        transformNoticia(wpNoticia)
+          .then(transformed => {
+            setArticle(transformed)
+            setIsTransforming(false)
+          })
+          .catch(err => {
+            console.error('Error transforming noticia:', err)
+            setIsTransforming(false)
+          })
+      } else {
+        setArticle(null)
+        setIsTransforming(false)
+      }
+    }
+  }, [data, id])
+
+  return {
+    article,
+    isLoading: isLoading || isTransforming,
     error
   }
 }

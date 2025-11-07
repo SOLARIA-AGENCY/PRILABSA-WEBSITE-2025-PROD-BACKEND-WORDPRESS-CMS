@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../components/Layout';
-import { noticiasData } from '../data/noticiasData';
+import { useNoticia } from '../services/wordpressApi';
 import { getLocalizedContent, getLocalizedTags } from '../types/blog';
 import { useLanguage } from '../contexts/LanguageContext';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -11,7 +11,31 @@ import RelatedArticles from '../components/organisms/blog/RelatedArticles'; // W
 const NoticiaPage = () => {
   const { id } = useParams<{ id: string }>();
   const { language, t } = useLanguage();
-  const article = noticiasData.find(p => p.id === id);
+  const { article, isLoading, error } = useNoticia(id || '');
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-6 py-20 text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <p className="mt-4 text-gray-600">Cargando noticia...</p>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-6 py-20 text-center">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-2xl mx-auto">
+            <h2 className="text-2xl font-bold text-red-600 mb-2">Error al cargar noticia</h2>
+            <p className="text-red-700">{error.message}</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   if (!article) {
     return (
@@ -20,8 +44,8 @@ const NoticiaPage = () => {
           <h1 className="text-2xl font-bold text-gray-800 mb-4">
             {t('news.newsNotFound')}
           </h1>
-          <Link 
-            to="/noticias" 
+          <Link
+            to="/noticias"
             className="text-prilabsa-blue-primary hover:text-prilabsa-blue-secondary transition-colors"
           >
             {t('news.backToNews')}
@@ -78,7 +102,7 @@ const NoticiaPage = () => {
 
       {/* We need to adapt RelatedArticles to show other news or disable it if not applicable */}
       {/* For now, let's assume it can work with a different data source or logic */}
-      <RelatedArticles currentArticleId={article.id} articles={noticiasData} basePath="/noticias" />
+      <RelatedArticles currentArticleId={article.id} articles={[]} basePath="/noticias" />
 
 
     </Layout>
