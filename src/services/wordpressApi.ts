@@ -1,0 +1,303 @@
+/**
+ * WordPress REST API Client
+ *
+ * Maneja la comunicación con WordPress Headless CMS
+ * Base URL: http://localhost:8000/index.php?rest_route=
+ *
+ * IMPORTANTE: Este archivo consume la API de WordPress local
+ * Los productos fueron migrados en commit 014baa81
+ */
+
+import { useEffect, useState } from 'react'
+import useSWR from 'swr'
+import { OptimizedProduct } from '../data/products/types'
+
+// ============================================================================
+// CONFIGURACIÓN
+// ============================================================================
+
+const WP_BASE_URL = 'http://localhost:8000/index.php?rest_route='
+const PRODUCTOS_ENDPOINT = '/wp/v2/productos'
+
+// ============================================================================
+// TIPOS TYPESCRIPT
+// ============================================================================
+
+/**
+ * Estructura de respuesta de WordPress REST API
+ * Incluye campos ACF expuestos por plugin "ACF to REST API"
+ */
+interface WordPressProduct {
+  id: number
+  title: {
+    rendered: string
+  }
+  acf: {
+    codigo: string
+    descripcion: string
+    beneficios: string  // Separado por \n
+    presentacion: string  // Separado por \n
+    categoria: 'aditivos' | 'alimentos' | 'equipos' | 'probioticos' | 'quimicos'
+    subcategoria: string
+    especificaciones: Array<{
+      clave: string
+      valor: string
+    }>
+    pdf?: number  // ID del attachment PDF
+  }
+  featured_media: number  // ID de la imagen destacada
+  _links: {
+    'wp:featuredmedia'?: Array<{
+      href: string
+    }>
+    'wp:attachment'?: Array<{
+      href: string
+    }>
+  }
+}
+
+/**
+ * Estructura de Media (imagen/PDF)
+ */
+interface WordPressMedia {
+  id: number
+  source_url: string
+  media_details: {
+    width: number
+    height: number
+    file: string
+    sizes?: {
+      thumbnail?: { source_url: string }
+      medium?: { source_url: string }
+      large?: { source_url: string }
+    }
+  }
+  mime_type: string
+}
+
+// ============================================================================
+// FUNCIONES AUXILIARES
+// ============================================================================
+
+/**
+ * Fetcher para SWR - maneja llamadas HTTP con error handling
+ */
+const fetcher = async (url: string) => {
+  const response = await fetch(url)
+
+  if (!response.ok) {
+    throw new Error(`API Error: ${response.status} ${response.statusText}`)
+  }
+
+  return response.json()
+}
+
+/**
+ * Obtiene URL de imagen desde WordPress Media API
+ */
+async function getImageURL(mediaId: number): Promise<string> {
+  if (!mediaId) return ''
+
+  try {
+    const response = await fetch(`${WP_BASE_URL}/wp/v2/media/${mediaId}`)
+    if (!response.ok) return ''
+
+    const media: WordPressMedia = await response.json()
+    return media.source_url || ''
+  } catch (error) {
+    console.error(`Error fetching image ${mediaId}:`, error)
+    return ''
+  }
+}
+
+/**
+ * Obtiene URL de PDF desde WordPress Media API
+ */
+async function getPDFURL(pdfId: number): Promise<string> {
+  if (!pdfId) return ''
+
+  try {
+    const response = await fetch(`${WP_BASE_URL}/wp/v2/media/${pdfId}`)
+    if (!response.ok) return ''
+
+    const media: WordPressMedia = await response.json()
+    return media.source_url || ''
+  } catch (error) {
+    console.error(`Error fetching PDF ${pdfId}:`, error)
+    return ''
+  }
+}
+
+/**
+ * Transforma producto de WordPress a formato frontend
+ *
+ * CRÍTICO: Mantener compatibilidad 100% con estructura actual
+ */
+async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedProduct> {
+  // Obtener URLs de imagen y PDF en paralelo
+  const [imageURL, pdfURL] = await Promise.all([
+    getImageURL(wpProduct.featured_media),
+    wpProduct.acf.pdf ? getPDFURL(wpProduct.acf.pdf) : Promise.resolve(undefined)
+  ])
+
+  // Extraer filename de URL (para compatibilidad con código existente)
+  const imageFilename = imageURL ? imageURL.split('/').pop() || '' : ''
+  const pdfFilename = pdfURL ? pdfURL.split('/').pop() || '' : ''
+
+  return {
+    id: wpProduct.acf.codigo,
+    slug: wpProduct.acf.codigo.toLowerCase(),
+    codigo: wpProduct.acf.codigo,
+    name: wpProduct.title.rendered,
+    description: wpProduct.acf.descripcion || '',
+    category: wpProduct.acf.categoria,
+    subcategory: wpProduct.acf.subcategoria || '',
+    benefits: wpProduct.acf.beneficios
+      ? wpProduct.acf.beneficios.split('\n').filter(b => b.trim())
+      : [],
+    presentation: wpProduct.acf.presentacion
+      ? wpProduct.acf.presentacion.split('\n').filter(p => p.trim())
+      : [],
+    specifications: wpProduct.acf.especificaciones?.map(spec => ({
+      key: spec.clave,
+      value: spec.valor
+    })) || [],
+    assets: {
+      image: {
+        filename: imageFilename,
+        path: imageURL || `/assets/images/productos/${imageFilename}`,  // URL real o legacy path
+        extension: imageFilename.split('.').pop() || '',
+        size: 0,
+        exists: !!imageURL,
+        // @ts-expect-error - URL dinámica de WordPress
+        url: imageURL
+      },
+      pdf: pdfURL ? {
+        filename: pdfFilename,
+        path: `/assets/pdfs/productos/${pdfFilename}`,  // Legacy path
+        size: '0 KB',
+        downloadUrl: pdfURL,  // ⭐ URL real de WordPress
+        exists: !!pdfURL,
+        url: pdfURL  // ⭐ URL real de WordPress
+      } : undefined
+    },
+    metadata: {
+      autoGenerated: false,
+      needsReview: false,
+      completenessScore: 100,
+      featured: false,
+      priority: 0
+    }
+  }
+}
+
+// ============================================================================
+// HOOKS PÚBLICOS (React Hooks para componentes)
+// ============================================================================
+
+/**
+ * Hook principal: Obtiene todos los productos
+ *
+ * Uso:
+ * ```tsx
+ * function ProductList() {
+ *   const { products, isLoading, error } = useProducts()
+ *
+ *   if (isLoading) return <div>Cargando...</div>
+ *   if (error) return <div>Error: {error.message}</div>
+ *
+ *   return <ProductListComponent products={products} />
+ * }
+ * ```
+ */
+export function useProducts() {
+  // SWR automáticamente cachea y revalida
+  const { data, error, isLoading } = useSWR<WordPressProduct[]>(
+    `${WP_BASE_URL}${PRODUCTOS_ENDPOINT}?per_page=100`,
+    fetcher,
+    {
+      revalidateOnFocus: false,  // No revalidar al enfocar ventana
+      revalidateOnReconnect: true,  // Revalidar al reconectar
+      dedupingInterval: 60000,  // Deduplicar requests por 1 minuto
+    }
+  )
+
+  // Transformar productos cuando data cambie
+  const [products, setProducts] = useState<OptimizedProduct[]>([])
+
+  useEffect(() => {
+    if (data) {
+      // Transformar todos los productos en paralelo
+      Promise.all(data.map(transformProduct))
+        .then(setProducts)
+        .catch(err => console.error('Error transforming products:', err))
+    }
+  }, [data])
+
+  return {
+    products,
+    isLoading,
+    error
+  }
+}
+
+/**
+ * Hook: Obtiene un producto por código
+ *
+ * Uso:
+ * ```tsx
+ * function ProductDetail({ codigo }: { codigo: string }) {
+ *   const { product, isLoading, error } = useProduct(codigo)
+ *   // ...
+ * }
+ * ```
+ */
+export function useProduct(codigo: string) {
+  const { data, error, isLoading } = useSWR<WordPressProduct[]>(
+    codigo ? `${WP_BASE_URL}${PRODUCTOS_ENDPOINT}?per_page=100` : null,
+    fetcher
+  )
+
+  // Buscar producto por código y transformar
+  const [product, setProduct] = useState<OptimizedProduct | null>(null)
+
+  useEffect(() => {
+    if (data && codigo) {
+      const wpProduct = data.find(p => p.acf.codigo === codigo)
+      if (wpProduct) {
+        transformProduct(wpProduct)
+          .then(setProduct)
+          .catch(err => console.error('Error transforming product:', err))
+      } else {
+        setProduct(null)
+      }
+    }
+  }, [data, codigo])
+
+  return {
+    product,
+    isLoading,
+    error
+  }
+}
+
+/**
+ * Hook: Obtiene productos filtrados por categoría
+ */
+export function useProductsByCategory(category: string) {
+  const { products, isLoading, error } = useProducts()
+
+  const [filteredProducts, setFilteredProducts] = useState<OptimizedProduct[]>([])
+
+  useEffect(() => {
+    if (products) {
+      setFilteredProducts(products.filter(p => p.category === category))
+    }
+  }, [products, category])
+
+  return {
+    products: filteredProducts,
+    isLoading,
+    error
+  }
+}

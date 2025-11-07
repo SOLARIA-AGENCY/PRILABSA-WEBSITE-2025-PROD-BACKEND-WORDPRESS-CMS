@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { productsJulio2025 } from '../../../data/products/julio-2025';
+import { useProducts } from '../../../services/wordpressApi';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import productTranslationService from '../../../services/ProductTranslationService';
 
@@ -11,20 +11,48 @@ interface ProductListProps {
 
 const ProductList: React.FC<ProductListProps> = ({ categorySlug, searchQuery }) => {
   const { t, language } = useLanguage();
-  
+
+  // ⭐ Consumir API de WordPress en lugar de datos estáticos
+  const { products: allProducts, isLoading, error } = useProducts();
+
   // Helper function to get translated product fields using ProductTranslationService
   const getTranslatedField = (producto: any, field: 'name' | 'description' | 'benefits' | 'presentation' | 'specifications') => {
     if (!producto) return null;
     return productTranslationService.getTranslatedField(producto, field, language);
   };
-  
-  const allProducts = productsJulio2025;
-  
-  const filteredProducts = allProducts
-    .filter(p => p.category === categorySlug)
-    .filter(p => 
-      searchQuery ? p.name.toLowerCase().includes(searchQuery.toLowerCase()) : true
+
+  const filteredProducts = useMemo(() => {
+    return allProducts
+      .filter(p => p.category === categorySlug)
+      .filter(p =>
+        searchQuery ? p.name.toLowerCase().includes(searchQuery.toLowerCase()) : true
+      );
+  }, [allProducts, categorySlug, searchQuery]);
+
+  // ⭐ Estado de carga
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-16">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <p className="mt-4 text-gray-600">{t('products.messages.loading') || 'Cargando productos...'}</p>
+        </div>
+      </div>
     );
+  }
+
+  // ⭐ Estado de error
+  if (error) {
+    return (
+      <div className="text-center py-16">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-bold text-red-600 mb-2">{t('products.messages.error') || 'Error al cargar productos'}</h2>
+          <p className="text-red-700 mb-4">{error.message}</p>
+          <p className="text-sm text-red-600">{t('products.messages.checkWordPress') || 'Verifica que WordPress esté corriendo en localhost:8000'}</p>
+        </div>
+      </div>
+    );
+  }
 
   if (filteredProducts.length === 0) {
     return (
