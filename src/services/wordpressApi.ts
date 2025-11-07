@@ -52,6 +52,13 @@ interface WordPressProduct {
       filesize: number
       mime_type: string
     } | number  // Puede ser objeto completo o ID
+    featured_image_url?: string  // ⭐ URL directa de imagen (ACF)
+    featured_image_sizes?: {
+      thumbnail?: { url: string, width: number, height: number }
+      medium?: { url: string, width: number, height: number }
+      large?: { url: string, width: number, height: number }
+      full?: { url: string, width: number, height: number }
+    }
   }
   featured_media: number  // ID de la imagen destacada
   _links: {
@@ -86,6 +93,13 @@ interface WordPressMedia {
 // ============================================================================
 // FUNCIONES AUXILIARES
 // ============================================================================
+
+/**
+ * Caché en memoria de productos transformados
+ * Key: código del producto (ej: "AL018")
+ * Value: OptimizedProduct transformado
+ */
+const transformedProductsCache = new Map<string, OptimizedProduct>()
 
 /**
  * Fetcher para SWR - maneja llamadas HTTP con error handling
@@ -140,8 +154,16 @@ async function getPDFURL(pdfId: number): Promise<string> {
  * Transforma producto de WordPress a formato frontend
  *
  * CRÍTICO: Mantener compatibilidad 100% con estructura actual
+ *
+ * ⚡ OPTIMIZACIÓN: Usa URLs directas del ACF, evita fetch a Media API
  */
 async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedProduct> {
+  // ⚡ Verificar caché primero
+  const cached = transformedProductsCache.get(wpProduct.acf.codigo)
+  if (cached) {
+    return cached
+  }
+
   // Determinar URL del PDF: si es objeto usar directamente, si es ID hacer fetch
   let pdfURL: string | undefined = undefined
   if (wpProduct.acf.pdf) {
@@ -149,19 +171,19 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
       // PDF ya viene como objeto con URL
       pdfURL = wpProduct.acf.pdf.url
     } else if (typeof wpProduct.acf.pdf === 'number') {
-      // PDF es ID, necesita fetch
+      // PDF es ID, necesita fetch (legacy)
       pdfURL = await getPDFURL(wpProduct.acf.pdf)
     }
   }
 
-  // Obtener URL de imagen
-  const imageURL = await getImageURL(wpProduct.featured_media)
+  // ⚡ Usar URL de imagen directa del ACF (evita fetch a Media API)
+  const imageURL = wpProduct.acf.featured_image_url || await getImageURL(wpProduct.featured_media)
 
   // Extraer filename de URL (para compatibilidad con código existente)
   const imageFilename = imageURL ? imageURL.split('/').pop() || '' : ''
   const pdfFilename = pdfURL ? pdfURL.split('/').pop() || '' : ''
 
-  return {
+  const optimizedProduct: OptimizedProduct = {
     id: wpProduct.acf.codigo,
     slug: wpProduct.acf.codigo.toLowerCase(),
     codigo: wpProduct.acf.codigo,
@@ -206,6 +228,11 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
       priority: 0
     }
   }
+
+  // ⚡ Guardar en caché
+  transformedProductsCache.set(wpProduct.acf.codigo, optimizedProduct)
+
+  return optimizedProduct
 }
 
 // ============================================================================
@@ -235,7 +262,9 @@ export function useProducts() {
     {
       revalidateOnFocus: false,  // No revalidar al enfocar ventana
       revalidateOnReconnect: true,  // Revalidar al reconectar
-      dedupingInterval: 60000,  // Deduplicar requests por 1 minuto
+      dedupingInterval: 300000,  // ⚡ 5 minutos (antes 1 min)
+      revalidateIfStale: false,  // ⚡ No revalidar automáticamente
+      revalidateOnMount: false,  // ⚡ No revalidar al montar si hay caché
     }
   )
 
@@ -280,7 +309,13 @@ export function useProducts() {
 export function useProduct(codigo: string) {
   const { data, error, isLoading } = useSWR<WordPressProduct[]>(
     codigo ? `${WP_BASE_URL}${PRODUCTOS_ENDPOINT}?per_page=${PRODUCTS_PER_PAGE}` : null,
-    fetcher
+    fetcher,
+    {
+      revalidateOnFocus: false,  // No revalidar al enfocar ventana
+      dedupingInterval: 300000,  // ⚡ 5 minutos
+      revalidateIfStale: false,  // ⚡ No revalidar automáticamente
+      revalidateOnMount: false,  // ⚡ No revalidar al montar si hay caché
+    }
   )
 
   // Buscar producto por código y transformar
