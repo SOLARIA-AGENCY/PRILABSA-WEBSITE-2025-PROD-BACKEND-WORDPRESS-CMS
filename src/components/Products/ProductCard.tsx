@@ -33,9 +33,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const { language } = useLanguage();
   const [modalOpen, setModalOpen] = useState(false);
   
-  // Get image URLs
+  // Get image URLs (support WordPress dynamic URLs)
   const main = product.assets.image;
-  const primaryImageSrc = main?.path || '/assets/images/placeholder-product.svg';
+  // @ts-expect-error - Check for WordPress URL first
+  const wordpressImageUrl = main?.url;
+  const primaryImageSrc = wordpressImageUrl || main?.path || '/assets/images/placeholder-product.svg';
   const fallbackImageSrc = main?.filename ? `/assets/images/productos/fallback/${main.filename}` : undefined;
   
   // Use fallback hook
@@ -58,7 +60,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   
   const handlePDFDownload = async () => {
     if (!product.assets.pdf) return;
-    
+
     try {
       // Analytics tracking
       if (typeof gtag !== 'undefined') {
@@ -68,18 +70,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           value: 1
         });
       }
-      
+
+      // ⭐ Use WordPress URL if available, fallback to downloadUrl
+      const pdfUrl = product.assets.pdf.url || product.assets.pdf.downloadUrl;
+
       // Create download link
       const link = document.createElement('a');
-      link.href = product.assets.pdf.downloadUrl;
+      link.href = pdfUrl;
       link.download = product.assets.pdf.filename;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
-      
+
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
+
       onDownload?.(product.id);
     } catch (error) {
       console.error('Download failed:', error);

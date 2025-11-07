@@ -151,3 +151,30 @@ export interface TranslationStatus {
   lastUpdated: Date;
   translator?: string;
 }
+
+/**
+ * Tipos para integración WordPress API
+ * Agregados en: 2025-11-07 (commit 014baa81+)
+ */
+
+export interface WordPressAPIResponse {
+  products: OptimizedProduct[];
+  total: number;
+  totalPages: number;
+}
+
+export interface APIError {
+  message: string;
+  code?: string;
+  status?: number;
+}
+
+// Extended ProductImage with WordPress URL support
+export interface ProductImageWithURL extends ProductImage {
+  url?: string;  // Dynamic URL from WordPress
+}
+
+// Extended ProductPDF with WordPress URL support
+export interface ProductPDFWithURL extends ProductPDF {
+  url?: string;  // Dynamic URL from WordPress
+}
