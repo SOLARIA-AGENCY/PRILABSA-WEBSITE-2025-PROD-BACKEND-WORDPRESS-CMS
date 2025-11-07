@@ -110,6 +110,26 @@ interface WordPressMedia {
 const transformedProductsCache = new Map<string, OptimizedProduct>()
 
 /**
+ * Limpia texto de WordPress: reemplaza \n con espacios y decodifica HTML entities
+ */
+function cleanWordPressText(text: string): string {
+  if (!text) return ''
+
+  // Crear un elemento temporal para decodificar HTML entities
+  const tempDiv = document.createElement('div')
+  tempDiv.innerHTML = text
+  let cleaned = tempDiv.textContent || tempDiv.innerText || ''
+
+  // Reemplazar saltos de línea literales y escapados con espacios
+  cleaned = cleaned.replace(/\\n/g, ' ').replace(/\n/g, ' ')
+
+  // Limpiar espacios múltiples
+  cleaned = cleaned.replace(/\s+/g, ' ').trim()
+
+  return cleaned
+}
+
+/**
  * Fetcher para SWR - maneja llamadas HTTP con error handling
  */
 const fetcher = async (url: string) => {
@@ -201,19 +221,19 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
     id: wpProduct.acf.codigo,
     slug: wpProduct.acf.codigo.toLowerCase(),
     codigo: wpProduct.acf.codigo,
-    name: wpProduct.title.rendered,
-    description: wpProduct.acf.descripcion || '',
+    name: cleanWordPressText(wpProduct.title.rendered),
+    description: cleanWordPressText(wpProduct.acf.descripcion || ''),
     category: wpProduct.acf.categoria,
     subcategory: wpProduct.acf.subcategoria || '',
     benefits: wpProduct.acf.beneficios
-      ? wpProduct.acf.beneficios.split('\n').filter(b => b.trim())
+      ? wpProduct.acf.beneficios.split('\n').filter(b => b.trim()).map(cleanWordPressText)
       : [],
     presentation: wpProduct.acf.presentacion
-      ? wpProduct.acf.presentacion.split('\n').filter(p => p.trim())
+      ? wpProduct.acf.presentacion.split('\n').filter(p => p.trim()).map(cleanWordPressText)
       : [],
     specifications: wpProduct.acf.especificaciones?.map(spec => ({
-      key: spec.clave,
-      value: spec.valor
+      key: cleanWordPressText(spec.clave),
+      value: cleanWordPressText(spec.valor)
     })) || [],
     assets: {
       image: {
