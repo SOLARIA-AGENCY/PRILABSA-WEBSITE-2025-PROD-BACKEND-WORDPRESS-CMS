@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ChevronLeft, FileDown, ShoppingCart, X } from 'lucide-react';
-import { getAllProducts } from '../data/products';
+import { useProduct, useProducts } from '../services/wordpressApi';
 import { OptimizedProduct } from '../data/products/types';
 import Layout from '../components/Layout';
 import NuestrasMarcas from '../components/NuestrasMarcas';
@@ -31,7 +31,13 @@ const ProductoDetalle = () => {
   const [isAddingToQuote, setIsAddingToQuote] = useState(false);
   const [notificacion, setNotificacion] = useState('');
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
-  
+
+  // ⭐ Obtener producto desde WordPress API por código
+  const { product: producto, isLoading, error } = useProduct(slug?.toUpperCase() || '');
+
+  // Obtener todos los productos para relacionados
+  const { products: productos } = useProducts();
+
   // Helper: get translated field using ProductTranslationService
   const getTranslatedField = (
     productId: string,
@@ -41,29 +47,29 @@ const ProductoDetalle = () => {
     return productTranslationService.getTranslatedField(producto, field, language);
   };
 
-  const productos = getAllProducts();
-  const producto = productos.find(p => p.slug === slug);
-  
-  // DEBUG TEMPORAL - ELIMINAR DESPUES DE RESOLVER
-  console.log('=== DEBUG PRODUCTO DETALLE ===');
-  console.log('URL params - categorySlug:', categorySlug, 'slug:', slug);
-  console.log('Total productos cargados:', productos.length);
-  console.log('Producto encontrado:', producto ? 'SÍ' : 'NO');
-  if (!producto) {
-    console.log('Slugs disponibles:', productos.slice(0, 10).map(p => p.slug));
-    const eq002 = productos.find(p => p.id === 'EQ002');
-    console.log('EQ002 encontrado por ID:', eq002 ? eq002.slug : 'NO ENCONTRADO');
-  }
-
   const productosRelacionados = producto
     ? productos.filter(p => p.category === producto.category && p.id !== producto.id)
     : [];
 
-  if (!producto) {
+  // ⭐ Estado de carga
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-12 text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <p className="mt-4 text-gray-600">{t('products.messages.loading') || 'Cargando producto...'}</p>
+        </div>
+      </Layout>
+    );
+  }
+
+  // ⭐ Estado de error o producto no encontrado
+  if (error || !producto) {
     return (
       <Layout>
         <div className="container mx-auto px-4 py-12 text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">{t('products.productDetail.productNotFound')}</h1>
+          {error && <p className="text-red-600 mb-4">{error.message}</p>}
           <Link to="/productos" className="inline-flex items-center px-6 py-3 text-base font-medium rounded-md text-white" style={{ backgroundColor: '#3759C1' }}>
             <ChevronLeft className="mr-2" size={18} />
             {t('products.actions.backToProducts')}

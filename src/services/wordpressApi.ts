@@ -16,8 +16,9 @@ import { OptimizedProduct } from '../data/products/types'
 // CONFIGURACIÓN
 // ============================================================================
 
-const WP_BASE_URL = 'http://localhost:8000/index.php?rest_route='
+const WP_BASE_URL = 'http://localhost:8000/wp-json'
 const PRODUCTOS_ENDPOINT = '/wp/v2/productos'
+const PRODUCTS_PER_PAGE = 500  // Límite aumentado para permitir expansión del catálogo (actual: 105, futuro: hasta 500)
 
 // ============================================================================
 // TIPOS TYPESCRIPT
@@ -213,7 +214,7 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
 export function useProducts() {
   // SWR automáticamente cachea y revalida
   const { data, error, isLoading } = useSWR<WordPressProduct[]>(
-    `${WP_BASE_URL}${PRODUCTOS_ENDPOINT}?per_page=100`,
+    `${WP_BASE_URL}${PRODUCTOS_ENDPOINT}?per_page=${PRODUCTS_PER_PAGE}`,
     fetcher,
     {
       revalidateOnFocus: false,  // No revalidar al enfocar ventana
@@ -224,19 +225,27 @@ export function useProducts() {
 
   // Transformar productos cuando data cambie
   const [products, setProducts] = useState<OptimizedProduct[]>([])
+  const [isTransforming, setIsTransforming] = useState(false)
 
   useEffect(() => {
     if (data) {
+      setIsTransforming(true)
       // Transformar todos los productos en paralelo
       Promise.all(data.map(transformProduct))
-        .then(setProducts)
-        .catch(err => console.error('Error transforming products:', err))
+        .then(transformed => {
+          setProducts(transformed)
+          setIsTransforming(false)
+        })
+        .catch(err => {
+          console.error('Error transforming products:', err)
+          setIsTransforming(false)
+        })
     }
   }, [data])
 
   return {
     products,
-    isLoading,
+    isLoading: isLoading || isTransforming,  // ⭐ Loading mientras transforma
     error
   }
 }
@@ -254,29 +263,38 @@ export function useProducts() {
  */
 export function useProduct(codigo: string) {
   const { data, error, isLoading } = useSWR<WordPressProduct[]>(
-    codigo ? `${WP_BASE_URL}${PRODUCTOS_ENDPOINT}?per_page=100` : null,
+    codigo ? `${WP_BASE_URL}${PRODUCTOS_ENDPOINT}?per_page=${PRODUCTS_PER_PAGE}` : null,
     fetcher
   )
 
   // Buscar producto por código y transformar
   const [product, setProduct] = useState<OptimizedProduct | null>(null)
+  const [isTransforming, setIsTransforming] = useState(false)
 
   useEffect(() => {
     if (data && codigo) {
       const wpProduct = data.find(p => p.acf.codigo === codigo)
       if (wpProduct) {
+        setIsTransforming(true)
         transformProduct(wpProduct)
-          .then(setProduct)
-          .catch(err => console.error('Error transforming product:', err))
+          .then(transformed => {
+            setProduct(transformed)
+            setIsTransforming(false)
+          })
+          .catch(err => {
+            console.error('Error transforming product:', err)
+            setIsTransforming(false)
+          })
       } else {
         setProduct(null)
+        setIsTransforming(false)
       }
     }
   }, [data, codigo])
 
   return {
     product,
-    isLoading,
+    isLoading: isLoading || isTransforming,  // ⭐ Loading mientras transforma
     error
   }
 }
@@ -297,6 +315,88 @@ export function useProductsByCategory(category: string) {
 
   return {
     products: filteredProducts,
+    isLoading,
+    error
+  }
+}
+
+// ============================================================================
+// CATEGORÍAS DINÁMICAS
+// ============================================================================
+
+/**
+ * Estructura de categoría de WordPress
+ */
+interface WordPressCategory {
+  id: number
+  count: number
+  name: string
+  slug: string
+  description: string
+  link: string
+}
+
+/**
+ * Categoría transformada para el frontend
+ */
+export interface ProductCategory {
+  id: number
+  name: string
+  slug: string
+  description: string
+  productCount: number
+}
+
+/**
+ * Hook: Obtiene categorías dinámicamente desde WordPress
+ *
+ * Las categorías se crean y administran en WordPress,
+ * permitiendo agregar nuevas categorías sin modificar código frontend.
+ *
+ * Uso:
+ * ```tsx
+ * function CategoryNav() {
+ *   const { categories, isLoading, error } = useCategories()
+ *
+ *   if (isLoading) return <div>Cargando categorías...</div>
+ *   if (error) return <div>Error: {error.message}</div>
+ *
+ *   return (
+ *     <nav>
+ *       {categories.map(cat => (
+ *         <Link key={cat.id} to={`/productos/${cat.slug}`}>
+ *           {cat.name} ({cat.productCount})
+ *         </Link>
+ *       ))}
+ *     </nav>
+ *   )
+ * }
+ * ```
+ */
+export function useCategories() {
+  const { data, error, isLoading } = useSWR<WordPressCategory[]>(
+    `${WP_BASE_URL}/wp/v2/categorias-productos?per_page=100`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: true,
+      dedupingInterval: 300000, // Caché de 5 minutos (las categorías cambian raramente)
+    }
+  )
+
+  // Transformar categorías de WordPress a formato del frontend
+  const categories: ProductCategory[] = data
+    ? data.map(cat => ({
+        id: cat.id,
+        name: cat.name,
+        slug: cat.slug,
+        description: cat.description,
+        productCount: cat.count
+      }))
+    : []
+
+  return {
+    categories,
     isLoading,
     error
   }
