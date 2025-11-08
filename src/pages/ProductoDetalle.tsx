@@ -70,13 +70,51 @@ const ProductoDetalle = () => {
   if (error || !producto) {
     return (
       <Layout>
-        <div className="container mx-auto px-4 py-12 text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">{t('products.productDetail.productNotFound')}</h1>
-          {error && <p className="text-red-600 mb-4">{error.message}</p>}
-          <Link to="/productos" className="inline-flex items-center px-6 py-3 text-base font-medium rounded-md text-white" style={{ backgroundColor: '#3759C1' }}>
-            <ChevronLeft className="mr-2" size={18} />
-            {t('products.actions.backToProducts')}
-          </Link>
+        {/* Hero azul del mismo tamaño que el header */}
+        <div
+          className="w-full"
+          style={{ backgroundColor: '#3759C1', height: '120px' }}
+        ></div>
+
+        {/* Contenido centrado verticalmente */}
+        <div className="flex items-center justify-center min-h-[60vh] px-4">
+          <div className="text-center max-w-md mx-auto">
+            {/* Ícono de producto no encontrado */}
+            <div className="mb-6">
+              <div className="mx-auto w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center">
+                <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Título */}
+            <h1 className="text-3xl font-bold text-gray-900 mb-3">
+              {t('products.productDetail.productNotFound')}
+            </h1>
+
+            {/* Descripción */}
+            <p className="text-lg text-gray-600 mb-6">
+              El producto que buscas no está disponible o ha sido eliminado.
+            </p>
+
+            {/* Mensaje de error (si existe) */}
+            {error && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-sm text-red-600">{error.message}</p>
+              </div>
+            )}
+
+            {/* Botón de regreso */}
+            <Link
+              to="/productos"
+              className="inline-flex items-center px-8 py-4 text-base font-semibold rounded-lg text-white transition-all duration-300 hover:shadow-lg hover:scale-105"
+              style={{ backgroundColor: '#3759C1' }}
+            >
+              <ChevronLeft className="mr-2" size={20} />
+              {t('products.actions.backToProducts')}
+            </Link>
+          </div>
         </div>
       </Layout>
     );

@@ -113,11 +113,15 @@ class PRILABSA_ACF_Config {
 			return;
 		}
 
-		// Field Group: Detalles Producto
+		// ⚠️ DESACTIVADO: Este grupo legacy ha sido reemplazado por prilabsa-productos-acf.php (multiidioma en 3 columnas)
+		// Se mantiene el código para backward compatibility en REST API, pero NO se muestra en admin
+		// Los campos legacy (descripcion, beneficios, presentacion) siguen expuestos vía register_rest_fields()
+
+		// Field Group: Detalles Producto (LEGACY - DESACTIVADO)
 		acf_add_local_field_group(
 			array(
 				'key'                   => 'group_productos_detalles',
-				'title'                 => __( 'Detalles del Producto', 'prilabsa-acf' ),
+				'title'                 => __( 'Detalles del Producto (Legacy)', 'prilabsa-acf' ),
 				'fields'                => $this->get_product_fields(),
 				'location'              => array(
 					array(
@@ -134,8 +138,8 @@ class PRILABSA_ACF_Config {
 				'label_placement'       => 'top',
 				'instruction_placement' => 'label',
 				'hide_on_screen'        => '',
-				'active'                => true,
-				'description'           => __( 'Información detallada del producto PRILABSA', 'prilabsa-acf' ),
+				'active'                => false,  // ⚠️ DESACTIVADO para evitar duplicación
+				'description'           => __( 'Información detallada del producto PRILABSA (LEGACY - REEMPLAZADO)', 'prilabsa-acf' ),
 				'show_in_rest'          => 1,
 			)
 		);

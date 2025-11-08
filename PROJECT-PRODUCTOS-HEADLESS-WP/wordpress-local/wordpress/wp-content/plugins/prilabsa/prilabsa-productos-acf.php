@@ -7,7 +7,7 @@
  *
  * @package PRILABSA_Productos_ACF
  * @author SOLARIA AGENCY
- * @version 2.0.0
+ * @version 2.1.0
  */
 
 // Security: Exit if accessed directly
@@ -24,6 +24,44 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 			'key'                   => 'group_prilabsa_productos',
 			'title'                 => 'Información del Producto (Multiidioma)',
 			'fields'                => array(
+
+				// ========================================
+				// FILA 0: CÓDIGO Y CATEGORÍA (2 columnas)
+				// ========================================
+				array(
+					'key'               => 'field_productos_codigo',
+					'label'             => '🔢 Código del Producto',
+					'name'              => 'codigo',
+					'type'              => 'text',
+					'instructions'      => 'Código único del producto (ej: AL007, AD009, QU016)',
+					'required'          => 1,
+					'maxlength'         => 20,
+					'placeholder'       => 'Ej: AL007',
+					'wrapper'           => array( 'width' => '50' ),
+				),
+				array(
+					'key'               => 'field_productos_categoria',
+					'label'             => '📂 Categoría',
+					'name'              => 'categoria',
+					'type'              => 'select',
+					'instructions'      => 'Selecciona la categoría del producto',
+					'required'          => 1,
+					'choices'           => array(
+						'aditivos'    => 'Aditivos',
+						'alimentos'   => 'Alimentos',
+						'equipos'     => 'Equipos',
+						'probioticos' => 'Probióticos',
+						'quimicos'    => 'Químicos',
+					),
+					'default_value'     => 'alimentos',
+					'allow_null'        => 0,
+					'multiple'          => 0,
+					'ui'                => 1,
+					'ajax'              => 0,
+					'return_format'     => 'value',
+					'placeholder'       => 'Selecciona una categoría',
+					'wrapper'           => array( 'width' => '50' ),
+				),
 
 				// ========================================
 				// FILA 1: NOMBRES (3 columnas)
@@ -63,7 +101,45 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 				),
 
 				// ========================================
-				// FILA 2: DESCRIPCIONES (3 columnas)
+				// FILA 2: IMAGEN DEL PRODUCTO (full width)
+				// ========================================
+				array(
+					'key'               => 'field_productos_imagen',
+					'label'             => '📷 Imagen del Producto',
+					'name'              => 'imagen_producto',
+					'type'              => 'image',
+					'instructions'      => 'Sube la imagen principal del producto (formato: PNG, JPG, WEBP. Recomendado: 800x800px)',
+					'required'          => 0,
+					'return_format'     => 'array',  // Devuelve array con url, alt, width, height
+					'preview_size'      => 'medium',
+					'library'           => 'all',
+					'min_width'         => 400,
+					'min_height'        => 400,
+					'max_size'          => 5,  // 5MB max
+					'mime_types'        => 'jpg,jpeg,png,webp',
+					'wrapper'           => array( 'width' => '100' ),
+				),
+
+				// ========================================
+				// FILA 3: PDF FICHA TÉCNICA (full width)
+				// ========================================
+				array(
+					'key'               => 'field_productos_ficha_tecnica',
+					'label'             => '📄 Ficha Técnica (PDF)',
+					'name'              => 'ficha_tecnica_pdf',
+					'type'              => 'file',
+					'instructions'      => 'Sube el archivo PDF con la ficha técnica del producto (máximo 10MB)',
+					'required'          => 0,
+					'return_format'     => 'array',  // Devuelve array con url, title, filename, filesize
+					'library'           => 'all',
+					'min_size'          => 0,
+					'max_size'          => 10,  // 10MB max
+					'mime_types'        => 'pdf',
+					'wrapper'           => array( 'width' => '100' ),
+				),
+
+				// ========================================
+				// FILA 4: DESCRIPCIONES (3 columnas)
 				// ========================================
 				array(
 					'key'               => 'field_productos_descripcion_es',
@@ -103,7 +179,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 				),
 
 				// ========================================
-				// FILA 3: BENEFICIO 1 (3 columnas)
+				// FILA 5: BENEFICIO 1 (3 columnas)
 				// ========================================
 				array(
 					'key'               => 'field_productos_beneficio_1_es',
@@ -140,7 +216,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 				),
 
 				// ========================================
-				// FILA 4: BENEFICIO 2 (3 columnas)
+				// FILA 6: BENEFICIO 2 (3 columnas)
 				// ========================================
 				array(
 					'key'               => 'field_productos_beneficio_2_es',
@@ -177,7 +253,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 				),
 
 				// ========================================
-				// FILA 5: BENEFICIO 3 (3 columnas)
+				// FILA 7: BENEFICIO 3 (3 columnas)
 				// ========================================
 				array(
 					'key'               => 'field_productos_beneficio_3_es',
@@ -214,7 +290,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 				),
 
 				// ========================================
-				// FILA 6: PRESENTACIÓN (3 columnas)
+				// FILA 8: PRESENTACIÓN (3 columnas)
 				// ========================================
 				array(
 					'key'               => 'field_productos_presentacion_es',
@@ -280,6 +356,13 @@ add_action(
 	function () {
 		// Register multiidioma fields
 		$multiidioma_fields = array(
+			// Código y categoría
+			'codigo',
+			'categoria',
+			// Imagen del producto
+			'imagen_producto',
+			// PDF ficha técnica
+			'ficha_tecnica_pdf',
 			// Nombres de producto
 			'nombre_producto_es',
 			'nombre_producto_en',

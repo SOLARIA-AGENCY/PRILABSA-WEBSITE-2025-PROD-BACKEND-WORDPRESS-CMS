@@ -33,7 +33,27 @@ interface WordPressProduct {
   title: {
     rendered: string
   }
-  // Campos multiidioma (nivel superior, registrados con register_rest_field)
+  slug: string
+  // Campos principales (nivel superior, registrados con register_rest_field)
+  codigo?: string
+  categoria?: 'aditivos' | 'alimentos' | 'equipos' | 'probioticos' | 'quimicos'
+  // Imagen del producto
+  imagen_producto?: {
+    id: number
+    url: string
+    alt?: string
+    width?: number
+    height?: number
+  }
+  // PDF ficha técnica
+  ficha_tecnica_pdf?: {
+    id: number
+    url: string
+    title?: string
+    filename?: string
+    filesize?: number
+  }
+  // Campos multiidioma
   nombre_producto_es?: string
   nombre_producto_en?: string
   nombre_producto_pt?: string
@@ -218,14 +238,19 @@ async function getPDFURL(pdfId: number): Promise<string> {
  */
 async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedProduct> {
   // ⚡ Verificar caché primero
-  const cached = transformedProductsCache.get(wpProduct.acf.codigo)
+  const productCodigo = wpProduct.codigo || wpProduct.acf?.codigo
+  const cached = transformedProductsCache.get(productCodigo)
   if (cached) {
     return cached
   }
 
-  // Determinar URL del PDF: si es objeto usar directamente, si es ID hacer fetch
+  // Determinar URL del PDF: Prioridad campo ficha_tecnica_pdf, sino acf.pdf legacy
   let pdfURL: string | undefined = undefined
-  if (wpProduct.acf.pdf) {
+  if (wpProduct.ficha_tecnica_pdf?.url) {
+    // Prioridad 1: Campo ACF ficha_tecnica_pdf (nuevo)
+    pdfURL = wpProduct.ficha_tecnica_pdf.url
+  } else if (wpProduct.acf.pdf) {
+    // Prioridad 2: Campo legacy acf.pdf
     if (typeof wpProduct.acf.pdf === 'object' && wpProduct.acf.pdf.url) {
       // PDF ya viene como objeto con URL
       pdfURL = wpProduct.acf.pdf.url
@@ -235,8 +260,18 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
     }
   }
 
-  // ⚡ Usar URL de imagen desde _embedded (evita fetch a Media API)
-  const imageURL = wpProduct._embedded?.['wp:featuredmedia']?.[0]?.source_url || await getImageURL(wpProduct.featured_media)
+  // ⚡ Obtener URL de imagen (prioridad: campo ACF imagen_producto → featured media)
+  let imageURL = ''
+  if (wpProduct.imagen_producto?.url) {
+    // Prioridad 1: Campo ACF imagen_producto
+    imageURL = wpProduct.imagen_producto.url
+  } else if (wpProduct._embedded?.['wp:featuredmedia']?.[0]?.source_url) {
+    // Prioridad 2: Featured media desde _embedded
+    imageURL = wpProduct._embedded['wp:featuredmedia'][0].source_url
+  } else if (wpProduct.featured_media) {
+    // Prioridad 3: Fetch featured media por ID (legacy)
+    imageURL = await getImageURL(wpProduct.featured_media)
+  }
 
   // Extraer filename de URL (para compatibilidad con código existente)
   const imageFilename = imageURL ? imageURL.split('/').pop() || '' : ''
@@ -316,13 +351,16 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
     }
   }
 
+  // Código y categoría: prioridad nivel superior, fallback a acf
+  const productCategoria = wpProduct.categoria || wpProduct.acf.categoria
+
   const optimizedProduct: OptimizedProduct = {
-    id: wpProduct.acf.codigo,
-    slug: wpProduct.acf.codigo.toLowerCase(),
-    codigo: wpProduct.acf.codigo,
+    id: productCodigo,
+    slug: wpProduct.slug || productCodigo.toLowerCase(),
+    codigo: productCodigo,
     name: nombreES,  // Usar nombre multiidioma español
     description: descripcionES,  // Campo legacy usa español
-    category: wpProduct.acf.categoria,
+    category: productCategoria,
     subcategory: wpProduct.acf.subcategoria || '',
     benefits: beneficiosES,  // Campo legacy usa español
     presentation: presentacionES,  // Campo legacy usa español
@@ -360,7 +398,7 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
   }
 
   // ⚡ Guardar en caché
-  transformedProductsCache.set(wpProduct.acf.codigo, optimizedProduct)
+  transformedProductsCache.set(productCodigo, optimizedProduct)
 
   return optimizedProduct
 }
@@ -394,7 +432,7 @@ export function useProducts() {
     {
       revalidateOnFocus: false,  // No revalidar al enfocar ventana
       revalidateOnReconnect: false,  // No revalidar al reconectar
-      dedupingInterval: 300000,  // ⚡ 5 minutos - evita fetches duplicados
+      dedupingInterval: 60000,  // ⚡ 1 minuto - reducido de 5min para reflejar cambios más rápido
       // ⚠️ REMOVIDO revalidateIfStale y revalidateOnMount
       // Permitir fetch inicial, pero usar caché si existe
     }
@@ -985,4 +1023,52 @@ export function useNoticia(id: string) {
     isLoading: isLoading || isTransforming,
     error
   }
+}
+
+// ============================================================================
+// UTILIDADES PARA GESTIÓN DE CACHÉ
+// ============================================================================
+
+/**
+ * Limpia todas las cachés (memoria + SWR)
+ *
+ * Útil cuando:
+ * - Se eliminan productos en WordPress y no se reflejan en frontend
+ * - Se actualizan datos y no se ven los cambios
+ * - Debugging de problemas de caché
+ *
+ * Uso desde consola del navegador:
+ * ```javascript
+ * // Importar la función
+ * import { clearAllCaches } from './services/wordpressApi'
+ * clearAllCaches()
+ * ```
+ *
+ * O simplemente recargar la página (Cmd+R / Ctrl+R)
+ */
+export function clearAllCaches() {
+  console.log('🧹 Limpiando cachés...')
+
+  // 1. Limpiar caché en memoria de productos transformados
+  const productsCacheSize = transformedProductsCache.size
+  transformedProductsCache.clear()
+  console.log(`✅ Caché de productos limpiada (${productsCacheSize} items)`)
+
+  // 2. Limpiar caché de SWR
+  // SWR usa cache global, podemos forzar revalidación cambiando window
+  if (typeof window !== 'undefined') {
+    window.location.reload()
+    console.log('🔄 Recargando página para limpiar caché SWR...')
+  }
+}
+
+/**
+ * Limpia solo la caché en memoria (no recarga página)
+ *
+ * Útil para debugging sin perder estado de la aplicación
+ */
+export function clearMemoryCache() {
+  const size = transformedProductsCache.size
+  transformedProductsCache.clear()
+  console.log(`🧹 Caché en memoria limpiada (${size} items)`)
 }

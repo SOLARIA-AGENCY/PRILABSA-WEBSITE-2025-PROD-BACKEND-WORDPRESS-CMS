@@ -70,6 +70,9 @@
     "addNote": "Agregar nota",
     "notes": "Notas adicionales"
   },
+  "messages": {
+    "loading": "Cargando Productos PRILABSA..."
+  },
   "common": {
     "products": "PRODUCTOS",
     "download": "Descargar",

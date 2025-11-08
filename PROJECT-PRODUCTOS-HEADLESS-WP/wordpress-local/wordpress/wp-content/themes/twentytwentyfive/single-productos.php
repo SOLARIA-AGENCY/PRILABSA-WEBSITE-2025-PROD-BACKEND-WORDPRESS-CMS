@@ -146,6 +146,24 @@ get_header();
         color: #9ca3af;
         font-style: italic;
     }
+    .pdf-download-button {
+        display: inline-block;
+        background: #d32f2f;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 16px;
+        transition: all 0.3s;
+        box-shadow: 0 2px 4px rgba(211, 47, 47, 0.3);
+    }
+    .pdf-download-button:hover {
+        background: #b71c1c;
+        box-shadow: 0 4px 8px rgba(211, 47, 47, 0.4);
+        transform: translateY(-2px);
+        color: white;
+    }
 </style>
 
 <div class="product-preview">
@@ -160,6 +178,9 @@ get_header();
         $nombre_es = get_field('nombre_producto_es') ?: get_the_title();
         $nombre_en = get_field('nombre_producto_en') ?: get_the_title();
         $nombre_pt = get_field('nombre_producto_pt') ?: get_the_title();
+
+        // PDF Ficha Técnica
+        $ficha_tecnica = get_field('ficha_tecnica_pdf');
 
         // Descripciones
         $desc_es = get_field('descripcion_es') ?: get_field('descripcion');
@@ -185,8 +206,13 @@ get_header();
         // Especificaciones
         $especificaciones = get_field('especificaciones');
 
-        // Imagen destacada
-        $image_url = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+        // Imagen del producto (prioridad: campo ACF imagen_producto, fallback: featured image)
+        $imagen_producto = get_field('imagen_producto');
+        if ($imagen_producto && is_array($imagen_producto)) {
+            $image_url = $imagen_producto['url'];
+        } else {
+            $image_url = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+        }
         ?>
 
         <!-- Header del Producto -->
@@ -215,6 +241,18 @@ get_header();
         <?php if ($image_url): ?>
             <div class="product-image">
                 <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($nombre_es); ?>">
+            </div>
+        <?php endif; ?>
+
+        <!-- Ficha Técnica PDF -->
+        <?php if ($ficha_tecnica && is_array($ficha_tecnica) && isset($ficha_tecnica['url'])): ?>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <a href="<?php echo esc_url($ficha_tecnica['url']); ?>"
+                   target="_blank"
+                   class="pdf-download-button"
+                   download>
+                    📄 Descargar Ficha Técnica (PDF)
+                </a>
             </div>
         <?php endif; ?>
 
