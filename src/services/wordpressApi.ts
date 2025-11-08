@@ -438,12 +438,17 @@ export function useProducts() {
 }
 
 /**
- * Hook: Obtiene un producto por código
+ * Hook: Obtiene un producto por código o slug
+ *
+ * Busca un producto por código (ej: "AL018") o slug (ej: "test")
+ * La búsqueda es case-insensitive
  *
  * Uso:
  * ```tsx
- * function ProductDetail({ codigo }: { codigo: string }) {
- *   const { product, isLoading, error } = useProduct(codigo)
+ * function ProductDetail() {
+ *   const { product, isLoading, error } = useProduct('AL018') // Por código
+ *   // O también:
+ *   const { product, isLoading, error } = useProduct('test')  // Por slug
  *   // ...
  * }
  * ```
@@ -467,7 +472,14 @@ export function useProduct(codigo: string) {
 
   useEffect(() => {
     if (data && codigo) {
-      const wpProduct = data.find(p => p.acf.codigo === codigo)
+      const searchTerm = codigo.toLowerCase()
+
+      // Buscar por código (case-insensitive) O por slug
+      const wpProduct = data.find(p =>
+        p.acf.codigo?.toLowerCase() === searchTerm ||
+        p.slug?.toLowerCase() === searchTerm
+      )
+
       if (wpProduct) {
         setIsTransforming(true)
         transformProduct(wpProduct)

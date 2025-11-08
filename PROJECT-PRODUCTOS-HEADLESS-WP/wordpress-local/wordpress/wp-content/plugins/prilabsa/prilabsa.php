@@ -3,7 +3,7 @@
  * Plugin Name: PRILABSA WordPress Headless
  * Plugin URI: https://www.solaria.agency
  * Description: Custom Post Types, ACF Config, REST API for PRILABSA (Products, Blog, Noticias)
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: SOLARIA Agency
  * Author URI: https://www.solaria.agency
  * License: GPL v2 or later
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('PRILABSA_VERSION', '1.1.0');
+define('PRILABSA_VERSION', '1.2.0');
 define('PRILABSA_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('PRILABSA_PLUGIN_URL', plugin_dir_url(__FILE__));
 
