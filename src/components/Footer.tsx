@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logoBlanco from '/images/logos/logo-prilabsa-blanco.png';
 import iconFacebook from '/assets/iniciodev/icon_facebook.svg';
 import iconInstagram from '/assets/iniciodev/icon_instagram.svg';
@@ -29,8 +30,9 @@ const Footer = () => {
         <div>
           <h3 className="font-bold text-lg mb-4">{t('footer.social.title')}</h3>
           <div className="flex flex-col items-center md:items-start space-y-2 mb-4">
-             <a href="/blog" className="hover:text-yellow-400 transition-colors text-sm">{t('header.navigation.blog')}</a>
-             <a href="/noticias" className="hover:text-yellow-400 transition-colors text-sm">{t('header.navigation.news')}</a>
+             {/* Blog y Noticias permanecen en productos.prilabsa.com (interno) */}
+             <Link to="/blog" className="hover:text-yellow-400 transition-colors text-sm">{t('header.navigation.blog')}</Link>
+             <Link to="/noticias" className="hover:text-yellow-400 transition-colors text-sm">{t('header.navigation.news')}</Link>
              {/* <a href="/inventario-productos" className="hover:text-yellow-400 transition-colors text-sm flex items-center">
                 <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -49,10 +51,11 @@ const Footer = () => {
       <div className="container mx-auto px-4 mt-8 pt-4 border-t border-blue-300">
         <div className="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-200">
           <span>{t('footer.copyright.text')}</span>
-          <a href="/politica-de-privacidad" className="hover:text-yellow-400 transition-colors">{t('footer.legal.privacy')}</a>
-          <a href="/terminos-y-condiciones" className="hover:text-yellow-400 transition-colors">{t('footer.legal.terms')}</a>
-                    <a href="/aviso-legal" className="hover:text-yellow-400 transition-colors">{t('footer.legal.legalNotice')}</a>
-          <a href="/politica-de-cookies" className="hover:text-yellow-400 transition-colors">{t('footer.legal.cookiePolicy')}</a>
+          {/* Rutas legales permanecen en productos.prilabsa.com (interno) - GDPR requerido */}
+          <Link to="/politica-de-privacidad" className="hover:text-yellow-400 transition-colors">{t('footer.legal.privacy')}</Link>
+          <Link to="/terminos-y-condiciones" className="hover:text-yellow-400 transition-colors">{t('footer.legal.terms')}</Link>
+          <Link to="/aviso-legal" className="hover:text-yellow-400 transition-colors">{t('footer.legal.legalNotice')}</Link>
+          <Link to="/politica-de-cookies" className="hover:text-yellow-400 transition-colors">{t('footer.legal.cookiePolicy')}</Link>
         </div>
       </div>
     </footer>

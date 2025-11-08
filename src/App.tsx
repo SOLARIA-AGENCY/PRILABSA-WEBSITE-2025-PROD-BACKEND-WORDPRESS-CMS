@@ -7,33 +7,37 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import { CotizacionProvider } from './context/CotizacionContext';
 import { FEATURES } from './config/features';
 import { HelmetProvider } from '@dr.pogodin/react-helmet';
+import { ExternalRedirect } from './components/ExternalRedirect';
+
 // Import critical pages directly for instant loading
-import Inicio from './pages/Inicio';
 import Blog from './pages/Blog';
 import Noticias from './pages/Noticias';
 import Login from './pages/Login';
 
 // Lazy load secondary pages for better performance
+// DESARROLLO: Rutas solo para desarrollo/testing
 const HomePage = React.lazy(() => import('./pages/HomePage').then(module => ({ default: module.HomePage })));
 const DeployDashboard = React.lazy(() => import('./pages/DeployDashboard'));
 const PrilabsaWebsite = React.lazy(() => import('./pages/PrilabsaWebsite'));
 const Website2025 = React.lazy(() => import('./pages/Website2025'));
-const QuienesSomos = React.lazy(() => import('./pages/QuienesSomos'));
-const Oficinas = React.lazy(() => import('./pages/Oficinas'));
+const DesignSystemPage = React.lazy(() => import('./pages/DesignSystemPage'));
+const InventarioProductos = React.lazy(() => import('./pages/InventarioProductos'));
+
+// PRODUCTOS: Rutas para catálogo de productos (PERMANECEN en productos.prilabsa.com)
 const Productos = React.lazy(() => import('./pages/Productos'));
 const CategoryPage = React.lazy(() => import('./pages/CategoryPage'));
-const Contactanos = React.lazy(() => import('./pages/Contactanos'));
-const TrabajaConNosotros = React.lazy(() => import('./pages/TrabajaConNosotros'));
+const ProductoDetalle = React.lazy(() => import('./pages/ProductoDetalle'));
+const Cotizacion = React.lazy(() => import('./pages/Cotizacion'));
+
+// BLOG/NOTICIAS: Rutas de contenido (PERMANECEN en productos.prilabsa.com)
 const ArticlePage = React.lazy(() => import('./pages/ArticlePage'));
 const NoticiaPage = React.lazy(() => import('./pages/NoticiaPage'));
+
+// LEGAL: Rutas legales (PERMANECEN en productos.prilabsa.com)
 const PoliticaDePrivacidad = React.lazy(() => import('./pages/PoliticaDePrivacidad'));
 const TerminosYCondiciones = React.lazy(() => import('./pages/TerminosYCondiciones'));
 const AvisoLegal = React.lazy(() => import('./pages/AvisoLegal'));
 const PoliticaDeCookies = React.lazy(() => import('./pages/PoliticaDeCookies'));
-const ProductoDetalle = React.lazy(() => import('./pages/ProductoDetalle'));
-const Cotizacion = React.lazy(() => import('./pages/Cotizacion'));
-const DesignSystemPage = React.lazy(() => import('./pages/DesignSystemPage'));
-const InventarioProductos = React.lazy(() => import('./pages/InventarioProductos'));
 
 // Optimized loading component with faster animation
 const PageLoader = () => (
@@ -103,50 +107,29 @@ function App() {
               <Router>
               <ScrollToTop />
               <Routes>
-          {/* Critical pages load instantly without Suspense */}
-          <Route path="/" element={<Inicio />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/noticias" element={<Noticias />} />
-          
-          {/* All other pages use lazy loading with Suspense */}
-          <Route path="/dashboard" element={
-            <Suspense fallback={<PageLoader />}>
-              <DeployDashboard />
-            </Suspense>
-          } />
-          <Route path="/home" element={
-            <Suspense fallback={<PageLoader />}>
-              <HomePage />
-            </Suspense>
-          } />
-          <Route path="/deploy" element={
-            <Suspense fallback={<PageLoader />}>
-              <DeployDashboard />
-            </Suspense>
-          } />
-          <Route path="/prilabsa" element={
-            <Suspense fallback={<PageLoader />}>
-              <PrilabsaWebsite />
-            </Suspense>
-          } />
-          <Route path="/website2025" element={
-            <Suspense fallback={<PageLoader />}>
-              <Website2025 />
-            </Suspense>
-          } />
-          <Route path="/quienes-somos" element={
-            <Suspense fallback={<PageLoader />}>
-              <QuienesSomos />
-            </Suspense>
-          } />
-          <Route path="/oficinas" element={
-            <Suspense fallback={<PageLoader />}>
-              <Oficinas />
-            </Suspense>
-          } />
+
+          {/* ═══════════════════════════════════════════════════════════════════
+              🔄 REDIRECCIONES EXTERNAS → www.prilabsa.com (Sitio Institucional)
+              ═══════════════════════════════════════════════════════════════════ */}
+
+          <Route path="/" element={<ExternalRedirect to="https://www.prilabsa.com/" />} />
+          <Route path="/quienes-somos" element={<ExternalRedirect to="https://www.prilabsa.com/quienes-somos" />} />
+          <Route path="/oficinas" element={<ExternalRedirect to="https://www.prilabsa.com/oficinas" />} />
+          <Route path="/contactanos" element={<ExternalRedirect to="https://www.prilabsa.com/contactanos" />} />
+          <Route path="/trabaja-con-nosotros" element={<ExternalRedirect to="https://www.prilabsa.com/trabaja-con-nosotros" />} />
+
+          {/* ═══════════════════════════════════════════════════════════════════
+              ✅ PRODUCTOS (PERMANECEN en productos.prilabsa.com)
+              ═══════════════════════════════════════════════════════════════════ */}
+
           <Route path="/productos" element={
             <Suspense fallback={<PageLoader />}>
               <Productos />
+            </Suspense>
+          } />
+          <Route path="/productos/:categorySlug" element={
+            <Suspense fallback={<PageLoader />}>
+              <CategoryPage />
             </Suspense>
           } />
           <Route path="/productos/:categorySlug/:slug" element={
@@ -154,6 +137,7 @@ function App() {
               <ProductoDetalle />
             </Suspense>
           } />
+
           {/* Cotizador - Condicional basado en FEATURES.COTIZADOR */}
           {FEATURES.COTIZADOR && (
             <Route path="/cotizacion" element={
@@ -162,31 +146,28 @@ function App() {
               </Suspense>
             } />
           )}
-          <Route path="/productos/:categorySlug" element={
-            <Suspense fallback={<PageLoader />}>
-              <CategoryPage />
-            </Suspense>
-          } />
-          <Route path="/contactanos" element={
-            <Suspense fallback={<PageLoader />}>
-              <Contactanos />
-            </Suspense>
-          } />
-          <Route path="/trabaja-con-nosotros" element={
-            <Suspense fallback={<PageLoader />}>
-              <TrabajaConNosotros />
-            </Suspense>
-          } />
+
+          {/* ═══════════════════════════════════════════════════════════════════
+              ✅ BLOG Y NOTICIAS (PERMANECEN en productos.prilabsa.com)
+              ═══════════════════════════════════════════════════════════════════ */}
+
+          <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={
             <Suspense fallback={<PageLoader />}>
               <ArticlePage />
             </Suspense>
           } />
+          <Route path="/noticias" element={<Noticias />} />
           <Route path="/noticias/:id" element={
             <Suspense fallback={<PageLoader />}>
               <NoticiaPage />
             </Suspense>
           } />
+
+          {/* ═══════════════════════════════════════════════════════════════════
+              ⚖️ RUTAS LEGALES (PERMANECEN - GDPR requerido)
+              ═══════════════════════════════════════════════════════════════════ */}
+
           <Route path="/politica-de-privacidad" element={
             <Suspense fallback={<PageLoader />}>
               <PoliticaDePrivacidad />
@@ -207,19 +188,54 @@ function App() {
               <PoliticaDeCookies />
             </Suspense>
           } />
-          <Route path="/design-system" element={
-            <Suspense fallback={<PageLoader />}>
-              <DesignSystemPage />
-            </Suspense>
-          } />
-          <Route path="/login" element={<Login />} />
-          <Route path="/inventario-productos" element={
-            <Suspense fallback={<PageLoader />}>
-              <ProtectedRoute>
-                <InventarioProductos />
-              </ProtectedRoute>
-            </Suspense>
-          } />
+
+          {/* ═══════════════════════════════════════════════════════════════════
+              🛠️ RUTAS DE DESARROLLO (Solo en modo desarrollo)
+              ═══════════════════════════════════════════════════════════════════ */}
+
+          {import.meta.env.MODE !== 'production' && (
+            <>
+              <Route path="/dashboard" element={
+                <Suspense fallback={<PageLoader />}>
+                  <DeployDashboard />
+                </Suspense>
+              } />
+              <Route path="/home" element={
+                <Suspense fallback={<PageLoader />}>
+                  <HomePage />
+                </Suspense>
+              } />
+              <Route path="/deploy" element={
+                <Suspense fallback={<PageLoader />}>
+                  <DeployDashboard />
+                </Suspense>
+              } />
+              <Route path="/prilabsa" element={
+                <Suspense fallback={<PageLoader />}>
+                  <PrilabsaWebsite />
+                </Suspense>
+              } />
+              <Route path="/website2025" element={
+                <Suspense fallback={<PageLoader />}>
+                  <Website2025 />
+                </Suspense>
+              } />
+              <Route path="/design-system" element={
+                <Suspense fallback={<PageLoader />}>
+                  <DesignSystemPage />
+                </Suspense>
+              } />
+              <Route path="/login" element={<Login />} />
+              <Route path="/inventario-productos" element={
+                <Suspense fallback={<PageLoader />}>
+                  <ProtectedRoute>
+                    <InventarioProductos />
+                  </ProtectedRoute>
+                </Suspense>
+              } />
+            </>
+          )}
+
           </Routes>
           </Router>
             </CotizacionProvider>

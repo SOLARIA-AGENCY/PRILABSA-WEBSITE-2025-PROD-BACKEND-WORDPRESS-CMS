@@ -70,26 +70,33 @@ const Header = () => {
     >
       <div className="container mx-auto flex justify-between items-center">
                 <div className="flex-shrink-0 ml-6 md:ml-10 lg:ml-16">
-          <Link to="/">
+          {/* Logo → www.prilabsa.com (externo) */}
+          <a href="https://www.prilabsa.com/">
             <img src={lastScrollY > 50 ? logoAzul : logoBlanco} alt="Prilabsa Logo" style={{ height: '96px' }} />
-          </Link>
+          </a>
         </div>
 
         {/* Desktop Menu */}
                 <nav role="navigation" className={`hidden md:flex items-center space-x-4 font-bold ${lastScrollY > 50 ? 'text-[#3759C1]' : 'text-white'}`}>
-          <Link to="/" className="hover:text-orange-500">{t('header.navigation.home')}</Link>
-          <Link to="/quienes-somos" className="hover:text-orange-500">{t('header.navigation.about')}</Link>
-          <Link to="/oficinas" className="hover:text-orange-500">{t('header.navigation.offices')}</Link>
+          {/* Inicio → www.prilabsa.com (externo) */}
+          <a href="https://www.prilabsa.com/" className="hover:text-orange-500">{t('header.navigation.home')}</a>
+          {/* Quiénes Somos → www.prilabsa.com (externo) */}
+          <a href="https://www.prilabsa.com/quienes-somos" className="hover:text-orange-500">{t('header.navigation.about')}</a>
+          {/* Oficinas → www.prilabsa.com (externo) */}
+          <a href="https://www.prilabsa.com/oficinas" className="hover:text-orange-500">{t('header.navigation.offices')}</a>
+          {/* Productos → permanece interno (React Router) */}
           <Link to="/productos" className="hover:text-orange-500">{t('header.navigation.products')}</Link>
-          <div 
+          <div
             className="relative"
             onMouseEnter={() => setContactMenuOpen(true)}
             onMouseLeave={() => setContactMenuOpen(false)}
           >
-            <Link to="/contactanos" className="cursor-pointer hover:text-orange-500 py-2">{t('header.navigation.contact')}</Link>
+            {/* Contacto → www.prilabsa.com (externo) */}
+            <a href="https://www.prilabsa.com/contactanos" className="cursor-pointer hover:text-orange-500 py-2">{t('header.navigation.contact')}</a>
             {contactMenuOpen && (
               <div className="absolute left-0 top-full pt-2">
-                <Link to="/trabaja-con-nosotros" className={`block whitespace-nowrap py-1 text-sm uppercase hover:text-orange-500 ${lastScrollY > 50 ? 'text-[#3759C1]' : 'text-white'}`}>{t('header.navigation.careers')}</Link>
+                {/* Trabaja con Nosotros → www.prilabsa.com (externo) */}
+                <a href="https://www.prilabsa.com/trabaja-con-nosotros" className={`block whitespace-nowrap py-1 text-sm uppercase hover:text-orange-500 ${lastScrollY > 50 ? 'text-[#3759C1]' : 'text-white'}`}>{t('header.navigation.careers')}</a>
               </div>
             )}
           </div>
@@ -161,12 +168,18 @@ const Header = () => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-white text-gray-800 p-4">
                     <nav className="flex flex-col space-y-2 font-bold">
-            <Link to="/" className="block py-2 px-4 text-sm hover:bg-gray-100" onClick={() => setMobileMenuOpen(false)}>{t('header.navigation.home')}</Link>
-            <Link to="/quienes-somos" className="block py-2 px-4 text-sm hover:bg-gray-100" onClick={() => setMobileMenuOpen(false)}>{t('header.navigation.about')}</Link>
-            <Link to="/oficinas" className="block py-2 px-4 text-sm hover:bg-gray-100" onClick={() => setMobileMenuOpen(false)}>{t('header.navigation.offices')}</Link>
+            {/* Inicio → www.prilabsa.com (externo) */}
+            <a href="https://www.prilabsa.com/" className="block py-2 px-4 text-sm hover:bg-gray-100">{t('header.navigation.home')}</a>
+            {/* Quiénes Somos → www.prilabsa.com (externo) */}
+            <a href="https://www.prilabsa.com/quienes-somos" className="block py-2 px-4 text-sm hover:bg-gray-100">{t('header.navigation.about')}</a>
+            {/* Oficinas → www.prilabsa.com (externo) */}
+            <a href="https://www.prilabsa.com/oficinas" className="block py-2 px-4 text-sm hover:bg-gray-100">{t('header.navigation.offices')}</a>
+            {/* Productos → permanece interno (React Router) */}
             <Link to="/productos" className="block py-2 px-4 text-sm hover:bg-gray-100" onClick={() => setMobileMenuOpen(false)}>{t('header.navigation.products')}</Link>
-            <Link to="/contactanos" className="block py-2 px-4 text-sm hover:bg-gray-100" onClick={() => setMobileMenuOpen(false)}>{t('header.navigation.contact')}</Link>
-            <Link to="/trabaja-con-nosotros" className="block py-2 px-4 text-sm hover:bg-gray-100 pl-4" onClick={() => setMobileMenuOpen(false)}>- {t('header.navigation.careers')}</Link>
+            {/* Contacto → www.prilabsa.com (externo) */}
+            <a href="https://www.prilabsa.com/contactanos" className="block py-2 px-4 text-sm hover:bg-gray-100">{t('header.navigation.contact')}</a>
+            {/* Trabaja con Nosotros → www.prilabsa.com (externo) */}
+            <a href="https://www.prilabsa.com/trabaja-con-nosotros" className="block py-2 px-4 text-sm hover:bg-gray-100 pl-4">- {t('header.navigation.careers')}</a>
             <div className="mt-4 pt-4 border-t border-gray-200">
               <LanguageSelector showText={true} />
             </div>
