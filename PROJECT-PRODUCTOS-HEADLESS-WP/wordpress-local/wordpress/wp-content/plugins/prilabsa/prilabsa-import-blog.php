@@ -11,11 +11,16 @@
  */
 
 // Load WordPress
-require_once dirname( __FILE__ ) . '/../../../../../../wp-load.php';
+require_once dirname( __FILE__ ) . '/../../../wp-load.php';
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No se puede acceder directamente a este script.' );
 }
+
+// Load required WordPress admin files for media functions
+require_once ABSPATH . 'wp-admin/includes/media.php';
+require_once ABSPATH . 'wp-admin/includes/file.php';
+require_once ABSPATH . 'wp-admin/includes/image.php';
 
 /**
  * Blog Articles Data

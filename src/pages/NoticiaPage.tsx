@@ -76,24 +76,28 @@ const NoticiaPage = () => {
         ]}
       />
 
-      <div className="container mx-auto py-12 px-4">
-        <article className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
+      <div className="container mx-auto py-12 px-4 md:px-6 lg:px-8">
+        <article className="max-w-5xl mx-auto bg-white p-6 md:p-10 lg:p-12 rounded-lg shadow-md">
           <header className="mb-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-wider mb-4" style={{ color: '#3759C1' }}>{localizedContent}</h1>
-            <p className="text-gray-500 text-sm">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-wider mb-4" style={{ color: '#3759C1' }}>{localizedContent}</h1>
+            <p className="text-gray-500 text-sm md:text-base">
               Publicado el {article.date} por <span className="font-semibold">{getLocalizedContent(article.author, language)}</span>
             </p>
             <div className="mt-4 flex flex-wrap justify-center gap-2">
               {localizedTags.map(tag => (
-                <span key={tag} className="bg-white text-blue-800 border border-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">
+                <span key={tag} className="bg-white text-blue-800 border border-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
                   {tag}
                 </span>
               ))}
             </div>
           </header>
 
-          <div 
-            className="prose lg:prose-xl max-w-none text-gray-700"
+          <div
+            className="prose prose-lg md:prose-xl max-w-none text-gray-700 overflow-visible"
+            style={{
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word'
+            }}
             dangerouslySetInnerHTML={{ __html: getLocalizedContent(article.content, language) }}
           />
 

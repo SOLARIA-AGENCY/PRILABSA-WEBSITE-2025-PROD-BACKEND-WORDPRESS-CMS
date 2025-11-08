@@ -16,6 +16,17 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, basePath = '/blog' }
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 ease-in-out hover:shadow-xl group flex flex-col">
+      {/* Hero Image */}
+      {article.heroImage && (
+        <div className="relative w-full h-48 overflow-hidden">
+          <img
+            src={article.heroImage}
+            alt={localizedTitle}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+      )}
+
       <div className="p-4 flex flex-col flex-grow">
         <p className="text-sm text-gray-500 mb-2">
           {article.date || 'Fecha no disponible'} - {t('blog.by')} {localizedAuthor || 'Autor desconocido'}
