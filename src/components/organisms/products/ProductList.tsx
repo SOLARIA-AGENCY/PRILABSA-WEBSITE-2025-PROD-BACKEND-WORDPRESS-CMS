@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useProducts } from '../../../services/wordpressApi';
 import { useLanguage } from '../../../contexts/LanguageContext';
+import LoadingLogo from '../../LoadingLogo';
 import productTranslationService from '../../../services/ProductTranslationService';
 
 interface ProductListProps {
@@ -44,12 +45,10 @@ const ProductList: React.FC<ProductListProps> = ({ categorySlug, searchQuery }) 
   // ⭐ Estado de carga
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-16">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-gray-600">{t('products.messages.loading') || 'Cargando productos...'}</p>
-        </div>
-      </div>
+      <LoadingLogo
+        message={t('products.messages.loading') || 'Cargando productos...'}
+        size="md"
+      />
     );
   }
 

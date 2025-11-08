@@ -4,6 +4,7 @@ import { ChevronLeft, FileDown, ShoppingCart, X } from 'lucide-react';
 import { useProduct, useProducts } from '../services/wordpressApi';
 import { OptimizedProduct } from '../data/products/types';
 import Layout from '../components/Layout';
+import LoadingLogo from '../components/LoadingLogo';
 import NuestrasMarcas from '../components/NuestrasMarcas';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { formatProductDisplay } from '../utils/ProductCodeMapper';
@@ -55,9 +56,11 @@ const ProductoDetalle = () => {
   if (isLoading) {
     return (
       <Layout>
-        <div className="container mx-auto px-4 py-12 text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-gray-600">{t('products.messages.loading') || 'Cargando producto...'}</p>
+        <div className="container mx-auto px-4 py-12">
+          <LoadingLogo
+            message={t('products.messages.loading') || 'Cargando producto...'}
+            size="lg"
+          />
         </div>
       </Layout>
     );

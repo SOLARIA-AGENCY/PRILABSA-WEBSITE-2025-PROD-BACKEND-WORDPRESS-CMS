@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import StaticHero from '../components/StaticHero';
 import Breadcrumbs from '../components/Breadcrumbs';
 import ArticleCard from '../components/organisms/blog/ArticleCard';
+import LoadingLogo from '../components/LoadingLogo';
 
 import { useBlog } from '../services/wordpressApi';
 import SearchBar from '../components/molecules/SearchBar';
@@ -61,9 +62,8 @@ const Blog = () => {
             { name: t('breadcrumbs.blog'), path: '/blog' },
           ]}
         />
-        <div className="container mx-auto py-16 px-4 text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-gray-600">Cargando artículos...</p>
+        <div className="container mx-auto py-16 px-4">
+          <LoadingLogo message="Cargando artículos..." size="md" />
         </div>
       </Layout>
     );
