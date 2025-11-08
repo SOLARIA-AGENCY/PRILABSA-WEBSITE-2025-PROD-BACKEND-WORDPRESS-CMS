@@ -34,9 +34,23 @@ interface WordPressProduct {
     rendered: string
   }
   // Campos multiidioma (nivel superior, registrados con register_rest_field)
+  nombre_producto_es?: string
+  nombre_producto_en?: string
+  nombre_producto_pt?: string
   descripcion_es?: string
   descripcion_en?: string
   descripcion_pt?: string
+  // Beneficios (3 campos separados por idioma) - Nueva estructura
+  beneficio_1_es?: string
+  beneficio_2_es?: string
+  beneficio_3_es?: string
+  beneficio_1_en?: string
+  beneficio_2_en?: string
+  beneficio_3_en?: string
+  beneficio_1_pt?: string
+  beneficio_2_pt?: string
+  beneficio_3_pt?: string
+  // Beneficios legacy (textarea, mantener para compatibilidad)
   beneficios_es?: string
   beneficios_en?: string
   beneficios_pt?: string
@@ -230,16 +244,37 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
 
   // 🌐 Construir traducciones multiidioma
   // Usar campos _es/_en/_pt (nivel superior) si existen, sino usar campos legacy (acf) como fallback
+
+  // Nombres de producto multiidioma
+  const nombreES = cleanWordPressText(wpProduct.nombre_producto_es || wpProduct.title.rendered)
+  const nombreEN = cleanWordPressText(wpProduct.nombre_producto_en || wpProduct.title.rendered)
+  const nombrePT = cleanWordPressText(wpProduct.nombre_producto_pt || wpProduct.title.rendered)
+
   const descripcionES = cleanWordPressText(wpProduct.descripcion_es || wpProduct.acf.descripcion || '')
   const descripcionEN = cleanWordPressText(wpProduct.descripcion_en || wpProduct.acf.descripcion || '')
   const descripcionPT = cleanWordPressText(wpProduct.descripcion_pt || wpProduct.acf.descripcion || '')
 
-  const beneficiosES = (wpProduct.beneficios_es || wpProduct.acf.beneficios || '')
-    .split('\n').filter(b => b.trim()).map(cleanWordPressText)
-  const beneficiosEN = (wpProduct.beneficios_en || wpProduct.acf.beneficios || '')
-    .split('\n').filter(b => b.trim()).map(cleanWordPressText)
-  const beneficiosPT = (wpProduct.beneficios_pt || wpProduct.acf.beneficios || '')
-    .split('\n').filter(b => b.trim()).map(cleanWordPressText)
+  // Beneficios: Preferir campos separados (beneficio_1/2/3), sino usar textarea legacy
+  const beneficiosES = wpProduct.beneficio_1_es
+    ? [wpProduct.beneficio_1_es, wpProduct.beneficio_2_es, wpProduct.beneficio_3_es]
+        .filter(b => b && b.trim())
+        .map(cleanWordPressText)
+    : (wpProduct.beneficios_es || wpProduct.acf.beneficios || '')
+        .split('\n').filter(b => b.trim()).map(cleanWordPressText)
+
+  const beneficiosEN = wpProduct.beneficio_1_en
+    ? [wpProduct.beneficio_1_en, wpProduct.beneficio_2_en, wpProduct.beneficio_3_en]
+        .filter(b => b && b.trim())
+        .map(cleanWordPressText)
+    : (wpProduct.beneficios_en || wpProduct.acf.beneficios || '')
+        .split('\n').filter(b => b.trim()).map(cleanWordPressText)
+
+  const beneficiosPT = wpProduct.beneficio_1_pt
+    ? [wpProduct.beneficio_1_pt, wpProduct.beneficio_2_pt, wpProduct.beneficio_3_pt]
+        .filter(b => b && b.trim())
+        .map(cleanWordPressText)
+    : (wpProduct.beneficios_pt || wpProduct.acf.beneficios || '')
+        .split('\n').filter(b => b.trim()).map(cleanWordPressText)
 
   const presentacionES = (wpProduct.presentacion_es || wpProduct.acf.presentacion || '')
     .split('\n').filter(p => p.trim()).map(cleanWordPressText)
@@ -250,7 +285,7 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
 
   const translations: ProductTranslations = {
     es: {
-      name: cleanWordPressText(wpProduct.title.rendered),
+      name: nombreES,
       description: descripcionES,
       benefits: beneficiosES,
       presentation: presentacionES,
@@ -260,7 +295,7 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
       })) || []
     },
     en: {
-      name: cleanWordPressText(wpProduct.title.rendered),  // Nombre se mantiene igual por ahora
+      name: nombreEN,
       description: descripcionEN,
       benefits: beneficiosEN,
       presentation: presentacionEN,
@@ -270,7 +305,7 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
       })) || []
     },
     pt: {
-      name: cleanWordPressText(wpProduct.title.rendered),  // Nombre se mantiene igual por ahora
+      name: nombrePT,
       description: descripcionPT,
       benefits: beneficiosPT,
       presentation: presentacionPT,
@@ -285,7 +320,7 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
     id: wpProduct.acf.codigo,
     slug: wpProduct.acf.codigo.toLowerCase(),
     codigo: wpProduct.acf.codigo,
-    name: cleanWordPressText(wpProduct.title.rendered),
+    name: nombreES,  // Usar nombre multiidioma español
     description: descripcionES,  // Campo legacy usa español
     category: wpProduct.acf.categoria,
     subcategory: wpProduct.acf.subcategoria || '',

@@ -38,6 +38,17 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 					'placement'         => 'top',
 					'endpoint'          => 0,
 				),
+				// Nombre del Producto Español
+				array(
+					'key'               => 'field_productos_nombre_es',
+					'label'             => 'Nombre del Producto',
+					'name'              => 'nombre_producto_es',
+					'type'              => 'text',
+					'instructions'      => 'Nombre comercial del producto en español',
+					'required'          => 1,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ej: Probiótico Premium Plus',
+				),
 				// Descripción Español
 				array(
 					'key'               => 'field_productos_descripcion_es',
@@ -50,17 +61,38 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 					'maxlength'         => 2000,
 					'placeholder'       => 'Describe el producto, sus características principales y usos...',
 				),
-				// Beneficios Español
+				// Beneficio 1 Español
 				array(
-					'key'               => 'field_productos_beneficios_es',
-					'label'             => 'Beneficios (Español)',
-					'name'              => 'beneficios_es',
-					'type'              => 'textarea',
-					'instructions'      => 'Lista de beneficios del producto (separar con saltos de línea)',
+					'key'               => 'field_productos_beneficio_1_es',
+					'label'             => 'Beneficio 1',
+					'name'              => 'beneficio_1_es',
+					'type'              => 'text',
+					'instructions'      => 'Primer beneficio principal del producto',
 					'required'          => 0,
-					'rows'              => 4,
-					'maxlength'         => 1500,
-					'placeholder'       => 'Beneficio 1\nBeneficio 2\nBeneficio 3',
+					'maxlength'         => 200,
+					'placeholder'       => 'Ej: Mejora la salud intestinal',
+				),
+				// Beneficio 2 Español
+				array(
+					'key'               => 'field_productos_beneficio_2_es',
+					'label'             => 'Beneficio 2',
+					'name'              => 'beneficio_2_es',
+					'type'              => 'text',
+					'instructions'      => 'Segundo beneficio principal del producto',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ej: Aumenta la tasa de conversión alimenticia',
+				),
+				// Beneficio 3 Español
+				array(
+					'key'               => 'field_productos_beneficio_3_es',
+					'label'             => 'Beneficio 3',
+					'name'              => 'beneficio_3_es',
+					'type'              => 'text',
+					'instructions'      => 'Tercer beneficio principal del producto',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ej: Reduce la mortalidad',
 				),
 				// Presentación Español
 				array(
@@ -88,6 +120,17 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 					'placement'         => 'top',
 					'endpoint'          => 0,
 				),
+				// Nombre del Producto Inglés
+				array(
+					'key'               => 'field_productos_nombre_en',
+					'label'             => 'Product Name',
+					'name'              => 'nombre_producto_en',
+					'type'              => 'text',
+					'instructions'      => 'Commercial product name in English',
+					'required'          => 1,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ex: Premium Plus Probiotic',
+				),
 				// Descripción Inglés
 				array(
 					'key'               => 'field_productos_descripcion_en',
@@ -100,17 +143,38 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 					'maxlength'         => 2000,
 					'placeholder'       => 'Describe the product, main features and uses...',
 				),
-				// Beneficios Inglés
+				// Beneficio 1 Inglés
 				array(
-					'key'               => 'field_productos_beneficios_en',
-					'label'             => 'Benefits (English)',
-					'name'              => 'beneficios_en',
-					'type'              => 'textarea',
-					'instructions'      => 'List of product benefits (separate with line breaks)',
+					'key'               => 'field_productos_beneficio_1_en',
+					'label'             => 'Benefit 1',
+					'name'              => 'beneficio_1_en',
+					'type'              => 'text',
+					'instructions'      => 'First main product benefit',
 					'required'          => 0,
-					'rows'              => 4,
-					'maxlength'         => 1500,
-					'placeholder'       => 'Benefit 1\nBenefit 2\nBenefit 3',
+					'maxlength'         => 200,
+					'placeholder'       => 'Ex: Improves intestinal health',
+				),
+				// Beneficio 2 Inglés
+				array(
+					'key'               => 'field_productos_beneficio_2_en',
+					'label'             => 'Benefit 2',
+					'name'              => 'beneficio_2_en',
+					'type'              => 'text',
+					'instructions'      => 'Second main product benefit',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ex: Increases feed conversion rate',
+				),
+				// Beneficio 3 Inglés
+				array(
+					'key'               => 'field_productos_beneficio_3_en',
+					'label'             => 'Benefit 3',
+					'name'              => 'beneficio_3_en',
+					'type'              => 'text',
+					'instructions'      => 'Third main product benefit',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ex: Reduces mortality',
 				),
 				// Presentación Inglés
 				array(
@@ -138,6 +202,17 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 					'placement'         => 'top',
 					'endpoint'          => 0,
 				),
+				// Nombre del Producto Portugués
+				array(
+					'key'               => 'field_productos_nombre_pt',
+					'label'             => 'Nome do Produto',
+					'name'              => 'nombre_producto_pt',
+					'type'              => 'text',
+					'instructions'      => 'Nome comercial do produto em português',
+					'required'          => 1,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ex: Probiótico Premium Plus',
+				),
 				// Descripción Portugués
 				array(
 					'key'               => 'field_productos_descripcion_pt',
@@ -150,17 +225,38 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 					'maxlength'         => 2000,
 					'placeholder'       => 'Descreva o produto, características principais e usos...',
 				),
-				// Beneficios Portugués
+				// Beneficio 1 Portugués
 				array(
-					'key'               => 'field_productos_beneficios_pt',
-					'label'             => 'Benefícios (Português)',
-					'name'              => 'beneficios_pt',
-					'type'              => 'textarea',
-					'instructions'      => 'Lista de benefícios do produto (separar com quebras de linha)',
+					'key'               => 'field_productos_beneficio_1_pt',
+					'label'             => 'Benefício 1',
+					'name'              => 'beneficio_1_pt',
+					'type'              => 'text',
+					'instructions'      => 'Primeiro benefício principal do produto',
 					'required'          => 0,
-					'rows'              => 4,
-					'maxlength'         => 1500,
-					'placeholder'       => 'Benefício 1\nBenefício 2\nBenefício 3',
+					'maxlength'         => 200,
+					'placeholder'       => 'Ex: Melhora a saúde intestinal',
+				),
+				// Beneficio 2 Portugués
+				array(
+					'key'               => 'field_productos_beneficio_2_pt',
+					'label'             => 'Benefício 2',
+					'name'              => 'beneficio_2_pt',
+					'type'              => 'text',
+					'instructions'      => 'Segundo benefício principal do produto',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ex: Aumenta a taxa de conversão alimentar',
+				),
+				// Beneficio 3 Portugués
+				array(
+					'key'               => 'field_productos_beneficio_3_pt',
+					'label'             => 'Benefício 3',
+					'name'              => 'beneficio_3_pt',
+					'type'              => 'text',
+					'instructions'      => 'Terceiro benefício principal do produto',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ex: Reduz a mortalidade',
 				),
 				// Presentación Portugués
 				array(
@@ -204,12 +300,25 @@ add_action(
 	function () {
 		// Register multiidioma fields
 		$multiidioma_fields = array(
+			// Nombres de producto
+			'nombre_producto_es',
+			'nombre_producto_en',
+			'nombre_producto_pt',
+			// Descripciones
 			'descripcion_es',
 			'descripcion_en',
 			'descripcion_pt',
-			'beneficios_es',
-			'beneficios_en',
-			'beneficios_pt',
+			// Beneficios (3 campos separados por idioma)
+			'beneficio_1_es',
+			'beneficio_2_es',
+			'beneficio_3_es',
+			'beneficio_1_en',
+			'beneficio_2_en',
+			'beneficio_3_en',
+			'beneficio_1_pt',
+			'beneficio_2_pt',
+			'beneficio_3_pt',
+			// Presentaciones
 			'presentacion_es',
 			'presentacion_en',
 			'presentacion_pt',

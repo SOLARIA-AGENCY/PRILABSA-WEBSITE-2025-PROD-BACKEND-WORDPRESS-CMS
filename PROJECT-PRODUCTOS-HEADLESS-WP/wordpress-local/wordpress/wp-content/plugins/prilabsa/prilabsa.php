@@ -32,5 +32,7 @@ require_once PRILABSA_PLUGIN_DIR . 'prilabsa-productos-acf.php';
 require_once PRILABSA_PLUGIN_DIR . 'prilabsa-blog-acf.php';
 require_once PRILABSA_PLUGIN_DIR . 'prilabsa-noticias-acf.php';
 require_once PRILABSA_PLUGIN_DIR . 'prilabsa-rest-api-custom.php';
+require_once PRILABSA_PLUGIN_DIR . 'prilabsa-roles.php';
+require_once PRILABSA_PLUGIN_DIR . 'prilabsa-admin-ui.php';
 
 // Note: prilabsa-import-products.php is loaded separately via WP-CLI or manual execution
