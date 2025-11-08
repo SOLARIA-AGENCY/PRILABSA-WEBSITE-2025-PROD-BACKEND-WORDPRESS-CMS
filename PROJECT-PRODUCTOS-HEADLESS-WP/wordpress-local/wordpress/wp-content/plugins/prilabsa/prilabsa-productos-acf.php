@@ -3,11 +3,11 @@
  * PRILABSA Productos ACF Configuration
  *
  * Advanced Custom Fields para Productos con exposición REST API completa
- * Incluye campos multiidioma (es, en, pt) organizados en tabs para mejor UX
+ * Organización en 3 columnas (ES/EN/PT) para visualización simultánea
  *
  * @package PRILABSA_Productos_ACF
  * @author SOLARIA AGENCY
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 // Security: Exit if accessed directly
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Register ACF Field Group for Productos with Tabs
+ * Register ACF Field Group for Productos (3 Column Layout)
  */
 if ( function_exists( 'acf_add_local_field_group' ) ) {
 	acf_add_local_field_group(
@@ -24,250 +24,230 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 			'key'                   => 'group_prilabsa_productos',
 			'title'                 => 'Información del Producto (Multiidioma)',
 			'fields'                => array(
+
 				// ========================================
-				// TAB: ESPAÑOL
+				// FILA 1: NOMBRES (3 columnas)
 				// ========================================
-				array(
-					'key'               => 'field_productos_tab_es',
-					'label'             => '🇪🇸 Español',
-					'name'              => '',
-					'type'              => 'tab',
-					'instructions'      => '',
-					'required'          => 0,
-					'conditional_logic' => 0,
-					'placement'         => 'top',
-					'endpoint'          => 0,
-				),
-				// Nombre del Producto Español
 				array(
 					'key'               => 'field_productos_nombre_es',
-					'label'             => 'Nombre del Producto',
+					'label'             => '🇪🇸 Nombre del Producto',
 					'name'              => 'nombre_producto_es',
 					'type'              => 'text',
-					'instructions'      => 'Nombre comercial del producto en español',
+					'instructions'      => 'Nombre comercial en español',
 					'required'          => 1,
 					'maxlength'         => 200,
 					'placeholder'       => 'Ej: Probiótico Premium Plus',
+					'wrapper'           => array( 'width' => '33.33' ),
 				),
-				// Descripción Español
-				array(
-					'key'               => 'field_productos_descripcion_es',
-					'label'             => 'Descripción (Español)',
-					'name'              => 'descripcion_es',
-					'type'              => 'textarea',
-					'instructions'      => 'Descripción completa del producto en español',
-					'required'          => 1,
-					'rows'              => 5,
-					'maxlength'         => 2000,
-					'placeholder'       => 'Describe el producto, sus características principales y usos...',
-				),
-				// Beneficio 1 Español
-				array(
-					'key'               => 'field_productos_beneficio_1_es',
-					'label'             => 'Beneficio 1',
-					'name'              => 'beneficio_1_es',
-					'type'              => 'text',
-					'instructions'      => 'Primer beneficio principal del producto',
-					'required'          => 0,
-					'maxlength'         => 200,
-					'placeholder'       => 'Ej: Mejora la salud intestinal',
-				),
-				// Beneficio 2 Español
-				array(
-					'key'               => 'field_productos_beneficio_2_es',
-					'label'             => 'Beneficio 2',
-					'name'              => 'beneficio_2_es',
-					'type'              => 'text',
-					'instructions'      => 'Segundo beneficio principal del producto',
-					'required'          => 0,
-					'maxlength'         => 200,
-					'placeholder'       => 'Ej: Aumenta la tasa de conversión alimenticia',
-				),
-				// Beneficio 3 Español
-				array(
-					'key'               => 'field_productos_beneficio_3_es',
-					'label'             => 'Beneficio 3',
-					'name'              => 'beneficio_3_es',
-					'type'              => 'text',
-					'instructions'      => 'Tercer beneficio principal del producto',
-					'required'          => 0,
-					'maxlength'         => 200,
-					'placeholder'       => 'Ej: Reduce la mortalidad',
-				),
-				// Presentación Español
-				array(
-					'key'               => 'field_productos_presentacion_es',
-					'label'             => 'Presentación (Español)',
-					'name'              => 'presentacion_es',
-					'type'              => 'text',
-					'instructions'      => 'Formato de presentación del producto (ej: "Saco de 25 kg")',
-					'required'          => 0,
-					'maxlength'         => 200,
-					'placeholder'       => 'Ej: Saco de 25 kg, Botella de 1 litro',
-				),
-
-				// ========================================
-				// TAB: ENGLISH
-				// ========================================
-				array(
-					'key'               => 'field_productos_tab_en',
-					'label'             => '🇬🇧 English',
-					'name'              => '',
-					'type'              => 'tab',
-					'instructions'      => '',
-					'required'          => 0,
-					'conditional_logic' => 0,
-					'placement'         => 'top',
-					'endpoint'          => 0,
-				),
-				// Nombre del Producto Inglés
 				array(
 					'key'               => 'field_productos_nombre_en',
-					'label'             => 'Product Name',
+					'label'             => '🇬🇧 Product Name',
 					'name'              => 'nombre_producto_en',
 					'type'              => 'text',
-					'instructions'      => 'Commercial product name in English',
+					'instructions'      => 'Commercial name in English',
 					'required'          => 1,
 					'maxlength'         => 200,
 					'placeholder'       => 'Ex: Premium Plus Probiotic',
+					'wrapper'           => array( 'width' => '33.33' ),
 				),
-				// Descripción Inglés
-				array(
-					'key'               => 'field_productos_descripcion_en',
-					'label'             => 'Description (English)',
-					'name'              => 'descripcion_en',
-					'type'              => 'textarea',
-					'instructions'      => 'Complete product description in English',
-					'required'          => 1,
-					'rows'              => 5,
-					'maxlength'         => 2000,
-					'placeholder'       => 'Describe the product, main features and uses...',
-				),
-				// Beneficio 1 Inglés
-				array(
-					'key'               => 'field_productos_beneficio_1_en',
-					'label'             => 'Benefit 1',
-					'name'              => 'beneficio_1_en',
-					'type'              => 'text',
-					'instructions'      => 'First main product benefit',
-					'required'          => 0,
-					'maxlength'         => 200,
-					'placeholder'       => 'Ex: Improves intestinal health',
-				),
-				// Beneficio 2 Inglés
-				array(
-					'key'               => 'field_productos_beneficio_2_en',
-					'label'             => 'Benefit 2',
-					'name'              => 'beneficio_2_en',
-					'type'              => 'text',
-					'instructions'      => 'Second main product benefit',
-					'required'          => 0,
-					'maxlength'         => 200,
-					'placeholder'       => 'Ex: Increases feed conversion rate',
-				),
-				// Beneficio 3 Inglés
-				array(
-					'key'               => 'field_productos_beneficio_3_en',
-					'label'             => 'Benefit 3',
-					'name'              => 'beneficio_3_en',
-					'type'              => 'text',
-					'instructions'      => 'Third main product benefit',
-					'required'          => 0,
-					'maxlength'         => 200,
-					'placeholder'       => 'Ex: Reduces mortality',
-				),
-				// Presentación Inglés
-				array(
-					'key'               => 'field_productos_presentacion_en',
-					'label'             => 'Presentation (English)',
-					'name'              => 'presentacion_en',
-					'type'              => 'text',
-					'instructions'      => 'Product presentation format (e.g., "25 kg bag")',
-					'required'          => 0,
-					'maxlength'         => 200,
-					'placeholder'       => 'Ex: 25 kg bag, 1 liter bottle',
-				),
-
-				// ========================================
-				// TAB: PORTUGUÊS
-				// ========================================
-				array(
-					'key'               => 'field_productos_tab_pt',
-					'label'             => '🇵🇹 Português',
-					'name'              => '',
-					'type'              => 'tab',
-					'instructions'      => '',
-					'required'          => 0,
-					'conditional_logic' => 0,
-					'placement'         => 'top',
-					'endpoint'          => 0,
-				),
-				// Nombre del Producto Portugués
 				array(
 					'key'               => 'field_productos_nombre_pt',
-					'label'             => 'Nome do Produto',
+					'label'             => '🇵🇹 Nome do Produto',
 					'name'              => 'nombre_producto_pt',
 					'type'              => 'text',
-					'instructions'      => 'Nome comercial do produto em português',
+					'instructions'      => 'Nome comercial em português',
 					'required'          => 1,
 					'maxlength'         => 200,
 					'placeholder'       => 'Ex: Probiótico Premium Plus',
+					'wrapper'           => array( 'width' => '33.33' ),
 				),
-				// Descripción Portugués
+
+				// ========================================
+				// FILA 2: DESCRIPCIONES (3 columnas)
+				// ========================================
+				array(
+					'key'               => 'field_productos_descripcion_es',
+					'label'             => '🇪🇸 Descripción',
+					'name'              => 'descripcion_es',
+					'type'              => 'textarea',
+					'instructions'      => 'Descripción completa en español',
+					'required'          => 1,
+					'rows'              => 6,
+					'maxlength'         => 2000,
+					'placeholder'       => 'Describe el producto, características principales y usos...',
+					'wrapper'           => array( 'width' => '33.33' ),
+				),
+				array(
+					'key'               => 'field_productos_descripcion_en',
+					'label'             => '🇬🇧 Description',
+					'name'              => 'descripcion_en',
+					'type'              => 'textarea',
+					'instructions'      => 'Complete description in English',
+					'required'          => 1,
+					'rows'              => 6,
+					'maxlength'         => 2000,
+					'placeholder'       => 'Describe the product, main features and uses...',
+					'wrapper'           => array( 'width' => '33.33' ),
+				),
 				array(
 					'key'               => 'field_productos_descripcion_pt',
-					'label'             => 'Descrição (Português)',
+					'label'             => '🇵🇹 Descrição',
 					'name'              => 'descripcion_pt',
 					'type'              => 'textarea',
-					'instructions'      => 'Descrição completa do produto em português',
+					'instructions'      => 'Descrição completa em português',
 					'required'          => 1,
-					'rows'              => 5,
+					'rows'              => 6,
 					'maxlength'         => 2000,
 					'placeholder'       => 'Descreva o produto, características principais e usos...',
+					'wrapper'           => array( 'width' => '33.33' ),
 				),
-				// Beneficio 1 Portugués
+
+				// ========================================
+				// FILA 3: BENEFICIO 1 (3 columnas)
+				// ========================================
+				array(
+					'key'               => 'field_productos_beneficio_1_es',
+					'label'             => '🇪🇸 Beneficio 1',
+					'name'              => 'beneficio_1_es',
+					'type'              => 'text',
+					'instructions'      => 'Primer beneficio principal',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ej: Mejora la salud intestinal',
+					'wrapper'           => array( 'width' => '33.33' ),
+				),
+				array(
+					'key'               => 'field_productos_beneficio_1_en',
+					'label'             => '🇬🇧 Benefit 1',
+					'name'              => 'beneficio_1_en',
+					'type'              => 'text',
+					'instructions'      => 'First main benefit',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ex: Improves intestinal health',
+					'wrapper'           => array( 'width' => '33.33' ),
+				),
 				array(
 					'key'               => 'field_productos_beneficio_1_pt',
-					'label'             => 'Benefício 1',
+					'label'             => '🇵🇹 Benefício 1',
 					'name'              => 'beneficio_1_pt',
 					'type'              => 'text',
-					'instructions'      => 'Primeiro benefício principal do produto',
+					'instructions'      => 'Primeiro benefício principal',
 					'required'          => 0,
 					'maxlength'         => 200,
 					'placeholder'       => 'Ex: Melhora a saúde intestinal',
+					'wrapper'           => array( 'width' => '33.33' ),
 				),
-				// Beneficio 2 Portugués
+
+				// ========================================
+				// FILA 4: BENEFICIO 2 (3 columnas)
+				// ========================================
+				array(
+					'key'               => 'field_productos_beneficio_2_es',
+					'label'             => '🇪🇸 Beneficio 2',
+					'name'              => 'beneficio_2_es',
+					'type'              => 'text',
+					'instructions'      => 'Segundo beneficio principal',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ej: Aumenta la tasa de conversión alimenticia',
+					'wrapper'           => array( 'width' => '33.33' ),
+				),
+				array(
+					'key'               => 'field_productos_beneficio_2_en',
+					'label'             => '🇬🇧 Benefit 2',
+					'name'              => 'beneficio_2_en',
+					'type'              => 'text',
+					'instructions'      => 'Second main benefit',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ex: Increases feed conversion rate',
+					'wrapper'           => array( 'width' => '33.33' ),
+				),
 				array(
 					'key'               => 'field_productos_beneficio_2_pt',
-					'label'             => 'Benefício 2',
+					'label'             => '🇵🇹 Benefício 2',
 					'name'              => 'beneficio_2_pt',
 					'type'              => 'text',
-					'instructions'      => 'Segundo benefício principal do produto',
+					'instructions'      => 'Segundo benefício principal',
 					'required'          => 0,
 					'maxlength'         => 200,
 					'placeholder'       => 'Ex: Aumenta a taxa de conversão alimentar',
+					'wrapper'           => array( 'width' => '33.33' ),
 				),
-				// Beneficio 3 Portugués
+
+				// ========================================
+				// FILA 5: BENEFICIO 3 (3 columnas)
+				// ========================================
+				array(
+					'key'               => 'field_productos_beneficio_3_es',
+					'label'             => '🇪🇸 Beneficio 3',
+					'name'              => 'beneficio_3_es',
+					'type'              => 'text',
+					'instructions'      => 'Tercer beneficio principal',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ej: Reduce la mortalidad',
+					'wrapper'           => array( 'width' => '33.33' ),
+				),
+				array(
+					'key'               => 'field_productos_beneficio_3_en',
+					'label'             => '🇬🇧 Benefit 3',
+					'name'              => 'beneficio_3_en',
+					'type'              => 'text',
+					'instructions'      => 'Third main benefit',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ex: Reduces mortality',
+					'wrapper'           => array( 'width' => '33.33' ),
+				),
 				array(
 					'key'               => 'field_productos_beneficio_3_pt',
-					'label'             => 'Benefício 3',
+					'label'             => '🇵🇹 Benefício 3',
 					'name'              => 'beneficio_3_pt',
 					'type'              => 'text',
-					'instructions'      => 'Terceiro benefício principal do produto',
+					'instructions'      => 'Terceiro benefício principal',
 					'required'          => 0,
 					'maxlength'         => 200,
 					'placeholder'       => 'Ex: Reduz a mortalidade',
+					'wrapper'           => array( 'width' => '33.33' ),
 				),
-				// Presentación Portugués
+
+				// ========================================
+				// FILA 6: PRESENTACIÓN (3 columnas)
+				// ========================================
+				array(
+					'key'               => 'field_productos_presentacion_es',
+					'label'             => '🇪🇸 Presentación',
+					'name'              => 'presentacion_es',
+					'type'              => 'text',
+					'instructions'      => 'Formato de presentación',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ej: Saco de 25 kg, Botella de 1 litro',
+					'wrapper'           => array( 'width' => '33.33' ),
+				),
+				array(
+					'key'               => 'field_productos_presentacion_en',
+					'label'             => '🇬🇧 Presentation',
+					'name'              => 'presentacion_en',
+					'type'              => 'text',
+					'instructions'      => 'Presentation format',
+					'required'          => 0,
+					'maxlength'         => 200,
+					'placeholder'       => 'Ex: 25 kg bag, 1 liter bottle',
+					'wrapper'           => array( 'width' => '33.33' ),
+				),
 				array(
 					'key'               => 'field_productos_presentacion_pt',
-					'label'             => 'Apresentação (Português)',
+					'label'             => '🇵🇹 Apresentação',
 					'name'              => 'presentacion_pt',
 					'type'              => 'text',
-					'instructions'      => 'Formato de apresentação do produto (ex: "Saco de 25 kg")',
+					'instructions'      => 'Formato de apresentação',
 					'required'          => 0,
 					'maxlength'         => 200,
 					'placeholder'       => 'Ex: Saco de 25 kg, Garrafa de 1 litro',
+					'wrapper'           => array( 'width' => '33.33' ),
 				),
 			),
 			'location'              => array(
@@ -286,7 +266,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) {
 			'instruction_placement' => 'label',
 			'hide_on_screen'        => '',
 			'active'                => true,
-			'description'           => 'Campos multiidioma para productos PRILABSA',
+			'description'           => 'Campos multiidioma organizados en 3 columnas (ES/EN/PT)',
 			'show_in_rest'          => 1,
 		)
 	);
