@@ -28,6 +28,7 @@ require_once PRILABSA_PLUGIN_DIR . 'prilabsa-productos-cpt.php';
 require_once PRILABSA_PLUGIN_DIR . 'prilabsa-blog-cpt.php';
 require_once PRILABSA_PLUGIN_DIR . 'prilabsa-noticias-cpt.php';
 require_once PRILABSA_PLUGIN_DIR . 'prilabsa-acf-config.php';
+require_once PRILABSA_PLUGIN_DIR . 'prilabsa-productos-acf.php';
 require_once PRILABSA_PLUGIN_DIR . 'prilabsa-blog-acf.php';
 require_once PRILABSA_PLUGIN_DIR . 'prilabsa-noticias-acf.php';
 require_once PRILABSA_PLUGIN_DIR . 'prilabsa-rest-api-custom.php';

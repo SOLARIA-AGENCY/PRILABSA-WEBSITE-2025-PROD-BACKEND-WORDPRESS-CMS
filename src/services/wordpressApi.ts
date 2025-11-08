@@ -10,7 +10,7 @@
 
 import { useEffect, useState } from 'react'
 import useSWR from 'swr'
-import { OptimizedProduct } from '../data/products/types'
+import { OptimizedProduct, ProductTranslations } from '../data/products/types'
 
 // ============================================================================
 // CONFIGURACIÓN
@@ -33,8 +33,19 @@ interface WordPressProduct {
   title: {
     rendered: string
   }
+  // Campos multiidioma (nivel superior, registrados con register_rest_field)
+  descripcion_es?: string
+  descripcion_en?: string
+  descripcion_pt?: string
+  beneficios_es?: string
+  beneficios_en?: string
+  beneficios_pt?: string
+  presentacion_es?: string
+  presentacion_en?: string
+  presentacion_pt?: string
   acf: {
     codigo: string
+    // Campos legacy (solo español - compatibilidad retroactiva)
     descripcion: string
     beneficios: string  // Separado por \n
     presentacion: string  // Separado por \n
@@ -217,24 +228,74 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
   const imageFilename = imageURL ? imageURL.split('/').pop() || '' : ''
   const pdfFilename = pdfURL ? pdfURL.split('/').pop() || '' : ''
 
+  // 🌐 Construir traducciones multiidioma
+  // Usar campos _es/_en/_pt (nivel superior) si existen, sino usar campos legacy (acf) como fallback
+  const descripcionES = cleanWordPressText(wpProduct.descripcion_es || wpProduct.acf.descripcion || '')
+  const descripcionEN = cleanWordPressText(wpProduct.descripcion_en || wpProduct.acf.descripcion || '')
+  const descripcionPT = cleanWordPressText(wpProduct.descripcion_pt || wpProduct.acf.descripcion || '')
+
+  const beneficiosES = (wpProduct.beneficios_es || wpProduct.acf.beneficios || '')
+    .split('\n').filter(b => b.trim()).map(cleanWordPressText)
+  const beneficiosEN = (wpProduct.beneficios_en || wpProduct.acf.beneficios || '')
+    .split('\n').filter(b => b.trim()).map(cleanWordPressText)
+  const beneficiosPT = (wpProduct.beneficios_pt || wpProduct.acf.beneficios || '')
+    .split('\n').filter(b => b.trim()).map(cleanWordPressText)
+
+  const presentacionES = (wpProduct.presentacion_es || wpProduct.acf.presentacion || '')
+    .split('\n').filter(p => p.trim()).map(cleanWordPressText)
+  const presentacionEN = (wpProduct.presentacion_en || wpProduct.acf.presentacion || '')
+    .split('\n').filter(p => p.trim()).map(cleanWordPressText)
+  const presentacionPT = (wpProduct.presentacion_pt || wpProduct.acf.presentacion || '')
+    .split('\n').filter(p => p.trim()).map(cleanWordPressText)
+
+  const translations: ProductTranslations = {
+    es: {
+      name: cleanWordPressText(wpProduct.title.rendered),
+      description: descripcionES,
+      benefits: beneficiosES,
+      presentation: presentacionES,
+      specifications: wpProduct.acf.especificaciones?.map(spec => ({
+        key: cleanWordPressText(spec.clave),
+        value: cleanWordPressText(spec.valor)
+      })) || []
+    },
+    en: {
+      name: cleanWordPressText(wpProduct.title.rendered),  // Nombre se mantiene igual por ahora
+      description: descripcionEN,
+      benefits: beneficiosEN,
+      presentation: presentacionEN,
+      specifications: wpProduct.acf.especificaciones?.map(spec => ({
+        key: cleanWordPressText(spec.clave),
+        value: cleanWordPressText(spec.valor)
+      })) || []
+    },
+    pt: {
+      name: cleanWordPressText(wpProduct.title.rendered),  // Nombre se mantiene igual por ahora
+      description: descripcionPT,
+      benefits: beneficiosPT,
+      presentation: presentacionPT,
+      specifications: wpProduct.acf.especificaciones?.map(spec => ({
+        key: cleanWordPressText(spec.clave),
+        value: cleanWordPressText(spec.valor)
+      })) || []
+    }
+  }
+
   const optimizedProduct: OptimizedProduct = {
     id: wpProduct.acf.codigo,
     slug: wpProduct.acf.codigo.toLowerCase(),
     codigo: wpProduct.acf.codigo,
     name: cleanWordPressText(wpProduct.title.rendered),
-    description: cleanWordPressText(wpProduct.acf.descripcion || ''),
+    description: descripcionES,  // Campo legacy usa español
     category: wpProduct.acf.categoria,
     subcategory: wpProduct.acf.subcategoria || '',
-    benefits: wpProduct.acf.beneficios
-      ? wpProduct.acf.beneficios.split('\n').filter(b => b.trim()).map(cleanWordPressText)
-      : [],
-    presentation: wpProduct.acf.presentacion
-      ? wpProduct.acf.presentacion.split('\n').filter(p => p.trim()).map(cleanWordPressText)
-      : [],
+    benefits: beneficiosES,  // Campo legacy usa español
+    presentation: presentacionES,  // Campo legacy usa español
     specifications: wpProduct.acf.especificaciones?.map(spec => ({
       key: cleanWordPressText(spec.clave),
       value: cleanWordPressText(spec.valor)
     })) || [],
+    translations,  // ⭐ Nuevo campo multiidioma
     assets: {
       image: {
         filename: imageFilename,
