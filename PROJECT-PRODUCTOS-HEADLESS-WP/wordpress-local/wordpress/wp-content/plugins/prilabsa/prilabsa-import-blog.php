@@ -174,7 +174,23 @@ foreach ( $blog_articles as $index => $article_data ) {
 	);
 
 	if ( ! empty( $existing ) ) {
-		echo "  ⚠️  Ya existe, omitiendo...\n\n";
+		$post_id = $existing[0]->ID;
+		echo "  ℹ️  Ya existe (ID: $post_id), verificando imagen...\n";
+
+		// Update featured image if missing
+		$current_thumbnail = get_post_thumbnail_id( $post_id );
+		if ( empty( $current_thumbnail ) && ! empty( $article_data['featured_image'] ) ) {
+			echo "  📸 Subiendo imagen desde URL...\n";
+			$image_id = media_sideload_image( $article_data['featured_image'], $post_id, $article_data['post_title'], 'id' );
+			if ( ! is_wp_error( $image_id ) ) {
+				set_post_thumbnail( $post_id, $image_id );
+				echo "  ✅ Imagen agregada correctamente\n\n";
+			} else {
+				echo "  ⚠️  Error al subir imagen: " . $image_id->get_error_message() . "\n\n";
+			}
+		} else {
+			echo "  ✅ Ya tiene imagen asignada\n\n";
+		}
 		continue;
 	}
 

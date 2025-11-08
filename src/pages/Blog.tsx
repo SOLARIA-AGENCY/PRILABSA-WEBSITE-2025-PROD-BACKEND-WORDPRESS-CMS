@@ -102,7 +102,7 @@ const Blog = () => {
       <StaticHero
         title={t('blog.pageTitle')}
         subtitle={t('blog.subtitle')}
-        backgroundImage="/assets/iniciodev/blue-texture-background.jpg"
+        backgroundImage="https://images.pexels.com/photos/7562313/pexels-photo-7562313.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
       />
       <Breadcrumbs
         paths={[
