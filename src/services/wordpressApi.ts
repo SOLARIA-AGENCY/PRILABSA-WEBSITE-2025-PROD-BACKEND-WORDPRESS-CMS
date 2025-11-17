@@ -16,7 +16,7 @@ import { OptimizedProduct, ProductTranslations } from '../data/products/types'
 // CONFIGURACIÓN
 // ============================================================================
 
-const WP_BASE_URL = 'http://localhost:8000/wp-json'
+const WP_BASE_URL = import.meta.env.VITE_WP_API_BASE_URL || 'https://productos.prilabsa.com/wp-json'
 const PRODUCTOS_ENDPOINT = '/wp/v2/productos'
 const PRODUCTS_PER_PAGE = 500  // Límite aumentado para permitir expansión del catálogo (actual: 105, futuro: hasta 500)
 
@@ -292,24 +292,24 @@ async function transformProduct(wpProduct: WordPressProduct): Promise<OptimizedP
   // Beneficios: Preferir campos separados (beneficio_1/2/3), sino usar textarea legacy
   const beneficiosES = wpProduct.beneficio_1_es
     ? [wpProduct.beneficio_1_es, wpProduct.beneficio_2_es, wpProduct.beneficio_3_es]
-        .filter(b => b && b.trim())
+        .filter((b): b is string => Boolean(b && b.trim()))
         .map(cleanWordPressText)
     : (wpProduct.beneficios_es || wpProduct.acf.beneficios || '')
-        .split('\n').filter(b => b.trim()).map(cleanWordPressText)
+        .split('\n').filter((b): b is string => Boolean(b && b.trim())).map(cleanWordPressText)
 
   const beneficiosEN = wpProduct.beneficio_1_en
     ? [wpProduct.beneficio_1_en, wpProduct.beneficio_2_en, wpProduct.beneficio_3_en]
-        .filter(b => b && b.trim())
+        .filter((b): b is string => Boolean(b && b.trim()))
         .map(cleanWordPressText)
     : (wpProduct.beneficios_en || wpProduct.acf.beneficios || '')
-        .split('\n').filter(b => b.trim()).map(cleanWordPressText)
+        .split('\n').filter((b): b is string => Boolean(b && b.trim())).map(cleanWordPressText)
 
   const beneficiosPT = wpProduct.beneficio_1_pt
     ? [wpProduct.beneficio_1_pt, wpProduct.beneficio_2_pt, wpProduct.beneficio_3_pt]
-        .filter(b => b && b.trim())
+        .filter((b): b is string => Boolean(b && b.trim()))
         .map(cleanWordPressText)
     : (wpProduct.beneficios_pt || wpProduct.acf.beneficios || '')
-        .split('\n').filter(b => b.trim()).map(cleanWordPressText)
+        .split('\n').filter((b): b is string => Boolean(b && b.trim())).map(cleanWordPressText)
 
   const presentacionES = (wpProduct.presentacion_es || wpProduct.acf.presentacion || '')
     .split('\n').filter(p => p.trim()).map(cleanWordPressText)

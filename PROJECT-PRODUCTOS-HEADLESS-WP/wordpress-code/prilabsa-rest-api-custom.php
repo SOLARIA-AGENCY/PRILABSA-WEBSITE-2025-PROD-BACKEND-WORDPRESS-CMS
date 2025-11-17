@@ -671,7 +671,7 @@ class PRILABSA_REST_API_Custom {
 	 */
 	public function add_cache_headers( $result, $server, $request ) {
 		// Only cache GET requests
-		if ( 'GET' !== $request->get_method() ) {
+		if ( $request->get_method() !== 'GET' ) {
 			return $result;
 		}
 

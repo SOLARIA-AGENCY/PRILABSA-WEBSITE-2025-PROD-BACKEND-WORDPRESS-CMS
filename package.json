@@ -90,6 +90,7 @@
     "@emmett.deen/linear-mcp-server": "^1.0.0",
     "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
+    "@playwright/mcp": "^0.0.47",
     "@react-pdf/renderer": "^4.3.0",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/postcss": "^4.1.10",

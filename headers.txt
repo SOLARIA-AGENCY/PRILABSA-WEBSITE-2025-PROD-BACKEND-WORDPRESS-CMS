@@ -1,0 +1,15 @@
+HTTP/2 200 
+x-powered-by: PHP/8.3.26
+expires: Wed, 11 Jan 1984 05:00:00 GMT
+cache-control: no-cache, must-revalidate, max-age=0, no-store, private
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+set-cookie: wordpress_test_cookie=WP%20Cookie%20check; path=/; secure; HttpOnly
+set-cookie: wordpress_sec_1183995bfe6d10d49ea13dc7602cb6a6=facipp%7C1763577320%7CifQR7lXrbMS6HjdlSe6w8fShiuXgko3eI6wqAodtmMh%7C226b73ce5d31ce19d630297ad9bc9b7c356c3aac00a561b6c58fdd8df2fec1c9; path=/wp-content/plugins; secure; HttpOnly
+set-cookie: wordpress_sec_1183995bfe6d10d49ea13dc7602cb6a6=facipp%7C1763577320%7CifQR7lXrbMS6HjdlSe6w8fShiuXgko3eI6wqAodtmMh%7C226b73ce5d31ce19d630297ad9bc9b7c356c3aac00a561b6c58fdd8df2fec1c9; path=/wp-admin; secure; HttpOnly
+set-cookie: wordpress_logged_in_1183995bfe6d10d49ea13dc7602cb6a6=facipp%7C1763577320%7CifQR7lXrbMS6HjdlSe6w8fShiuXgko3eI6wqAodtmMh%7C17d927ac20e18cd05d5a55186db6c845fc4046a6490e3bf26b5b63719280dd04; path=/; secure; HttpOnly
+vary: Accept-Encoding
+content-type: text/html; charset=UTF-8
+date: Mon, 17 Nov 2025 18:35:20 GMT
+server: Apache
+
