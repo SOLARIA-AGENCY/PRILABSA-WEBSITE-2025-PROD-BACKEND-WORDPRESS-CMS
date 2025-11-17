@@ -1,20 +1,23 @@
-# BEGIN WordPress
-# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
-# dynamically generated, and should only be modified via WordPress filters.
-# Any changes to the directives between these markers will be overwritten.
+# PRILABSA Website Configuration
+# Frontend served from root, WordPress API available
 
-<IfModule mod_rewrite.c>
+# Enable rewrite engine
 RewriteEngine On
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /
 
-# Allow direct access to PRILABSA import scripts
+# WordPress routes - serve from WordPress installation
+RewriteRule ^wp-admin/ - [L]
+RewriteRule ^wp-login.php - [L]
+RewriteRule ^wp-json/ - [L]
+RewriteRule ^wp-includes/ - [L]
+RewriteRule ^wp-content/ - [L]
+
+# Allow direct access to import scripts
 RewriteRule ^(simple-import|embedded-import|import-products|admin-import|ajax-import-handler)\.php$ - [L]
 
-RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
-</IfModule>
+# If file or directory exists, serve it
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
 
-# END WordPress
+# For all other requests, serve index.html (SPA)
+RewriteRule ^(.*)$ index.html [L]
