@@ -38,14 +38,46 @@ Transform the static 105-product catalog of PRILABSA into a dynamic system manag
 
 ### Frontend (No Changes to Design)
 ```typescript
-// Existing Stack (Preserved)
-React 19.1.0 + TypeScript 5.3+ + Vite 6.3.6 + TailwindCSS 4.1.10
-React Router 7.7.0 + i18next 25.3.2
+// Existing Stack (Preserved) - ⚠️ CRITICAL: DO NOT MODIFY DEPENDENCIES
+React 19.2.0 + TypeScript 5.3+ + Vite 6.3.6 + TailwindCSS 4.1.10
+React Router 7.9.6 + i18next 25.3.2 + @dr.pogodin/react-helmet 3.0.2
+react-leaflet 5.0.0 + leaflet 1.9.4
 
 // New Additions (Functionality Only)
 Axios           → HTTP client for WordPress API
 SWR             → API caching and revalidation
 ```
+
+### ⚠️ CRITICAL DEPENDENCY WARNING (2025-11-18)
+**PROBLEM RESOLVED**: Frontend was non-functional due to dependency incompatibility
+**SOLUTION**: Restored original compatible dependencies from commit `8eb27b2e`
+
+**LOCKED DEPENDENCIES** - NEVER MODIFY THESE VERSIONS:
+```json
+{
+  "react": "19.2.0",
+  "react-dom": "19.2.0", 
+  "react-router-dom": "7.9.6",
+  "react-leaflet": "5.0.0",
+  "@dr.pogodin/react-helmet": "^3.0.2",
+  "leaflet": "1.9.4"
+}
+```
+
+**WHAT CAUSED THE ISSUE**:
+- Attempted downgrade to React 18.3.1 (incompatible with project design)
+- React Router 6.x (incompatible with React 19)
+- react-leaflet 4.x (incompatible with React 19)
+- react-helmet-async (different API from @dr.pogodin/react-helmet)
+
+**SOLUTION IMPLEMENTED**:
+1. Created branch `frontend-funcional` from working commit `8eb27b2e`
+2. Identified original compatible dependency versions
+3. Restored package.json with correct versions
+4. Clean reinstall with `yarn install`
+5. Verified frontend functionality
+
+**RESULT**: ✅ Frontend fully functional at http://localhost:5174
 
 ### Backend (New - Headless WordPress)
 ```php
@@ -388,6 +420,9 @@ src/
 - ❌ Introduce technical debt ("fix later")
 - ❌ Speculate about WordPress APIs without verification
 - ❌ Deploy to production before local testing complete
+- ❌ **CRITICAL**: MODIFY DEPENDENCY VERSIONS (React, React Router, react-leaflet, helmet)
+- ❌ Downgrade React 19 to React 18 (breaks entire frontend)
+- ❌ Change major versions of core dependencies without testing
 
 ### ALWAYS Do
 - ✅ Read specs before writing code
@@ -397,6 +432,9 @@ src/
 - ✅ Update learning log when discovering patterns
 - ✅ Preserve existing design 100%
 - ✅ Test locally before production migration
+- ✅ **CRITICAL**: Verify dependency compatibility before any changes
+- ✅ **CRITICAL**: Test frontend functionality after dependency updates
+- ✅ **CRITICAL**: Use exact versions for core dependencies (no ranges)
 
 ---
 
@@ -463,6 +501,7 @@ Ready for instructions. What would you like to work on?
 ## 🔄 VERSION HISTORY
 
 - **1.0.0** (2025-11-04): Initial context file created
+- **1.1.0** (2025-11-18): Added critical dependency lock warning after frontend restoration
 - Future versions will be tracked as project evolves
 
 ---

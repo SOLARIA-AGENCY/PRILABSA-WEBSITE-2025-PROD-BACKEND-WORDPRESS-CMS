@@ -34,11 +34,13 @@ Sitio web corporativo moderno para PRILABSA (Prime Laboratorio Prilab SA), empre
 ## Stack Tecnológico
 
 ### Frontend
-- **React 19**: Framework de interfaz de usuario
+- **React 19.2.0**: Framework de interfaz de usuario ⚠️ **LOCKED VERSION**
 - **TypeScript 5.3+**: Tipado estático y desarrollo robusto
 - **Vite 6.3**: Build tool optimizado y servidor de desarrollo
 - **TailwindCSS 4.1**: Framework de estilos utilitarios
-- **React Router 7**: Navegación client-side
+- **React Router 7.9.6**: Navegación client-side ⚠️ **LOCKED VERSION**
+- **react-leaflet 5.0.0**: Mapas interactivos ⚠️ **LOCKED VERSION**
+- **@dr.pogodin/react-helmet 3.0.2**: SEO meta tags ⚠️ **LOCKED VERSION**
 
 ### Optimización y Performance
 - **Code Splitting**: Carga dinámica de componentes
@@ -100,23 +102,55 @@ src/
 ## 🛠️ Desarrollo
 
 ```bash
-# Instalación
-npm install
+# Instalación (CRITICAL: Use yarn for dependency resolution)
+yarn install
 
 # Desarrollo
-npm run dev          # Puerto 5174
-npm run build        # Build producción
-npm run preview      # Preview build
+yarn run dev          # Puerto 5174 - Frontend funcional
+yarn run build        # Build producción
+yarn run preview      # Preview build
 
 # Testing
-npm run test         # Tests unitarios
-npm run test:ui      # UI tests
-npm run test:e2e     # Tests E2E
+yarn run test         # Tests unitarios
+yarn run test:ui      # UI tests
+yarn run test:e2e     # Tests E2E
 
 # Linting & Formatting
-npm run lint         # ESLint
-npm run type-check   # TypeScript check
+yarn run lint         # ESLint
+yarn run type-check   # TypeScript check
 ```
+
+## ⚠️ CRITICAL DEPENDENCY WARNING (2025-11-18)
+
+**FRONTEND RESTORED**: El proyecto estaba no funcional por incompatibilidad de dependencias
+
+**DEPENDENCIAS BLOQUEADAS** - NO MODIFICAR NUNCA:
+```json
+{
+  "react": "19.2.0",
+  "react-dom": "19.2.0",
+  "react-router-dom": "7.9.6",
+  "react-leaflet": "5.0.0", 
+  "@dr.pogodin/react-helmet": "^3.0.2",
+  "leaflet": "1.9.4"
+}
+```
+
+**¿QUÉ PASÓ?**
+- Intento de downgrade a React 18.3.1 (incompatible)
+- React Router 6.x incompatible con React 19
+- react-leaflet 4.x incompatible con React 19
+- Cambio a react-helmet-async (API diferente)
+
+**SOLUCIÓN APLICADA**:
+1. Crear rama `frontend-funcional` desde commit `8eb27b2e`
+2. Identificar versiones compatibles originales
+3. Restaurar package.json con versiones correctas
+4. Limpieza completa: `rm -rf node_modules yarn.lock`
+5. Reinstalar: `yarn install`
+6. Verificar funcionalidad: ✅ http://localhost:5174
+
+**RESULTADO**: ✅ Frontend 100% funcional
 
 ## 🌍 Internacionalización
 
@@ -230,6 +264,20 @@ test: agregar/actualizar tests
 chore: tareas mantenimiento
 ```
 
+### ⚠️ REGLAS CRÍTICAS DE CONTRIBUCIÓN
+
+**PROHIBIDO ABSOLUTAMENTE**:
+- ❌ Modificar versiones de React, React Router, react-leaflet, helmet
+- ❌ Hacer downgrade de React 19 a React 18
+- ❌ Cambiar versiones mayores sin testing completo
+- ❌ Usar `npm install` (usar siempre `yarn install`)
+
+**OBLIGATORIO**:
+- ✅ Verificar frontend funcional después de cambios
+- ✅ Usar versiones exactas (no rangos) para dependencias core
+- ✅ Testear en localhost:5174 antes de PR
+- ✅ Documentar cambios en dependencias si son necesarios
+
 ## 📄 Licencia
 
 © 2025 Prilabsa. Todos los derechos reservados.
@@ -249,6 +297,18 @@ Este proyecto es de uso privado y propiedad exclusiva de PRILABSA (Prime Laborat
 
 ---
 
+## 📝 HISTORIAL DE CAMBIOS CRÍTICOS
+
+### 2025-11-18: Restauración Frontend Funcional
+- **Problema**: Frontend completamente no funcional
+- **Causa**: Incompatibilidad de dependencias (React 19 vs 18)
+- **Solución**: Restaurar dependencias compatibles desde commit `8eb27b2e`
+- **Resultado**: ✅ Frontend 100% operativo en http://localhost:5174
+- **Lección**: Nunca modificar dependencias core sin testing exhaustivo
+
+---
+
 **PRILABSA - Especialistas en Soluciones Acuícolas**  
 *Sitio web desarrollado con tecnologías modernas para máximo rendimiento*
-# Test main deployment - Wed Aug 20 10:49:19 CEST 2025
+
+**Última Actualización Crítica**: 2025-11-18 (Frontend Restaurado)

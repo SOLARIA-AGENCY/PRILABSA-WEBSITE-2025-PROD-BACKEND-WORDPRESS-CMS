@@ -915,6 +915,14 @@
           "description": "Specifies a list of Tail Workers that are bound to this Worker environment\n\nNOTE: This field is not automatically inherited from the top level environment, and so must be specified in every named environment.",
           "default": []
         },
+        "streaming_tail_consumers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StreamingTailConsumer"
+          },
+          "description": "Specifies a list of Streaming Tail Workers that are bound to this Worker environment\n\nNOTE: This field is not automatically inherited from the top level environment, and so must be specified in every named environment.",
+          "default": []
+        },
         "dispatch_namespaces": {
           "type": "array",
           "items": {
@@ -2102,6 +2110,14 @@
           "description": "Specifies a list of Tail Workers that are bound to this Worker environment\n\nNOTE: This field is not automatically inherited from the top level environment, and so must be specified in every named environment.",
           "default": []
         },
+        "streaming_tail_consumers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StreamingTailConsumer"
+          },
+          "description": "Specifies a list of Streaming Tail Workers that are bound to this Worker environment\n\nNOTE: This field is not automatically inherited from the top level environment, and so must be specified in every named environment.",
+          "default": []
+        },
         "dispatch_namespaces": {
           "type": "array",
           "items": {
@@ -2854,6 +2870,19 @@
         "environment": {
           "type": "string",
           "description": "(Optional) The environment of the service."
+        }
+      },
+      "required": [
+        "service"
+      ],
+      "additionalProperties": false
+    },
+    "StreamingTailConsumer": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "The name of the service streaming tail events will be forwarded to."
         }
       },
       "required": [

@@ -570,6 +570,37 @@ Para activar sistema de agentes:
 
 ---
 
-**Versión**: 1.0.0
-**Última Actualización**: 2025-11-04
+**Versión**: 1.1.0
+**Última Actualización**: 2025-11-18
 **Mantenido por**: ECO (Engineering Coordination Officer)
+
+---
+
+## 🚨 CRITICAL UPDATES (2025-11-18)
+
+### DEPENDENCY LOCK PROTOCOL
+**INCIDENT**: Frontend completely non-functional due to dependency incompatibility
+**RESOLUTION**: Restored working dependencies from commit `8eb27b2e`
+
+**LOCKED DEPENDENCIES** - ALL AGENTS MUST PRESERVE:
+```json
+{
+  "react": "19.2.0",
+  "react-dom": "19.2.0",
+  "react-router-dom": "7.9.6", 
+  "react-leaflet": "5.0.0",
+  "@dr.pogodin/react-helmet": "^3.0.2",
+  "leaflet": "1.9.4"
+}
+```
+
+**AGENT RESPONSIBILITIES**:
+- **THETA (Frontend)**: Never modify core dependencies without ECO approval
+- **DELTA (DevOps)**: Use exact versions in CI/CD pipelines
+- **PSI (Testing)**: Include dependency verification in test suite
+- **ECO**: Enforce dependency lock protocol
+
+**VIOLATION CONSEQUENCES**:
+- Immediate rollback to working commit
+- Full incident report required
+- Updated learning log with antipattern documentation
