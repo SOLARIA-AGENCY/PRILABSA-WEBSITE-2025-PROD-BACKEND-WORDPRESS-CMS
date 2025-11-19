@@ -121,6 +121,7 @@
     "remark-gfm": "^4.0.1",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.2.10",
+    "swr": "^2.3.6",
     "tailwindcss": "^4.1.10",
     "typescript": "^5.3.3",
     "vite": "^6.3.6",

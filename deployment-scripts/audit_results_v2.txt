@@ -1,0 +1,42 @@
+--- 1. Plugins Instalados (en /wordpress/wp-content/plugins) ---
+drwxr-xr-x    3 f55gt259sx f55gt259sx       4096 Nov 12 10:02 .
+drwxr-xr-x   10 f55gt259sx f55gt259sx       4096 Nov 18 11:03 ..
+drwxr-xr-x    4 f55gt259sx f55gt259sx       4096 Nov 12 10:02 akismet
+-rw-r--r--    1 f55gt259sx f55gt259sx       2646 Mar  5  2025 hello.php
+-rw-r--r--    1 f55gt259sx f55gt259sx         28 Jun  5  2014 index.php
+--- 2. Plugins Prilabsa (en /wordpress/wp-content/plugins/prilabsa-productos) ---
+--- 3. Uploads (en /wordpress/wp-content/uploads/prilabsa-productos) ---
+drwxr-xr-x    2 f55gt259sx f55gt259sx       4096 Nov 18 10:53 .
+drwxr-xr-x    6 f55gt259sx f55gt259sx       4096 Nov 18 10:52 ..
+-rw-r--r--    1 f55gt259sx f55gt259sx     196238 Nov 18 10:52 AD001_COMBACID_XL.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     722135 Nov 18 10:52 AD002_Carophyll_Pink.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     715463 Nov 18 10:52 AD003_Desinfectante_Argentyne.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     632971 Nov 18 10:52 AD004_Emerald.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     976794 Nov 18 10:52 AD005_Florfenicol.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     976949 Nov 18 10:52 AD006_Oxitetraciclina.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     744050 Nov 18 10:52 AD007_Prime_Booster.png
+-rw-r--r--    1 f55gt259sx f55gt259sx    1011900 Nov 18 10:52 AD008_PROTECTOR_D3_ZINC_ACTIVADO.PNG
+-rw-r--r--    1 f55gt259sx f55gt259sx     714218 Nov 18 10:52 AD010_Vevovitall.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     982711 Nov 18 10:52 AD011_Vitamina_C.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     905978 Nov 18 10:52 AD012_Vitamina_C_Monofosfatada.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     841033 Nov 18 10:52 AD09_SAPONINA.PNG
+-rw-r--r--    1 f55gt259sx f55gt259sx    1180459 Nov 18 10:52 AL001_Advance_Feed.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     988287 Nov 18 10:52 AL002_Artemia_Adulta_Congelada.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     686891 Nov 18 10:52 AL003_Brine_Shrimp_Flake.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     909868 Nov 18 10:52 AL004_Calamares.png
+-rw-r--r--    1 f55gt259sx f55gt259sx    1002670 Nov 18 10:52 AL005_Cistos_de_Artemia.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     441200 Nov 18 10:52 AL006_Espirulina.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     365515 Nov 18 10:52 AL007_EZ_ARTEMIA_MICROENCAPSULADOS.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     850320 Nov 18 10:52 AL008_EZ_ARTEMIA_ULTRA_MICROENCAPSULADOS.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     371767 Nov 18 10:52 AL009_EZ_LARVA_MICROENCAPSULADOS.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     826912 Nov 18 10:53 AL010_EZ_Mate.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     724758 Nov 18 10:53 AL011_Flake_Negro_de_Artemia.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     750374 Nov 18 10:53 AL012_GOLD_FEED_MICROPARTICULADOS.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     847971 Nov 18 10:53 AL013_KRILL_CONGELADO.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     703633 Nov 18 10:53 AL014_LARVA_AP_100_MICROPARTICULADOS.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     737920 Nov 18 10:53 AL015_LARVA_Z_PLUS_MICROPARTICULADOS.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     602038 Nov 18 10:53 AL016_Mejillones.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     611492 Nov 18 10:53 AL017_MPs_MICROPARTICULADOS.png
+-rw-r--r--    1 f55gt259sx f55gt259sx     917071 Nov 18 10:53 AL018_P_VANNAMEI_MICROPARTICULADO.PNG
+-rw-r--r--    1 f55gt259sx f55gt259sx     219708 Nov 18 10:53 AL019_Pre_Mix_PL_Raceway_40_9.png
+--- 4. Uploads Imágenes ---

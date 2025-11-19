@@ -1,0 +1,27 @@
+--- 1. Estructura Raíz WordPress ---
+drwxr-xr-x    5 f55gt259sx f55gt259sx       4096 Nov 12 10:02 .
+drwxr-x---   20 f55gt259sx 65534            4096 Nov 19 01:20 ..
+-rw-r--r--    1 f55gt259sx f55gt259sx       1040 Nov  5 14:07 .htaccess
+-rw-r--r--    1 f55gt259sx f55gt259sx        405 Feb  5  2020 index.php
+-rw-r--r--    1 f55gt259sx f55gt259sx      19903 Mar  6  2025 license.txt
+-rw-r--r--    1 f55gt259sx f55gt259sx       7425 Mar  7  2025 readme.html
+-rw-r--r--    1 f55gt259sx f55gt259sx       7387 Feb 13  2024 wp-activate.php
+drwxr-xr-x   10 f55gt259sx f55gt259sx       4096 Nov 18 11:08 wp-admin
+-rw-r--r--    1 f55gt259sx f55gt259sx        351 Feb  5  2020 wp-blog-header.php
+-rw-r--r--    1 f55gt259sx f55gt259sx       2323 Jun 14  2023 wp-comments-post.php
+-rw-r--r--    1 f55gt259sx f55gt259sx       3336 Oct 15  2024 wp-config-sample.php
+-rw-------    1 f55gt259sx f55gt259sx       3729 Nov  5 14:07 wp-config.php
+drwxr-xr-x   10 f55gt259sx f55gt259sx       4096 Nov 18 11:03 wp-content
+-rw-r--r--    1 f55gt259sx f55gt259sx       5617 Aug  2  2024 wp-cron.php
+drwxr-xr-x   31 f55gt259sx f55gt259sx      16384 Nov 18 11:07 wp-includes
+-rw-r--r--    1 f55gt259sx f55gt259sx       2502 Nov 26  2022 wp-links-opml.php
+-rw-r--r--    1 f55gt259sx f55gt259sx       3937 Mar 11  2024 wp-load.php
+-rw-r--r--    1 f55gt259sx f55gt259sx      51414 Feb  3  2025 wp-login.php
+-rw-r--r--    1 f55gt259sx f55gt259sx       8727 Feb  8  2025 wp-mail.php
+-rw-r--r--    1 f55gt259sx f55gt259sx      30081 Mar  4  2025 wp-settings.php
+-rw-r--r--    1 f55gt259sx f55gt259sx      34516 Mar 10  2025 wp-signup.php
+-rw-r--r--    1 f55gt259sx f55gt259sx       5102 Oct 18  2024 wp-trackback.php
+-rw-r--r--    1 f55gt259sx f55gt259sx       3205 Nov  8  2024 xmlrpc.php
+--- 2. Plugins Instalados ---
+--- 3. Plugins Prilabsa ---
+--- 4. Uploads (Imágenes/PDFs) ---

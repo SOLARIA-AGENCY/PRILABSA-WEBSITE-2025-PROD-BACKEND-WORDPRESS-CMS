@@ -1,0 +1,19 @@
+Asunto: URGENTE - Limpieza de Caché requerida en productos.prilabsa.com
+
+Hola,
+
+Hemos completado el despliegue del nuevo sitio en el subdominio productos.prilabsa.com. Todos los archivos están subidos correctamente en el servidor.
+
+Sin embargo, **el sitio no se actualiza debido a una caché severa en el servidor de GoDaddy**.
+
+Hemos confirmado técnicamente que el servidor está ignorando los archivos nuevos y sirviendo una versión antigua de hace 24 horas, incluso después de borrar archivos manualmente.
+
+**ACCIÓN REQUERIDA:**
+Por favor, ingresen al panel de control de GoDaddy y realicen un **"Flush Cache" / "Limpiar Caché"** (o purgar CDN) para el dominio productos.prilabsa.com lo antes posible.
+
+Adjunto un reporte técnico detallado (REPORTE-INCIDENCIA-GODADDY.md) con las evidencias del problema para su equipo técnico.
+
+Quedamos a la espera de su confirmación para verificar el sitio.
+
+Saludos,
+Equipo de Desarrollo
