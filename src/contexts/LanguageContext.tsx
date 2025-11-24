@@ -15,7 +15,7 @@ interface LanguageProviderProps {
   children: ReactNode;
 }
 
-// Función para detectar idioma del navegador
+// Función para detectar idioma del navegador (solo como fallback opcional)
 const detectBrowserLanguage = (): Language => {
   const browserLang = navigator.language.toLowerCase();
   if (browserLang.startsWith('en')) return 'en';
@@ -23,7 +23,7 @@ const detectBrowserLanguage = (): Language => {
   return 'es'; // Default fallback
 };
 
-// Función para obtener idioma guardado o detectar automáticamente
+// Función para obtener idioma guardado, SIEMPRE español por defecto
 const getInitialLanguage = (): Language => {
   try {
     const saved = localStorage.getItem('prilabsa-language') as Language;
@@ -33,7 +33,8 @@ const getInitialLanguage = (): Language => {
   } catch (error) {
     console.warn('Error accessing localStorage:', error);
   }
-  return detectBrowserLanguage();
+  // SIEMPRE español por defecto, no detectar navegador
+  return 'es';
 };
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {

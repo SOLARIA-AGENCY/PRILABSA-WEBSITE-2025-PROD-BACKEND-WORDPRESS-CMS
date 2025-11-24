@@ -17,9 +17,9 @@ const loadLocaleMessages = async (locale: SupportedLanguages, namespace: Namespa
   }
 };
 
-// Language detector configuration
+// Language detector configuration - SOLO localStorage, NO navigator
 const detectionOptions = {
-  order: ['localStorage', 'navigator', 'htmlTag'],
+  order: ['localStorage', 'htmlTag'], // Removido 'navigator' para forzar español
   lookupLocalStorage: 'i18nextLng',
   caches: ['localStorage'],
   excludeCacheFor: ['cimode'],
