@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-11-18T18:47:55.608Z",
+  "build_id": "build-1763491675609",
+  "problematic_images": [
+    {
+      "name": "AD012_VITAMINA_C_MONOFOSFATADA.png",
+      "status": "found",
+      "size": 905978,
+      "hash": "e48d8777836d1c93"
+    },
+    {
+      "name": "EQ029_MALLAS_PARA_PISCINAS_CAMARONERAS.png",
+      "status": "found",
+      "size": 255504,
+      "hash": "885c3bb9622d9c52"
+    },
+    {
+      "name": "EQ046_TIRILLAS_pH.png",
+      "status": "found",
+      "size": 691181,
+      "hash": "0df73c118cccb175"
+    },
+    {
+      "name": "EQ022_KITS_API_DUREZA_DE_CARBONO.png",
+      "status": "found",
+      "size": 267102,
+      "hash": "737e8b9a0fa898c4"
+    }
+  ],
+  "total_images": 84,
+  "cache_bust": 1763491675609
+}

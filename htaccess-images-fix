@@ -1,0 +1,62 @@
+# PRILABSA Productos - Server Configuration Fix
+# Resuelve el problema de imágenes sirviendo HTML en lugar de contenido real
+
+# Deshabilitar cualquier reescritura que pueda interferir
+<IfModule mod_rewrite.c>
+    RewriteEngine Off
+</IfModule>
+
+# Forzar tipos MIME correctos para imágenes
+<FilesMatch "\.(png|jpg|jpeg|gif|webp|svg)$">
+    ForceType image/png
+    Header always set Content-Type "image/png"
+    Header always set Cache-Control "public, max-age=31536000"
+    Header unset X-Content-Type-Options
+</FilesMatch>
+
+<FilesMatch "\.(jpg|jpeg)$">
+    ForceType image/jpeg
+    Header always set Content-Type "image/jpeg"
+    Header always set Cache-Control "public, max-age=31536000"
+    Header unset X-Content-Type-Options
+</FilesMatch>
+
+<FilesMatch "\.(gif)$">
+    ForceType image/gif
+    Header always set Content-Type "image/gif"
+    Header always set Cache-Control "public, max-age=31536000"
+    Header unset X-Content-Type-Options
+</FilesMatch>
+
+# Deshabilitar compresión para imágenes
+<IfModule mod_deflate.c>
+    SetEnvIfNoCase Request_URI \.(?:png|jpg|jpeg|gif|webp|svg)$ no-gzip dont-vary
+</IfModule>
+
+# Configuración específica para directorio de productos
+<Directory "productos">
+    Options -Indexes -MultiViews
+    AllowOverride None
+    ForceType image/png
+    Header always set Content-Type "image/png"
+</Directory>
+
+<Directory "assets/images/productos">
+    Options -Indexes -MultiViews
+    AllowOverride None
+    ForceType image/png
+    Header always set Content-Type "image/png"
+</Directory>
+
+# Security headers (excluyendo imágenes)
+<FilesMatch "\.(php|html|htm|js|css)$">
+    Header set X-Content-Type-Options nosniff
+    Header set X-Frame-Options DENY
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</FilesMatch>
+
+# Evitar que las imágenes sean procesadas por PHP
+<FilesMatch "\.(png|jpg|jpeg|gif|webp|svg)$">
+    SetHandler None
+</FilesMatch>
