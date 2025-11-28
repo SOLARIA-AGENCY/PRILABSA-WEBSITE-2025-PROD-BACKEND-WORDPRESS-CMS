@@ -1,0 +1,35 @@
+# PRILABSA Website Configuration - FIXED
+# Frontend served from root, WordPress API available
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Set HTTP_AUTHORIZATION header
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# WordPress routes - serve from WordPress installation
+RewriteRule ^wp-admin/ - [L]
+RewriteRule ^wp-login.php - [L]
+RewriteRule ^wp-json/ - [L]
+RewriteRule ^wp-includes/ - [L]
+RewriteRule ^wp-content/ - [L]
+
+# Allow direct access to import scripts
+RewriteRule ^(simple-import|embedded-import|import-products|admin-import|ajax-import-handler)\.php$ - [L]
+
+# IMPORTANT: Serve existing files directly FIRST
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Static assets - use PHP file server as fallback
+RewriteCond %{REQUEST_URI} ^/assets/.*\.(jpg|jpeg|png|gif|webp|svg|css|js|json|pdf|ico|woff|woff2|ttf|eot)$ [NC]
+RewriteRule ^.*$ file-server.php [L]
+
+RewriteCond %{REQUEST_URI} ^/images/.*\.(jpg|jpeg|png|gif|webp|svg)$ [NC]
+RewriteRule ^.*$ file-server.php [L]
+
+# For all other requests, serve index.html (SPA)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.html [L]

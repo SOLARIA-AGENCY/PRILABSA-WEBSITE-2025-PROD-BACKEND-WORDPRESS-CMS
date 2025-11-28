@@ -1,0 +1,55 @@
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options nosniff
+    Header set X-Frame-Options DENY
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Access-Control-Allow-Origin "https://productos.prilabsa.com"
+</IfModule>
+
+# Gzip compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json
+</IfModule>
+
+# ============================================================================
+# WORDPRESS ROUTING (Priority 1 - WordPress REST API & Admin)
+# ============================================================================
+
+# BEGIN WordPress Core Rules
+<IfModule mod_rewrite.c>
+
+# WordPress Admin, Login, and Includes (pass to WordPress)
+RewriteCond %{REQUEST_URI} ^/wp-admin [OR]
+RewriteCond %{REQUEST_URI} ^/wp-login\.php [OR]
+RewriteCond %{REQUEST_URI} ^/wp-includes [OR]
+RewriteCond %{REQUEST_URI} ^/wp-content
+RewriteRule ^ - [L]
+
+# WordPress REST API and Permalinks
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^/wp-json [OR]
+RewriteCond %{REQUEST_URI} \.php$
+RewriteRule . /index.php [L]
+
+</IfModule>
+# END WordPress Core Rules
+
+# ============================================================================
+# REACT SPA ROUTING (Priority 2 - Frontend Fallback)
+# ============================================================================
+
+# Skip rewrite for static assets (images, CSS, JS, fonts, etc.)
+RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|pdf|mp4|webm|json)$ [OR]
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Everything else goes to React SPA
+RewriteRule ^ index.html [L]

@@ -1,0 +1,31 @@
+# PRILABSA Website Configuration - FIXED
+# Frontend served from root, WordPress API available
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Set HTTP_AUTHORIZATION for WordPress
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# IMPORTANT: Serve existing files directly FIRST
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# WordPress routes - serve from WordPress installation
+RewriteRule ^wp-admin/ - [L]
+RewriteRule ^wp-login.php - [L]
+RewriteRule ^wp-json/ - [L]
+RewriteRule ^wp-includes/ - [L]
+RewriteRule ^wp-content/ - [L]
+
+# Allow direct access to import scripts and PHP files
+RewriteRule ^(simple-import|embedded-import|import-products|admin-import|ajax-import-handler|prilabsa-import-plugin)\.php$ - [L]
+RewriteRule ^catalogo-productos\.json$ - [L]
+
+# For WordPress admin and API, use WordPress index.php
+RewriteCond %{REQUEST_URI} ^/(wp-admin|wp-login|wp-json)
+RewriteRule . index.php [L]
+
+# For all other requests, serve index.html (SPA frontend)
+RewriteRule ^(.*)$ index.html [L]

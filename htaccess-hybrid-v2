@@ -1,0 +1,57 @@
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options nosniff
+    Header set X-Frame-Options DENY
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+# Gzip compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+# ----------------------------------------------------------------------
+# ROUTING LOGIC
+# ----------------------------------------------------------------------
+
+# 1. Don't touch anything in /wordpress/ directory
+# WordPress handles its own routing with its .htaccess
+RewriteRule ^wordpress/ - [L]
+
+# 2. Proxy /wp-json to /wordpress/wp-json (keep clean URLs for React)
+RewriteCond %{REQUEST_URI} ^/wp-json
+RewriteRule ^wp-json/(.*)$ /wordpress/?rest_route=/$1 [P,L,QSA]
+
+# 3. Proxy /wp-content and /wp-includes to /wordpress/
+RewriteCond %{REQUEST_URI} ^/wp-content
+RewriteRule ^wp-content/(.*)$ /wordpress/wp-content/$1 [L]
+
+RewriteCond %{REQUEST_URI} ^/wp-includes
+RewriteRule ^wp-includes/(.*)$ /wordpress/wp-includes/$1 [L]
+
+# 4. Redirect wp-admin and wp-login to /wordpress/
+RewriteRule ^wp-admin(.*)$ /wordpress/wp-admin$1 [R=301,L]
+RewriteRule ^wp-login.php$ /wordpress/wp-login.php [R=301,L]
+
+# 5. Serve real files and directories (React assets)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 6. React Router Catch-All
+# Everything else goes to index.html
+RewriteRule ^ index.html [L]

@@ -1,0 +1,10 @@
+# Configuración específica para imágenes
+AddType image/png .png
+AddType image/jpeg .jpg .jpeg
+AddType image/gif .gif
+
+# Deshabilitar procesamiento PHP para imágenes
+<FilesMatch "\.png$">
+    SetHandler None
+    ForceType image/png
+</FilesMatch>
