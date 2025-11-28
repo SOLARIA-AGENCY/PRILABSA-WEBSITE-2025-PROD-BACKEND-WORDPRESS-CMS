@@ -19,19 +19,23 @@ import { useLanguage } from '../contexts/LanguageContext';
 const NuestroCatalogo = () => {
   const { t } = useLanguage();
   // Calculate if we have enough slides for loop mode
-  const hasEnoughSlides = categoriasProductos.length >= 4;
-  
+  // Loop requires: totalSlides >= slidesPerView * 2
+  // With 5 categories, loop works up to slidesPerView: 2
+  const totalCategories = categoriasProductos.length;
+
   // Swiper configuration optimized for carousel
+  // Loop disabled because with 5 categories and slidesPerView up to 5,
+  // Swiper can't create seamless loop (needs duplicates)
   const swiperConfig = {
     modules: [Autoplay, A11y],
     spaceBetween: 8,
     slidesPerView: 1.5,
-    loop: hasEnoughSlides,
-    autoplay: hasEnoughSlides ? {
+    loop: false,  // Disabled to prevent warning with 5 slides
+    autoplay: {
       delay: 4000,
       disableOnInteraction: false,
       pauseOnMouseEnter: true,
-    } : false,
+    },
     breakpoints: {
       320: {
         slidesPerView: 1.2,

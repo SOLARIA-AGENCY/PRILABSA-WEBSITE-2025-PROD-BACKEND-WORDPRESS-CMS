@@ -5,7 +5,7 @@
   "port": 21,
   "secure": false,
   "passive": true,
-  "remoteRoot": "/public_html",
+  "remoteRoot": "/public_html/productos.prilabsa.com",
   "localRoot": "./dist",
   "uploadOnSave": false,
   "deleteRemote": false,
