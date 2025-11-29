@@ -163,6 +163,26 @@ export default defineConfig(({ command }) => {
       fs: {
         strict: false,
       },
+      // Proxy configuration for WordPress API on GoDaddy
+      proxy: {
+        '/api/wp-json': {
+          target: 'https://productos.prilabsa.com',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+          secure: true,
+          configure: (proxy, _options) => {
+            proxy.on('error', (err, _req, _res) => {
+              console.log('[Vite Proxy] Error:', err.message);
+            });
+            proxy.on('proxyReq', (proxyReq, req, _res) => {
+              console.log('[Vite Proxy] Request:', req.method, req.url);
+            });
+            proxy.on('proxyRes', (proxyRes, req, _res) => {
+              console.log('[Vite Proxy] Response:', proxyRes.statusCode, req.url);
+            });
+          },
+        },
+      },
     },
 
     // Test configuration

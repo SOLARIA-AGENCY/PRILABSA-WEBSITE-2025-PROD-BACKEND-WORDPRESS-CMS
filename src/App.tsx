@@ -38,6 +38,14 @@ const PoliticaDePrivacidad = React.lazy(() => import('./pages/PoliticaDePrivacid
 const TerminosYCondiciones = React.lazy(() => import('./pages/TerminosYCondiciones'));
 const AvisoLegal = React.lazy(() => import('./pages/AvisoLegal'));
 const PoliticaDeCookies = React.lazy(() => import('./pages/PoliticaDeCookies'));
+// Dynamic pages with lazy loading
+const ProductoDetalle = React.lazy(() => import('./pages/ProductoDetalle'));
+const Cotizacion = React.lazy(() => import('./pages/Cotizacion'));
+const DesignSystemPage = React.lazy(() => import('./pages/DesignSystemPage'));
+const InventarioProductos = React.lazy(() => import('./pages/InventarioProductos'));
+const WordPressProductsDemo = React.lazy(() => import('./pages/WordPressProductsDemo'));
+const WordPressSyncDashboard = React.lazy(() => import('./pages/WordPressSyncDashboard'));
+const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
 
 // Optimized loading component with faster animation
 const PageLoader = () => (
@@ -190,7 +198,7 @@ function App() {
           } />
 
           {/* ═══════════════════════════════════════════════════════════════════
-              🛠️ RUTAS DE DESARROLLO (Solo en modo desarrollo)
+              🛠️ RUTAS DE DESARROLLO Y ADMINISTRACIÓN
               ═══════════════════════════════════════════════════════════════════ */}
 
           {import.meta.env.MODE !== 'production' && (
@@ -220,22 +228,42 @@ function App() {
                   <Website2025 />
                 </Suspense>
               } />
-              <Route path="/design-system" element={
-                <Suspense fallback={<PageLoader />}>
-                  <DesignSystemPage />
-                </Suspense>
-              } />
-              <Route path="/login" element={<Login />} />
-              <Route path="/inventario-productos" element={
-                <Suspense fallback={<PageLoader />}>
-                  <ProtectedRoute>
-                    <InventarioProductos />
-                  </ProtectedRoute>
-                </Suspense>
-              } />
             </>
           )}
 
+          {/* ═══════════════════════════════════════════════════════════════════
+              🔧 RUTAS WORDPRESS CMS (Protegidas)
+              ═══════════════════════════════════════════════════════════════════ */}
+          <Route path="/design-system" element={
+            <Suspense fallback={<PageLoader />}>
+              <DesignSystemPage />
+            </Suspense>
+          } />
+          <Route path="/login" element={<Login />} />
+          <Route path="/inventario-productos" element={
+            <Suspense fallback={<PageLoader />}>
+              <ProtectedRoute>
+                <InventarioProductos />
+              </ProtectedRoute>
+            </Suspense>
+          } />
+          <Route path="/wordpress-demo" element={
+            <Suspense fallback={<PageLoader />}>
+              <WordPressProductsDemo />
+            </Suspense>
+          } />
+          <Route path="/wordpress-sync" element={
+            <Suspense fallback={<PageLoader />}>
+              <WordPressSyncDashboard />
+            </Suspense>
+          } />
+          <Route path="/admin" element={
+            <Suspense fallback={<PageLoader />}>
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            </Suspense>
+          } />
           </Routes>
           </Router>
             </CotizacionProvider>
