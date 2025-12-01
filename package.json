@@ -28,9 +28,9 @@
   "scripts": {
     "dev": "vite",
     "validate:images": "node scripts/validate-images-integrity.js",
-    "build": "node scripts/materialize-expected-images.cjs && node scripts/copy-product-assets.cjs && tsx scripts/verify-products-integrity.js && node scripts/validate-images-integrity.js && vite build && node scripts/post-build-verify.js && node scripts/post-build-phantom-chunks.cjs",
+    "build": "node scripts/materialize-expected-images.cjs && node scripts/copy-product-assets.cjs && tsx scripts/verify-products-integrity.js && node scripts/validate-images-integrity.js && vite build && node scripts/post-build-verify.js",
     "build:clean": "rm -rf dist && rm -rf .vite",
-    "build:fast": "node scripts/materialize-expected-images.cjs && vite build --mode production && node scripts/post-build-phantom-chunks.cjs",
+    "build:fast": "node scripts/materialize-expected-images.cjs && vite build --mode production",
     "build:analyze": "npm run build && npx vite-bundle-analyzer dist",
     "preview": "npm run build && vite preview",
     "test": "npx vitest",

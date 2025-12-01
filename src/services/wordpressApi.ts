@@ -349,3 +349,95 @@ export const WordPressAPI = {
 };
 
 export default WordPressAPI;
+
+// ==========================================
+// WordPress Hooks Stubs - TODO: Implement
+// ==========================================
+
+import { useState, useEffect } from 'react';
+
+// Blog Post Hook
+export function useBlogPost(id: string) {
+  const [article, setArticle] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+    fetch(`https://productos.prilabsa.com/wp-json/wp/v2/posts/${id}?_embed`)
+      .then(res => res.json())
+      .then(data => { setArticle(data); setIsLoading(false); })
+      .catch(err => { setError(err); setIsLoading(false); });
+  }, [id]);
+
+  return { article, isLoading, error };
+}
+
+// Noticias Hook
+export function useNoticias() {
+  const [posts, setPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    fetch('https://productos.prilabsa.com/wp-json/wp/v2/posts?_embed&per_page=10')
+      .then(res => res.json())
+      .then(data => { setPosts(data); setLoading(false); })
+      .catch(err => { setError(err); setLoading(false); });
+  }, []);
+
+  return { posts, loading, error };
+}
+
+// Single Noticia Hook
+export function useNoticia(id: string) {
+  const [noticia, setNoticia] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+    fetch(`https://productos.prilabsa.com/wp-json/wp/v2/posts/${id}?_embed`)
+      .then(res => res.json())
+      .then(data => { setNoticia(data); setIsLoading(false); })
+      .catch(err => { setError(err); setIsLoading(false); });
+  }, [id]);
+
+  return { noticia, isLoading, error };
+}
+
+// Products Hook
+export function useProducts() {
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    fetch('https://productos.prilabsa.com/wp-json/wp/v2/productos?per_page=100')
+      .then(res => res.json())
+      .then(data => { setProducts(data); setLoading(false); })
+      .catch(err => { setError(err); setLoading(false); });
+  }, []);
+
+  return { products, loading, error };
+}
+
+// Single Product Hook
+export function useProduct(id: string) {
+  const [product, setProduct] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+    fetch(`https://productos.prilabsa.com/wp-json/wp/v2/productos/${id}`)
+      .then(res => res.json())
+      .then(data => { setProduct(data); setIsLoading(false); })
+      .catch(err => { setError(err); setIsLoading(false); });
+  }, [id]);
+
+  return { product, isLoading, error };
+}
+
+// Blog Hook (re-export)
+export { useBlog } from '../hooks/useBlog';

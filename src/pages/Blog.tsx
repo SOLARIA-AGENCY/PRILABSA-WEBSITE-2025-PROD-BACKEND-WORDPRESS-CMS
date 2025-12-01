@@ -6,7 +6,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import ArticleCard from '../components/organisms/blog/ArticleCard';
 import LoadingLogo from '../components/LoadingLogo';
 
-import { useBlog } from '../services/wordpressApi';
+import { useBlog } from '../hooks/useBlog';
 import SearchBar from '../components/molecules/SearchBar';
 import ArchiveMenu from '../components/organisms/blog/ArchiveMenu';
 import { useLanguage } from '../contexts/LanguageContext';

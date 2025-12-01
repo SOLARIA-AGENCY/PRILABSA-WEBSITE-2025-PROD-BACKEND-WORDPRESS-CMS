@@ -62,6 +62,9 @@ export default defineConfig(({ command }) => {
       emptyOutDir: true,
       rollupOptions: {
         output: {
+          // Use hashed filenames for cache busting (REQUIRED for GoDaddy)
+          entryFileNames: 'assets/[name]-[hash].js',
+          chunkFileNames: 'assets/[name]-[hash].js',
           manualChunks(id) {
             // PDF worker chunk
             if (id.includes('pdf.worker.min.js')) {

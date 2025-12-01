@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import { AuthProvider } from './contexts/AuthContext';
 import { LanguageProvider } from './contexts/LanguageContext';
@@ -38,14 +38,11 @@ const PoliticaDePrivacidad = React.lazy(() => import('./pages/PoliticaDePrivacid
 const TerminosYCondiciones = React.lazy(() => import('./pages/TerminosYCondiciones'));
 const AvisoLegal = React.lazy(() => import('./pages/AvisoLegal'));
 const PoliticaDeCookies = React.lazy(() => import('./pages/PoliticaDeCookies'));
-// Dynamic pages with lazy loading
-const ProductoDetalle = React.lazy(() => import('./pages/ProductoDetalle'));
-const Cotizacion = React.lazy(() => import('./pages/Cotizacion'));
-const DesignSystemPage = React.lazy(() => import('./pages/DesignSystemPage'));
-const InventarioProductos = React.lazy(() => import('./pages/InventarioProductos'));
-const WordPressProductsDemo = React.lazy(() => import('./pages/WordPressProductsDemo'));
-const WordPressSyncDashboard = React.lazy(() => import('./pages/WordPressSyncDashboard'));
-const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
+
+// WordPress CMS Integration Pages (TODO: crear páginas)
+// const WordPressProductsDemo = React.lazy(() => import('./pages/WordPressProductsDemo'));
+// const WordPressSyncDashboard = React.lazy(() => import('./pages/WordPressSyncDashboard'));
+// const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
 
 // Optimized loading component with faster animation
 const PageLoader = () => (
@@ -120,7 +117,8 @@ function App() {
               🔄 REDIRECCIONES EXTERNAS → www.prilabsa.com (Sitio Institucional)
               ═══════════════════════════════════════════════════════════════════ */}
 
-          <Route path="/" element={<ExternalRedirect to="https://www.prilabsa.com/" />} />
+          {/* Root redirects to /productos on productos.prilabsa.com */}
+          <Route path="/" element={<Navigate to="/productos" replace />} />
           <Route path="/quienes-somos" element={<ExternalRedirect to="https://www.prilabsa.com/quienes-somos" />} />
           <Route path="/oficinas" element={<ExternalRedirect to="https://www.prilabsa.com/oficinas" />} />
           <Route path="/contactanos" element={<ExternalRedirect to="https://www.prilabsa.com/contactanos" />} />
@@ -247,6 +245,7 @@ function App() {
               </ProtectedRoute>
             </Suspense>
           } />
+          {/* TODO: WordPress CMS routes - páginas pendientes de crear
           <Route path="/wordpress-demo" element={
             <Suspense fallback={<PageLoader />}>
               <WordPressProductsDemo />
@@ -264,6 +263,7 @@ function App() {
               </ProtectedRoute>
             </Suspense>
           } />
+          */}
           </Routes>
           </Router>
             </CotizacionProvider>
