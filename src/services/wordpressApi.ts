@@ -458,6 +458,24 @@ export function useProducts() {
   return { products, loading, isLoading, error };
 }
 
+// Helper: Extract benefits from ACF fields
+const getBenefits = (acf: any): string[] => {
+  const benefits: string[] = [];
+  if (acf?.beneficio_1_es) benefits.push(acf.beneficio_1_es);
+  if (acf?.beneficio_2_es) benefits.push(acf.beneficio_2_es);
+  if (acf?.beneficio_3_es) benefits.push(acf.beneficio_3_es);
+  return benefits;
+};
+
+// Helper: Parse presentation HTML to array
+const parsePresentation = (html: string): string[] => {
+  if (!html) return [];
+  // Extract text from <li> tags
+  const matches = html.match(/<li[^>]*>([^<]+)<\/li>/gi);
+  if (!matches) return [html.replace(/<[^>]+>/g, '')]; // Fallback: strip all HTML
+  return matches.map(li => li.replace(/<\/?li[^>]*>/gi, '').trim()).filter(Boolean);
+};
+
 // Single Product Hook - Searches by SLUG (not ID)
 export function useProduct(slug: string) {
   const [product, setProduct] = useState<any>(null);
@@ -466,34 +484,64 @@ export function useProduct(slug: string) {
 
   useEffect(() => {
     if (!slug) return;
-    // Use slug parameter and _embed for images
-    fetch(`https://productos.prilabsa.com/wp-json/wp/v2/productos?slug=${slug.toLowerCase()}&_embed`)
-      .then(res => res.json())
-      .then(data => {
+
+    const fetchProduct = async () => {
+      try {
+        // Fetch product by slug with embedded media
+        const res = await fetch(`https://productos.prilabsa.com/wp-json/wp/v2/productos?slug=${slug.toLowerCase()}&_embed`);
+        const data = await res.json();
+
         if (data.length > 0) {
           const wp = data[0];
+          const acf = wp.acf || {};
+
+          // Fetch PDF URL if ficha_tecnica_pdf exists
+          let pdfData = { exists: false, downloadUrl: '' };
+          if (acf.ficha_tecnica_pdf) {
+            try {
+              const pdfRes = await fetch(`https://productos.prilabsa.com/wp-json/wp/v2/media/${acf.ficha_tecnica_pdf}`);
+              const pdfMedia = await pdfRes.json();
+              if (pdfMedia.source_url) {
+                pdfData = { exists: true, downloadUrl: pdfMedia.source_url };
+              }
+            } catch (e) {
+              console.warn('Could not fetch PDF:', e);
+            }
+          }
+
           // Transform to frontend format
           const transformed = {
             ...wp,
             id: wp.id,
             slug: wp.slug,
-            codigo: wp.acf?.codigo || '',
-            category: wp.acf?.categoria || '',
-            name: wp.acf?.nombre_producto_es || wp.title?.rendered || '',
-            description: wp.acf?.descripcion_es || '',
+            codigo: acf.codigo || '',
+            productCode: acf.codigo || '',
+            category: acf.categoria || '',
+            name: acf.nombre_producto_es || wp.title?.rendered || '',
+            description: acf.descripcion_es || '',
+            // ⭐ New fields for tabs
+            benefits: getBenefits(acf),
+            specifications: [], // WordPress doesn't have specs field, leave empty
+            presentation: parsePresentation(acf.presentacion_es || ''),
             assets: {
               image: {
                 path: getImageUrl(wp)
-              }
+              },
+              pdf: pdfData
             }
           };
           setProduct(transformed);
         } else {
           setProduct(null);
         }
+      } catch (err) {
+        setError(err as Error);
+      } finally {
         setIsLoading(false);
-      })
-      .catch(err => { setError(err); setIsLoading(false); });
+      }
+    };
+
+    fetchProduct();
   }, [slug]);
 
   return { product, isLoading, error };
