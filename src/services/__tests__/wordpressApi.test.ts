@@ -1,72 +1,270 @@
+/**
+ * WordPress API Service Tests
+ * Tests for helper functions and data transformation
+ */
+
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { useProducts, useProduct } from '../wordpressApi'
+import {
+  useProducts,
+  useProduct,
+  getBenefits,
+  parsePresentation,
+  getImageUrl
+} from '../wordpressApi'
 
 // Mock global fetch
 const mockFetch = vi.fn()
 global.fetch = mockFetch
 
-// Mock SWR since it's used in the hooks
-vi.mock('swr', () => ({
-    default: (key: string, fetcher: any) => {
-        // If key is null, return empty state
-        if (!key) return { data: undefined, error: undefined, isLoading: false }
+describe('WordPress API Helper Functions', () => {
 
-        // Simulate SWR calling the fetcher
-        // In a real test we might want to test the SWR integration more deeply,
-        // but here we want to test the transformation logic mostly.
-        // For simplicity in this unit test, we'll rely on the fact that we are testing
-        // the logic *inside* the hook when data arrives.
-        // However, testing hooks with internal state updates (useEffect) is tricky without rendering.
-        // So we will mock the return value to trigger the useEffect.
-        return {
-            data: mockProductsData,
-            error: undefined,
-            isLoading: false
-        }
-    }
-}))
+  // ==========================================
+  // getBenefits Tests
+  // ==========================================
+  describe('getBenefits', () => {
+    it('should return empty array when acf is undefined', () => {
+      expect(getBenefits(undefined)).toEqual([])
+    })
 
-// Mock data from WordPress API
-const mockProductsData = [
-    {
-        id: 101,
-        slug: 'producto-prueba',
-        title: { rendered: 'Producto de Prueba' },
-        acf: {
-            codigo: 'TEST001',
-            categoria: 'aditivos',
-            descripcion: 'Descripción de prueba',
-            beneficios: 'Beneficio 1\nBeneficio 2',
-            presentacion: 'Saco 25kg',
-            especificaciones: [
-                { clave: 'Pureza', valor: '99%' }
-            ]
-        },
+    it('should return empty array when acf is null', () => {
+      expect(getBenefits(null)).toEqual([])
+    })
+
+    it('should return empty array when no benefits exist', () => {
+      expect(getBenefits({})).toEqual([])
+    })
+
+    it('should extract single benefit', () => {
+      const acf = { beneficio_1_es: 'First benefit' }
+      expect(getBenefits(acf)).toEqual(['First benefit'])
+    })
+
+    it('should extract all three benefits in order', () => {
+      const acf = {
+        beneficio_1_es: 'First',
+        beneficio_2_es: 'Second',
+        beneficio_3_es: 'Third'
+      }
+      expect(getBenefits(acf)).toEqual(['First', 'Second', 'Third'])
+    })
+
+    it('should skip missing benefits but keep order', () => {
+      const acf = {
+        beneficio_1_es: 'First',
+        beneficio_3_es: 'Third'
+      }
+      expect(getBenefits(acf)).toEqual(['First', 'Third'])
+    })
+
+    it('should skip empty string benefits', () => {
+      const acf = {
+        beneficio_1_es: 'First',
+        beneficio_2_es: '',
+        beneficio_3_es: 'Third'
+      }
+      expect(getBenefits(acf)).toEqual(['First', 'Third'])
+    })
+
+    it('should handle real WordPress ACF data', () => {
+      const acf = {
+        beneficio_1_es: 'Liberación controlada de bacterias beneficiosas',
+        beneficio_2_es: 'Reduce compuestos tóxicos en estanques',
+        beneficio_3_es: 'Mejora calidad del agua',
+        other_field: 'ignored'
+      }
+      expect(getBenefits(acf)).toEqual([
+        'Liberación controlada de bacterias beneficiosas',
+        'Reduce compuestos tóxicos en estanques',
+        'Mejora calidad del agua'
+      ])
+    })
+  })
+
+  // ==========================================
+  // parsePresentation Tests
+  // ==========================================
+  describe('parsePresentation', () => {
+    it('should return empty array for empty string', () => {
+      expect(parsePresentation('')).toEqual([])
+    })
+
+    it('should return empty array for undefined (cast to string)', () => {
+      expect(parsePresentation(undefined as unknown as string)).toEqual([])
+    })
+
+    it('should extract items from simple <li> tags', () => {
+      const html = '<li>Item 1</li><li>Item 2</li>'
+      expect(parsePresentation(html)).toEqual(['Item 1', 'Item 2'])
+    })
+
+    it('should handle <li> tags with attributes', () => {
+      const html = '<li class="item">First</li><li id="second">Second</li>'
+      expect(parsePresentation(html)).toEqual(['First', 'Second'])
+    })
+
+    it('should strip HTML and return single item when no <li> tags', () => {
+      const html = '<p>Plain paragraph text</p>'
+      expect(parsePresentation(html)).toEqual(['Plain paragraph text'])
+    })
+
+    it('should filter empty items', () => {
+      const html = '<li>Item 1</li><li></li><li>Item 3</li>'
+      expect(parsePresentation(html)).toEqual(['Item 1', 'Item 3'])
+    })
+
+    it('should trim whitespace from items', () => {
+      const html = '<li>  Spaced item  </li><li>\nNewline\n</li>'
+      expect(parsePresentation(html)).toEqual(['Spaced item', 'Newline'])
+    })
+
+    it('should handle real WordPress presentation HTML', () => {
+      const html = `<ul>
+        <li>Tabletas de 100g</li>
+        <li>Bote con 36 tabletas</li>
+        <li>Caja con 4 botes</li>
+      </ul>`
+      expect(parsePresentation(html)).toEqual([
+        'Tabletas de 100g',
+        'Bote con 36 tabletas',
+        'Caja con 4 botes'
+      ])
+    })
+
+    it('should handle plain text without HTML', () => {
+      const text = 'Sacos de 25kg'
+      expect(parsePresentation(text)).toEqual(['Sacos de 25kg'])
+    })
+  })
+
+  // ==========================================
+  // getImageUrl Tests
+  // ==========================================
+  describe('getImageUrl', () => {
+    it('should return placeholder when no image data exists', () => {
+      expect(getImageUrl({})).toBe('/assets/images/placeholder-product.jpg')
+    })
+
+    it('should return placeholder when wp is null', () => {
+      expect(getImageUrl(null)).toBe('/assets/images/placeholder-product.jpg')
+    })
+
+    it('should extract URL from embedded featured media', () => {
+      const wp = {
         _embedded: {
-            'wp:featuredmedia': [
-                { source_url: 'https://example.com/image.jpg' }
-            ]
+          'wp:featuredmedia': [
+            { source_url: 'https://productos.prilabsa.com/wp-content/uploads/image.jpg' }
+          ]
         }
+      }
+      expect(getImageUrl(wp)).toBe('https://productos.prilabsa.com/wp-content/uploads/image.jpg')
+    })
+
+    it('should fallback to ACF image URL when no embedded media', () => {
+      const wp = {
+        acf: {
+          imagen_producto: {
+            url: 'https://productos.prilabsa.com/wp-content/uploads/acf-image.jpg'
+          }
+        }
+      }
+      expect(getImageUrl(wp)).toBe('https://productos.prilabsa.com/wp-content/uploads/acf-image.jpg')
+    })
+
+    it('should prefer embedded media over ACF image', () => {
+      const wp = {
+        _embedded: {
+          'wp:featuredmedia': [
+            { source_url: 'https://embedded.jpg' }
+          ]
+        },
+        acf: {
+          imagen_producto: { url: 'https://acf.jpg' }
+        }
+      }
+      expect(getImageUrl(wp)).toBe('https://embedded.jpg')
+    })
+
+    it('should return placeholder when embedded media has no source_url', () => {
+      const wp = {
+        _embedded: {
+          'wp:featuredmedia': [{}]
+        }
+      }
+      expect(getImageUrl(wp)).toBe('/assets/images/placeholder-product.jpg')
+    })
+
+    it('should return placeholder when featured media array is empty', () => {
+      const wp = {
+        _embedded: {
+          'wp:featuredmedia': []
+        }
+      }
+      expect(getImageUrl(wp)).toBe('/assets/images/placeholder-product.jpg')
+    })
+  })
+
+  // ==========================================
+  // Hook Export Tests
+  // ==========================================
+  describe('Hooks Export', () => {
+    it('should export useProducts hook', () => {
+      expect(useProducts).toBeDefined()
+      expect(typeof useProducts).toBe('function')
+    })
+
+    it('should export useProduct hook', () => {
+      expect(useProduct).toBeDefined()
+      expect(typeof useProduct).toBe('function')
+    })
+  })
+})
+
+// ==========================================
+// Integration-style tests (require React)
+// ==========================================
+describe('WordPress API Data Transformation', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
+  it('should transform WordPress product to frontend format', () => {
+    // This tests the transformation logic conceptually
+    const wpProduct = {
+      id: 204,
+      slug: 'pondtoss',
+      title: { rendered: 'PondToss' },
+      acf: {
+        codigo: 'PB002',
+        categoria: 'probioticos',
+        nombre_producto_es: 'PondToss',
+        descripcion_es: 'Tabletas de probióticos',
+        beneficio_1_es: 'Liberación controlada',
+        beneficio_2_es: 'Reduce H2S',
+        beneficio_3_es: 'Mejora calidad',
+        presentacion_es: '<li>Tabletas 100g</li><li>Bote 36 tabs</li>',
+        ficha_tecnica_pdf: 150
+      },
+      _embedded: {
+        'wp:featuredmedia': [
+          { source_url: 'https://productos.prilabsa.com/wp-content/uploads/pondtoss.jpg' }
+        ]
+      }
     }
-]
 
-describe('WordPress API Service', () => {
-    beforeEach(() => {
-        vi.clearAllMocks()
-    })
+    // Test transformation helpers work with real data
+    expect(getBenefits(wpProduct.acf)).toEqual([
+      'Liberación controlada',
+      'Reduce H2S',
+      'Mejora calidad'
+    ])
 
-    it('should be defined', () => {
-        expect(useProducts).toBeDefined()
-        expect(useProduct).toBeDefined()
-    })
+    expect(parsePresentation(wpProduct.acf.presentacion_es)).toEqual([
+      'Tabletas 100g',
+      'Bote 36 tabs'
+    ])
 
-    // Note: Testing custom hooks that use useEffect and internal state requires 
-    // rendering them in a test component or using @testing-library/react-hooks.
-    // Since we are in a "setup" phase, I will create a basic integrity test file
-    // that validates the service file structure and exports.
-
-    it('should export necessary hooks', () => {
-        expect(typeof useProducts).toBe('function')
-        expect(typeof useProduct).toBe('function')
-    })
+    expect(getImageUrl(wpProduct)).toBe(
+      'https://productos.prilabsa.com/wp-content/uploads/pondtoss.jpg'
+    )
+  })
 })

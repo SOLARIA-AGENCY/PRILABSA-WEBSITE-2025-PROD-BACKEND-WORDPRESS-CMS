@@ -407,7 +407,8 @@ export function useNoticia(id: string) {
 }
 
 // Helper: Extract image URL from WordPress embedded data or media ID
-const getImageUrl = (wp: any): string => {
+export const getImageUrl = (wp: any): string => {
+  if (!wp) return '/assets/images/placeholder-product.jpg';
   // Try embedded featured media first
   const embedded = wp._embedded?.['wp:featuredmedia']?.[0];
   if (embedded?.source_url) {
@@ -459,7 +460,7 @@ export function useProducts() {
 }
 
 // Helper: Extract benefits from ACF fields
-const getBenefits = (acf: any): string[] => {
+export const getBenefits = (acf: any): string[] => {
   const benefits: string[] = [];
   if (acf?.beneficio_1_es) benefits.push(acf.beneficio_1_es);
   if (acf?.beneficio_2_es) benefits.push(acf.beneficio_2_es);
@@ -468,7 +469,7 @@ const getBenefits = (acf: any): string[] => {
 };
 
 // Helper: Parse presentation HTML to array
-const parsePresentation = (html: string): string[] => {
+export const parsePresentation = (html: string): string[] => {
   if (!html) return [];
   // Extract text from <li> tags
   const matches = html.match(/<li[^>]*>([^<]+)<\/li>/gi);
