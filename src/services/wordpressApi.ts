@@ -406,20 +406,41 @@ export function useNoticia(id: string) {
   return { noticia, isLoading, error };
 }
 
-// Products Hook
+// Products Hook - Transforms WordPress data for frontend consumption
 export function useProducts() {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     fetch('https://productos.prilabsa.com/wp-json/wp/v2/productos?per_page=100')
       .then(res => res.json())
-      .then(data => { setProducts(data); setLoading(false); })
-      .catch(err => { setError(err); setLoading(false); });
+      .then(data => {
+        // Transform WordPress products to frontend format
+        const transformed = data.map((wp: any) => ({
+          ...wp,
+          // Map critical fields for filtering/display
+          id: wp.id,
+          slug: wp.slug,
+          codigo: wp.acf?.codigo || '',
+          category: wp.acf?.categoria || '', // ⭐ Critical: map acf.categoria → category
+          name: wp.acf?.nombre_producto_es || wp.title?.rendered || '',
+          description: wp.acf?.descripcion_es || '',
+          assets: {
+            image: {
+              path: wp.acf?.imagen_producto?.url || '/assets/images/placeholder-product.jpg'
+            }
+          }
+        }));
+        setProducts(transformed);
+        setLoading(false);
+        setIsLoading(false);
+      })
+      .catch(err => { setError(err); setLoading(false); setIsLoading(false); });
   }, []);
 
-  return { products, loading, error };
+  return { products, loading, isLoading, error };
 }
 
 // Single Product Hook
