@@ -13,6 +13,60 @@ import type {
   WordPressProductQuery,
   WordPressLanguage
 } from '../types/wordpress';
+import type { BlogArticle, MultiLanguageContent } from '../types/blog';
+
+// WordPress Post interface for blog/news
+interface WordPressPost {
+  id: number;
+  title: { rendered: string };
+  excerpt: { rendered: string };
+  content: { rendered: string };
+  date: string;
+  slug: string;
+  featured_media: number;
+  categories: number[];
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{ source_url: string }>;
+    'author'?: Array<{ name: string }>;
+  };
+}
+
+// Helper: Strip HTML tags from WordPress content
+function stripHtmlTags(html: string): string {
+  return html
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .trim();
+}
+
+// Helper: Create MultiLanguageContent from single string
+function toMultiLang(content: string): MultiLanguageContent {
+  const cleaned = stripHtmlTags(content);
+  return { es: cleaned, en: cleaned, pt: cleaned };
+}
+
+// Transform WordPress post to BlogArticle format
+function transformWordPressPost(post: WordPressPost): BlogArticle {
+  const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+    '/assets/iniciodev/blue-texture-background.jpg';
+  const authorName = post._embedded?.author?.[0]?.name || 'Prilabsa';
+
+  return {
+    id: post.id.toString(),
+    title: toMultiLang(post.title.rendered),
+    summary: toMultiLang(post.excerpt.rendered),
+    content: toMultiLang(post.content.rendered),
+    date: post.date.split('T')[0],
+    author: toMultiLang(authorName),
+    heroImage: featuredImage,
+    tags: { es: [], en: [], pt: [] }
+  };
+}
 
 // Configuration
 const CONFIG = {
@@ -373,24 +427,31 @@ export function useBlogPost(id: string) {
   return { article, isLoading, error };
 }
 
-// Noticias Hook
+// Noticias Hook - Transforms WordPress posts to BlogArticle format
 export function useNoticias() {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [articles, setArticles] = useState<BlogArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     fetch('https://productos.prilabsa.com/wp-json/wp/v2/posts?_embed&per_page=10')
-      .then(res => res.json())
-      .then(data => { setPosts(data); setLoading(false); })
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data: WordPressPost[]) => {
+        const transformed = data.map(transformWordPressPost);
+        setArticles(transformed);
+        setLoading(false);
+      })
       .catch(err => { setError(err); setLoading(false); });
   }, []);
 
   return {
-    posts,
-    articles: posts,      // Alias for compatibility
+    posts: articles,
+    articles,
     loading,
-    isLoading: loading,   // Alias for compatibility
+    isLoading: loading,
     error
   };
 }
