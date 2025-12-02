@@ -86,6 +86,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     product?.acf?.imagen_producto?.url || null
   );
 
+  // PDF upload state
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const [pdfName, setPdfName] = useState<string | null>(
+    product?.acf?.ficha_tecnica_pdf ? 'PDF existente' : null
+  );
+
   // Update form field
   const updateField = useCallback((field: keyof ProductFormData, value: unknown) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -104,6 +110,15 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     }
   }, []);
 
+  // Handle PDF selection
+  const handlePdfChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setPdfFile(file);
+      setPdfName(file.name);
+    }
+  }, []);
+
   // Handle form submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -119,10 +134,23 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       }
     }
 
-    // Prepare data with image ID
+    // Upload PDF if new one selected
+    let pdfUrl = formData.ficha_tecnica_pdf;
+    if (pdfFile) {
+      const uploadResult = await uploadMedia(pdfFile);
+      if (uploadResult.success && uploadResult.data) {
+        // Store the media URL directly for PDFs
+        pdfUrl = uploadResult.data.url;
+      } else {
+        return; // Error handled by hook
+      }
+    }
+
+    // Prepare data with image ID and PDF URL
     const submitData: ProductFormData = {
       ...formData,
       imagen_producto: imageId,
+      ficha_tecnica_pdf: pdfUrl || '',
       title: formData.nombre_producto_es, // Use Spanish name as title
     };
 
@@ -354,25 +382,65 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         </div>
       </div>
 
-      {/* PDF URL */}
+      {/* PDF Upload */}
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 mb-1">
-          Ficha Tecnica PDF (URL)
+          Ficha Tecnica PDF
         </label>
-        <div className="flex items-center gap-4">
-          <input
-            type="url"
-            value={formData.ficha_tecnica_pdf || ''}
-            onChange={e => updateField('ficha_tecnica_pdf', e.target.value)}
-            placeholder="https://..."
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-          {formData.ficha_tecnica_pdf && (
+        <div className="flex items-start gap-4">
+          {/* Current PDF indicator */}
+          {(pdfName || formData.ficha_tecnica_pdf) && (
+            <div className="flex items-center gap-2 px-3 py-2 bg-red-50 border border-red-200 rounded-lg">
+              <svg className="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zm-3 9h2v6h-2v-6zm4 0h2v6h-2v-6zm-8 0h2v6H6v-6z"/>
+              </svg>
+              <div className="text-sm">
+                <p className="font-medium text-red-700 truncate max-w-[150px]">
+                  {pdfFile ? pdfName : 'PDF existente'}
+                </p>
+                {pdfFile && <p className="text-red-500 text-xs">Nuevo archivo</p>}
+              </div>
+            </div>
+          )}
+          <div className="flex-1 space-y-2">
+            {/* File upload input */}
+            <div>
+              <input
+                type="file"
+                accept=".pdf,application/pdf"
+                onChange={handlePdfChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 file:mr-4 file:py-1 file:px-4 file:rounded file:border-0 file:bg-red-50 file:text-red-700 file:font-medium hover:file:bg-red-100"
+              />
+              <p className="text-xs text-gray-500 mt-1">Sube un archivo PDF (max 10MB)</p>
+            </div>
+            {/* OR divider */}
+            <div className="flex items-center gap-2">
+              <div className="flex-1 border-t border-gray-200" />
+              <span className="text-xs text-gray-400">o pega URL</span>
+              <div className="flex-1 border-t border-gray-200" />
+            </div>
+            {/* URL input */}
+            <input
+              type="url"
+              value={formData.ficha_tecnica_pdf || ''}
+              onChange={e => {
+                updateField('ficha_tecnica_pdf', e.target.value);
+                if (e.target.value) {
+                  setPdfFile(null);
+                  setPdfName(null);
+                }
+              }}
+              placeholder="https://ejemplo.com/ficha.pdf"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+            />
+          </div>
+          {/* View PDF button */}
+          {formData.ficha_tecnica_pdf && !pdfFile && (
             <a
               href={formData.ficha_tecnica_pdf}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors whitespace-nowrap"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M4 18h12a2 2 0 002-2V6.414A2 2 0 0017.414 5L15 2.586A2 2 0 0013.586 2H4a2 2 0 00-2 2v12a2 2 0 002 2zm9-13.586L14.586 6H13V4.414zM4 4h7v4h4v8H4V4z"/>
@@ -381,8 +449,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             </a>
           )}
         </div>
-        {product?.acf?.ficha_tecnica_pdf && (
-          <p className="text-xs text-green-600 mt-1">
+        {product?.acf?.ficha_tecnica_pdf && !pdfFile && (
+          <p className="text-xs text-green-600 mt-2">
             PDF actual desde WordPress
           </p>
         )}

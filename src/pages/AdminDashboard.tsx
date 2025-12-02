@@ -173,6 +173,70 @@ const AdminDashboard: React.FC = () => {
     setSelectedProduct(null);
   }, []);
 
+  // Export products to CSV
+  const exportToCSV = useCallback(() => {
+    if (products.length === 0) return;
+
+    // CSV headers
+    const headers = [
+      'ID',
+      'Codigo',
+      'Nombre (ES)',
+      'Nombre (EN)',
+      'Nombre (PT)',
+      'Categoria',
+      'Estado',
+      'Descripcion Corta (ES)',
+      'Descripcion (ES)',
+      'Beneficio 1 (ES)',
+      'Beneficio 2 (ES)',
+      'Beneficio 3 (ES)',
+      'Presentacion (ES)',
+      'Imagen URL',
+      'PDF URL',
+      'Fecha Creacion',
+      'Fecha Modificacion'
+    ];
+
+    // Map products to rows
+    const rows = products.map(p => [
+      p.id,
+      p.acf?.codigo || '',
+      p.acf?.nombre_producto_es || '',
+      p.acf?.nombre_producto_en || '',
+      p.acf?.nombre_producto_pt || '',
+      p.acf?.categoria || '',
+      p.status || '',
+      (p.acf?.descripcion_corta_es || '').replace(/"/g, '""'),
+      (p.acf?.descripcion_es || '').replace(/"/g, '""').replace(/\n/g, ' '),
+      p.acf?.beneficio_1_es || '',
+      p.acf?.beneficio_2_es || '',
+      p.acf?.beneficio_3_es || '',
+      (p.acf?.presentacion_es || '').replace(/"/g, '""'),
+      getProductImageUrl(p) || '',
+      getProductPdfUrl(p) || '',
+      p.date || '',
+      p.modified || ''
+    ]);
+
+    // Build CSV content
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n');
+
+    // Create and download file
+    const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `productos-prilabsa-${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }, [products]);
+
   // Get category display info
   const getCategoryInfo = (slug: string) => {
     return CATEGORY_CONFIG[slug] || { name: slug, bg: 'bg-gray-100', text: 'text-gray-800' };
@@ -413,14 +477,29 @@ const AdminDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Create New */}
-        <button
-          onClick={() => setViewMode('create')}
-          className="px-6 py-2 rounded-lg text-white font-medium transition-colors hover:opacity-90"
-          style={{ backgroundColor: '#3759C1' }}
-        >
-          + Nuevo Producto
-        </button>
+        {/* Actions */}
+        <div className="flex items-center gap-3">
+          {/* CSV Export */}
+          <button
+            onClick={exportToCSV}
+            disabled={products.length === 0}
+            className="px-4 py-2 rounded-lg font-medium transition-colors border border-green-600 text-green-600 hover:bg-green-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            title="Exportar todos los productos a CSV"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Exportar CSV
+          </button>
+          {/* Create New */}
+          <button
+            onClick={() => setViewMode('create')}
+            className="px-6 py-2 rounded-lg text-white font-medium transition-colors hover:opacity-90"
+            style={{ backgroundColor: '#3759C1' }}
+          >
+            + Nuevo Producto
+          </button>
+        </div>
       </div>
 
       {/* Error / Warning */}

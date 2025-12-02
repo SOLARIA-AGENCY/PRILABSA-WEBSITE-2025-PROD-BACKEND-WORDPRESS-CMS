@@ -386,7 +386,13 @@ export function useNoticias() {
       .catch(err => { setError(err); setLoading(false); });
   }, []);
 
-  return { posts, loading, error };
+  return {
+    posts,
+    articles: posts,      // Alias for compatibility
+    loading,
+    isLoading: loading,   // Alias for compatibility
+    error
+  };
 }
 
 // Single Noticia Hook
@@ -403,7 +409,12 @@ export function useNoticia(id: string) {
       .catch(err => { setError(err); setIsLoading(false); });
   }, [id]);
 
-  return { noticia, isLoading, error };
+  return {
+    noticia,
+    article: noticia,  // Alias for compatibility
+    isLoading,
+    error
+  };
 }
 
 // Helper: Extract image URL from WordPress embedded data or media ID
@@ -496,9 +507,13 @@ export function useProduct(slug: string) {
           const wp = data[0];
           const acf = wp.acf || {};
 
-          // Fetch PDF URL if ficha_tecnica_pdf exists
-          let pdfData = { exists: false, downloadUrl: '' };
+          // Fetch PDF URL if ficha_tecnica_pdf exists, otherwise use fallback path
+          let pdfData: { exists: boolean; downloadUrl: string } = { exists: false, downloadUrl: '' };
+          const productCode = acf.codigo || '';
+          const productName = acf.nombre_producto_es || wp.title?.rendered || '';
+
           if (acf.ficha_tecnica_pdf) {
+            // WordPress has PDF media ID - fetch the actual URL
             try {
               const pdfRes = await fetch(`https://productos.prilabsa.com/wp-json/wp/v2/media/${acf.ficha_tecnica_pdf}`);
               const pdfMedia = await pdfRes.json();
@@ -508,6 +523,22 @@ export function useProduct(slug: string) {
             } catch (e) {
               console.warn('Could not fetch PDF:', e);
             }
+          }
+
+          // Fallback: generate PDF path from product code if no WordPress PDF
+          if (!pdfData.exists && productCode && productName) {
+            // Sanitize name for filename: remove diacritics, special chars, replace spaces
+            const sanitizedName = productName
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+              .replace(/[\/]/g, '_')           // Replace slashes with underscores
+              .replace(/[^a-zA-Z0-9\s_]/g, '') // Remove other special chars
+              .replace(/\s+/g, '_')            // Replace spaces with underscores
+              .replace(/_+/g, '_')             // Collapse multiple underscores
+              .trim();
+            const pdfFilename = `${productCode}_${sanitizedName}.pdf`;
+            const pdfPath = `/assets/pdfs/productos/${pdfFilename}`;
+            pdfData = { exists: true, downloadUrl: pdfPath };
           }
 
           // Transform to frontend format
