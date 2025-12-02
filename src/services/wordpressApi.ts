@@ -410,18 +410,32 @@ export default WordPressAPI;
 
 import { useState, useEffect } from 'react';
 
-// Blog Post Hook
+// Blog Post Hook - Transforms WordPress post to BlogArticle format
 export function useBlogPost(id: string) {
-  const [article, setArticle] = useState<any>(null);
+  const [article, setArticle] = useState<BlogArticle | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) {
+      setIsLoading(false);
+      return;
+    }
+
     fetch(`https://productos.prilabsa.com/wp-json/wp/v2/posts/${id}?_embed`)
-      .then(res => res.json())
-      .then(data => { setArticle(data); setIsLoading(false); })
-      .catch(err => { setError(err); setIsLoading(false); });
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data: WordPressPost) => {
+        const transformed = transformWordPressPost(data);
+        setArticle(transformed);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setError(err);
+        setIsLoading(false);
+      });
   }, [id]);
 
   return { article, isLoading, error };
@@ -456,23 +470,37 @@ export function useNoticias() {
   };
 }
 
-// Single Noticia Hook
+// Single Noticia Hook - Transforms WordPress post to BlogArticle format
 export function useNoticia(id: string) {
-  const [noticia, setNoticia] = useState<any>(null);
+  const [article, setArticle] = useState<BlogArticle | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) {
+      setIsLoading(false);
+      return;
+    }
+
     fetch(`https://productos.prilabsa.com/wp-json/wp/v2/posts/${id}?_embed`)
-      .then(res => res.json())
-      .then(data => { setNoticia(data); setIsLoading(false); })
-      .catch(err => { setError(err); setIsLoading(false); });
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data: WordPressPost) => {
+        const transformed = transformWordPressPost(data);
+        setArticle(transformed);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setError(err);
+        setIsLoading(false);
+      });
   }, [id]);
 
   return {
-    noticia,
-    article: noticia,  // Alias for compatibility
+    noticia: article,  // Legacy alias
+    article,
     isLoading,
     error
   };

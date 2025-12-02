@@ -1,12 +1,13 @@
 # WordPress Blog/Noticias Integration Fix
 
 **Date:** 2025-12-02
+**Last Updated:** 2025-12-02
 **Status:** ✅ Complete
-**Routes:** `/blog`, `/noticias`
+**Routes:** `/blog`, `/noticias`, `/blog/:id`, `/noticias/:id`
 
 ## Problem
 
-The `/blog` and `/noticias` routes were showing errors because WordPress API returns posts in a different format than the React components expected.
+The blog/noticias routes were showing errors because WordPress API returns posts in a different format than the React components expected.
 
 ### Root Cause
 - **WordPress API returns:** `{ title: { rendered: string }, excerpt: { rendered: string } }`
@@ -31,15 +32,18 @@ Updated the hooks to transform WordPress posts to `BlogArticle` format:
    - Added `stripHtmlTags()` helper function
    - Added `toMultiLang()` helper function
    - Added `transformWordPressPost()` function
-   - Updated `useNoticias()` hook to use transformation
+   - Updated `useNoticias()` hook for list page transformation
+   - Updated `useNoticia(id)` hook for detail page transformation
+   - Updated `useBlogPost(id)` hook for detail page transformation
 
 ### Test Files Created
 
-1. **`src/services/__tests__/useNoticias.test.ts`** (12 tests)
+1. **`src/services/__tests__/useNoticias.test.ts`** (17 tests)
    - Tests for `stripHtmlTags()` HTML stripping
    - Tests for `toMultiLang()` content transformation
    - Tests for `transformWordPressPost()` full transformation
-   - Integration tests for component compatibility
+   - Integration tests for list page components
+   - Integration tests for detail page components (NoticiaPage, ArticlePage)
 
 ## Data Transformation
 
@@ -73,20 +77,35 @@ Updated the hooks to transform WordPress posts to `BlogArticle` format:
 ## Verification
 
 ```bash
-# Test routes
+# Test list pages
 curl -I https://productos.prilabsa.com/blog      # HTTP 200
 curl -I https://productos.prilabsa.com/noticias  # HTTP 200
 
+# Test detail pages
+curl -I https://productos.prilabsa.com/blog/1    # HTTP 200
+curl -I https://productos.prilabsa.com/noticias/1 # HTTP 200
+
 # Verify WordPress API
 curl https://productos.prilabsa.com/wp-json/wp/v2/posts?_embed
+curl https://productos.prilabsa.com/wp-json/wp/v2/posts/1?_embed
 
 # Run tests
 npx vitest run src/services/__tests__/useNoticias.test.ts
+# Expected: 17 tests passed
 ```
 
 ## Related Files
 
+### Pages
+- `src/pages/Blog.tsx` - Uses `useBlog()` hook (list)
+- `src/pages/Noticias.tsx` - Uses `useNoticias()` hook (list)
+- `src/pages/ArticlePage.tsx` - Uses `useBlogPost(id)` hook (detail)
+- `src/pages/NoticiaPage.tsx` - Uses `useNoticia(id)` hook (detail)
+
+### Types & Components
 - `src/types/blog.ts` - `BlogArticle`, `MultiLanguageContent` interfaces
-- `src/pages/Blog.tsx` - Uses `useBlog()` hook
-- `src/pages/Noticias.tsx` - Uses `useNoticias()` hook
 - `src/components/organisms/blog/ArticleCard.tsx` - Renders article cards
+
+### Hooks
+- `src/hooks/useBlog.ts` - List hook for /blog
+- `src/services/wordpressApi.ts` - All other WordPress hooks

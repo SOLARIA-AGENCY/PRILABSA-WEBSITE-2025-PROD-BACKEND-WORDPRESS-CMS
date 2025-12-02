@@ -1,10 +1,15 @@
 /**
- * useNoticias Hook Tests
+ * WordPress Blog/Noticias Hooks Tests
  *
  * Tests the WordPress post transformation to BlogArticle format
- * for the /noticias page.
+ * for both list pages (/blog, /noticias) and detail pages (/blog/:id, /noticias/:id).
  *
- * @see src/services/wordpressApi.ts - useNoticias hook
+ * Hooks tested:
+ * - useNoticias: List of posts for /noticias page
+ * - useNoticia: Single post for /noticias/:id page
+ * - useBlogPost: Single post for /blog/:id page
+ *
+ * @see src/services/wordpressApi.ts
  */
 
 import { describe, it, expect } from 'vitest';
@@ -252,5 +257,123 @@ describe('Integration: Noticias Page Data Structure', () => {
     expect(getLocalizedContent(article.title, 'es')).toBe('Spanish Title');
     expect(getLocalizedContent(article.title, 'en')).toBe('Spanish Title');
     expect(getLocalizedContent(article.title, 'pt')).toBe('Spanish Title');
+  });
+});
+
+describe('Detail Page Hooks: useNoticia and useBlogPost', () => {
+  it('should transform single post for NoticiaPage component', () => {
+    // Simulates what useNoticia returns after transformation
+    const wpPost: WordPressPost = {
+      id: 1,
+      title: { rendered: 'Hello world!' },
+      excerpt: { rendered: '<p>Welcome to WordPress. This is your first post.</p>\n' },
+      content: { rendered: '<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>\n' },
+      date: '2025-11-14T11:42:45',
+      slug: 'hello-world',
+      featured_media: 0,
+      categories: [1],
+      _embedded: {
+        'author': [{ name: 'admin' }]
+      }
+    };
+
+    const article = transformWordPressPost(wpPost);
+
+    // NoticiaPage.tsx expects these exact properties
+    expect(article.id).toBe('1');
+    expect(typeof article.title.es).toBe('string');
+    expect(typeof article.summary.es).toBe('string');
+    expect(typeof article.content.es).toBe('string');
+    expect(typeof article.author.es).toBe('string');
+    expect(typeof article.heroImage).toBe('string');
+    expect(article.tags).toHaveProperty('es');
+  });
+
+  it('should work with getLocalizedContent for detail page display', () => {
+    const wpPost: WordPressPost = {
+      id: 1,
+      title: { rendered: 'Artículo de Prueba' },
+      excerpt: { rendered: '<p>Resumen del artículo</p>' },
+      content: { rendered: '<p>Contenido completo del artículo con <strong>formato</strong>.</p>' },
+      date: '2025-12-02T10:00:00',
+      slug: 'articulo-prueba',
+      featured_media: 0,
+      categories: [],
+      _embedded: {
+        'author': [{ name: 'Editor' }]
+      }
+    };
+
+    const article = transformWordPressPost(wpPost);
+    const getLocalizedContent = (content: MultiLanguageContent, lang: 'es' | 'en' | 'pt') => content[lang];
+
+    // Simulates NoticiaPage line 58: getLocalizedContent(article.title, language)
+    expect(getLocalizedContent(article.title, 'es')).toBe('Artículo de Prueba');
+
+    // Simulates NoticiaPage line 84: getLocalizedContent(article.author, language)
+    expect(getLocalizedContent(article.author, 'es')).toBe('Editor');
+
+    // Simulates NoticiaPage line 101: getLocalizedContent(article.content, language)
+    expect(getLocalizedContent(article.content, 'es')).toBe('Contenido completo del artículo con formato.');
+  });
+
+  it('should handle missing _embedded data gracefully', () => {
+    const wpPost: WordPressPost = {
+      id: 5,
+      title: { rendered: 'Post without embedded' },
+      excerpt: { rendered: 'No extra data' },
+      content: { rendered: 'Just content' },
+      date: '2025-12-02T10:00:00',
+      slug: 'no-embedded',
+      featured_media: 0,
+      categories: []
+      // No _embedded property
+    };
+
+    const article = transformWordPressPost(wpPost);
+
+    // Should use defaults
+    expect(article.author.es).toBe('Prilabsa');
+    expect(article.heroImage).toBe('/assets/iniciodev/blue-texture-background.jpg');
+  });
+
+  it('should preserve date format for display', () => {
+    const wpPost: WordPressPost = {
+      id: 6,
+      title: { rendered: 'Date Test' },
+      excerpt: { rendered: 'Test' },
+      content: { rendered: 'Test' },
+      date: '2025-12-02T15:30:45',
+      slug: 'date-test',
+      featured_media: 0,
+      categories: []
+    };
+
+    const article = transformWordPressPost(wpPost);
+
+    // NoticiaPage line 84: Publicado el {article.date}
+    expect(article.date).toBe('2025-12-02');
+    expect(article.date).not.toContain('T'); // No time component
+  });
+
+  it('should provide heroImage for detail page header', () => {
+    const wpPostWithImage: WordPressPost = {
+      id: 7,
+      title: { rendered: 'Post with Image' },
+      excerpt: { rendered: 'Has featured image' },
+      content: { rendered: 'Content' },
+      date: '2025-12-02T10:00:00',
+      slug: 'with-image',
+      featured_media: 123,
+      categories: [],
+      _embedded: {
+        'wp:featuredmedia': [{ source_url: 'https://productos.prilabsa.com/wp-content/uploads/2025/12/image.jpg' }]
+      }
+    };
+
+    const article = transformWordPressPost(wpPostWithImage);
+
+    // NoticiaPage line 68: <img src={article.heroImage} ...
+    expect(article.heroImage).toBe('https://productos.prilabsa.com/wp-content/uploads/2025/12/image.jpg');
   });
 });
