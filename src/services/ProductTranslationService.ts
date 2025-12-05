@@ -45,47 +45,85 @@ export class ProductTranslationService {
 
   /**
    * Get translated field with fallback to Spanish
+   * Uses product.codigo (e.g., "QU017") for static translation lookup, not WordPress post ID
    */
   public getTranslatedField(
     product: OptimizedProduct,
     field: keyof ProductTranslationContent,
     language: SupportedLanguage
   ): any {
-    // Optimize: avoid loading large translations chunk for Spanish (base data)
+    // Use product code (QU017, AD001, etc.) for static translation lookup
+    const productCode = (product as any).codigo || (product as any).productCode || product.id;
+
+    // Helper: get static translation for any language
+    const getStaticField = (lang: SupportedLanguage): any => {
+      const staticTranslation = this.getProductTranslation(productCode, lang);
+      return staticTranslation?.[field] ?? null;
+    };
+
+    // Helper: check if array/value is empty
+    const isEmpty = (val: any): boolean => {
+      if (val === null || val === undefined) return true;
+      if (Array.isArray(val)) return val.length === 0;
+      if (typeof val === 'string') return val.trim() === '';
+      return false;
+    };
+
+    // For Spanish, try WordPress first, then fallback to static
     if (language === 'es') {
       switch (field) {
         case 'name':
           return product.name;
         case 'description':
           return product.description;
-        case 'benefits':
-          return product.benefits || [];
-        case 'presentation':
-          return product.presentation || [];
-        case 'specifications':
-          return product.specifications || [];
+        case 'shortDescription':
+          return product.translations?.es?.shortDescription || product.description?.substring(0, 150) || '';
+        case 'benefits': {
+          const wpBenefits = product.benefits;
+          return !isEmpty(wpBenefits) ? wpBenefits : (getStaticField('es') || []);
+        }
+        case 'presentation': {
+          const wpPresentation = product.presentation;
+          return !isEmpty(wpPresentation) ? wpPresentation : (getStaticField('es') || []);
+        }
+        case 'specifications': {
+          // WordPress ACF specifications may be empty - fallback to static
+          const wpSpecs = product.specifications;
+          return !isEmpty(wpSpecs) ? wpSpecs : (getStaticField('es') || []);
+        }
         default:
           return null;
       }
     }
 
-    const translation = this.getProductTranslation(product.id, language);
+    // For other languages, check static translations first
+    const translation = this.getProductTranslation(productCode, language);
     if (translation && translation[field]) {
       return translation[field];
     }
 
-    // Fallback to original product data (base)
+    // Fallback to Spanish static, then WordPress data
+    const spanishStatic = getStaticField('es');
+
     switch (field) {
       case 'name':
         return product.name;
       case 'description':
         return product.description;
-      case 'benefits':
-        return product.benefits || [];
-      case 'presentation':
-        return product.presentation || [];
-      case 'specifications':
-        return product.specifications || [];
+      case 'shortDescription':
+        return product.translations?.es?.shortDescription || product.description?.substring(0, 150) || '';
+      case 'benefits': {
+        const wpBenefits = product.benefits;
+        return !isEmpty(wpBenefits) ? wpBenefits : (spanishStatic || []);
+      }
+      case 'presentation': {
+        const wpPresentation = product.presentation;
+        return !isEmpty(wpPresentation) ? wpPresentation : (spanishStatic || []);
+      }
+      case 'specifications': {
+        const wpSpecs = product.specifications;
+        return !isEmpty(wpSpecs) ? wpSpecs : (spanishStatic || []);
+      }
       default:
         return null;
     }
