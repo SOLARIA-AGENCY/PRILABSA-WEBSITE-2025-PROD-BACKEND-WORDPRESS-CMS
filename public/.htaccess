@@ -1,16 +1,56 @@
 Options -MultiViews
 RewriteEngine On
+RewriteBase /
 
-# Handle Angular and React Router requests - serve index.html for all non-file requests
-RewriteCond %{THE_REQUEST} \s/+(.*?/)?(?:index)?\s [NC]
-RewriteRule ^ /%1 [R=302,L]
+# ====================================================================
+# WordPress Routes - Route to index.php for WordPress processing
+# ====================================================================
 
-# If the requested file or directory doesn't exist, serve index.html
+# WordPress REST API - Route to index.php
+RewriteCond %{REQUEST_URI} ^/wp-json [NC]
+RewriteRule ^ /index.php [L]
+
+# WordPress admin panel - Pass through to WordPress
+RewriteCond %{REQUEST_URI} ^/wp-admin [NC]
+RewriteRule ^ - [L]
+
+# WordPress login - Route to wp-login.php
+RewriteCond %{REQUEST_URI} ^/wp-login\.php [NC]
+RewriteRule ^ - [L]
+
+# WordPress content (uploads, plugins, themes) - Pass through
+RewriteCond %{REQUEST_URI} ^/wp-content [NC]
+RewriteRule ^ - [L]
+
+# WordPress includes - Pass through
+RewriteCond %{REQUEST_URI} ^/wp-includes [NC]
+RewriteRule ^ - [L]
+
+# WordPress cron
+RewriteCond %{REQUEST_URI} ^/wp-cron\.php [NC]
+RewriteRule ^ - [L]
+
+# Allow xmlrpc (if needed)
+RewriteCond %{REQUEST_URI} ^/xmlrpc\.php [NC]
+RewriteRule ^ - [L]
+
+# ====================================================================
+# React SPA Router - Serve index.html for client-side routes
+# ====================================================================
+
+# Don't rewrite existing files or directories
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+
+# Don't rewrite WordPress PHP files
+RewriteCond %{REQUEST_URI} !\.php$ [NC]
+
+# Serve React SPA for all other routes
 RewriteRule . /index.html [L]
 
-# Security headers
+# ====================================================================
+# Security Headers
+# ====================================================================
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options nosniff
     Header set X-Frame-Options DENY
@@ -18,7 +58,9 @@ RewriteRule . /index.html [L]
     Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# Gzip compression
+# ====================================================================
+# Gzip Compression
+# ====================================================================
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -29,9 +71,12 @@ RewriteRule . /index.html [L]
     AddOutputFilterByType DEFLATE application/rss+xml
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
 </IfModule>
 
-# Browser caching
+# ====================================================================
+# Browser Caching
+# ====================================================================
 <IfModule mod_expires.c>
     ExpiresActive on
     ExpiresByType text/css "access plus 1 year"

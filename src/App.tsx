@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import { AuthProvider } from './contexts/AuthContext';
@@ -8,6 +8,7 @@ import { CotizacionProvider } from './context/CotizacionContext';
 import { FEATURES } from './config/features';
 import { HelmetProvider } from '@dr.pogodin/react-helmet';
 import { ExternalRedirect } from './components/ExternalRedirect';
+import { prefetchProducts } from './services/wordpressApi';
 
 // Import critical pages directly for instant loading
 import Blog from './pages/Blog';
@@ -27,6 +28,7 @@ const InventarioProductos = React.lazy(() => import('./pages/InventarioProductos
 const Productos = React.lazy(() => import('./pages/Productos'));
 const CategoryPage = React.lazy(() => import('./pages/CategoryPage'));
 const ProductoDetalle = React.lazy(() => import('./pages/ProductoDetalle'));
+const ProductOrCategoryResolver = React.lazy(() => import('./components/ProductOrCategoryResolver'));
 const Cotizacion = React.lazy(() => import('./pages/Cotizacion'));
 
 // BLOG/NOTICIAS: Rutas de contenido (PERMANECEN en productos.prilabsa.com)
@@ -39,10 +41,8 @@ const TerminosYCondiciones = React.lazy(() => import('./pages/TerminosYCondicion
 const AvisoLegal = React.lazy(() => import('./pages/AvisoLegal'));
 const PoliticaDeCookies = React.lazy(() => import('./pages/PoliticaDeCookies'));
 
-// WordPress CMS Integration Pages (TODO: crear páginas)
-// const WordPressProductsDemo = React.lazy(() => import('./pages/WordPressProductsDemo'));
-// const WordPressSyncDashboard = React.lazy(() => import('./pages/WordPressSyncDashboard'));
-// const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
+// WordPress CMS Integration Pages
+const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
 
 // Optimized loading component with faster animation
 const PageLoader = () => (
@@ -99,6 +99,10 @@ class ErrorBoundary extends React.Component<
 }
 
 function App() {
+  // Prefetch products on app initialization for faster loading
+  useEffect(() => {
+    prefetchProducts();
+  }, []);
 
   // Detect if we're on blog subdomain
   const isBlogSubdomain = window.location.hostname === 'blog.prilabsa.com';
@@ -133,9 +137,10 @@ function App() {
               <Productos />
             </Suspense>
           } />
-          <Route path="/productos/:categorySlug" element={
+          {/* Smart resolver: detects if slug is product or category */}
+          <Route path="/productos/:slug" element={
             <Suspense fallback={<PageLoader />}>
-              <CategoryPage />
+              <ProductOrCategoryResolver />
             </Suspense>
           } />
           <Route path="/productos/:categorySlug/:slug" element={
@@ -238,24 +243,7 @@ function App() {
             </Suspense>
           } />
           <Route path="/login" element={<Login />} />
-          <Route path="/inventario-productos" element={
-            <Suspense fallback={<PageLoader />}>
-              <ProtectedRoute>
-                <InventarioProductos />
-              </ProtectedRoute>
-            </Suspense>
-          } />
-          {/* TODO: WordPress CMS routes - páginas pendientes de crear
-          <Route path="/wordpress-demo" element={
-            <Suspense fallback={<PageLoader />}>
-              <WordPressProductsDemo />
-            </Suspense>
-          } />
-          <Route path="/wordpress-sync" element={
-            <Suspense fallback={<PageLoader />}>
-              <WordPressSyncDashboard />
-            </Suspense>
-          } />
+          {/* Admin Dashboard - Conectado a WordPress API */}
           <Route path="/admin" element={
             <Suspense fallback={<PageLoader />}>
               <ProtectedRoute>
@@ -263,7 +251,22 @@ function App() {
               </ProtectedRoute>
             </Suspense>
           } />
-          */}
+          {/* Alias para /inventario-productos → AdminDashboard */}
+          <Route path="/inventario-productos" element={
+            <Suspense fallback={<PageLoader />}>
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            </Suspense>
+          } />
+          {/* Legacy: Inventario estático (datos locales) */}
+          <Route path="/inventario-legacy" element={
+            <Suspense fallback={<PageLoader />}>
+              <ProtectedRoute>
+                <InventarioProductos />
+              </ProtectedRoute>
+            </Suspense>
+          } />
           </Routes>
           </Router>
             </CotizacionProvider>

@@ -163,7 +163,7 @@ const buildAssets = (product: WordPressProduct, productName: string): ProductAss
   const assets: ProductAssets = {};
 
   if (imagen) {
-    // Use WordPress media library image
+    // Use WordPress media library image (ACF field object)
     assets.images = {
       main: {
         filename: imagen.filename,
@@ -175,6 +175,24 @@ const buildAssets = (product: WordPressProduct, productName: string): ProductAss
         width: imagen.width,
         height: imagen.height,
         thumbnail: imagen.sizes?.thumbnail,
+        webp: undefined,
+      },
+      gallery: [],
+    };
+    assets.image = assets.images.main;
+  } else if (product.featured_image_url) {
+    // Use WordPress featured image URL (from featured_media)
+    assets.images = {
+      main: {
+        filename: product.featured_image_url.split('/').pop() || 'product-image.png',
+        path: product.featured_image_url,
+        extension: 'png',
+        size: 0,
+        exists: true,
+        alt: productName,
+        width: product.featured_image_sizes?.large?.width,
+        height: product.featured_image_sizes?.large?.height,
+        thumbnail: product.featured_image_sizes?.thumbnail?.url,
         webp: undefined,
       },
       gallery: [],
@@ -231,6 +249,41 @@ const buildAssets = (product: WordPressProduct, productName: string): ProductAss
 };
 
 /**
+ * Generate a short description from full description (first sentence, max 150 chars)
+ */
+const generateShortDescription = (fullDescription: string | undefined): string => {
+  if (!fullDescription) return '';
+
+  const clean = stripHtml(fullDescription);
+  if (!clean) return '';
+
+  // Try to get first sentence
+  const sentenceMatch = clean.match(/^[^.!?]+[.!?]/);
+  if (sentenceMatch && sentenceMatch[0].length <= 200) {
+    return sentenceMatch[0].trim();
+  }
+
+  // Fallback: first 150 chars + ellipsis
+  if (clean.length <= 150) return clean;
+  return clean.substring(0, 147).trim() + '...';
+};
+
+/**
+ * Get short description - from WordPress field or generate from description
+ */
+const getShortDescription = (product: WordPressProduct, lang: WordPressLanguage): string => {
+  // Try to get from WordPress ACF field first
+  const wpShort = getLocalizedText(product, 'descripcion_corta', lang);
+  if (wpShort && wpShort.trim()) {
+    return stripHtml(wpShort);
+  }
+
+  // Generate from full description
+  const fullDesc = getLocalizedText(product, 'descripcion', lang);
+  return generateShortDescription(fullDesc);
+};
+
+/**
  * Convert a single WordPress product to OptimizedProduct
  */
 export const wordpressToOptimizedProduct = (
@@ -244,7 +297,7 @@ export const wordpressToOptimizedProduct = (
   // Get localized content
   const name = getLocalizedText(product, 'nombre_producto', lang) || product.title.rendered;
   const description = getLocalizedText(product, 'descripcion', lang);
-  const shortDescription = getLocalizedText(product, 'descripcion_corta', lang);
+  const shortDescription = getShortDescription(product, lang);
   const presentationHtml = getLocalizedText(product, 'presentacion', lang);
 
   // Parse presentation HTML to array
@@ -304,7 +357,7 @@ export const wordpressToOptimizedProduct = (
       es: {
         name: getLocalizedText(product, 'nombre_producto', 'es') || name,
         description: stripHtml(getLocalizedText(product, 'descripcion', 'es')),
-        shortDescription: getLocalizedText(product, 'descripcion_corta', 'es'),
+        shortDescription: getShortDescription(product, 'es'),
         benefits: getBenefits(product, 'es'),
         presentation: parseHtmlList(getLocalizedText(product, 'presentacion', 'es')),
         specifications: parseSpecifications(getLocalizedText(product, 'especificaciones', 'es')),
@@ -312,7 +365,7 @@ export const wordpressToOptimizedProduct = (
       en: {
         name: getLocalizedText(product, 'nombre_producto', 'en') || name,
         description: stripHtml(getLocalizedText(product, 'descripcion', 'en')),
-        shortDescription: getLocalizedText(product, 'descripcion_corta', 'en'),
+        shortDescription: getShortDescription(product, 'en'),
         benefits: getBenefits(product, 'en'),
         presentation: parseHtmlList(getLocalizedText(product, 'presentacion', 'en')),
         specifications: parseSpecifications(getLocalizedText(product, 'especificaciones', 'en')),
@@ -320,7 +373,7 @@ export const wordpressToOptimizedProduct = (
       pt: {
         name: getLocalizedText(product, 'nombre_producto', 'pt') || name,
         description: stripHtml(getLocalizedText(product, 'descripcion', 'pt')),
-        shortDescription: getLocalizedText(product, 'descripcion_corta', 'pt'),
+        shortDescription: getShortDescription(product, 'pt'),
         benefits: getBenefits(product, 'pt'),
         presentation: parseHtmlList(getLocalizedText(product, 'presentacion', 'pt')),
         specifications: parseSpecifications(getLocalizedText(product, 'especificaciones', 'pt')),

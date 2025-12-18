@@ -44,9 +44,10 @@ const ProductList: React.FC<ProductListProps> = ({ categorySlug, searchQuery }) 
 
   // ⭐ Estado de carga
   if (isLoading) {
+    const loadingMsg = t('products.messages.loading');
     return (
       <LoadingLogo
-        message={t('products.messages.loading') || 'Cargando productos...'}
+        message={(loadingMsg && loadingMsg !== 'products.messages.loading') ? loadingMsg : 'Cargando Productos PRILABSA...'}
         size="md"
       />
     );

@@ -197,23 +197,46 @@ netlify deploy --prod
 npm run deploy:workers
 ```
 
-## 📋 Estructura de Archivos Reorganizada
+## 📋 Estructura del Repositorio (Actualizada 2025-12-18)
 
-### ✅ Beneficios de Reorganización:
+```
+PRILABSA-WEBSITE-2025-PROD-BACKEND-WORDPRESS-CMS/
+├── src/                    # Codigo fuente React
+├── public/                 # Assets publicos
+├── dist/                   # Build de produccion
+├── scripts/                # Scripts de build y deploy
+├── docs/                   # Documentacion organizada
+│   ├── deployment/         # Guias de deploy
+│   ├── wordpress/          # Integracion WordPress
+│   ├── architecture/       # Arquitectura y patrones
+│   └── KNOWN-ISSUES.md     # Bugs conocidos y pendientes
+├── archive/                # Archivos obsoletos (no eliminar)
+│   ├── htaccess-legacy/    # Configuraciones htaccess antiguas
+│   ├── php-import-scripts/ # Scripts PHP de migracion
+│   ├── shell-scripts/      # Scripts bash temporales
+│   ├── temp-files/         # Archivos temporales
+│   └── logs/               # Logs de desarrollo
+├── backups/                # Backups de produccion
+└── [configs]               # Archivos de configuracion esenciales
+```
 
-1. **Directorio raíz limpio**: Solo 15 archivos esenciales (vs 88 anteriores)
-2. **Categorización lógica**: Archivos agrupados por función y estado
-3. **Mejor mantenibilidad**: Fácil localización de recursos
-4. **Escalabilidad**: Estructura preparada para crecimiento futuro
-5. **Mejor CI/CD**: Builds más rápidos y confiables
+### Archivos Esenciales en Root
 
-### 🗂️ Categorías Implementadas:
+| Archivo | Proposito |
+|---------|-----------|
+| `package.json` | Dependencias y scripts |
+| `vite.config.ts` | Configuracion Vite |
+| `tsconfig.json` | Configuracion TypeScript |
+| `tailwind.config.cjs` | Configuracion TailwindCSS |
+| `.htaccess` | Configuracion Apache produccion |
+| `index.html` | Entry point HTML |
 
-- **`.archive/`**: Documentos históricos, reportes, backups
-- **`.workspace/`**: Archivos temporales, configs desarrollo
-- **`automation/`**: Scripts categorized por función
-- **`resources/`**: Assets, especificaciones, inventarios
-- **`MODULO PRODUCTOS PRILABSA CATALOGO JULIO 2025/`**: Catálogo oficial de productos Julio 2025 con fotografías, PDFs y archivos CSV
+### Documentacion Importante
+
+- **`docs/KNOWN-ISSUES.md`**: Bugs conocidos y correcciones pendientes
+- **`docs/deployment/`**: Guias de despliegue a produccion
+- **`docs/wordpress/`**: Integracion con WordPress CMS
+- **`AGENTS.md`**: Instrucciones para agentes AI
 
 ## 🔧 Configuración
 

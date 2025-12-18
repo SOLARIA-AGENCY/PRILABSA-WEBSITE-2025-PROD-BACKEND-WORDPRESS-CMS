@@ -966,7 +966,7 @@ ${allTokens.map(token => `  ${token.cssVar}: ${token.value};`).join('\n')}
             
             <div className="prose max-w-none mt-12">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {_colorsContent}
+                {/* Colors content placeholder */}
               </ReactMarkdown>
             </div>
           </div>

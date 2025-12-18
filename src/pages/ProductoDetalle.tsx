@@ -42,7 +42,7 @@ const ProductoDetalle = () => {
   // Helper: get translated field using ProductTranslationService
   const getTranslatedField = (
     productId: string,
-    field: 'name' | 'description' | 'benefits' | 'presentation' | 'specifications'
+    field: 'name' | 'description' | 'shortDescription' | 'benefits' | 'presentation' | 'specifications'
   ) => {
     if (!producto) return null;
     return productTranslationService.getTranslatedField(producto, field, language);
@@ -58,7 +58,10 @@ const ProductoDetalle = () => {
       <Layout>
         <div className="container mx-auto px-4 py-12">
           <LoadingLogo
-            message={t('products.messages.loading') || 'Cargando producto...'}
+            message={(() => {
+              const msg = t('products.messages.loading');
+              return (msg && msg !== 'products.messages.loading') ? msg : 'Cargando Productos PRILABSA...';
+            })()}
             size="lg"
           />
         </div>
@@ -180,7 +183,7 @@ const ProductoDetalle = () => {
                 </p>
               )}
               
-              <p className="text-lg text-gray-600 mb-6">{getTranslatedField(producto.id, 'description') || producto.description || ''}</p>
+              <p className="text-lg text-gray-600 mb-6">{getTranslatedField(producto.id, 'shortDescription') || producto.translations?.es?.shortDescription || producto.description?.substring(0, 150) || ''}</p>
               
               {/* Selector de cantidad y botón de agregar a cotización - Condicional por feature flag */}
               {FEATURES.COTIZADOR && (

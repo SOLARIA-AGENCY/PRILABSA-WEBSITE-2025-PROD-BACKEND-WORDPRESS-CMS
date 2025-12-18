@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { WordPressAPI, clearCache } from '../services/WordPressAPI';
+import { WordPressAPI, clearCache } from '../services/wordpressApi';
 import { wordpressToOptimizedProducts, wordpressToOptimizedProduct } from '../utils/wordpressAdapter';
 import type { WordPressProduct, WordPressLanguage } from '../types/wordpress';
 import type { OptimizedProduct } from '../data/products/types';

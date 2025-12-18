@@ -9,7 +9,10 @@ import SearchBar from '../components/molecules/SearchBar';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const CategoryPage: React.FC = () => {
-  const { categorySlug } = useParams<{ categorySlug: string }>();
+  // Route can be /productos/:slug OR /productos/:categorySlug
+  // Handle both cases for compatibility
+  const params = useParams<{ slug?: string; categorySlug?: string }>();
+  const categorySlug = params.categorySlug || params.slug;
   const { t } = useLanguage();
 
   const [searchQuery, setSearchQuery] = useState('');

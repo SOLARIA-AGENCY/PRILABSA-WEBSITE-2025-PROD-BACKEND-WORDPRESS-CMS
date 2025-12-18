@@ -44,6 +44,7 @@ export interface ProductAssets {
 export interface ProductTranslationContent {
   name: string;
   description: string;
+  shortDescription?: string;
   benefits?: string[];
   presentation?: string[];
   specifications?: Array<{

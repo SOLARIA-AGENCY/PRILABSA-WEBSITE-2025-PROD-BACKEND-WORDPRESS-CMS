@@ -79,11 +79,18 @@ const CONFIG = {
   // Default pagination
   DEFAULT_PER_PAGE: 100,
 
-  // Cache duration in milliseconds (5 minutes)
+  // Memory cache duration (5 minutes)
   CACHE_DURATION: 5 * 60 * 1000,
+
+  // LocalStorage cache duration (30 minutes) - for stale-while-revalidate
+  STORAGE_CACHE_DURATION: 30 * 60 * 1000,
 
   // Request timeout
   TIMEOUT: 30000,
+
+  // LocalStorage keys
+  STORAGE_KEY_PRODUCTS: 'prilabsa_products_cache',
+  STORAGE_KEY_TIMESTAMP: 'prilabsa_products_timestamp',
 };
 
 // Determine if we're in development mode
@@ -124,6 +131,75 @@ const setCache = <T>(key: string, data: T): void => {
 // Clear cache (useful for forced refresh)
 export const clearCache = (): void => {
   cache.clear();
+  // Also clear localStorage cache
+  try {
+    localStorage.removeItem(CONFIG.STORAGE_KEY_PRODUCTS);
+    localStorage.removeItem(CONFIG.STORAGE_KEY_TIMESTAMP);
+  } catch {
+    // Ignore localStorage errors (SSR, quota exceeded, etc.)
+  }
+};
+
+// ============================================
+// LocalStorage Persistent Cache (Stale-While-Revalidate)
+// ============================================
+
+interface StoredProductsCache {
+  data: WordPressProduct[];
+  timestamp: number;
+}
+
+/**
+ * Get products from localStorage cache
+ * Returns null if cache is expired or doesn't exist
+ */
+const getStoredProducts = (): WordPressProduct[] | null => {
+  try {
+    const stored = localStorage.getItem(CONFIG.STORAGE_KEY_PRODUCTS);
+    const timestamp = localStorage.getItem(CONFIG.STORAGE_KEY_TIMESTAMP);
+
+    if (!stored || !timestamp) return null;
+
+    const cacheAge = Date.now() - parseInt(timestamp, 10);
+    if (cacheAge > CONFIG.STORAGE_CACHE_DURATION) {
+      // Cache expired, but return stale data for immediate display
+      console.log('[WordPressAPI] localStorage cache stale, will revalidate');
+      return JSON.parse(stored);
+    }
+
+    console.log('[WordPressAPI] Using localStorage cached products');
+    return JSON.parse(stored);
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * Check if stored cache is still fresh
+ */
+const isStoredCacheFresh = (): boolean => {
+  try {
+    const timestamp = localStorage.getItem(CONFIG.STORAGE_KEY_TIMESTAMP);
+    if (!timestamp) return false;
+
+    const cacheAge = Date.now() - parseInt(timestamp, 10);
+    return cacheAge < CONFIG.STORAGE_CACHE_DURATION;
+  } catch {
+    return false;
+  }
+};
+
+/**
+ * Save products to localStorage
+ */
+const storeProducts = (products: WordPressProduct[]): void => {
+  try {
+    localStorage.setItem(CONFIG.STORAGE_KEY_PRODUCTS, JSON.stringify(products));
+    localStorage.setItem(CONFIG.STORAGE_KEY_TIMESTAMP, String(Date.now()));
+    console.log(`[WordPressAPI] Cached ${products.length} products to localStorage`);
+  } catch (e) {
+    console.warn('[WordPressAPI] Failed to cache to localStorage:', e);
+  }
 };
 
 /**
@@ -132,6 +208,10 @@ export const clearCache = (): void => {
 export const WordPressAPI = {
   /**
    * Fetch all products from WordPress
+   * Uses stale-while-revalidate pattern:
+   * 1. Return localStorage cache immediately (if exists)
+   * 2. Revalidate in background if cache is stale
+   * 3. Fresh network fetch if no cache
    */
   async getProducts(query: WordPressProductQuery = {}): Promise<WordPressProduct[]> {
     const params = new URLSearchParams({
@@ -144,15 +224,44 @@ export const WordPressAPI = {
     });
 
     const cacheKey = `products:${params.toString()}`;
-    const cached = getCached<WordPressProduct[]>(cacheKey);
-    if (cached) {
-      console.log('[WordPressAPI] Using cached products');
-      return cached;
+    const isDefaultQuery = params.toString() === `per_page=${CONFIG.DEFAULT_PER_PAGE}&page=1`;
+
+    // 1. Check memory cache first (fastest)
+    const memoryCached = getCached<WordPressProduct[]>(cacheKey);
+    if (memoryCached) {
+      console.log('[WordPressAPI] Using memory cached products');
+      return memoryCached;
     }
 
+    // 2. For default query, check localStorage (stale-while-revalidate)
+    if (isDefaultQuery) {
+      const storedProducts = getStoredProducts();
+      if (storedProducts && storedProducts.length > 0) {
+        // Set memory cache
+        setCache(cacheKey, storedProducts);
+
+        // If cache is stale, revalidate in background
+        if (!isStoredCacheFresh()) {
+          console.log('[WordPressAPI] Revalidating stale cache in background...');
+          this._fetchAndCacheProducts(cacheKey).catch(console.error);
+        }
+
+        return storedProducts;
+      }
+    }
+
+    // 3. No cache available, fetch from network
+    return this._fetchAndCacheProducts(cacheKey, params.toString());
+  },
+
+  /**
+   * Internal: Fetch products from network and update all caches
+   */
+  async _fetchAndCacheProducts(cacheKey: string, queryString?: string): Promise<WordPressProduct[]> {
     try {
-      const url = getApiUrl(`/productos?${params.toString()}`);
-      console.log('[WordPressAPI] Fetching:', url);
+      const endpoint = queryString ? `/productos?${queryString}` : `/productos?per_page=${CONFIG.DEFAULT_PER_PAGE}&page=1`;
+      const url = getApiUrl(endpoint);
+      console.log('[WordPressAPI] Fetching from network:', url);
 
       const response = await fetch(url, {
         method: 'GET',
@@ -167,9 +276,17 @@ export const WordPressAPI = {
       }
 
       const products: WordPressProduct[] = await response.json();
+
+      // Update memory cache
       setCache(cacheKey, products);
 
-      console.log(`[WordPressAPI] Fetched ${products.length} products`);
+      // Update localStorage for default query
+      const isDefaultQuery = !queryString || queryString === `per_page=${CONFIG.DEFAULT_PER_PAGE}&page=1`;
+      if (isDefaultQuery) {
+        storeProducts(products);
+      }
+
+      console.log(`[WordPressAPI] Fetched and cached ${products.length} products`);
       return products;
     } catch (error) {
       console.error('[WordPressAPI] Error fetching products:', error);
@@ -402,15 +519,161 @@ export const WordPressAPI = {
   },
 };
 
+/**
+ * Prefetch products on app initialization
+ * Call this in main.tsx or App.tsx to warm up the cache
+ */
+export const prefetchProducts = async (): Promise<void> => {
+  try {
+    // Check if we already have fresh cache
+    if (isStoredCacheFresh()) {
+      console.log('[WordPressAPI] Products already cached, skipping prefetch');
+      return;
+    }
+
+    console.log('[WordPressAPI] Prefetching products...');
+    await WordPressAPI.getProducts();
+    console.log('[WordPressAPI] Prefetch complete');
+  } catch (error) {
+    console.warn('[WordPressAPI] Prefetch failed:', error);
+  }
+};
+
+/**
+ * Check if products are cached (for showing loading state)
+ */
+export const hasProductsCache = (): boolean => {
+  try {
+    const stored = localStorage.getItem(CONFIG.STORAGE_KEY_PRODUCTS);
+    return stored !== null && stored.length > 2; // Not empty array "[]"
+  } catch {
+    return false;
+  }
+};
+
 export default WordPressAPI;
 
 // ==========================================
-// WordPress Hooks Stubs - TODO: Implement
+// WordPress Hooks for Blog/Noticias CPT
+// Uses ACF multiidioma fields
 // ==========================================
 
 import { useState, useEffect } from 'react';
 
-// Blog Post Hook - Transforms WordPress post to BlogArticle format
+// WordPress Blog/Noticias CPT response structure (with ACF fields)
+interface WordPressCPTPost {
+  id: number;
+  date: string;
+  slug: string;
+  title: { rendered: string };
+  acf: {
+    titulo_es?: string;
+    titulo_en?: string;
+    titulo_pt?: string;
+    resumen_es?: string;
+    resumen_en?: string;
+    resumen_pt?: string;
+    contenido_es?: string;
+    contenido_en?: string;
+    contenido_pt?: string;
+    autor_es?: string;
+    autor_en?: string;
+    autor_pt?: string;
+    fecha_publicacion?: string;
+    tags_es?: string;
+    tags_en?: string;
+    tags_pt?: string;
+    imagen_destacada?: string | { url: string } | number;
+  };
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{ source_url: string }>;
+  };
+}
+
+/**
+ * Extract image URL from ACF field (can be string, object with url, or media ID)
+ */
+function getCPTImageUrl(imageField: string | { url: string } | number | undefined, embedded?: WordPressCPTPost['_embedded']): string {
+  if (typeof imageField === 'string' && imageField.startsWith('http')) {
+    return imageField;
+  }
+  if (typeof imageField === 'object' && imageField && 'url' in imageField) {
+    return imageField.url;
+  }
+  if (embedded?.['wp:featuredmedia']?.[0]?.source_url) {
+    return embedded['wp:featuredmedia'][0].source_url;
+  }
+  return '/assets/iniciodev/blue-texture-background.jpg';
+}
+
+/**
+ * Parse tags string (CSV format) to array
+ */
+function parseCPTTags(tagsString: string | undefined): string[] {
+  if (!tagsString) return [];
+  return tagsString.split(',').map(tag => tag.trim()).filter(Boolean);
+}
+
+/**
+ * Transforms WordPress Blog/Noticias CPT post to BlogArticle format
+ * Uses ACF multiidioma fields
+ */
+function transformCPTPost(post: WordPressCPTPost): BlogArticle {
+  const acf = post.acf || {};
+
+  const title: MultiLanguageContent = {
+    es: stripHtmlTags(acf.titulo_es || post.title?.rendered || ''),
+    en: stripHtmlTags(acf.titulo_en || acf.titulo_es || post.title?.rendered || ''),
+    pt: stripHtmlTags(acf.titulo_pt || acf.titulo_es || post.title?.rendered || '')
+  };
+
+  const summary: MultiLanguageContent = {
+    es: stripHtmlTags(acf.resumen_es || ''),
+    en: stripHtmlTags(acf.resumen_en || acf.resumen_es || ''),
+    pt: stripHtmlTags(acf.resumen_pt || acf.resumen_es || '')
+  };
+
+  // Keep HTML in content for rendering
+  const content: MultiLanguageContent = {
+    es: acf.contenido_es || '',
+    en: acf.contenido_en || acf.contenido_es || '',
+    pt: acf.contenido_pt || acf.contenido_es || ''
+  };
+
+  const author: MultiLanguageContent = {
+    es: acf.autor_es || 'Prilabsa',
+    en: acf.autor_en || acf.autor_es || 'Prilabsa',
+    pt: acf.autor_pt || acf.autor_es || 'Prilabsa'
+  };
+
+  // Parse date - ACF fecha_publicacion is in Ymd format (20251203)
+  let dateStr = post.date.split('T')[0];
+  if (acf.fecha_publicacion) {
+    const fp = acf.fecha_publicacion;
+    if (fp.length === 8) {
+      dateStr = `${fp.slice(0, 4)}-${fp.slice(4, 6)}-${fp.slice(6, 8)}`;
+    } else {
+      dateStr = fp;
+    }
+  }
+
+  return {
+    id: post.id.toString(),
+    title,
+    summary,
+    content,
+    date: dateStr,
+    author,
+    heroImage: getCPTImageUrl(acf.imagen_destacada, post._embedded),
+    tags: {
+      es: parseCPTTags(acf.tags_es),
+      en: parseCPTTags(acf.tags_en),
+      pt: parseCPTTags(acf.tags_pt)
+    }
+  };
+}
+
+// Blog Post Hook - Fetches single blog post from CPT 'blog'
 export function useBlogPost(id: string) {
   const [article, setArticle] = useState<BlogArticle | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -422,13 +685,14 @@ export function useBlogPost(id: string) {
       return;
     }
 
-    fetch(`https://productos.prilabsa.com/wp-json/wp/v2/posts/${id}?_embed`)
+    // Use CPT 'blog' endpoint
+    fetch(`https://productos.prilabsa.com/wp-json/wp/v2/blog/${id}?_embed`)
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then((data: WordPressPost) => {
-        const transformed = transformWordPressPost(data);
+      .then((data: WordPressCPTPost) => {
+        const transformed = transformCPTPost(data);
         setArticle(transformed);
         setIsLoading(false);
       })
@@ -441,20 +705,21 @@ export function useBlogPost(id: string) {
   return { article, isLoading, error };
 }
 
-// Noticias Hook - Transforms WordPress posts to BlogArticle format
+// Noticias Hook - Fetches news from CPT 'noticias'
 export function useNoticias() {
   const [articles, setArticles] = useState<BlogArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    fetch('https://productos.prilabsa.com/wp-json/wp/v2/posts?_embed&per_page=10')
+    // Use CPT 'noticias' endpoint
+    fetch('https://productos.prilabsa.com/wp-json/wp/v2/noticias?_embed&per_page=10')
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then((data: WordPressPost[]) => {
-        const transformed = data.map(transformWordPressPost);
+      .then((data: WordPressCPTPost[]) => {
+        const transformed = data.map(transformCPTPost);
         setArticles(transformed);
         setLoading(false);
       })
@@ -470,7 +735,7 @@ export function useNoticias() {
   };
 }
 
-// Single Noticia Hook - Transforms WordPress post to BlogArticle format
+// Single Noticia Hook - Fetches single news from CPT 'noticias'
 export function useNoticia(id: string) {
   const [article, setArticle] = useState<BlogArticle | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -482,13 +747,14 @@ export function useNoticia(id: string) {
       return;
     }
 
-    fetch(`https://productos.prilabsa.com/wp-json/wp/v2/posts/${id}?_embed`)
+    // Use CPT 'noticias' endpoint
+    fetch(`https://productos.prilabsa.com/wp-json/wp/v2/noticias/${id}?_embed`)
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then((data: WordPressPost) => {
-        const transformed = transformWordPressPost(data);
+      .then((data: WordPressCPTPost) => {
+        const transformed = transformCPTPost(data);
         setArticle(transformed);
         setIsLoading(false);
       })
@@ -577,6 +843,56 @@ export const parsePresentation = (html: string): string[] => {
   return matches.map(li => li.replace(/<\/?li[^>]*>/gi, '').trim()).filter(Boolean);
 };
 
+// Helper: Generate short description from full description
+const generateShortDescription = (fullDescription: string | undefined): string => {
+  if (!fullDescription) return '';
+  const clean = fullDescription.replace(/<[^>]*>/g, '').trim();
+  if (!clean) return '';
+  // Try to get first sentence
+  const sentenceMatch = clean.match(/^[^.!?]+[.!?]/);
+  if (sentenceMatch && sentenceMatch[0].length <= 200) {
+    return sentenceMatch[0].trim();
+  }
+  // Fallback: first 150 chars + ellipsis
+  if (clean.length <= 150) return clean;
+  return clean.substring(0, 147).trim() + '...';
+};
+
+// Helper: Parse specifications HTML to key-value pairs
+// Expects format: <li><strong>Key:</strong> Value</li> OR <li>Key: Value</li>
+const parseSpecifications = (html: string | undefined): Array<{ key: string; value: string }> => {
+  if (!html) return [];
+
+  const specs: Array<{ key: string; value: string }> = [];
+  const liMatches = html.match(/<li[^>]*>(.*?)<\/li>/gi);
+
+  if (liMatches) {
+    for (const li of liMatches) {
+      // Try to extract <strong>Key:</strong> Value pattern
+      const strongMatch = li.match(/<strong>([^<]+)<\/strong>\s*(.*)/i);
+      if (strongMatch) {
+        const key = strongMatch[1].replace(/:$/, '').trim();
+        const value = strongMatch[2].replace(/<[^>]*>/g, '').trim();
+        if (key && value) {
+          specs.push({ key, value });
+        }
+      } else {
+        // Fallback: try to split by colon
+        const text = li.replace(/<[^>]*>/g, '').trim();
+        const colonIndex = text.indexOf(':');
+        if (colonIndex > 0) {
+          specs.push({
+            key: text.substring(0, colonIndex).trim(),
+            value: text.substring(colonIndex + 1).trim(),
+          });
+        }
+      }
+    }
+  }
+
+  return specs;
+};
+
 // Single Product Hook - Searches by SLUG (not ID)
 export function useProduct(slug: string) {
   const [product, setProduct] = useState<any>(null);
@@ -630,6 +946,11 @@ export function useProduct(slug: string) {
             pdfData = { exists: true, downloadUrl: pdfPath };
           }
 
+          // Generate short description for each language
+          const descEs = acf.descripcion_es || '';
+          const descEn = acf.descripcion_en || '';
+          const descPt = acf.descripcion_pt || '';
+
           // Transform to frontend format
           const transformed = {
             ...wp,
@@ -639,16 +960,43 @@ export function useProduct(slug: string) {
             productCode: acf.codigo || '',
             category: acf.categoria || '',
             name: acf.nombre_producto_es || wp.title?.rendered || '',
-            description: acf.descripcion_es || '',
+            description: descEs,
             // ⭐ New fields for tabs
             benefits: getBenefits(acf),
-            specifications: [], // WordPress doesn't have specs field, leave empty
+            specifications: parseSpecifications(acf.especificaciones_es || ''),
             presentation: parsePresentation(acf.presentacion_es || ''),
             assets: {
               image: {
                 path: getImageUrl(wp)
               },
               pdf: pdfData
+            },
+            // ⭐ Translations with shortDescription for multilingual support
+            translations: {
+              es: {
+                name: acf.nombre_producto_es || wp.title?.rendered || '',
+                description: descEs,
+                shortDescription: acf.descripcion_corta_es || generateShortDescription(descEs),
+                benefits: getBenefits(acf),
+                presentation: parsePresentation(acf.presentacion_es || ''),
+                specifications: parseSpecifications(acf.especificaciones_es || ''),
+              },
+              en: {
+                name: acf.nombre_producto_en || acf.nombre_producto_es || '',
+                description: descEn,
+                shortDescription: acf.descripcion_corta_en || generateShortDescription(descEn || descEs),
+                benefits: [acf.beneficio_1_en, acf.beneficio_2_en, acf.beneficio_3_en].filter(Boolean),
+                presentation: parsePresentation(acf.presentacion_en || ''),
+                specifications: parseSpecifications(acf.especificaciones_en || acf.especificaciones_es || ''),
+              },
+              pt: {
+                name: acf.nombre_producto_pt || acf.nombre_producto_es || '',
+                description: descPt,
+                shortDescription: acf.descripcion_corta_pt || generateShortDescription(descPt || descEs),
+                benefits: [acf.beneficio_1_pt, acf.beneficio_2_pt, acf.beneficio_3_pt].filter(Boolean),
+                presentation: parsePresentation(acf.presentacion_pt || ''),
+                specifications: parseSpecifications(acf.especificaciones_pt || acf.especificaciones_es || ''),
+              }
             }
           };
           setProduct(transformed);
