@@ -14,7 +14,7 @@ import Footer from '../components/Footer';
 import type { WordPressProduct } from '../types/wordpress';
 
 // View modes
-type ViewMode = 'list' | 'create' | 'edit';
+type ViewMode = 'list' | 'create' | 'edit' | 'logs' | 'users';
 type DisplayMode = 'table' | 'cards';
 
 // Category configuration with proper names and colors
@@ -23,12 +23,11 @@ const CATEGORY_CONFIG: Record<string, { name: string; bg: string; text: string }
   alimentos: { name: 'Alimentos', bg: 'bg-green-100', text: 'text-green-800' },
   probioticos: { name: 'Probioticos', bg: 'bg-purple-100', text: 'text-purple-800' },
   quimicos: { name: 'Quimicos', bg: 'bg-orange-100', text: 'text-orange-800' },
-  equipos: { name: 'Equipos', bg: 'bg-gray-100', text: 'text-gray-800' },
+  equipos: { name: 'Equipos', bg: 'bg-slate-800', text: 'text-white' },
 };
 
 const AdminDashboard: React.FC = () => {
-  // Auth
-  const { logout } = useAuth();
+  const { logout, user, users, createUser, deleteUser, logAction, logs } = useAuth();
 
   // WordPress data - use raw products for admin CRUD
   const { products, loading, error, refresh, totalCount } = useWordPressRawProducts();
@@ -39,6 +38,10 @@ const AdminDashboard: React.FC = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [displayMode, setDisplayMode] = useState<DisplayMode>('table');
   const [selectedProduct, setSelectedProduct] = useState<WordPressProduct | null>(null);
+
+  // User Management State
+  const [newUser, setNewUser] = useState({ username: '', password: '', name: '', role: 'editor' as 'admin' | 'editor' });
+  const [showUserForm, setShowUserForm] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState<string>('all');
   const [connectionStatus, setConnectionStatus] = useState<'unknown' | 'connected' | 'failed'>('unknown');
@@ -153,6 +156,7 @@ const AdminDashboard: React.FC = () => {
     const result = await trashProduct(product.id);
     if (result.success) {
       refresh();
+      logAction('DELETE_PRODUCT', `Eliminado producto: ${product.acf?.nombre_producto_es || 'Sin nombre'} (ID: ${product.id})`);
       alert('Producto eliminado correctamente');
     } else {
       console.error('Delete failed:', result.error);
@@ -165,6 +169,12 @@ const AdminDashboard: React.FC = () => {
     setViewMode('list');
     setSelectedProduct(null);
     refresh();
+    logAction(
+      selectedProduct ? 'UPDATE_PRODUCT' : 'CREATE_PRODUCT',
+      selectedProduct
+        ? `Actualizado producto ID: ${selectedProduct.id}`
+        : 'Creado nuevo producto'
+    );
   }, [refresh]);
 
   // Handle cancel
@@ -365,17 +375,24 @@ const AdminDashboard: React.FC = () => {
             </p>
           </div>
           <div className="flex items-center gap-4">
+            {/* User Info */}
+            {user && (
+              <div className="text-right hidden sm:block">
+                <p className="text-sm font-medium text-gray-900">{user.name}</p>
+                <p className="text-xs text-gray-500 uppercase">{user.role}</p>
+              </div>
+            )}
+
             {/* Connection Status */}
             <div className="flex items-center gap-2 text-sm">
               <div
-                className={`w-2 h-2 rounded-full ${
-                  connectionStatus === 'connected' ? 'bg-green-500' :
+                className={`w-2 h-2 rounded-full ${connectionStatus === 'connected' ? 'bg-green-500' :
                   connectionStatus === 'failed' ? 'bg-red-500' : 'bg-gray-400'
-                }`}
+                  }`}
               />
               <span className="text-gray-600">
                 {connectionStatus === 'connected' ? 'API Conectada' :
-                 connectionStatus === 'failed' ? 'Error API' : 'Verificando...'}
+                  connectionStatus === 'failed' ? 'Error API' : 'Verificando...'}
               </span>
             </div>
             <button
@@ -416,11 +433,10 @@ const AdminDashboard: React.FC = () => {
       <div className="flex flex-wrap gap-2 mb-6">
         <button
           onClick={() => setFilterCategory('all')}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-            filterCategory === 'all'
-              ? 'bg-gray-800 text-white'
-              : 'bg-white text-gray-700 hover:bg-gray-100 shadow'
-          }`}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${filterCategory === 'all'
+            ? 'bg-gray-800 text-white'
+            : 'bg-white text-gray-700 hover:bg-gray-100 shadow'
+            }`}
         >
           Todos ({totalCount})
         </button>
@@ -428,15 +444,35 @@ const AdminDashboard: React.FC = () => {
           <button
             key={slug}
             onClick={() => setFilterCategory(filterCategory === slug ? 'all' : slug)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all shadow ${
-              filterCategory === slug
-                ? 'ring-2 ring-blue-500 ' + config.bg + ' ' + config.text
-                : config.bg + ' ' + config.text + ' opacity-80 hover:opacity-100'
-            }`}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all shadow ${filterCategory === slug
+              ? 'ring-2 ring-blue-500 ' + config.bg + ' ' + config.text
+              : config.bg + ' ' + config.text + ' opacity-80 hover:opacity-100'
+              }`}
           >
             {config.name} ({categoryStats[slug] || 0})
           </button>
-        ))}
+        ))}<button
+          onClick={() => setViewMode('logs')}
+          className="ml-auto px-4 py-2 rounded-lg text-sm font-medium transition-all bg-white text-gray-700 hover:bg-gray-100 shadow flex items-center gap-2"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Registro de Cambios
+        </button>
+
+        {/* User Management Button (Admin Only) */}
+        {user?.role === 'admin' && (
+          <button
+            onClick={() => setViewMode('users')}
+            className="px-4 py-2 rounded-lg text-sm font-medium transition-all bg-white text-gray-700 hover:bg-gray-100 shadow flex items-center gap-2"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            Usuarios
+          </button>
+        )}
       </div>
 
       {/* Actions Bar */}
@@ -460,17 +496,15 @@ const AdminDashboard: React.FC = () => {
           <div className="flex bg-gray-100 rounded-lg p-1">
             <button
               onClick={() => setDisplayMode('table')}
-              className={`px-4 py-2 text-sm rounded-md transition-colors ${
-                displayMode === 'table' ? 'bg-white shadow text-gray-900' : 'text-gray-600 hover:text-gray-900'
-              }`}
+              className={`px-4 py-2 text-sm rounded-md transition-colors ${displayMode === 'table' ? 'bg-white shadow text-gray-900' : 'text-gray-600 hover:text-gray-900'
+                }`}
             >
               Lista
             </button>
             <button
               onClick={() => setDisplayMode('cards')}
-              className={`px-4 py-2 text-sm rounded-md transition-colors ${
-                displayMode === 'cards' ? 'bg-white shadow text-gray-900' : 'text-gray-600 hover:text-gray-900'
-              }`}
+              className={`px-4 py-2 text-sm rounded-md transition-colors ${displayMode === 'cards' ? 'bg-white shadow text-gray-900' : 'text-gray-600 hover:text-gray-900'
+                }`}
             >
               Tarjetas
             </button>
@@ -599,16 +633,19 @@ const AdminDashboard: React.FC = () => {
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center justify-center w-8 h-8 bg-red-50 text-red-600 rounded hover:bg-red-100"
-                              title="Ver PDF"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center w-8 h-8 bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors"
+                              title="Descargar Ficha Técnica"
                             >
                               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zm-3 9h2v6h-2v-6zm4 0h2v6h-2v-6zm-8 0h2v6H6v-6z"/>
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zm-3 9h2v6h-2v-6zm4 0h2v6h-2v-6zm-8 0h2v6H6v-6z" />
                               </svg>
                             </a>
                           ) : (
                             <span className="inline-flex items-center justify-center w-8 h-8 bg-gray-100 text-gray-400 rounded" title="Cargando PDF...">
                               <svg className="w-5 h-5 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4z"/>
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4z" />
                               </svg>
                             </span>
                           )
@@ -677,25 +714,235 @@ const AdminDashboard: React.FC = () => {
     </div>
   );
 
-  return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
-      {/* Blue hero section behind header */}
-      <div className="bg-gradient-to-r from-[#3759C1] to-[#2a4494] pt-32 pb-8">
-        {/* This creates the blue background visible behind the transparent header */}
+  // Render Logs View
+  const renderLogsView = () => (
+    <div className="max-w-4xl mx-auto px-4 py-6">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold text-gray-800">Registro de Auditoria</h2>
+        <button
+          onClick={() => setViewMode('list')}
+          className="px-4 py-2 border rounded-lg hover:bg-gray-50 text-gray-600"
+        >
+          Volver al Inventario
+        </button>
       </div>
 
-      {/* Site Header - fixed, will overlay the blue section */}
-      <Header />
-
-      {/* Main Content */}
-      <main className="flex-1 -mt-4">
-        {viewMode === 'list' ? renderListView() : renderFormView()}
-      </main>
-
-      {/* Site Footer */}
-      <Footer />
+      <div className="bg-white rounded-xl shadow overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-gray-50 border-b">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Usuario</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Accion</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Detalle</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {logs.length === 0 ? (
+              <tr>
+                <td colSpan={4} className="px-6 py-8 text-center text-gray-500">
+                  No hay registros de actividad recientes
+                </td>
+              </tr>
+            ) : (
+              logs.map((log, idx) => (
+                <tr key={idx} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {new Date(log.timestamp).toLocaleString()}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    {log.user}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${log.action.includes('DELETE') ? 'bg-red-100 text-red-800' :
+                      log.action.includes('CREATE') ? 'bg-green-100 text-green-800' :
+                        log.action.includes('UPDATE') ? 'bg-blue-100 text-blue-800' :
+                          'bg-gray-100 text-gray-800'
+                      }`}>
+                      {log.action}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-600">
+                    {log.details}
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
+
+    </div >
+  );
+
+// Render Users View
+const renderUsersView = () => (
+  <div className="max-w-4xl mx-auto px-4 py-6">
+    <div className="flex items-center justify-between mb-6">
+      <h2 className="text-2xl font-bold text-gray-800">Gestión de Usuarios</h2>
+      <div className="flex gap-2">
+        {!showUserForm && (
+          <button
+            onClick={() => setShowUserForm(true)}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow"
+          >
+            Nuevo Usuario
+          </button>
+        )}
+        <button
+          onClick={() => setViewMode('list')}
+          className="px-4 py-2 border rounded-lg hover:bg-gray-50 text-gray-600"
+        >
+          Volver
+        </button>
+      </div>
+    </div>
+
+    {showUserForm && (
+      <div className="bg-white p-6 rounded-xl shadow mb-8">
+        <h3 className="text-lg font-semibold mb-4">Crear Nuevo Usuario</h3>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          if (createUser(newUser)) {
+            alert('Usuario creado correctamente');
+            setNewUser({ username: '', password: '', name: '', role: 'editor' });
+            setShowUserForm(false);
+          } else {
+            alert('Error: El nombre de usuario ya existe');
+          }
+        }} className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Usuario (Login)</label>
+            <input
+              required
+              type="text"
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              value={newUser.username}
+              onChange={e => setNewUser({ ...newUser, username: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+            <input
+              required
+              type="text"
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              value={newUser.password}
+              onChange={e => setNewUser({ ...newUser, password: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+            <input
+              required
+              type="text"
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              value={newUser.name}
+              onChange={e => setNewUser({ ...newUser, name: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Rol</label>
+            <select
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              value={newUser.role}
+              onChange={e => setNewUser({ ...newUser, role: e.target.value as 'admin' | 'editor' })}
+            >
+              <option value="editor">Editor (Gestión de Productos)</option>
+              <option value="admin">Administrador (Acceso Total)</option>
+            </select>
+          </div>
+          <div className="md:col-span-2 flex justify-end gap-2 mt-2">
+            <button
+              type="button"
+              onClick={() => setShowUserForm(false)}
+              className="px-4 py-2 text-gray-600 hover:text-gray-800"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+            >
+              Guardar Usuario
+            </button>
+          </div>
+        </form>
+      </div>
+    )}
+
+    <div className="bg-white rounded-xl shadow overflow-hidden">
+      <table className="w-full">
+        <thead className="bg-gray-50 border-b">
+          <tr>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Usuario</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rol</th>
+            <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Acciones</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-200">
+          {users.map((u) => (
+            <tr key={u.username} className="hover:bg-gray-50">
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                {u.username}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {u.name}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <span className={`px-2 py-1 rounded-full text-xs font-medium ${u.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'
+                  }`}>
+                  {u.role === 'admin' ? 'Administrador' : 'Editor'}
+                </span>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                {u.username !== 'ADMIN-PRILABSA' && u.username !== user?.username && (
+                  <button
+                    onClick={() => {
+                      if (confirm(`¿Eliminar usuario ${u.name}?`)) {
+                        deleteUser(u.username);
+                      }
+                    }}
+                    className="text-red-600 hover:text-red-900"
+                  >
+                    Eliminar
+                  </button>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+);
+
+return (
+  <div className="min-h-screen flex flex-col bg-gray-100">
+    {/* Blue hero section behind header */}
+    <div className="bg-gradient-to-r from-[#3759C1] to-[#2a4494] pt-32 pb-8">
+      {/* This creates the blue background visible behind the transparent header */}
+    </div>
+
+    {/* Site Header - fixed, will overlay the blue section */}
+    <Header />
+
+    {/* Main Content */}
+    <main className="flex-1 -mt-4">
+      {viewMode === 'list' && renderListView()}
+      {viewMode === 'create' && renderFormView()}
+      {viewMode === 'edit' && renderFormView()}
+      {viewMode === 'logs' && renderLogsView()}
+      {viewMode === 'users' && renderUsersView()}
+    </main>
+
+    {/* Site Footer */}
+    <Footer />
+  </div>
+);
 };
 
 export default AdminDashboard;

@@ -257,37 +257,75 @@ export const WordPressAPI = {
   /**
    * Internal: Fetch products from network and update all caches
    */
+  /**
+   * Internal: Fetch products from network and update all caches
+   * Supports recursive fetching if multiple pages exist
+   */
   async _fetchAndCacheProducts(cacheKey: string, queryString?: string): Promise<WordPressProduct[]> {
     try {
-      const endpoint = queryString ? `/productos?${queryString}` : `/productos?per_page=${CONFIG.DEFAULT_PER_PAGE}&page=1`;
-      const url = getApiUrl(endpoint);
-      console.log('[WordPressAPI] Fetching from network:', url);
+      let allProducts: WordPressProduct[] = [];
+      let page = 1;
+      let totalPages = 1;
+      
+      // Base URL construction
+      const baseEndpoint = queryString ? `/productos?${queryString}` : `/productos?per_page=${CONFIG.DEFAULT_PER_PAGE}`;
+      
+      // If we are doing a default fetch (all items), we potentially need to loop pages
+      // If query has specific page param, just fetch that one.
+      const isSpecificPageRequest = queryString?.includes('page=');
 
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-        },
-        signal: AbortSignal.timeout(CONFIG.TIMEOUT),
-      });
+      do {
+        // Construct URL for current page
+        let endpoint = baseEndpoint;
+        if (!isSpecificPageRequest) {
+           endpoint = `${baseEndpoint}&page=${page}`;
+        }
 
-      if (!response.ok) {
-        throw new Error(`WordPress API error: ${response.status} ${response.statusText}`);
-      }
+        const url = getApiUrl(endpoint);
+        console.log(`[WordPressAPI] Fetching from network (Page ${page}):`, url);
 
-      const products: WordPressProduct[] = await response.json();
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          },
+          signal: AbortSignal.timeout(CONFIG.TIMEOUT),
+        });
+
+        if (!response.ok) {
+           // If page > 1 and 400/404, it might just mean end of pagination if headers were wrong, but usually we trust x-wp-totalpages
+           if (page > 1 && (response.status === 400 || response.status === 404)) {
+             break;
+           }
+           throw new Error(`WordPress API error: ${response.status} ${response.statusText}`);
+        }
+
+        const products: WordPressProduct[] = await response.json();
+        allProducts = [...allProducts, ...products];
+
+        // Check pagination headers
+        const totalPagesHeader = response.headers.get('x-wp-totalpages');
+        if (totalPagesHeader) {
+          totalPages = parseInt(totalPagesHeader, 10);
+        }
+
+        // If specific page requested, we are done
+        if (isSpecificPageRequest) break;
+
+        page++;
+      } while (page <= totalPages);
 
       // Update memory cache
-      setCache(cacheKey, products);
+      setCache(cacheKey, allProducts);
 
       // Update localStorage for default query
       const isDefaultQuery = !queryString || queryString === `per_page=${CONFIG.DEFAULT_PER_PAGE}&page=1`;
       if (isDefaultQuery) {
-        storeProducts(products);
+        storeProducts(allProducts);
       }
 
-      console.log(`[WordPressAPI] Fetched and cached ${products.length} products`);
-      return products;
+      console.log(`[WordPressAPI] Fetched and cached ${allProducts.length} total products`);
+      return allProducts;
     } catch (error) {
       console.error('[WordPressAPI] Error fetching products:', error);
       throw error;

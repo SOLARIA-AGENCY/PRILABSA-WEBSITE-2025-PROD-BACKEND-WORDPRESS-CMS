@@ -13,11 +13,11 @@ export const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // Redirigir si ya está autenticado
   useEffect(() => {
     if (isAuthenticated) {
@@ -43,14 +43,14 @@ export const Login: React.FC = () => {
     await new Promise(resolve => setTimeout(resolve, 500));
 
     const success = login(formData.username, formData.password);
-    
+
     if (success) {
       const from = (location.state as any)?.from?.pathname || '/inventario-productos';
       navigate(from, { replace: true });
     } else {
       setError('Credenciales incorrectas. Verifique su usuario y contraseña.');
     }
-    
+
     setIsLoading(false);
   };
 
@@ -58,20 +58,20 @@ export const Login: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       {/* Header Original */}
       <Header />
-      
+
       {/* Mini-hero azul */}
       <div className="w-full h-32 bg-blue-900 opacity-60 relative z-10"></div>
-      
+
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center px-4 py-8 relative">
         {/* Background Image - PRILABSA Pedernales */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
           style={{
             backgroundImage: 'url(/images/prilabsa pedernales.png)',
           }}
         />
-        
+
         {/* Login Form Container con efecto frost */}
         <div className="relative z-10 w-full max-w-md">
           <div className="text-center mb-8">
@@ -140,6 +140,16 @@ export const Login: React.FC = () => {
               </div>
             </div>
 
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={() => alert("Por favor contacte al administrador del sistema para restablecer su acceso:\n\nEmail: soporte@prilabsa.com\nTel: +593 123 456 789")}
+                className="text-sm font-medium text-blue-600 hover:text-blue-500"
+              >
+                ¿Olvidó su contraseña?
+              </button>
+            </div>
+
             {error && (
               <div className="rounded-md bg-red-100/90 backdrop-blur-sm border-2 border-red-300 p-4 shadow-lg">
                 <div className="text-sm text-red-800 font-medium">{error}</div>
@@ -165,7 +175,7 @@ export const Login: React.FC = () => {
           </form>
         </div>
       </div>
-      
+
       {/* Footer Original */}
       <Footer />
     </div>
