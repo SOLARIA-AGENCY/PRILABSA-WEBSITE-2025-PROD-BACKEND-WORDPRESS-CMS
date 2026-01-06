@@ -80,6 +80,14 @@ export interface WordPressProductACF {
   especificaciones_es: string | null;
   especificaciones_en: string | null;
   especificaciones_pt: string | null;
+  // Extra fields found in API
+  beneficios?: string | null;
+  descripcion?: string | null;
+  especificaciones?: string | null;
+  fotos?: any[] | null;
+  presentacion?: string | null;
+  subcategoria?: string | null;
+  pdf?: string | null;
 }
 
 // WordPress Product from REST API

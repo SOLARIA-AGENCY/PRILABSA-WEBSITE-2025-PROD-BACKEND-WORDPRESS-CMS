@@ -30,7 +30,10 @@ const AppWithProviders = () => {
   );
 };
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+console.log('🚀 Prilabsa Web App Initialized');
+console.log('📦 Build Version: 2026-01-06 14:50 (Aggressive Fallback Active)');
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AppWithProviders />
   </React.StrictMode>

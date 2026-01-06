@@ -3,23 +3,24 @@ import { Search, Filter, Download, AlertTriangle, CheckCircle, Clock, FileText, 
 import { PRODUCTS_REGISTRY as DISCOVERED_PRODUCTS_REGISTRY } from '../data/products';
 import { OptimizedProduct as DiscoveredProduct } from '../data/products/types';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useWordPressProducts } from '../hooks/useWordPressProducts';
 
 // Funciones de utilidad para productos
-const getProductsByCategory = (category: string) => {
-  return DISCOVERED_PRODUCTS_REGISTRY.filter(product => product.category === category);
+const getProductsByCategory = (products: DiscoveredProduct[], category: string) => {
+  return products.filter(product => product.category === category);
 };
 
-const searchProducts = (query: string) => {
+const searchProducts = (products: DiscoveredProduct[], query: string) => {
   const lowerQuery = query.toLowerCase();
-  return DISCOVERED_PRODUCTS_REGISTRY.filter(product => 
+  return products.filter(product =>
     product.name.toLowerCase().includes(lowerQuery) ||
     (product.codigo || product.productCode || '').toLowerCase().includes(lowerQuery) ||
     (product.description && product.description.toLowerCase().includes(lowerQuery))
   );
 };
 
-const getAvailableCategories = () => {
-  const categories = new Set(DISCOVERED_PRODUCTS_REGISTRY.map(p => p.category));
+const getAvailableCategories = (products: DiscoveredProduct[]) => {
+  const categories = new Set(products.map(p => p.category));
   return Array.from(categories);
 };
 
@@ -30,19 +31,23 @@ const validateProduct = (product: DiscoveredProduct) => {
   };
 };
 
-// Estadísticas del registro
-const REGISTRY_STATS = {
-  totalProducts: DISCOVERED_PRODUCTS_REGISTRY.length,
-  completenessRate: Math.round((DISCOVERED_PRODUCTS_REGISTRY.filter(p => p.name && (p.codigo || p.productCode)).length / DISCOVERED_PRODUCTS_REGISTRY.length) * 100),
-  totalAssets: DISCOVERED_PRODUCTS_REGISTRY.length * 2, // Estimación
-  categories: getAvailableCategories().length
+const getRegistryStats = (products: DiscoveredProduct[]) => {
+  const categories = new Set(products.map(p => p.category));
+  return {
+    totalProducts: products.length,
+    completenessRate: products.length > 0
+      ? Math.round((products.filter(p => p.name && (p.codigo || p.productCode)).length / products.length) * 100)
+      : 0,
+    totalAssets: products.length * 2, // Estimación
+    categories: categories.size
+  };
 };
 
 // Clasificaciones temporales hasta migración completa
 const CLASIFICACIONES = {
   aditivos: 'products.categories.aditivos',
   alimentos: 'products.categories.alimentos',
-  probioticos: 'products.categories.probioticos', 
+  probioticos: 'products.categories.probioticos',
   quimicos: 'products.categories.quimicos',
   equipos: 'products.categories.equipos'
 };
@@ -50,50 +55,50 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 // Componente de estadísticas del dashboard
-const InventarioStats: React.FC<{ stats: typeof REGISTRY_STATS }> = ({ stats }) => {
+const InventarioStats: React.FC<{ stats: any }> = ({ stats }) => {
   const { t } = useLanguage();
   return (
-  <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-    <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
-      <div className="flex items-center">
-        <FileText className="h-8 w-8 text-blue-500" />
-        <div className="ml-4">
-          <p className="text-sm font-medium text-gray-500">{t('inventory.stats.totalProducts')}</p>
-          <p className="text-2xl font-bold text-gray-900">{stats.totalProducts}</p>
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+        <div className="flex items-center">
+          <FileText className="h-8 w-8 text-blue-500" />
+          <div className="ml-4">
+            <p className="text-sm font-medium text-gray-500">{t('inventory.stats.totalProducts')}</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.totalProducts}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+        <div className="flex items-center">
+          <CheckCircle className="h-8 w-8 text-green-500" />
+          <div className="ml-4">
+            <p className="text-sm font-medium text-gray-500">{t('inventory.stats.completeness')}</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.completenessRate}%</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-500">
+        <div className="flex items-center">
+          <Image className="h-8 w-8 text-yellow-500" />
+          <div className="ml-4">
+            <p className="text-sm font-medium text-gray-500">{t('inventory.stats.totalAssets')}</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.totalAssets.toLocaleString()}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
+        <div className="flex items-center">
+          <Filter className="h-8 w-8 text-purple-500" />
+          <div className="ml-4">
+            <p className="text-sm font-medium text-gray-500">{t('inventory.stats.categories')}</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.categories}</p>
+          </div>
         </div>
       </div>
     </div>
-    
-    <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
-      <div className="flex items-center">
-        <CheckCircle className="h-8 w-8 text-green-500" />
-        <div className="ml-4">
-          <p className="text-sm font-medium text-gray-500">{t('inventory.stats.completeness')}</p>
-          <p className="text-2xl font-bold text-gray-900">{stats.completenessRate}%</p>
-        </div>
-      </div>
-    </div>
-    
-    <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-500">
-      <div className="flex items-center">
-        <Image className="h-8 w-8 text-yellow-500" />
-        <div className="ml-4">
-          <p className="text-sm font-medium text-gray-500">{t('inventory.stats.totalAssets')}</p>
-          <p className="text-2xl font-bold text-gray-900">{stats.totalAssets.toLocaleString()}</p>
-        </div>
-      </div>
-    </div>
-    
-    <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
-      <div className="flex items-center">
-        <Filter className="h-8 w-8 text-purple-500" />
-        <div className="ml-4">
-          <p className="text-sm font-medium text-gray-500">{t('inventory.stats.categories')}</p>
-          <p className="text-2xl font-bold text-gray-900">5</p>
-        </div>
-      </div>
-    </div>
-  </div>
   );
 };
 
@@ -102,12 +107,12 @@ const ProductThumbnail: React.FC<{ product: DiscoveredProduct }> = ({ product })
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const handleImageError = () => {
     setImageError(true);
     console.warn(`Imagen no encontrada: ${product.assets.image?.path}`);
   };
-  
+
   if (!product.assets.image?.exists || imageError) {
     return (
       <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
@@ -115,10 +120,10 @@ const ProductThumbnail: React.FC<{ product: DiscoveredProduct }> = ({ product })
       </div>
     );
   }
-  
+
   return (
     <>
-      <div 
+      <div
         className="relative group cursor-pointer"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -127,20 +132,19 @@ const ProductThumbnail: React.FC<{ product: DiscoveredProduct }> = ({ product })
         <img
           src={product.assets.image.path}
           alt={product.name}
-          className={`w-16 h-16 object-cover rounded-lg border-2 border-gray-200 transition-all duration-200 ${
-            imageLoaded ? 'opacity-100' : 'opacity-50'
-          } hover:border-blue-400 hover:shadow-md`}
+          className={`w-16 h-16 object-cover rounded-lg border-2 border-gray-200 transition-all duration-200 ${imageLoaded ? 'opacity-100' : 'opacity-50'
+            } hover:border-blue-400 hover:shadow-md`}
           onError={handleImageError}
           onLoad={() => setImageLoaded(true)}
         />
-        
+
         {/* Loading spinner */}
         {!imageLoaded && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
           </div>
         )}
-        
+
         {/* Indicador de zoom */}
         <div className="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <div className="bg-blue-500 text-white text-xs px-1.5 py-0.5 rounded-full shadow-lg">
@@ -148,13 +152,13 @@ const ProductThumbnail: React.FC<{ product: DiscoveredProduct }> = ({ product })
           </div>
         </div>
       </div>
-      
+
       {/* Modal de imagen ampliada */}
       {isHovered && imageLoaded && (
         <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
           {/* Overlay */}
           <div className="absolute inset-0 bg-black bg-opacity-75"></div>
-          
+
           {/* Imagen ampliada */}
           <div className="relative z-10 max-w-2xl max-h-2xl p-4">
             <img
@@ -162,7 +166,7 @@ const ProductThumbnail: React.FC<{ product: DiscoveredProduct }> = ({ product })
               alt={`${product.name} - Ampliada`}
               className="max-w-full max-h-full object-contain rounded-lg border-4 border-white shadow-2xl animate-in zoom-in-95 duration-200"
             />
-            
+
             {/* Información del producto */}
             <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 text-white p-3 rounded-b-lg">
               <h3 className="font-semibold text-lg">{product.name}</h3>
@@ -234,27 +238,27 @@ const ProductEditModal: React.FC<{
     try {
       // Simular guardado de assets (en un caso real, aquí subirías los archivos)
       const updatedProduct: DiscoveredProduct = {
-         ...product,
-         ...formData,
-         assets: {
-           ...product.assets,
-           image: imageFile ? {
-             filename: imageFile.name,
-             path: URL.createObjectURL(imageFile),
-             extension: imageFile.name.split('.').pop() || 'jpg',
-             size: imageFile.size,
-             exists: true
-           } : product.assets.image,
-           pdf: pdfFile ? {
-             filename: pdfFile.name,
-             path: product.assets.pdf?.path || '',
-             size: `${(pdfFile.size / 1024 / 1024).toFixed(1)} MB`,
-             downloadUrl: product.assets.pdf?.downloadUrl || '',
-             exists: true
-           } : product.assets.pdf
-         }
-       };
-      
+        ...product,
+        ...formData,
+        assets: {
+          ...product.assets,
+          image: imageFile ? {
+            filename: imageFile.name,
+            path: URL.createObjectURL(imageFile),
+            extension: imageFile.name.split('.').pop() || 'jpg',
+            size: imageFile.size,
+            exists: true
+          } : product.assets.image,
+          pdf: pdfFile ? {
+            filename: pdfFile.name,
+            path: product.assets.pdf?.path || '',
+            size: `${(pdfFile.size / 1024 / 1024).toFixed(1)} MB`,
+            downloadUrl: product.assets.pdf?.downloadUrl || '',
+            exists: true
+          } : product.assets.pdf
+        }
+      };
+
       onSave(updatedProduct);
       onClose();
     } catch (error) {
@@ -271,7 +275,7 @@ const ProductEditModal: React.FC<{
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onClick={onClose}></div>
-        
+
         <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="flex items-center justify-between mb-4">
@@ -280,7 +284,7 @@ const ProductEditModal: React.FC<{
                 <X className="w-6 h-6" />
               </button>
             </div>
-            
+
             <div className="space-y-4">
               {/* Información básica */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -289,7 +293,7 @@ const ProductEditModal: React.FC<{
                   <input
                     type="text"
                     value={formData.codigo}
-                    onChange={(e) => setFormData({...formData, codigo: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, codigo: e.target.value })}
                     className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
@@ -298,22 +302,22 @@ const ProductEditModal: React.FC<{
                   <input
                     type="text"
                     value={formData.nombre}
-                    onChange={(e) => setFormData({...formData, nombre: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
                     className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
                 <textarea
                   value={formData.descripcion}
-                  onChange={(e) => setFormData({...formData, descripcion: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, descripcion: e.target.value })}
                   rows={3}
                   className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
-              
+
               {/* Assets actuales */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Imagen actual */}
@@ -322,8 +326,8 @@ const ProductEditModal: React.FC<{
                   <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
                     {product.assets.image?.exists ? (
                       <div className="text-center">
-                        <img 
-                          src={imagePreview || product.assets.image.path} 
+                        <img
+                          src={imagePreview || product.assets.image.path}
                           alt={product.name}
                           className="w-24 h-24 object-cover rounded-lg mx-auto mb-2"
                         />
@@ -335,7 +339,7 @@ const ProductEditModal: React.FC<{
                         <p className="text-sm">Sin imagen</p>
                       </div>
                     )}
-                    
+
                     <input
                       type="file"
                       accept="image/*"
@@ -344,7 +348,7 @@ const ProductEditModal: React.FC<{
                     />
                   </div>
                 </div>
-                
+
                 {/* PDF actual */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">PDF Técnico</label>
@@ -361,7 +365,7 @@ const ProductEditModal: React.FC<{
                         <p className="text-sm">Sin PDF</p>
                       </div>
                     )}
-                    
+
                     <input
                       type="file"
                       accept=".pdf"
@@ -373,7 +377,7 @@ const ProductEditModal: React.FC<{
               </div>
             </div>
           </div>
-          
+
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button
               onClick={handleSave}
@@ -477,7 +481,7 @@ const ProductModal: React.FC<{
   const handleSpecificationChange = (index: number, field: 'key' | 'value', value: string) => {
     setFormData(prev => ({
       ...prev,
-      especificaciones: prev.especificaciones.map((spec, i) => 
+      especificaciones: prev.especificaciones.map((spec, i) =>
         i === index ? { ...spec, [field]: value } : spec
       )
     }));
@@ -550,7 +554,7 @@ const ProductModal: React.FC<{
                     'quimicos': 4,
                     'equipos': 5
                   }[category] || 1;
-                  
+
                   handleInputChange('categoria', category);
                   handleInputChange('clasificacion', classification);
                 }}
@@ -773,7 +777,7 @@ const ProductoRow: React.FC<{
 }> = ({ producto, onUpdate, onEdit }) => {
   const [estadoQA, setEstadoQA] = useState<'pendiente' | 'revision' | 'aprobado'>('pendiente');
   const [showDescriptionTooltip, setShowDescriptionTooltip] = useState(false);
-  
+
   useEffect(() => {
     // Cargar datos del localStorage si existen
     const savedData = localStorage.getItem(`producto_${producto.id}`);
@@ -782,7 +786,7 @@ const ProductoRow: React.FC<{
       setEstadoQA(data.estadoQA || 'pendiente');
     }
   }, [producto.id]);
-  
+
   const saveToLocalStorage = (field: string, value: any) => {
     const currentData = JSON.parse(localStorage.getItem(`producto_${producto.id}`) || '{}');
     const newData = { ...currentData, [field]: value };
@@ -791,12 +795,12 @@ const ProductoRow: React.FC<{
       onUpdate(producto.id, field, value);
     }
   };
-  
+
   const handleEstadoQAChange = (value: 'pendiente' | 'revision' | 'aprobado') => {
     setEstadoQA(value);
     saveToLocalStorage('estadoQA', value);
   };
-  
+
   const getEstadoColor = (estado: string) => {
     switch (estado) {
       case 'aprobado': return 'bg-green-100 text-green-800';
@@ -804,7 +808,7 @@ const ProductoRow: React.FC<{
       default: return 'bg-gray-100 text-gray-800';
     }
   };
-  
+
   return (
     <tr className={`border-b hover:bg-gray-50 ${producto.metadata.needsReview ? 'bg-red-50' : ''}`}>
       <td className="px-6 py-4 whitespace-nowrap">
@@ -815,14 +819,14 @@ const ProductoRow: React.FC<{
           )}
         </div>
       </td>
-      
+
       <td className="px-6 py-4">
         <div className="text-sm font-medium text-gray-900">{producto.name}</div>
         <div className="text-sm text-gray-500">Clasificación {producto.clasificacion || 0}</div>
       </td>
-      
+
       <td className="px-6 py-4 max-w-sm">
-        <div 
+        <div
           className="relative"
           onMouseEnter={() => setShowDescriptionTooltip(true)}
           onMouseLeave={() => setShowDescriptionTooltip(false)}
@@ -838,13 +842,13 @@ const ProductoRow: React.FC<{
           )}
         </div>
       </td>
-      
+
       <td className="px-6 py-4">
         <div className="group relative">
           <ProductThumbnail product={producto} />
         </div>
       </td>
-      
+
       <td className="px-6 py-4">
         <div className="text-sm text-gray-900">
           {producto.assets.image?.filename || 'Sin imagen'}
@@ -855,7 +859,7 @@ const ProductoRow: React.FC<{
           </div>
         )}
       </td>
-      
+
       <td className="px-6 py-4">
         <input
           type="checkbox"
@@ -867,7 +871,7 @@ const ProductoRow: React.FC<{
           }}
         />
       </td>
-      
+
       <td className="px-6 py-4">
         {producto.assets.pdf?.exists ? (
           <a
@@ -886,7 +890,7 @@ const ProductoRow: React.FC<{
           </span>
         )}
       </td>
-      
+
       <td className="px-6 py-4">
         <div className="text-sm text-gray-900">
           {producto.assets.pdf?.filename || 'Sin PDF'}
@@ -897,7 +901,7 @@ const ProductoRow: React.FC<{
           </div>
         )}
       </td>
-      
+
       <td className="px-6 py-4">
         <select
           value={estadoQA}
@@ -909,7 +913,7 @@ const ProductoRow: React.FC<{
           <option value="aprobado">Aprobado</option>
         </select>
       </td>
-      
+
       <td className="px-6 py-4">
         <button
           onClick={() => onEdit(producto)}
@@ -928,37 +932,39 @@ const ProductoRow: React.FC<{
 // Componente principal de inventario
 const InventarioProductos: React.FC = () => {
   const { t } = useLanguage();
-  const [productos] = useState<DiscoveredProduct[]>(DISCOVERED_PRODUCTS_REGISTRY);
+  const { products: productos, loading, error, refresh } = useWordPressProducts();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('todos');
   const [filtroEstado, setFiltroEstado] = useState('todos');
   const [vistaCompleta, setVistaCompleta] = useState(false);
-  const [loading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<DiscoveredProduct | null>(null);
-  
+
+  // Estadísticas dinámicas
+  const registryStats = useMemo(() => getRegistryStats(productos), [productos]);
+
   // Productos filtrados
   const productosFiltrados = useMemo(() => {
     let filtered = productos;
-    
+
     // Filtro por término de búsqueda
     if (searchTerm.trim()) {
-      filtered = searchProducts(searchTerm);
+      filtered = searchProducts(productos, searchTerm);
     }
-    
+
     // Filtro por categoría
     if (selectedCategory !== 'todos') {
-      filtered = filtered.filter(p => p.category === selectedCategory);
+      filtered = getProductsByCategory(filtered, selectedCategory);
     }
-    
+
     // Filtro por estado de completitud
     if (filtroEstado === 'completos') {
       filtered = filtered.filter(p => !p.metadata.needsReview);
     } else if (filtroEstado === 'incompletos') {
       filtered = filtered.filter(p => p.metadata.needsReview);
     }
-    
+
     return filtered.sort((a, b) => {
       // Ordenar por clasificación y luego por código
       if ((a.clasificacion || 0) !== (b.clasificacion || 0)) {
@@ -967,11 +973,11 @@ const InventarioProductos: React.FC = () => {
       return (a.codigo || a.productCode || '').localeCompare(b.codigo || b.productCode || '');
     });
   }, [productos, searchTerm, selectedCategory, filtroEstado]);
-  
+
   // Agrupar productos por clasificación
   const productosAgrupados = useMemo(() => {
     const grouped: Record<number, { nombre: string; productos: DiscoveredProduct[] }> = {};
-    
+
     productosFiltrados.forEach(producto => {
       const clasificacion = producto.clasificacion || 0;
       if (!grouped[clasificacion]) {
@@ -985,10 +991,10 @@ const InventarioProductos: React.FC = () => {
       }
       grouped[clasificacion].productos.push(producto);
     });
-    
+
     return grouped;
   }, [productosFiltrados]);
-  
+
 
   const handleOpenModal = (product?: DiscoveredProduct) => {
     setSelectedProduct(product || null);
@@ -1005,7 +1011,7 @@ const InventarioProductos: React.FC = () => {
     // Aquí se implementaría la lógica para guardar el producto
     // Por ahora solo lo loggeamos
   };
-  
+
   const exportToCSV = () => {
     const headers = ['Código', 'Nombre', 'Descripción', 'Clasificación', 'Categoría', 'Imagen', 'PDF', 'Estado QA'];
     const rows = productosFiltrados.map(p => [
@@ -1018,7 +1024,7 @@ const InventarioProductos: React.FC = () => {
       p.assets.pdf?.exists ? 'Sí' : 'No',
       p.metadata.needsReview ? 'Pendiente' : 'OK'
     ]);
-    
+
     const csvContent = [headers, ...rows].map(row => row.join(',')).join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
@@ -1027,7 +1033,7 @@ const InventarioProductos: React.FC = () => {
     a.download = `inventario-productos-${new Date().toISOString().split('T')[0]}.csv`;
     a.click();
   };
-  
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -1038,396 +1044,394 @@ const InventarioProductos: React.FC = () => {
       </div>
     );
   }
-  
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <Header />
-      
+
       {/* Mini-hero azul para evitar solapamiento con header */}
       <div className="bg-blue-900 opacity-60 h-32"></div>
-      
+
       <div className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Inventario de Productos</h1>
-          <p className="mt-2 text-gray-600">
-            Sistema de gestión y auditoría del catálogo de productos Prilabsa
-          </p>
-          <div className="mt-4 text-sm text-gray-500">
-            Generado automáticamente el {new Date().toLocaleDateString('es-ES')} • 
-            Productos encontrados: {REGISTRY_STATS.totalProducts} • 
-            Assets: {REGISTRY_STATS.totalAssets.toLocaleString()}
-          </div>
-        </div>
-        
-        {/* Estadísticas */}
-        <InventarioStats stats={REGISTRY_STATS} />
-        
-        {/* Controles de filtrado */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-900">Controles de Inventario</h2>
-            <button
-              onClick={() => handleOpenModal()}
-              className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
-            >
-              <Plus className="h-4 w-4" />
-              Añadir Producto
-            </button>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            {/* Búsqueda */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder={t('products.search.placeholder')}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">Inventario de Productos</h1>
+            <p className="mt-2 text-gray-600">
+              Sistema de gestión y auditoría del catálogo de productos Prilabsa
+            </p>
+            <div className="mt-4 text-sm text-gray-500">
+              Generado automáticamente el {new Date().toLocaleDateString('es-ES')} •
+              Productos encontrados: {registryStats.totalProducts} •
+              Assets: {registryStats.totalAssets.toLocaleString()}
             </div>
-            
-            {/* Filtro de categoría */}
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="todos">Todas las categorías</option>
-              {Object.keys(CLASIFICACIONES).map(category => (
-                <option key={category} value={category}>
-                  {category.charAt(0).toUpperCase() + category.slice(1)}
-                </option>
-              ))}
-            </select>
-            
-            {/* Filtro de estado */}
-            <select
-              value={filtroEstado}
-              onChange={(e) => setFiltroEstado(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="todos">Todos los estados</option>
-              <option value="completos">Completos</option>
-              <option value="incompletos">Incompletos</option>
-            </select>
-            
-            {/* Vista completa toggle */}
-            <button
-              onClick={() => setVistaCompleta(!vistaCompleta)}
-              className={`px-4 py-2 rounded-lg transition-colors flex items-center justify-center ${
-                vistaCompleta 
-                  ? 'bg-green-600 text-white hover:bg-green-700' 
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              <FileText className="h-4 w-4 mr-2" />
-              {vistaCompleta ? 'Vista Agrupada' : 'Ver Todos (101)'}
-            </button>
-            
-            {/* Exportar */}
-            <button
-              onClick={exportToCSV}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center"
-            >
-              <Download className="h-4 w-4 mr-2" />
-              Exportar CSV
-            </button>
           </div>
-        </div>
-        
-        {/* Resultados */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">
-              Productos encontrados: {productosFiltrados.length} {vistaCompleta ? '(Listado completo)' : '(Agrupado por clasificación)'}
-            </h2>
-          </div>
-          
-          {vistaCompleta ? (
-            /* Vista completa - Todos los productos en una tabla */
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      #
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Código
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Nombre
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Categoría
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Descripción
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Fotografía
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Nombre Archivo
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Foto OK
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      PDF
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Nombre PDF
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      PDF OK
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Estado QA
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Anotaciones
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Responsable
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {productosFiltrados.map((producto, index) => (
-                    <tr key={producto.id} className={`border-b hover:bg-gray-50 ${producto.metadata.needsReview ? 'bg-red-50' : ''}`}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {index + 1}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <span className="text-sm font-medium text-gray-900">{producto.codigo || producto.productCode || 'N/A'}</span>
-                          {producto.metadata.needsReview && (
-                            <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />
-                          )}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="text-sm font-medium text-gray-900">{producto.name}</div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          producto.category === 'aditivos' ? 'bg-blue-100 text-blue-800' :
-                          producto.category === 'alimentos' ? 'bg-green-100 text-green-800' :
-                          producto.category === 'probioticos' ? 'bg-purple-100 text-purple-800' :
-                          producto.category === 'quimicos' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-gray-100 text-gray-800'
-                        }`}>
-                          {producto.category.charAt(0).toUpperCase() + producto.category.slice(1)}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 max-w-xs">
-                        <div className="text-sm text-gray-900 truncate" title={producto.description}>
-                          {producto.description}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="group relative">
-                          <ProductThumbnail product={producto} />
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="text-sm text-gray-900">
-                          {producto.assets.image?.filename || 'Sin imagen'}
-                        </div>
-                        {producto.assets.image?.extension && (
-                          <div className="text-xs text-gray-500">
-                            {producto.assets.image.extension.toUpperCase()}
-                          </div>
-                        )}
-                      </td>
-                      <td className="px-6 py-4">
-                        <input
-                          type="checkbox"
-                          defaultChecked={producto.assets.image?.exists || false}
-                          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                          onChange={(e) => {
-                            const key = `photo_ok_${producto.id}`;
-                            localStorage.setItem(key, e.target.checked.toString());
-                          }}
-                        />
-                      </td>
-                      <td className="px-6 py-4">
-                        {producto.assets.pdf?.exists ? (
-                          <a
-                            href={producto.assets.pdf.downloadUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full hover:bg-blue-200"
-                          >
-                            <Download className="w-3 h-3 mr-1" />
-                            {producto.assets.pdf.size}
-                          </a>
-                        ) : (
-                          <span className="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">
-                            <AlertTriangle className="w-3 h-3 mr-1" />
-                            No disponible
-                          </span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="text-sm text-gray-900">
-                          {producto.assets.pdf?.filename || 'Sin PDF'}
-                        </div>
-                        {producto.assets.pdf?.size && (
-                          <div className="text-xs text-gray-500">
-                            {producto.assets.pdf.size}
-                          </div>
-                        )}
-                      </td>
-                      <td className="px-6 py-4">
-                        <input
-                          type="checkbox"
-                          defaultChecked={producto.assets.pdf?.exists || false}
-                          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                          onChange={(e) => {
-                            const key = `pdf_ok_${producto.id}`;
-                            localStorage.setItem(key, e.target.checked.toString());
-                          }}
-                        />
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
-                          <CheckCircle className="w-3 h-3 mr-1" />
-                          OK
-                        </span>
-                      </td>
-                      <td className="px-6 py-4">
-                        <input
-                          type="text"
-                          placeholder="Agregar anotaciones..."
-                          className="w-full text-sm border border-gray-300 rounded px-2 py-1"
-                        />
-                      </td>
-                      <td className="px-6 py-4">
-                        <input
-                          type="text"
-                          placeholder="Asignar responsable"
-                          className="w-full text-sm border border-gray-300 rounded px-2 py-1"
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+
+          {/* Estadísticas */}
+          <InventarioStats stats={registryStats} />
+
+          {/* Controles de filtrado */}
+          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-gray-900">Controles de Inventario</h2>
+              <button
+                onClick={() => handleOpenModal()}
+                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+              >
+                <Plus className="h-4 w-4" />
+                Añadir Producto
+              </button>
             </div>
-          ) : (
-            /* Vista agrupada por clasificación */
-            <>
-              {Object.entries(productosAgrupados).map(([clasificacion, grupo]) => (
-            <div key={clasificacion} className="border-b border-gray-200 last:border-b-0">
-              {/* Header de clasificación */}
-              <div className="bg-gray-100 px-6 py-3 border-b border-gray-200">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    {grupo.nombre}
-                  </h3>
-                  <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                    {grupo.productos.length} producto{grupo.productos.length !== 1 ? 's' : ''}
-                  </span>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+              {/* Búsqueda */}
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder={t('products.search.placeholder')}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
               </div>
-              
-              {/* Tabla de productos */}
+
+              {/* Filtro de categoría */}
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="todos">Todas las categorías</option>
+                {Object.keys(CLASIFICACIONES).map(category => (
+                  <option key={category} value={category}>
+                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                  </option>
+                ))}
+              </select>
+
+              {/* Filtro de estado */}
+              <select
+                value={filtroEstado}
+                onChange={(e) => setFiltroEstado(e.target.value)}
+                className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="todos">Todos los estados</option>
+                <option value="completos">Completos</option>
+                <option value="incompletos">Incompletos</option>
+              </select>
+
+              {/* Vista completa toggle */}
+              <button
+                onClick={() => setVistaCompleta(!vistaCompleta)}
+                className={`px-4 py-2 rounded-lg transition-colors flex items-center justify-center ${vistaCompleta
+                  ? 'bg-green-600 text-white hover:bg-green-700'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+              >
+                <FileText className="h-4 w-4 mr-2" />
+                {vistaCompleta ? 'Vista Agrupada' : `Ver Todos (${productos.length})`}
+              </button>
+
+              {/* Exportar */}
+              <button
+                onClick={exportToCSV}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Exportar CSV
+              </button>
+            </div>
+          </div>
+
+          {/* Resultados */}
+          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-200">
+              <h2 className="text-lg font-semibold text-gray-900">
+                Productos encontrados: {productosFiltrados.length} {vistaCompleta ? '(Listado completo)' : '(Agrupado por clasificación)'}
+              </h2>
+            </div>
+
+            {vistaCompleta ? (
+              /* Vista completa - Todos los productos en una tabla */
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Código
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Nombre
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Descripción
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Fotografía
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Nombre Archivo
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Foto OK
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  PDF
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Nombre PDF
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Estado QA
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Acciones
-                </th>
-              </tr>
-            </thead>
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        #
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Código
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Nombre
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Categoría
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Descripción
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Fotografía
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Nombre Archivo
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Foto OK
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        PDF
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Nombre PDF
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        PDF OK
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Estado QA
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Anotaciones
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Responsable
+                      </th>
+                    </tr>
+                  </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {grupo.productos.map(producto => (
-                      <ProductoRow
-                        key={producto.id}
-                        producto={producto}
-                        onEdit={(producto) => {
-                          setSelectedProduct(producto);
-                          setIsEditModalOpen(true);
-                        }}
-                      />
+                    {productosFiltrados.map((producto, index) => (
+                      <tr key={producto.id} className={`border-b hover:bg-gray-50 ${producto.metadata.needsReview ? 'bg-red-50' : ''}`}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {index + 1}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <span className="text-sm font-medium text-gray-900">{producto.codigo || producto.productCode || 'N/A'}</span>
+                            {producto.metadata.needsReview && (
+                              <AlertTriangle className="w-4 h-4 text-red-500 ml-2" />
+                            )}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="text-sm font-medium text-gray-900">{producto.name}</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${producto.category === 'aditivos' ? 'bg-blue-100 text-blue-800' :
+                            producto.category === 'alimentos' ? 'bg-green-100 text-green-800' :
+                              producto.category === 'probioticos' ? 'bg-purple-100 text-purple-800' :
+                                producto.category === 'quimicos' ? 'bg-yellow-100 text-yellow-800' :
+                                  'bg-gray-100 text-gray-800'
+                            }`}>
+                            {producto.category.charAt(0).toUpperCase() + producto.category.slice(1)}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 max-w-xs">
+                          <div className="text-sm text-gray-900 truncate" title={producto.description}>
+                            {producto.description}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="group relative">
+                            <ProductThumbnail product={producto} />
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="text-sm text-gray-900">
+                            {producto.assets.image?.filename || 'Sin imagen'}
+                          </div>
+                          {producto.assets.image?.extension && (
+                            <div className="text-xs text-gray-500">
+                              {producto.assets.image.extension.toUpperCase()}
+                            </div>
+                          )}
+                        </td>
+                        <td className="px-6 py-4">
+                          <input
+                            type="checkbox"
+                            defaultChecked={producto.assets.image?.exists || false}
+                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                            onChange={(e) => {
+                              const key = `photo_ok_${producto.id}`;
+                              localStorage.setItem(key, e.target.checked.toString());
+                            }}
+                          />
+                        </td>
+                        <td className="px-6 py-4">
+                          {producto.assets.pdf?.exists ? (
+                            <a
+                              href={producto.assets.pdf.downloadUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full hover:bg-blue-200"
+                            >
+                              <Download className="w-3 h-3 mr-1" />
+                              {producto.assets.pdf.size}
+                            </a>
+                          ) : (
+                            <span className="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">
+                              <AlertTriangle className="w-3 h-3 mr-1" />
+                              No disponible
+                            </span>
+                          )}
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="text-sm text-gray-900">
+                            {producto.assets.pdf?.filename || 'Sin PDF'}
+                          </div>
+                          {producto.assets.pdf?.size && (
+                            <div className="text-xs text-gray-500">
+                              {producto.assets.pdf.size}
+                            </div>
+                          )}
+                        </td>
+                        <td className="px-6 py-4">
+                          <input
+                            type="checkbox"
+                            defaultChecked={producto.assets.pdf?.exists || false}
+                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                            onChange={(e) => {
+                              const key = `pdf_ok_${producto.id}`;
+                              localStorage.setItem(key, e.target.checked.toString());
+                            }}
+                          />
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                            <CheckCircle className="w-3 h-3 mr-1" />
+                            OK
+                          </span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <input
+                            type="text"
+                            placeholder="Agregar anotaciones..."
+                            className="w-full text-sm border border-gray-300 rounded px-2 py-1"
+                          />
+                        </td>
+                        <td className="px-6 py-4">
+                          <input
+                            type="text"
+                            placeholder="Asignar responsable"
+                            className="w-full text-sm border border-gray-300 rounded px-2 py-1"
+                          />
+                        </td>
+                      </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              
-              {/* Separador ADITIVOS */}
-              {clasificacion !== Object.keys(productosAgrupados)[Object.keys(productosAgrupados).length - 1] && (
-                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 text-center">
-                  <span className="text-yellow-800 font-medium">ADITIVOS</span>
-                </div>
-              )}
-            </div>
-              ))}
-            </>
-          )}
-          
-          {productosFiltrados.length === 0 && (
-            <div className="text-center py-12">
-              <AlertTriangle className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No se encontraron productos</h3>
-              <p className="mt-1 text-sm text-gray-500">
-                Intenta ajustar los filtros de búsqueda.
-              </p>
-            </div>
-          )}
-        </div>
+            ) : (
+              /* Vista agrupada por clasificación */
+              <>
+                {Object.entries(productosAgrupados).map(([clasificacion, grupo]) => (
+                  <div key={clasificacion} className="border-b border-gray-200 last:border-b-0">
+                    {/* Header de clasificación */}
+                    <div className="bg-gray-100 px-6 py-3 border-b border-gray-200">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-lg font-semibold text-gray-900">
+                          {grupo.nombre}
+                        </h3>
+                        <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                          {grupo.productos.length} producto{grupo.productos.length !== 1 ? 's' : ''}
+                        </span>
+                      </div>
+                    </div>
 
-        {/* Modal para agregar/editar productos */}
-        <ProductModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          onSave={handleSaveProduct}
-          product={selectedProduct}
-        />
-        
-        {/* Modal para editar productos existentes */}
-        {selectedProduct && isEditModalOpen && (
-          <ProductEditModal
-            isOpen={isEditModalOpen}
-            onClose={() => {
-              setIsEditModalOpen(false);
-              setSelectedProduct(null);
-            }}
-            onSave={(updatedProduct) => {
+                    {/* Tabla de productos */}
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Código
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Nombre
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Descripción
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Fotografía
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Nombre Archivo
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Foto OK
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              PDF
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Nombre PDF
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Estado QA
+                            </th>
+                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Acciones
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                          {grupo.productos.map(producto => (
+                            <ProductoRow
+                              key={producto.id}
+                              producto={producto}
+                              onEdit={(producto) => {
+                                setSelectedProduct(producto);
+                                setIsEditModalOpen(true);
+                              }}
+                            />
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Separador ADITIVOS */}
+                    {clasificacion !== Object.keys(productosAgrupados)[Object.keys(productosAgrupados).length - 1] && (
+                      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 text-center">
+                        <span className="text-yellow-800 font-medium">ADITIVOS</span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </>
+            )}
+
+            {productosFiltrados.length === 0 && (
+              <div className="text-center py-12">
+                <AlertTriangle className="mx-auto h-12 w-12 text-gray-400" />
+                <h3 className="mt-2 text-sm font-medium text-gray-900">No se encontraron productos</h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  Intenta ajustar los filtros de búsqueda.
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Modal para agregar/editar productos */}
+          <ProductModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            onSave={handleSaveProduct}
+            product={selectedProduct}
+          />
+
+          {/* Modal para editar productos existentes */}
+          {selectedProduct && isEditModalOpen && (
+            <ProductEditModal
+              isOpen={isEditModalOpen}
+              onClose={() => {
+                setIsEditModalOpen(false);
+                setSelectedProduct(null);
+              }}
+              onSave={(updatedProduct) => {
                 // Aquí podrías actualizar el producto en el estado si fuera necesario
                 console.log('Producto actualizado:', updatedProduct);
                 setIsEditModalOpen(false);
@@ -1438,7 +1442,7 @@ const InventarioProductos: React.FC = () => {
           )}
         </div>
       </div>
-      
+
       {/* Footer */}
       <Footer />
     </div>

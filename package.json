@@ -28,7 +28,7 @@
   "scripts": {
     "dev": "vite",
     "validate:images": "node scripts/validate-images-integrity.js",
-    "build": "node scripts/materialize-expected-images.cjs && node scripts/copy-product-assets.cjs && tsx scripts/verify-products-integrity.js && node scripts/validate-images-integrity.js && vite build && node scripts/post-build-verify.js",
+    "build": "node scripts/materialize-expected-images.cjs && node scripts/copy-product-assets.cjs && npx tsx scripts/verify-products-integrity.js && node scripts/validate-images-integrity.js && vite build && node scripts/post-build-verify.js",
     "build:clean": "rm -rf dist && rm -rf .vite",
     "build:fast": "node scripts/materialize-expected-images.cjs && vite build --mode production",
     "build:analyze": "npm run build && npx vite-bundle-analyzer dist",
@@ -157,7 +157,7 @@
     "rollup-plugin-visualizer": "^6.0.3",
     "sharp": "^0.34.3",
     "terser": "^5.43.1",
-    "tsx": "^4.20.1",
+    "tsx": "^4.21.0",
     "typescript-eslint": "^8.20.0",
     "vite-plugin-compression": "^0.5.1",
     "webpack-bundle-analyzer": "^4.10.2",

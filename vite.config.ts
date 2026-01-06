@@ -19,7 +19,7 @@ export default defineConfig(({ command }) => {
     // The @cloudflare/vite-plugin handles the build process
     // to generate an output compatible with Cloudflare Pages.
 
-  
+
     // Resolve optimizations
     resolve: {
       alias: {
@@ -52,10 +52,10 @@ export default defineConfig(({ command }) => {
 
     // Asset handling configuration
     assetsInclude: ['**/*.woff', '**/*.woff2', '**/*.eot', '**/*.ttf', '**/*.svg', '**/*.gif', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.mp4', '**/*.webm', '**/*.ogg'],
-    
+
     // Public directory configuration
     publicDir: 'public',
-    
+
     // Build configuration for assets
     build: {
       outDir: 'dist',
@@ -70,7 +70,7 @@ export default defineConfig(({ command }) => {
             if (id.includes('pdf.worker.min.js')) {
               return 'pdf.worker';
             }
-            
+
             // Node modules chunking
             if (id.includes('node_modules')) {
               // Large libraries get their own chunks
@@ -95,12 +95,12 @@ export default defineConfig(({ command }) => {
               // Other vendor libraries
               return 'vendor';
             }
-            
+
             // Product translations chunk (this is our largest data file)
             if (id.includes('product-translations')) {
               return 'product-translations';
             }
-            
+
             // Split large components into separate chunks
             if (id.includes('src/pages/Cotizacion')) {
               return 'cotizacion';
@@ -146,7 +146,7 @@ export default defineConfig(({ command }) => {
       minify: 'terser',
       terserOptions: {
         compress: {
-          drop_console: true,
+          drop_console: false,
           drop_debugger: true,
         },
       }
@@ -166,9 +166,9 @@ export default defineConfig(({ command }) => {
       fs: {
         strict: false,
       },
-      // Proxy configuration for WordPress API on GoDaddy
+      // Proxy configuration for WordPress API and assets on GoDaddy
       proxy: {
-        '/api/wp-json': {
+        '/api': {
           target: 'https://productos.prilabsa.com',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
@@ -177,12 +177,7 @@ export default defineConfig(({ command }) => {
             proxy.on('error', (err, _req, _res) => {
               console.log('[Vite Proxy] Error:', err.message);
             });
-            proxy.on('proxyReq', (proxyReq, req, _res) => {
-              console.log('[Vite Proxy] Request:', req.method, req.url);
-            });
-            proxy.on('proxyRes', (proxyRes, req, _res) => {
-              console.log('[Vite Proxy] Response:', proxyRes.statusCode, req.url);
-            });
+            // Detailed logging removed for production-readiness unless needed
           },
         },
       },

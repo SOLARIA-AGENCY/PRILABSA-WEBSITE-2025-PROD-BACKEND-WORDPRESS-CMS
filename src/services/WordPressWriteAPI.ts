@@ -121,6 +121,14 @@ export interface ProductFormData {
   // Media (attachment IDs or URLs)
   imagen_producto?: number | null;
   ficha_tecnica_pdf?: string | null;
+  pdf?: string | null;
+
+  // Extra fallback fields
+  beneficios?: string | null;
+  descripcion?: string | null;
+  especificaciones?: string | null;
+  presentacion?: string | null;
+  subcategoria?: string | null;
 
   // Categories (taxonomy term IDs)
   'categorias-productos'?: number[];
@@ -262,6 +270,11 @@ export const WordPressWriteAPI = {
         especificaciones_pt: formData.especificaciones_pt || '',
         imagen_producto: formData.imagen_producto || null,
         ficha_tecnica_pdf: formData.ficha_tecnica_pdf || '',
+        beneficios: formData.beneficios || '',
+        descripcion: formData.descripcion || '',
+        especificaciones: formData.especificaciones || '',
+        presentacion: formData.presentacion || '',
+        subcategoria: formData.subcategoria || '',
       },
       'categorias-productos': formData['categorias-productos'] || [],
     };
@@ -301,6 +314,7 @@ export const WordPressWriteAPI = {
       'presentacion_es', 'presentacion_en', 'presentacion_pt',
       'especificaciones_es', 'especificaciones_en', 'especificaciones_pt',
       'imagen_producto', 'ficha_tecnica_pdf',
+      'beneficios', 'descripcion', 'especificaciones', 'presentacion', 'subcategoria', 'pdf'
     ] as const;
 
     for (const field of acfFields) {

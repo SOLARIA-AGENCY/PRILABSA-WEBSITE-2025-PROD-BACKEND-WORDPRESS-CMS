@@ -89,8 +89,8 @@ const CONFIG = {
   TIMEOUT: 30000,
 
   // LocalStorage keys
-  STORAGE_KEY_PRODUCTS: 'prilabsa_products_cache',
-  STORAGE_KEY_TIMESTAMP: 'prilabsa_products_timestamp',
+  STORAGE_KEY_PRODUCTS: 'prilabsa_products_cache_v3',
+  STORAGE_KEY_TIMESTAMP: 'prilabsa_products_timestamp_v3',
 };
 
 // Determine if we're in development mode
@@ -216,7 +216,8 @@ export const WordPressAPI = {
   async getProducts(query: WordPressProductQuery = {}): Promise<WordPressProduct[]> {
     const params = new URLSearchParams({
       per_page: String(query.per_page || CONFIG.DEFAULT_PER_PAGE),
-      page: String(query.page || 1),
+      // Only include page if explicitly requested, otherwise allow recursive fetch
+      ...(query.page && { page: String(query.page) }),
       ...(query.search && { search: query.search }),
       ...(query['categorias-productos'] && { 'categorias-productos': String(query['categorias-productos']) }),
       ...(query.orderby && { orderby: query.orderby }),
@@ -224,26 +225,46 @@ export const WordPressAPI = {
     });
 
     const cacheKey = `products:${params.toString()}`;
-    const isDefaultQuery = params.toString() === `per_page=${CONFIG.DEFAULT_PER_PAGE}&page=1`;
+    // Check if this is a default query (no search, no category, no specific page or page=1)
+    // Note: params.toString() might not include page=1 now
+    const queryString = params.toString();
+    const isDefaultQuery = queryString === `per_page=${CONFIG.DEFAULT_PER_PAGE}`;
 
     // 1. Check memory cache first (fastest)
     const memoryCached = getCached<WordPressProduct[]>(cacheKey);
     if (memoryCached) {
-      console.log('[WordPressAPI] Using memory cached products');
-      return memoryCached;
+      // CRITICAL FIX: Skip memory cache if it has exactly 100 items (likely incomplete)
+      if (memoryCached.length === CONFIG.DEFAULT_PER_PAGE) {
+        console.log(`[WordPressAPI] Memory cache has exactly ${CONFIG.DEFAULT_PER_PAGE} items - likely incomplete. Bypassing.`);
+        // Clear the potentially incomplete memory cache
+        setCache(cacheKey, null);
+      } else {
+        console.log('[WordPressAPI] Using memory cached products');
+        return memoryCached;
+      }
     }
 
     // 2. For default query, check localStorage (stale-while-revalidate)
     if (isDefaultQuery) {
       const storedProducts = getStoredProducts();
       if (storedProducts && storedProducts.length > 0) {
+        // CRITICAL FIX: If cache has exactly 100 items, it's likely an incomplete
+        // paginated fetch from before the pagination fix. Force a fresh fetch.
+        if (storedProducts.length === CONFIG.DEFAULT_PER_PAGE) {
+          console.log(`[WordPressAPI] Cache has exactly ${CONFIG.DEFAULT_PER_PAGE} items - likely incomplete. Forcing fresh fetch.`);
+          // Clear the potentially incomplete cache
+          localStorage.removeItem(CONFIG.STORAGE_KEY_PRODUCTS);
+          localStorage.removeItem(CONFIG.STORAGE_KEY_TIMESTAMP);
+          return this._fetchAndCacheProducts(cacheKey, queryString);
+        }
+
         // Set memory cache
         setCache(cacheKey, storedProducts);
 
         // If cache is stale, revalidate in background
         if (!isStoredCacheFresh()) {
           console.log('[WordPressAPI] Revalidating stale cache in background...');
-          this._fetchAndCacheProducts(cacheKey).catch(console.error);
+          this._fetchAndCacheProducts(cacheKey, queryString).catch(console.error);
         }
 
         return storedProducts;
@@ -251,12 +272,9 @@ export const WordPressAPI = {
     }
 
     // 3. No cache available, fetch from network
-    return this._fetchAndCacheProducts(cacheKey, params.toString());
+    return this._fetchAndCacheProducts(cacheKey, queryString);
   },
 
-  /**
-   * Internal: Fetch products from network and update all caches
-   */
   /**
    * Internal: Fetch products from network and update all caches
    * Supports recursive fetching if multiple pages exist
@@ -266,23 +284,28 @@ export const WordPressAPI = {
       let allProducts: WordPressProduct[] = [];
       let page = 1;
       let totalPages = 1;
-      
+      let hasMore = true;
+
       // Base URL construction
-      const baseEndpoint = queryString ? `/productos?${queryString}` : `/productos?per_page=${CONFIG.DEFAULT_PER_PAGE}`;
-      
-      // If we are doing a default fetch (all items), we potentially need to loop pages
-      // If query has specific page param, just fetch that one.
-      const isSpecificPageRequest = queryString?.includes('page=');
+      const baseEndpoint = queryString
+        ? `/productos?${queryString}`
+        : `/productos?per_page=${CONFIG.DEFAULT_PER_PAGE}`;
+
+      // If query has specific page param, just fetch that one (no recursion)
+      // CRITICAL FIX: Use regex to match ONLY 'page=' not 'per_page='
+      const isSpecificPageRequest = queryString ? /(?:^|&)page=/.test(queryString) : false;
+
+      console.log(`[WordPressAPI] Starting recursive fetch for: ${baseEndpoint}`);
 
       do {
         // Construct URL for current page
         let endpoint = baseEndpoint;
-        if (!isSpecificPageRequest) {
-           endpoint = `${baseEndpoint}&page=${page}`;
+        if (!isSpecificPageRequest && !baseEndpoint.includes('&page=') && !baseEndpoint.includes('?page=')) {
+          endpoint = `${baseEndpoint}${baseEndpoint.includes('?') ? '&' : '?'}page=${page}`;
         }
 
         const url = getApiUrl(endpoint);
-        console.log(`[WordPressAPI] Fetching from network (Page ${page}):`, url);
+        console.log(`[WordPressAPI] Fetching Page ${page}... URL: ${url}`);
 
         const response = await fetch(url, {
           method: 'GET',
@@ -293,41 +316,71 @@ export const WordPressAPI = {
         });
 
         if (!response.ok) {
-           // If page > 1 and 400/404, it might just mean end of pagination if headers were wrong, but usually we trust x-wp-totalpages
-           if (page > 1 && (response.status === 400 || response.status === 404)) {
-             break;
-           }
-           throw new Error(`WordPress API error: ${response.status} ${response.statusText}`);
+          if (page > 1 && (response.status === 400 || response.status === 404)) {
+            console.log(`[WordPressAPI] Reached end of pagination at page ${page} (Status ${response.status})`);
+            break;
+          }
+          throw new Error(`WordPress API error: ${response.status} ${response.statusText}`);
         }
 
         const products: WordPressProduct[] = await response.json();
         allProducts = [...allProducts, ...products];
+        console.log(`[WordPressAPI] Page ${page} received: ${products.length} products. Total so far: ${allProducts.length}`);
 
-        // Check pagination headers
+        // 1. Try X-WP-TotalPages header
         const totalPagesHeader = response.headers.get('x-wp-totalpages');
         if (totalPagesHeader) {
           totalPages = parseInt(totalPagesHeader, 10);
+          console.log(`[WordPressAPI] Header x-wp-totalpages: ${totalPages}`);
+        } else {
+          // 2. Fallback: Try Link header for 'next'
+          const linkHeader = response.headers.get('link');
+          if (linkHeader && linkHeader.includes('rel="next"')) {
+            totalPages = page + 1; // At least one more page
+            console.log(`[WordPressAPI] Found 'next' in Link header. Assuming more pages.`);
+          } else {
+            // 3. AGGRESSIVE FALLBACK: If page is FULL (>= per_page), ASSUME there is a next page
+            // This fixes the issue where GoDaddy strips headers
+            if (products.length >= CONFIG.DEFAULT_PER_PAGE) {
+              totalPages = page + 1;
+              console.log(`[WordPressAPI] No pagination headers, but page was FULL (${products.length}). Speculatively fetching next page.`);
+            } else {
+              totalPages = page;
+              console.log(`[WordPressAPI] Page not full (${products.length} < ${CONFIG.DEFAULT_PER_PAGE}). Stopping recursion.`);
+            }
+          }
         }
 
-        // If specific page requested, we are done
-        if (isSpecificPageRequest) break;
+        if (isSpecificPageRequest) {
+          console.log(`[WordPressAPI] Specific page request - breaking after single page.`);
+          break;
+        }
+
+        if (products.length < CONFIG.DEFAULT_PER_PAGE) {
+          console.log(`[WordPressAPI] Page ${page} was partial (${products.length} < ${CONFIG.DEFAULT_PER_PAGE}). Stopping.`);
+          hasMore = false;
+          break;
+        }
 
         page++;
-      } while (page <= totalPages);
+        console.log(`[WordPressAPI] Loop check: page=${page}, totalPages=${totalPages}, condition=${page <= totalPages && page <= 50}`);
+      } while (page <= totalPages && page <= 50); // Cap at 50 pages safety
+
+      console.log(`[WordPressAPI] Exited loop. Final page=${page}, totalPages=${totalPages}`);
 
       // Update memory cache
       setCache(cacheKey, allProducts);
 
       // Update localStorage for default query
-      const isDefaultQuery = !queryString || queryString === `per_page=${CONFIG.DEFAULT_PER_PAGE}&page=1`;
+      const isDefaultQuery = !queryString || queryString === `per_page=${CONFIG.DEFAULT_PER_PAGE}`;
       if (isDefaultQuery) {
         storeProducts(allProducts);
       }
 
-      console.log(`[WordPressAPI] Fetched and cached ${allProducts.length} total products`);
+      console.log(`[WordPressAPI] Recursion complete. Total products: ${allProducts.length}`);
       return allProducts;
     } catch (error) {
-      console.error('[WordPressAPI] Error fetching products:', error);
+      console.error('[WordPressAPI] error recursion:', error);
       throw error;
     }
   },
@@ -833,9 +886,8 @@ export function useProducts() {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    // Use _embed to get featured images in same request
-    fetch('https://productos.prilabsa.com/wp-json/wp/v2/productos?per_page=100&_embed')
-      .then(res => res.json())
+    // ⭐ Use central WordPressAPI to get ALL products (recursive)
+    WordPressAPI.getProducts()
       .then(data => {
         // Transform WordPress products to frontend format
         const transformed = data.map((wp: any) => ({
@@ -857,7 +909,11 @@ export function useProducts() {
         setLoading(false);
         setIsLoading(false);
       })
-      .catch(err => { setError(err); setLoading(false); setIsLoading(false); });
+      .catch(err => {
+        setError(err);
+        setLoading(false);
+        setIsLoading(false);
+      });
   }, []);
 
   return { products, loading, isLoading, error };
@@ -896,33 +952,58 @@ const generateShortDescription = (fullDescription: string | undefined): string =
   return clean.substring(0, 147).trim() + '...';
 };
 
-// Helper: Parse specifications HTML to key-value pairs
-// Expects format: <li><strong>Key:</strong> Value</li> OR <li>Key: Value</li>
-const parseSpecifications = (html: string | undefined): Array<{ key: string; value: string }> => {
-  if (!html) return [];
+// Helper: Parse specifications HTML or plain text to key-value pairs
+// Supports: 
+//   1. HTML: <li><strong>Key:</strong> Value</li> OR <li>Key: Value</li>
+//   2. Plain text: Key: Value (one per line)
+const parseSpecifications = (input: string | undefined): Array<{ key: string; value: string }> => {
+  if (!input) return [];
 
   const specs: Array<{ key: string; value: string }> = [];
-  const liMatches = html.match(/<li[^>]*>(.*?)<\/li>/gi);
 
-  if (liMatches) {
-    for (const li of liMatches) {
-      // Try to extract <strong>Key:</strong> Value pattern
-      const strongMatch = li.match(/<strong>([^<]+)<\/strong>\s*(.*)/i);
-      if (strongMatch) {
-        const key = strongMatch[1].replace(/:$/, '').trim();
-        const value = strongMatch[2].replace(/<[^>]*>/g, '').trim();
+  // Check if input contains HTML tags
+  const hasHtml = /<[^>]+>/.test(input);
+
+  if (hasHtml) {
+    // Parse HTML format
+    const liMatches = input.match(/<li[^>]*>(.*?)<\/li>/gi);
+
+    if (liMatches) {
+      for (const li of liMatches) {
+        // Try to extract <strong>Key:</strong> Value pattern
+        const strongMatch = li.match(/<strong>([^<]+)<\/strong>\s*(.*)/i);
+        if (strongMatch) {
+          const key = strongMatch[1].replace(/:$/, '').trim();
+          const value = strongMatch[2].replace(/<[^>]*>/g, '').trim();
+          if (key && value) {
+            specs.push({ key, value });
+          }
+        } else {
+          // Fallback: try to split by colon
+          const text = li.replace(/<[^>]*>/g, '').trim();
+          const colonIndex = text.indexOf(':');
+          if (colonIndex > 0) {
+            specs.push({
+              key: text.substring(0, colonIndex).trim(),
+              value: text.substring(colonIndex + 1).trim(),
+            });
+          }
+        }
+      }
+    }
+  } else {
+    // Parse plain text format (one spec per line: Key: Value)
+    const lines = input.split('\n');
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+      if (!trimmedLine) continue;
+
+      const colonIndex = trimmedLine.indexOf(':');
+      if (colonIndex > 0) {
+        const key = trimmedLine.substring(0, colonIndex).trim();
+        const value = trimmedLine.substring(colonIndex + 1).trim();
         if (key && value) {
           specs.push({ key, value });
-        }
-      } else {
-        // Fallback: try to split by colon
-        const text = li.replace(/<[^>]*>/g, '').trim();
-        const colonIndex = text.indexOf(':');
-        if (colonIndex > 0) {
-          specs.push({
-            key: text.substring(0, colonIndex).trim(),
-            value: text.substring(colonIndex + 1).trim(),
-          });
         }
       }
     }
@@ -955,29 +1036,39 @@ export function useProduct(slug: string) {
           const productCode = acf.codigo || '';
           const productName = acf.nombre_producto_es || wp.title?.rendered || '';
 
-          if (acf.ficha_tecnica_pdf) {
-            // WordPress has PDF media ID - fetch the actual URL
-            try {
-              const pdfRes = await fetch(`https://productos.prilabsa.com/wp-json/wp/v2/media/${acf.ficha_tecnica_pdf}`);
-              const pdfMedia = await pdfRes.json();
-              if (pdfMedia.source_url) {
-                pdfData = { exists: true, downloadUrl: pdfMedia.source_url };
+          if (acf.ficha_tecnica_pdf || wp.pdf) {
+            const pdfVal = acf.ficha_tecnica_pdf || wp.pdf;
+            if (typeof pdfVal === 'string' && pdfVal.startsWith('http')) {
+              // Direct URL in database
+              pdfData = { exists: true, downloadUrl: pdfVal };
+            } else if (pdfVal) {
+              // It's a media ID - fetch the actual URL
+              try {
+                const pdfRes = await fetch(`https://productos.prilabsa.com/wp-json/wp/v2/media/${pdfVal}`);
+                const pdfMedia = await pdfRes.json();
+                if (pdfMedia.source_url) {
+                  pdfData = { exists: true, downloadUrl: pdfMedia.source_url };
+                }
+              } catch (e) {
+                console.warn('Could not fetch PDF from media ID:', e);
               }
-            } catch (e) {
-              console.warn('Could not fetch PDF:', e);
             }
           }
 
-          // Fallback: generate PDF path from product code if no WordPress PDF
+          // Fallback: generate PDF path from product code IF still no PDF found in database
           if (!pdfData.exists && productCode && productName) {
-            // Sanitize name for filename: remove diacritics, special chars, replace spaces
+            // Log a warning in development so we know we're still guessing
+            if (import.meta.env.DEV) {
+              console.log(`[WordPressAPI] Warning: Guessing PDF path for ${productCode}. Consider syncing in Admin Dashboard.`);
+            }
+            // Sanitize name for filename
             const sanitizedName = productName
               .normalize('NFD')
-              .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-              .replace(/[\/]/g, '_')           // Replace slashes with underscores
-              .replace(/[^a-zA-Z0-9\s_]/g, '') // Remove other special chars
-              .replace(/\s+/g, '_')            // Replace spaces with underscores
-              .replace(/_+/g, '_')             // Collapse multiple underscores
+              .replace(/[\u0300-\u036f]/g, '')
+              .replace(/[\/]/g, '_')
+              .replace(/[^a-zA-Z0-9\s_]/g, '')
+              .replace(/\s+/g, '_')
+              .replace(/_+/g, '_')
               .trim();
             const pdfFilename = `${productCode}_${sanitizedName}.pdf`;
             const pdfPath = `/assets/pdfs/productos/${pdfFilename}`;

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Desplegando build COMPLETO actualizado..."
+echo "🚀 Desplegando build COMPLETO actualizado a subdomain..."
 
 cat > deploy_full.txt << EOF
 set ftp:ssl-allow no
@@ -8,14 +8,14 @@ set ftp:passive-mode on
 open ftp://productos.prilabsa.com
 user solaria.charlie@blog.prilabsa.com SoCh2025\$%
 
-# Upload index.html
-put dist/index.html -o public_html/index.html
+# Upload index.html to subdomain root
+put dist/index.html -o public_html/productos.prilabsa.com/index.html
 
-# Upload assets directory (mirror will sync)
-mirror -R --delete dist/assets public_html/assets
+# Upload assets directory (mirror will sync) to subdomain assets
+mirror -R --delete dist/assets public_html/productos.prilabsa.com/assets
 
-# Upload favicon
-put dist/favicon.png -o public_html/favicon.png
+# Upload favicon to subdomain root
+put dist/favicon.png -o public_html/productos.prilabsa.com/favicon.png
 
 quit
 EOF
