@@ -49,14 +49,14 @@ define('DB_COLLATE', '');
  *
  * Replace the placeholder text below with the generated keys
  */
-define('AUTH_KEY',         '{{GENERATE_UNIQUE_KEY}}');
-define('SECURE_AUTH_KEY',  '{{GENERATE_UNIQUE_KEY}}');
-define('LOGGED_IN_KEY',    '{{GENERATE_UNIQUE_KEY}}');
-define('NONCE_KEY',        '{{GENERATE_UNIQUE_KEY}}');
-define('AUTH_SALT',        '{{GENERATE_UNIQUE_KEY}}');
+define('AUTH_KEY', '{{GENERATE_UNIQUE_KEY}}');
+define('SECURE_AUTH_KEY', '{{GENERATE_UNIQUE_KEY}}');
+define('LOGGED_IN_KEY', '{{GENERATE_UNIQUE_KEY}}');
+define('NONCE_KEY', '{{GENERATE_UNIQUE_KEY}}');
+define('AUTH_SALT', '{{GENERATE_UNIQUE_KEY}}');
 define('SECURE_AUTH_SALT', '{{GENERATE_UNIQUE_KEY}}');
-define('LOGGED_IN_SALT',   '{{GENERATE_UNIQUE_KEY}}');
-define('NONCE_SALT',       '{{GENERATE_UNIQUE_KEY}}');
+define('LOGGED_IN_SALT', '{{GENERATE_UNIQUE_KEY}}');
+define('NONCE_SALT', '{{GENERATE_UNIQUE_KEY}}');
 
 // ============================================================================
 // JWT AUTHENTICATION CONFIGURATION
@@ -212,13 +212,13 @@ define('EMPTY_TRASH_DAYS', 30);
  * true = development environment
  * false = production environment
  */
-define('WP_DEBUG', {{WP_DEBUG_MODE}});
+define('WP_DEBUG', '{{WP_DEBUG_MODE}}');
 
 /**
  * Debug log file location
  * Logs errors to wp-content/debug.log
  */
-define('WP_DEBUG_LOG', {{WP_DEBUG_MODE}});
+define('WP_DEBUG_LOG', '{{WP_DEBUG_MODE}}');
 
 /**
  * Display errors on screen
@@ -231,12 +231,12 @@ define('WP_DEBUG_DISPLAY', false);
  * Script debug mode
  * Forces WordPress to use development versions of core CSS/JS files
  */
-define('SCRIPT_DEBUG', {{WP_DEBUG_MODE}});
+define('SCRIPT_DEBUG', '{{WP_DEBUG_MODE}}');
 
 /**
  * Save database queries for analysis
  */
-define('SAVEQUERIES', {{WP_DEBUG_MODE}});
+define('SAVEQUERIES', '{{WP_DEBUG_MODE}}');
 
 // ============================================================================
 // MULTILINGUAL SUPPORT (Optional)
