@@ -204,11 +204,20 @@ const AdminDashboard: React.FC = () => {
     setSelectedProduct(null);
   }, []);
 
-  // Export products to CSV
+  // Export products to CSV (Excel-friendly format with semicolon separator for Spanish locale)
   const exportToCSV = useCallback(() => {
     if (products.length === 0) return;
 
-    // CSV headers
+    // Helper to escape CSV fields properly
+    const escapeCSV = (value: string | number | null | undefined): string => {
+      if (value === null || value === undefined) return '';
+      const str = String(value);
+      // Replace newlines, tabs, and carriage returns with spaces
+      const cleaned = str.replace(/[\r\n\t]+/g, ' ').replace(/"/g, '""').trim();
+      return `"${cleaned}"`;
+    };
+
+    // CSV headers - comprehensive list
     const headers = [
       'ID',
       'Codigo',
@@ -216,20 +225,27 @@ const AdminDashboard: React.FC = () => {
       'Nombre (EN)',
       'Nombre (PT)',
       'Categoria',
+      'Subcategoria',
       'Estado',
       'Descripcion Corta (ES)',
+      'Descripcion Corta (EN)',
+      'Descripcion Corta (PT)',
       'Descripcion (ES)',
-      'Beneficio 1 (ES)',
-      'Beneficio 2 (ES)',
-      'Beneficio 3 (ES)',
+      'Beneficio 1',
+      'Beneficio 2',
+      'Beneficio 3',
       'Presentacion (ES)',
+      'Presentacion (EN)',
+      'Presentacion (PT)',
+      'Especificaciones (ES)',
       'Imagen URL',
       'PDF URL',
       'Fecha Creacion',
-      'Fecha Modificacion'
+      'Fecha Modificacion',
+      'Slug'
     ];
 
-    // Map products to rows
+    // Map products to rows with all available fields
     const rows = products.map(p => [
       p.id,
       p.acf?.codigo || '',
@@ -237,35 +253,43 @@ const AdminDashboard: React.FC = () => {
       p.acf?.nombre_producto_en || '',
       p.acf?.nombre_producto_pt || '',
       p.acf?.categoria || '',
+      p.acf?.subcategoria || '',
       p.status || '',
-      (p.acf?.descripcion_corta_es || '').replace(/"/g, '""'),
-      (p.acf?.descripcion_es || '').replace(/"/g, '""').replace(/\n/g, ' '),
+      p.acf?.descripcion_corta_es || '',
+      p.acf?.descripcion_corta_en || '',
+      p.acf?.descripcion_corta_pt || '',
+      p.acf?.descripcion_es || '',
       p.acf?.beneficio_1_es || '',
       p.acf?.beneficio_2_es || '',
       p.acf?.beneficio_3_es || '',
-      (p.acf?.presentacion_es || '').replace(/"/g, '""'),
+      p.acf?.presentacion_es || '',
+      p.acf?.presentacion_en || '',
+      p.acf?.presentacion_pt || '',
+      p.acf?.especificaciones_es || '',
       getProductImageUrl(p) || '',
       getProductPdfUrl(p) || '',
       p.date || '',
-      p.modified || ''
+      p.modified || '',
+      p.slug || ''
     ]);
 
-    // Build CSV content
+    // Build CSV content with semicolon separator (better for Excel in Spanish locale)
     const csvContent = [
-      headers.join(','),
-      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
-    ].join('\n');
+      headers.join(';'),
+      ...rows.map(row => row.map(cell => escapeCSV(cell)).join(';'))
+    ].join('\r\n');
 
-    // Create and download file
+    // Create and download file with BOM for UTF-8 Excel compatibility
     const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
-    link.setAttribute('download', `productos-prilabsa-${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute('download', `PRILABSA-Catalogo-Productos-${new Date().toISOString().split('T')[0]}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    URL.revokeObjectURL(url); // Clean up
   }, [products]);
 
   // Get category display info
@@ -647,20 +671,22 @@ const AdminDashboard: React.FC = () => {
       </div>
 
       {/* Primary Actions - Unified size, optimized centering */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-        {/* Log de Cambios */}
-        <button
-          onClick={() => setViewMode('logs')}
-          className="h-14 rounded-xl font-bold transition-all border-2 border-gray-200 text-gray-700 hover:bg-gray-50 flex items-center justify-center bg-white shadow-sm group px-4"
-          title="Ver historial de cambios"
-        >
-          <div className="flex flex-row items-center justify-center gap-3">
-            <svg className="w-5 h-5 text-gray-400 group-hover:text-[#3759C1] transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span className="tracking-wide uppercase whitespace-nowrap">LOG CAMBIOS</span>
-          </div>
-        </button>
+      <div className={`grid grid-cols-1 ${user?.role === 'admin' ? 'sm:grid-cols-3' : 'sm:grid-cols-2'} gap-6 mb-8`}>
+        {/* Log de Cambios - Solo visible para administradores */}
+        {user?.role === 'admin' && (
+          <button
+            onClick={() => setViewMode('logs')}
+            className="h-14 rounded-xl font-bold transition-all border-2 border-gray-200 text-gray-700 hover:bg-gray-50 flex items-center justify-center bg-white shadow-sm group px-4"
+            title="Ver historial de cambios"
+          >
+            <div className="flex flex-row items-center justify-center gap-3">
+              <svg className="w-5 h-5 text-gray-400 group-hover:text-[#3759C1] transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="tracking-wide uppercase whitespace-nowrap">LOG CAMBIOS</span>
+            </div>
+          </button>
+        )}
 
         {/* CSV Export */}
         <button
@@ -1295,70 +1321,336 @@ const AdminDashboard: React.FC = () => {
     </div>
   );
 
-  // Render Help View
-  const renderHelpView = () => (
-    <div className="max-w-4xl mx-auto px-4 py-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Manual de Usuario</h2>
+  // Help Tab State
+  const [helpTab, setHelpTab] = useState<'inicio' | 'productos' | 'archivos' | 'admin' | 'soporte'>('inicio');
+
+  // Render Help View - Comprehensive with role-based sections
+  const renderHelpView = () => {
+    const isAdmin = user?.role === 'admin';
+
+    const TabButton = ({ id, label, icon, adminOnly = false }: { id: typeof helpTab; label: string; icon: React.ReactNode; adminOnly?: boolean }) => {
+      if (adminOnly && !isAdmin) return null;
+      return (
         <button
-          onClick={() => setViewMode('list')}
-          className="px-4 py-2 border rounded-lg hover:bg-gray-50 text-gray-600"
+          onClick={() => setHelpTab(id)}
+          className={`flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all ${helpTab === id
+            ? 'bg-[#3759C1] text-white shadow-md'
+            : 'text-gray-600 hover:bg-gray-100'
+            }`}
         >
-          Volver al Inventario
+          {icon}
+          <span className="hidden sm:inline">{label}</span>
         </button>
+      );
+    };
+
+    return (
+      <div className="max-w-5xl mx-auto px-4 py-6">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-800">Manual de Usuario</h2>
+            <p className="text-sm text-gray-500 mt-1">
+              {isAdmin ? (
+                <span className="inline-flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-purple-500"></span>
+                  Acceso Administrador - Funciones completas
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                  Acceso Editor - Gestión de productos
+                </span>
+              )}
+            </p>
+          </div>
+          <button
+            onClick={() => setViewMode('list')}
+            className="px-4 py-2 border rounded-lg hover:bg-gray-50 text-gray-600 flex items-center gap-2"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Volver
+          </button>
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="flex flex-wrap gap-2 mb-6 p-2 bg-gray-50 rounded-xl">
+          <TabButton id="inicio" label="Inicio" icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>} />
+          <TabButton id="productos" label="Productos" icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>} />
+          <TabButton id="archivos" label="Archivos" icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>} />
+          <TabButton id="admin" label="Administración" adminOnly icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>} />
+          <TabButton id="soporte" label="Soporte" icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" /></svg>} />
+        </div>
+
+        {/* Content Area */}
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          {/* Tab: Inicio */}
+          {helpTab === 'inicio' && (
+            <div className="p-6 space-y-6">
+              <div className="bg-gradient-to-r from-[#3759C1] to-[#2a4494] rounded-xl p-6 text-white">
+                <h3 className="text-xl font-bold mb-2">Bienvenido al Panel de Administración</h3>
+                <p className="opacity-90">Sistema de gestión de catálogo de productos PRILABSA. Desde aquí puedes administrar todos los productos del catálogo que se muestran en el sitio web.</p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="p-4 border rounded-lg">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
+                    </div>
+                    <h4 className="font-semibold text-gray-800">Vista de Lista</h4>
+                  </div>
+                  <p className="text-sm text-gray-600">Visualiza productos en formato tabla con todas las columnas de información. Ideal para ver muchos productos a la vez.</p>
+                </div>
+
+                <div className="p-4 border rounded-lg">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-5a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-5a1 1 0 01-1-1v-4z" /></svg>
+                    </div>
+                    <h4 className="font-semibold text-gray-800">Vista de Tarjetas</h4>
+                  </div>
+                  <p className="text-sm text-gray-600">Visualiza productos como tarjetas con imagen. Útil para revisar visualmente el catálogo.</p>
+                </div>
+              </div>
+
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <h4 className="font-semibold text-amber-800 mb-2 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  Tu nivel de acceso: {isAdmin ? 'Administrador' : 'Editor'}
+                </h4>
+                {isAdmin ? (
+                  <p className="text-sm text-amber-700">Tienes acceso completo a todas las funciones: productos, usuarios, logs de actividad y configuración del sistema.</p>
+                ) : (
+                  <p className="text-sm text-amber-700">Puedes gestionar productos (crear, editar, eliminar) y exportar datos. <strong>No tienes acceso</strong> a: logs de actividad, gestión de usuarios ni configuración del sistema.</p>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Tab: Productos */}
+          {helpTab === 'productos' && (
+            <div className="p-6 space-y-6">
+              <h3 className="text-lg font-bold text-gray-800 border-b pb-2">📦 Gestión de Productos</h3>
+
+              <div className="space-y-4">
+                <div className="flex gap-4 p-4 bg-gray-50 rounded-lg">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">1</div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800">Crear Nuevo Producto</h4>
+                    <p className="text-sm text-gray-600 mt-1">Haz clic en el botón azul <strong>"AÑADIR PRODUCTO"</strong>. Completa todos los campos del formulario (nombre, código, descripción, imagen, PDF). Los campos marcados con * son obligatorios.</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 p-4 bg-gray-50 rounded-lg">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">2</div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800">Editar Producto Existente</h4>
+                    <p className="text-sm text-gray-600 mt-1">En la lista o tarjeta del producto, haz clic en <strong>"Editar"</strong>. Modifica los campos necesarios y guarda los cambios. Los cambios se sincronizan automáticamente con el sitio web.</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 p-4 bg-gray-50 rounded-lg">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-bold text-sm">3</div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800">Eliminar Producto</h4>
+                    <p className="text-sm text-gray-600 mt-1">Haz clic en el botón <strong>"X"</strong> o icono de papelera. Se te pedirá confirmación antes de eliminar. <span className="text-red-600 font-medium">Esta acción no se puede deshacer.</span></p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t pt-4">
+                <h4 className="font-semibold text-gray-800 mb-3">🔍 Búsqueda y Filtros</h4>
+                <ul className="space-y-2 text-sm text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <svg className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <span><strong>Barra de búsqueda:</strong> Escribe el nombre o código del producto para encontrarlo rápidamente.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <svg className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <span><strong>Filtros por categoría:</strong> Haz clic en los botones de categoría (Aditivos, Alimentos, etc.) para ver solo esos productos.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <svg className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <span><strong>Cambio de vista:</strong> Alterna entre vista de lista y tarjetas según tu preferencia.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: Archivos */}
+          {helpTab === 'archivos' && (
+            <div className="p-6 space-y-6">
+              <h3 className="text-lg font-bold text-gray-800 border-b pb-2">📄 Archivos y Exportaciones</h3>
+
+              <div className="p-4 border-2 border-green-200 bg-green-50 rounded-lg">
+                <h4 className="font-semibold text-green-800 mb-2 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                  Exportar a CSV (Excel)
+                </h4>
+                <p className="text-sm text-green-700 mb-3">El botón verde <strong>"DESCARGAR CSV"</strong> exporta todos los productos a un archivo compatible con Excel.</p>
+                <ul className="text-sm text-green-700 space-y-1">
+                  <li>• El archivo usa formato UTF-8 con BOM para caracteres especiales (ñ, acentos)</li>
+                  <li>• Separador: punto y coma (;) para compatibilidad con Excel en español</li>
+                  <li>• Incluye: código, nombre, categoría, descripciones, URLs de imagen y PDF</li>
+                </ul>
+              </div>
+
+              <div className="p-4 border-2 border-red-200 bg-red-50 rounded-lg">
+                <h4 className="font-semibold text-red-800 mb-2 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.363 15.335h-.542v-1.145h.542c.342 0 .521.161.521.492 0 .321-.179.653-.521.653zm1.657-1.145h-.5c-.171 0-.306.015-.407.045v.691c.099.03.229.045.397.045.176 0 .278-.01.352-.03.111-.03.19-.08.241-.146.06-.08.09-.186.09-.321 0-.171-.06-.286-.171-.342a.574.574 0 0 0-.302-.045zM15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7l-5-5z" /></svg>
+                  Fichas Técnicas (PDF)
+                </h4>
+                <p className="text-sm text-red-700 mb-3">Los productos con ficha técnica muestran un icono rojo de PDF.</p>
+                <ul className="text-sm text-red-700 space-y-1">
+                  <li>• Haz clic en el icono o enlace "PDF" para abrir/descargar la ficha técnica</li>
+                  <li>• Los productos sin PDF muestran "Sin PDF" en gris</li>
+                  <li>• Las estadísticas muestran cuántos productos tienen PDF vinculado</li>
+                </ul>
+              </div>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h4 className="font-semibold text-blue-800 mb-2">💡 Consejo para abrir el CSV en Excel</h4>
+                <ol className="text-sm text-blue-700 space-y-1 list-decimal list-inside">
+                  <li>Descarga el archivo CSV desde el panel</li>
+                  <li>Abre Excel y ve a <strong>Datos → Desde texto/CSV</strong></li>
+                  <li>Selecciona el archivo descargado</li>
+                  <li>En el asistente, selecciona <strong>Delimitador: Punto y coma</strong></li>
+                  <li>Asegúrate de que la codificación sea <strong>UTF-8</strong></li>
+                </ol>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: Admin (Solo visible para admins) */}
+          {helpTab === 'admin' && isAdmin && (
+            <div className="p-6 space-y-6">
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
+                <h3 className="text-lg font-bold text-purple-800 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                  Funciones de Administrador
+                </h3>
+                <p className="text-sm text-purple-700 mt-1">Estas funciones solo están disponibles para usuarios con rol de Administrador.</p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="bg-gray-100 px-4 py-2 font-semibold text-gray-800">👥 Gestión de Usuarios</div>
+                  <div className="p-4 space-y-2 text-sm text-gray-600">
+                    <p>Accede desde el menú de usuario (icono en la esquina superior derecha) → <strong>"Roles y permisos"</strong></p>
+                    <ul className="list-disc list-inside space-y-1 mt-2">
+                      <li><strong>Crear usuario:</strong> Clic en "Nuevo Usuario", completa nombre, usuario, contraseña y rol</li>
+                      <li><strong>Editar usuario:</strong> Modifica nombre, contraseña o rol de usuarios existentes</li>
+                      <li><strong>Eliminar usuario:</strong> Clic en "Eliminar" (requiere confirmación)</li>
+                      <li><strong>Cambiar permisos:</strong> Alternar entre rol Admin y Editor</li>
+                    </ul>
+                    <div className="mt-3 p-2 bg-amber-50 border border-amber-200 rounded text-amber-700">
+                      <strong>Nota:</strong> El usuario principal "ADMIN-PRILABSA" no puede ser eliminado.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="bg-gray-100 px-4 py-2 font-semibold text-gray-800">📝 Log de Cambios</div>
+                  <div className="p-4 space-y-2 text-sm text-gray-600">
+                    <p>El botón <strong>"LOG CAMBIOS"</strong> muestra el historial de todas las acciones realizadas en el sistema.</p>
+                    <ul className="list-disc list-inside space-y-1 mt-2">
+                      <li>Inicio/cierre de sesión de todos los usuarios</li>
+                      <li>Creación, edición y eliminación de productos</li>
+                      <li>Creación, modificación y eliminación de usuarios</li>
+                      <li>Cambios de contraseña y permisos</li>
+                    </ul>
+                    <p className="mt-2 text-gray-500 italic">Se guardan los últimos 100 registros de actividad.</p>
+                  </div>
+                </div>
+
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="bg-gray-100 px-4 py-2 font-semibold text-gray-800">🔐 Diferencia entre Roles</div>
+                  <div className="p-4">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b">
+                          <th className="text-left py-2 text-gray-600">Función</th>
+                          <th className="text-center py-2 text-purple-600">Admin</th>
+                          <th className="text-center py-2 text-blue-600">Editor</th>
+                        </tr>
+                      </thead>
+                      <tbody className="text-gray-600">
+                        <tr className="border-b"><td className="py-2">Ver productos</td><td className="text-center">✅</td><td className="text-center">✅</td></tr>
+                        <tr className="border-b"><td className="py-2">Crear/Editar productos</td><td className="text-center">✅</td><td className="text-center">✅</td></tr>
+                        <tr className="border-b"><td className="py-2">Eliminar productos</td><td className="text-center">✅</td><td className="text-center">✅</td></tr>
+                        <tr className="border-b"><td className="py-2">Exportar CSV</td><td className="text-center">✅</td><td className="text-center">✅</td></tr>
+                        <tr className="border-b"><td className="py-2">Ver Log de Cambios</td><td className="text-center">✅</td><td className="text-center text-red-500">❌</td></tr>
+                        <tr className="border-b"><td className="py-2">Gestionar Usuarios</td><td className="text-center">✅</td><td className="text-center text-red-500">❌</td></tr>
+                        <tr><td className="py-2">Cambiar su contraseña</td><td className="text-center">✅</td><td className="text-center">✅</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: Soporte */}
+          {helpTab === 'soporte' && (
+            <div className="p-6 space-y-6">
+              <h3 className="text-lg font-bold text-gray-800 border-b pb-2">🛠️ Soporte Técnico</h3>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="p-4 border rounded-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">📧 Contacto de Soporte</h4>
+                  <p className="text-sm text-gray-600 mb-3">Para asistencia técnica o problemas con el sistema:</p>
+                  <a href="mailto:soporte@solaria.agency" className="inline-flex items-center gap-2 text-[#3759C1] font-medium hover:underline">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    soporte@solaria.agency
+                  </a>
+                </div>
+
+                <div className="p-4 border rounded-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">🌐 URLs del Sistema</h4>
+                  <ul className="text-sm text-gray-600 space-y-1">
+                    <li><strong>Catálogo público:</strong> <a href="https://productos.prilabsa.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">productos.prilabsa.com</a></li>
+                    <li><strong>Panel admin:</strong> <a href="https://productos.prilabsa.com/inventario-productos" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">productos.prilabsa.com/inventario-productos</a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="border rounded-lg overflow-hidden">
+                <div className="bg-gray-100 px-4 py-2 font-semibold text-gray-800">❓ Preguntas Frecuentes</div>
+                <div className="divide-y">
+                  <details className="p-4">
+                    <summary className="font-medium text-gray-700 cursor-pointer hover:text-[#3759C1]">¿Por qué no veo todos los productos?</summary>
+                    <p className="mt-2 text-sm text-gray-600">Verifica que no tengas un filtro de categoría activo. Haz clic en "TODOS" para ver el catálogo completo.</p>
+                  </details>
+                  <details className="p-4">
+                    <summary className="font-medium text-gray-700 cursor-pointer hover:text-[#3759C1]">¿Cómo cambio mi contraseña?</summary>
+                    <p className="mt-2 text-sm text-gray-600">Haz clic en tu avatar (esquina superior derecha) → "Cambiar contraseña". Ingresa la nueva contraseña dos veces para confirmar.</p>
+                  </details>
+                  <details className="p-4">
+                    <summary className="font-medium text-gray-700 cursor-pointer hover:text-[#3759C1]">El CSV no se abre bien en Excel</summary>
+                    <p className="mt-2 text-sm text-gray-600">En Excel: Datos → Desde texto/CSV → selecciona el archivo → elige delimitador "Punto y coma" y codificación "UTF-8".</p>
+                  </details>
+                  <details className="p-4">
+                    <summary className="font-medium text-gray-700 cursor-pointer hover:text-[#3759C1]">¿Cuándo se actualizan los cambios en el sitio web?</summary>
+                    <p className="mt-2 text-sm text-gray-600">Los cambios se reflejan inmediatamente en la base de datos. El sitio web puede tardar hasta 5 minutos en mostrar los cambios debido al caché.</p>
+                  </details>
+                </div>
+              </div>
+
+              <div className="bg-gray-100 rounded-lg p-4 text-center">
+                <p className="text-sm text-gray-500">Sistema desarrollado por</p>
+                <p className="font-bold text-[#3759C1]">Solaria Agency</p>
+                <p className="text-xs text-gray-400 mt-1">© 2025 - Todos los derechos reservados</p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-
-      <div className="bg-white rounded-xl shadow p-6 space-y-6">
-        <div className="border-b pb-4">
-          <h3 className="text-lg font-semibold text-[#3759C1] mb-2">Bienvenido al Panel de Administración</h3>
-          <p className="text-gray-600">Este panel te permite gestionar el inventario de productos de Prilabsa de forma sencilla.</p>
-        </div>
-
-        <div>
-          <h4 className="font-semibold text-gray-800 mb-2">📦 Gestión de Productos</h4>
-          <ul className="list-disc list-inside text-gray-600 space-y-1">
-            <li><strong>Ver productos:</strong> En la vista principal puedes ver todos los productos en lista o tarjetas.</li>
-            <li><strong>Buscar:</strong> Usa la barra de búsqueda para filtrar por nombre o código.</li>
-            <li><strong>Filtrar por categoría:</strong> Haz clic en los botones de categoría (Aditivos, Alimentos, etc.).</li>
-            <li><strong>Crear producto:</strong> Clic en "+ Nuevo Producto" para añadir uno nuevo.</li>
-            <li><strong>Editar producto:</strong> Clic en el icono de lápiz en cualquier producto.</li>
-            <li><strong>Eliminar producto:</strong> Clic en el icono X (requiere confirmación).</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="font-semibold text-gray-800 mb-2">📄 Exportar y PDFs</h4>
-          <ul className="list-disc list-inside text-gray-600 space-y-1">
-            <li><strong>Exportar CSV:</strong> El botón verde descarga todos los productos en formato Excel/CSV.</li>
-            <li><strong>Ver PDF:</strong> Los productos con ficha técnica muestran un icono rojo de PDF. Haz clic para descargar.</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="font-semibold text-gray-800 mb-2">📝 Registro de Cambios</h4>
-          <ul className="list-disc list-inside text-gray-600 space-y-1">
-            <li>El botón "Registrar Cambios" muestra el historial de todas las acciones realizadas.</li>
-            <li>Incluye: creación, edición, eliminación de productos y gestión de usuarios.</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="font-semibold text-gray-800 mb-2">👥 Gestión de Usuarios (Solo Administradores)</h4>
-          <ul className="list-disc list-inside text-gray-600 space-y-1">
-            <li>Accede desde el menú de usuario (icono azul arriba a la derecha).</li>
-            <li>Selecciona "Roles y permisos" para crear o eliminar usuarios.</li>
-            <li>Los roles disponibles son: Admin (acceso total) y Editor (gestión de productos).</li>
-          </ul>
-        </div>
-
-        <div className="border-t pt-4">
-          <h4 className="font-semibold text-gray-800 mb-2">🛠️ Soporte Técnico</h4>
-          <p className="text-gray-600">Para asistencia técnica contacta a:</p>
-          <p className="text-[#3759C1] font-medium">Solaria Agency - soporte@prilabsa.com</p>
-        </div>
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
